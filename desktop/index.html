@@ -1,584 +1,590 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:">
 <title>English Boarding Pass</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: a boarding-pass app — a ticket header with today's "flight" (week + topic), tabbed panels below, max 760px column. */
+/* Layout: desktop app shell — fixed sidebar (nav + level badge) and a scrolling main column of screens. Night-flight palette: deep navy, runway blue, boarding-gold for XP. */
 :root{
-  --bg:#eef1f6; --surface:#ffffff; --surface-2:#f5f7fb; --ink:#14213a; --muted:#5b6782; --line:#d6dce8;
-  --accent:#1f4fd1; --accent-ink:#ffffff; --accent-soft:#e3eafc; --stamp:#0f8a6a; --stamp-soft:#dcf2ea; --warn:#b5520a; --warn-soft:#fbeadb;
-  --me:#1f4fd1; --me-ink:#fff; --bot:#ffffff;
-  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --bg:#0b1020; --panel:#121a31; --panel-2:#18223f; --panel-3:#1f2b4f; --line:#26335c;
+  --ink:#eaf0ff; --muted:#93a2c8; --dim:#62719a;
+  --blue:#5b8cff; --blue-ink:#07112b; --blue-soft:#1c2b5c;
+  --gold:#ffc04d; --gold-soft:#3a2f17;
+  --green:#3ed69b; --green-soft:#123a2e; --red:#ff6b7a; --red-soft:#3d1a22;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",Consolas,ui-monospace,monospace;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0d1322; --surface:#151d31; --surface-2:#1b2540; --ink:#e7ecf7; --muted:#9aa6c2; --line:#2a3657;
-  --accent:#7ea2ff; --accent-ink:#0b1430; --accent-soft:#1f2c55; --stamp:#4fd1a8; --stamp-soft:#123a31; --warn:#f2a361; --warn-soft:#3a2615;
-  --me:#3d63d8; --me-ink:#fff; --bot:#1b2540; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0d1322; --surface:#151d31; --surface-2:#1b2540; --ink:#e7ecf7; --muted:#9aa6c2; --line:#2a3657;
-  --accent:#7ea2ff; --accent-ink:#0b1430; --accent-soft:#1f2c55; --stamp:#4fd1a8; --stamp-soft:#123a31; --warn:#f2a361; --warn-soft:#3a2615;
-  --me:#3d63d8; --me-ink:#fff; --bot:#1b2540; color-scheme:dark}
+:root[data-theme="light"]{
+  --bg:#eef2fa; --panel:#ffffff; --panel-2:#f4f6fc; --panel-3:#e8edf8; --line:#d7deef;
+  --ink:#121a33; --muted:#56658c; --dim:#8a96b5;
+  --blue:#2f5fe0; --blue-ink:#ffffff; --blue-soft:#e2e9fd;
+  --gold:#c98a00; --gold-soft:#fbf0d6;
+  --green:#0f9a68; --green-soft:#dcf4ea; --red:#d63a4b; --red-soft:#fde2e5;
+  color-scheme:light;
+}
 *{box-sizing:border-box}
-html,body{background:var(--bg);color:var(--ink)}
-body{font-family:var(--body);font-size:16px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
-.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
-button{font:inherit;cursor:pointer}
-button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-/* Ticket */
-.ticket{background:var(--surface);border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:1fr auto;overflow:hidden}
-.ticket-main{padding:18px 20px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.route{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:800;font-size:clamp(26px,6vw,38px)}
-.route .plane{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 12px);position:relative;min-width:30px}
-.route .plane::after{content:"✈";position:absolute;right:-4px;top:-14px;font-size:20px;color:var(--accent)}
-.meta{display:flex;flex-wrap:wrap;gap:6px 22px}
-.meta div{display:flex;flex-direction:column}
-.meta b{font-family:var(--mono);font-size:15px}
-.stub{border-left:2px dashed var(--line);padding:18px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--surface-2);min-width:118px}
-.stub .big{font-family:var(--display);font-weight:800;font-size:40px;line-height:1;color:var(--accent)}
-@media (max-width:520px){.ticket{grid-template-columns:1fr}.stub{border-left:0;border-top:2px dashed var(--line);flex-direction:row;gap:14px}}
-/* Tabs */
-nav.tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-nav.tabs button{flex:1;border:0;background:transparent;color:var(--muted);padding:10px 6px;border-radius:10px;font-weight:700;font-size:14px}
-nav.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
-.panel{display:flex;flex-direction:column;gap:16px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.card h2{font-size:22px}
-.card h3{font-size:17px}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.app{display:grid;grid-template-columns:240px 1fr;height:100%}
+/* Sidebar */
+aside{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:20px 14px;gap:18px;min-height:0}
+.brand{display:flex;align-items:center;gap:10px;padding:0 6px}
+.brand .logo{width:38px;height:38px;border-radius:11px;background:var(--blue);color:var(--blue-ink);display:grid;place-items:center;font-size:20px;transform:rotate(-8deg)}
+.brand b{font-family:var(--display);font-size:17px;line-height:1.05}
+.brand small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+nav{display:flex;flex-direction:column;gap:2px}
+nav button{display:flex;align-items:center;gap:12px;border:0;background:transparent;padding:10px 12px;border-radius:10px;color:var(--muted);font-weight:700;text-align:left}
+nav button .i{width:22px;text-align:center;font-size:17px}
+nav button:hover{background:var(--panel-2);color:var(--ink)}
+nav button[aria-current="page"]{background:var(--blue-soft);color:var(--ink)}
+nav button .badge{margin-left:auto;font-family:var(--mono);font-size:11px;background:var(--gold);color:#241a00;border-radius:999px;padding:1px 7px}
+.rank{margin-top:auto;background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.rank .row{display:flex;justify-content:space-between;align-items:baseline}
+.rank b{font-family:var(--display);font-size:16px}
+.bar{height:8px;border-radius:99px;background:var(--panel-3);overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:99px}
+.label{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+main{overflow-y:auto;min-width:0}
+.screen{max-width:1080px;margin:0 auto;padding:28px 32px 48px;display:flex;flex-direction:column;gap:20px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.head h1{font-size:34px;font-weight:800}
+.head p{margin:4px 0 0;color:var(--muted)}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1.4fr 1fr}
+@media (max-width:980px){.g4{grid-template-columns:repeat(2,1fr)}.g3,.g2{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card h3{font-size:19px}
 .muted{color:var(--muted)}
-.prose ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
-.prose p{margin:0}
-/* Blocks */
-.blocks{display:flex;flex-direction:column;gap:8px}
-.block{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
-.block.done{background:var(--stamp-soft);border-color:var(--stamp)}
-.block .min{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--accent);width:52px;white-space:nowrap}
-.block.done .min{color:var(--stamp)}
-.block .t{min-width:0}
-.block .t strong{display:block}
-.block .t span{font-size:14px;color:var(--muted)}
-.chk{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:var(--surface);display:grid;place-items:center;font-weight:700;color:transparent}
-.block.done .chk{background:var(--stamp);border-color:var(--stamp);color:#fff}
-.timer{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.timer .clock{font-family:var(--mono);font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
-.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:10px;font-weight:700;font-size:14px}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.btn.ghost{background:transparent}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+.card.stat{flex-direction:row;align-items:center;gap:14px}
+.stat>div{display:flex;flex-direction:column;gap:4px}
+.stat .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:22px;flex:none}
+.stat b{font-family:var(--display);font-size:26px;font-weight:800;line-height:1}
+.stat span{font-size:13px;color:var(--muted)}
+.btn{border:1px solid var(--line);background:var(--panel-2);padding:10px 16px;border-radius:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn:hover{border-color:var(--blue)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:var(--blue-ink)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#241a00}
+.btn.big{padding:14px 22px;font-size:16px;border-radius:14px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chip{border:1px solid var(--line);background:var(--panel-2);border-radius:999px;padding:5px 12px;font-size:13.5px}
+button.chip:hover{border-color:var(--blue)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:5px 11px;font-size:14px}
-button.chip:hover{border-color:var(--accent)}
-/* Chat */
-.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
-.mode{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:10px 12px;text-align:left;color:var(--ink);display:flex;flex-direction:column;gap:2px}
-.mode small{color:var(--muted);font-size:13px}
-.mode[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
-.chat{display:flex;flex-direction:column;gap:10px;min-height:260px;max-height:58vh;overflow-y:auto;padding:4px 2px}
-.msg{max-width:86%;padding:10px 14px;border-radius:16px;white-space:pre-wrap;word-wrap:break-word}
-.msg.bot{align-self:flex-start;background:var(--bot);border:1px solid var(--line);border-bottom-left-radius:4px}
-.msg.me{align-self:flex-end;background:var(--me);color:var(--me-ink);border-bottom-right-radius:4px}
-.msg .say{margin-top:6px;border:0;background:transparent;color:var(--accent);font-size:13px;font-weight:700;padding:0}
-.msg.note{align-self:center;background:transparent;color:var(--muted);font-size:14px;text-align:center}
-.composer{display:flex;gap:8px;align-items:flex-end}
-.composer textarea{flex:1;min-width:0;resize:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:10px 12px;font:inherit;min-height:48px;max-height:140px}
-.mic{width:48px;height:48px;border-radius:50%;border:0;background:var(--accent-soft);color:var(--accent);font-size:20px;flex:none}
-.mic.on{background:var(--warn);color:#fff;animation:pulse 1.2s infinite}
-@keyframes pulse{50%{transform:scale(1.08)}}
-@media (prefers-reduced-motion:reduce){.mic.on{animation:none}}
-.send{height:48px;flex:none}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.toggle{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted)}
-.feedback{background:var(--stamp-soft);border:1px solid var(--stamp);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.feedback h3{color:var(--stamp)}
+.pill{font-family:var(--mono);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--blue-soft);color:var(--blue)}
+.pill.ok{background:var(--green-soft);color:var(--green)}.pill.gold{background:var(--gold-soft);color:var(--gold)}
+/* Home hero: flight route */
+.hero{background:radial-gradient(120% 140% at 100% 0%,var(--blue-soft) 0%,var(--panel) 55%);border:1px solid var(--line);border-radius:22px;padding:24px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.hero h2{font-size:28px;font-weight:800}
+.route{display:flex;align-items:center;gap:14px;margin-top:14px}
+.route .code{font-family:var(--display);font-weight:800;font-size:30px}
+.route .code small{display:block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;color:var(--muted)}
+.track{flex:1;position:relative;height:28px;min-width:120px}
+.track::before{content:"";position:absolute;left:0;right:0;top:13px;border-top:2px dashed var(--line)}
+.track .done{position:absolute;left:0;top:12px;height:4px;background:var(--gold);border-radius:4px}
+.track .plane{position:absolute;top:0;font-size:22px;transform:translateX(-50%);color:var(--gold)}
+.track .wp{position:absolute;top:9px;width:10px;height:10px;border-radius:50%;background:var(--panel-3);border:2px solid var(--line);transform:translateX(-50%)}
+.track .wp.on{background:var(--gold);border-color:var(--gold)}
+.mission{display:flex;flex-direction:column;gap:8px}
+.step{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line)}
+.step .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--panel-3);font-family:var(--mono);font-size:12px;font-weight:700}
+.step.done{border-color:var(--green);background:var(--green-soft)}
+.step.done .n{background:var(--green);color:#03231a}
+.step small{display:block;color:var(--muted);font-size:13px}
+.step .go{border:0;background:transparent;color:var(--blue);font-weight:700}
+.chart{display:flex;align-items:flex-end;gap:10px;height:150px;padding-top:10px}
+.chart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.chart .b{width:100%;max-width:38px;border-radius:8px 8px 3px 3px;background:var(--blue-soft);min-height:4px;position:relative}
+.chart .b.full{background:var(--blue)}
+.chart .b.today{outline:2px solid var(--gold);outline-offset:2px}
+.chart .v{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chart .d{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.qa{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:16px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.qa:hover{border-color:var(--blue);transform:translateY(-1px)}
+.qa .e{font-size:26px}
+.qa b{font-family:var(--display);font-size:17px}
+.qa small{color:var(--muted)}
+/* Path */
+.unit{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:center}
+.unit.locked{opacity:.55}
+.unit.now{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+.unit .wk{font-family:var(--display);font-weight:800;font-size:44px;color:var(--blue);line-height:1}
+.nodes{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.node{display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:transparent;width:96px}
+.node .c{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--panel-3);border:3px solid var(--line);box-shadow:0 5px 0 var(--line)}
+.node:hover .c{border-color:var(--blue)}
+.node.done .c{background:var(--green-soft);border-color:var(--green);box-shadow:0 5px 0 var(--green)}
+.node.next .c{background:var(--blue);border-color:var(--blue);box-shadow:0 5px 0 #2b4bb0;color:var(--blue-ink)}
+.node span{font-size:12.5px;font-weight:700;text-align:center;color:var(--muted)}
+.node.next span{color:var(--ink)}
+/* Lesson */
+.lesson{max-width:760px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:22px}
+.ltop{display:flex;align-items:center;gap:14px}
+.ltop .x{border:0;background:transparent;font-size:22px;color:var(--muted)}
+.ltop .bar{flex:1;height:14px}
+.ltop .xp{font-family:var(--mono);font-weight:700;color:var(--gold)}
+.q{font-family:var(--display);font-size:28px;font-weight:700}
+.q .blank{display:inline-block;min-width:90px;border-bottom:3px solid var(--blue);text-align:center;color:var(--blue)}
+.qsub{color:var(--muted);margin-top:-12px}
+.opts{display:grid;gap:10px}
+.opt{border:2px solid var(--line);background:var(--panel);border-radius:14px;padding:14px 18px;text-align:left;font-size:17px;font-weight:700;display:flex;gap:12px;align-items:center;box-shadow:0 4px 0 var(--line)}
+.opt .k{font-family:var(--mono);font-size:12px;width:24px;height:24px;border-radius:7px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 4px 0 var(--blue)}
+.opt.right{border-color:var(--green);background:var(--green-soft);box-shadow:0 4px 0 var(--green)}
+.opt.wrong{border-color:var(--red);background:var(--red-soft);box-shadow:0 4px 0 var(--red)}
+.tray{min-height:62px;border-bottom:2px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0}
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tile{border:2px solid var(--line);background:var(--panel);border-radius:12px;padding:8px 14px;font-size:17px;font-weight:700;box-shadow:0 3px 0 var(--line)}
+.tile.used{visibility:hidden}
+.feedback{border-radius:16px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.feedback.ok{background:var(--green-soft);color:var(--green)}
+.feedback.no{background:var(--red-soft);color:var(--red)}
+.feedback b{font-family:var(--display);font-size:20px;display:block}
+.feedback p{margin:2px 0 0;color:var(--ink)}
+.listenbtn{width:96px;height:96px;border-radius:24px;border:0;background:var(--blue);color:var(--blue-ink);font-size:40px;box-shadow:0 6px 0 #2b4bb0}
+.listenbtn.slow{width:64px;height:64px;font-size:24px;border-radius:18px;background:var(--panel-3);color:var(--ink);box-shadow:0 5px 0 var(--line)}
+textarea,input,select{font:inherit;border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:14px;padding:12px 14px}
+textarea{resize:vertical;min-height:90px;width:100%}
+.done-screen{text-align:center;align-items:center}
+.done-screen .big{font-size:72px}
+.done-screen .stats3{display:flex;gap:12px}
+.done-screen .stats3 .card{min-width:150px;align-items:center}
+/* Flashcards */
+.fc-wrap{perspective:1200px;max-width:620px;width:100%;margin:0 auto}
+.fc{position:relative;height:300px;transform-style:preserve-3d;transition:transform .45s}
+.fc.flip{transform:rotateY(180deg)}
+.fc .side{position:absolute;inset:0;backface-visibility:hidden;border-radius:24px;border:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px;text-align:center}
+.fc .back{transform:rotateY(180deg);background:var(--panel-2)}
+.fc .phrase{font-family:var(--display);font-size:34px;font-weight:800}
+.fc .mean{font-size:22px;font-weight:700;color:var(--gold)}
+.rate{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:620px;margin:0 auto;width:100%}
+.rate button{border-radius:14px;padding:12px;border:2px solid var(--line);background:var(--panel);font-weight:700;display:flex;flex-direction:column;align-items:center}
+.rate button small{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
+.rate .r1{border-color:var(--red)}.rate .r2{border-color:var(--gold)}.rate .r3{border-color:var(--blue)}.rate .r4{border-color:var(--green)}
+@media (prefers-reduced-motion:reduce){.fc{transition:none}}
+/* Talk */
+.talk{display:grid;grid-template-columns:280px 1fr 260px;gap:16px;height:calc(100vh - 150px);min-height:520px}
+@media (max-width:1180px){.talk{grid-template-columns:240px 1fr}.talk .hints{display:none}}
+.scen{display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.sc{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:12px;display:grid;grid-template-columns:40px 1fr;gap:10px;text-align:left;align-items:center}
+.sc .e{font-size:26px;width:40px;height:40px;border-radius:11px;background:var(--panel-3);display:grid;place-items:center}
+.sc b{display:block;font-size:14.5px}
+.sc small{color:var(--muted);font-size:12.5px;line-height:1.3;display:block}
+.sc[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft)}
+.chatbox{background:var(--panel);border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;min-height:0}
+.chathead{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--gold));display:grid;place-items:center;font-size:20px;flex:none}
+.chathead b{display:block}
+.chathead small{color:var(--green);font-size:12.5px}
+.msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:78%;padding:11px 15px;border-radius:18px;white-space:pre-wrap;word-wrap:break-word}
+.msg.bot{background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start}
+.msg.me{background:var(--blue);color:var(--blue-ink);border-bottom-right-radius:5px;align-self:flex-end}
+.msg.note{align-self:center;color:var(--muted);font-size:13px;background:transparent;text-align:center}
+.msg .say{display:block;margin-top:6px;border:0;background:transparent;color:var(--blue);font-weight:700;font-size:12.5px;padding:0}
+.composer{display:flex;gap:10px;padding:14px;border-top:1px solid var(--line);align-items:flex-end}
+.composer textarea{min-height:48px;height:48px;max-height:140px;resize:none;flex:1;overflow-y:auto}
+.mic{width:48px;height:48px;border-radius:50%;border:0;background:var(--blue-soft);font-size:20px;flex:none}
+.hints{display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.fbk{background:var(--green-soft);border:1px solid var(--green);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
 table{border-collapse:collapse;width:100%;font-size:14px}
-th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.tablewrap{overflow-x:auto}
-/* Plan */
-.weeks{display:flex;flex-direction:column;gap:8px}
-.week{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-.week summary{list-style:none;cursor:pointer;padding:12px 14px;display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center}
-.week summary::-webkit-details-marker{display:none}
-.week .wn{font-family:var(--display);font-weight:800;font-size:22px;color:var(--accent)}
-.week .wt{min-width:0}
-.week .wt strong{display:block}
-.week .wt span{font-size:13px;color:var(--muted)}
-.week.now{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
-.week .body{padding:0 14px 14px;display:flex;flex-direction:column;gap:10px}
-.pill{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700}
-.pill.ok{background:var(--stamp-soft);color:var(--stamp)}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
 /* Progress */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{background:var(--surface-2);border-radius:12px;padding:12px;display:flex;flex-direction:column}
-.stat b{font-family:var(--display);font-size:28px;font-weight:800}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal .d{aspect-ratio:1;max-width:100%;border-radius:6px;background:var(--surface-2);display:grid;place-items:center;font-size:11px;font-family:var(--mono);color:var(--muted)}
-.cal .d.full{background:var(--stamp);color:#fff}
-.cal .d.part{background:var(--stamp-soft);color:var(--stamp)}
-.cal .d.today{outline:2px solid var(--accent)}
-.cal .d.blank{background:transparent}
-.cal .h{font-family:var(--mono);font-size:10px;text-align:center;color:var(--muted)}
-.banner{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:10px 14px;font-size:14px}
+.skill{display:grid;grid-template-columns:110px 1fr 44px;gap:12px;align-items:center}
+.skill .bar{height:12px}
+.skill b{font-family:var(--mono);font-size:13px;text-align:right}
+.heat{display:grid;grid-template-columns:repeat(7,minmax(0,34px));gap:5px;justify-content:start}
+.heat .d{aspect-ratio:1;border-radius:6px;background:var(--panel-3);display:grid;place-items:center;font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.heat .d.l1{background:var(--blue-soft);color:var(--ink)}.heat .d.l2{background:#3355b8;color:#fff}.heat .d.l3{background:var(--blue);color:var(--blue-ink)}
+.heat .d.today{outline:2px solid var(--gold)}
+.heat .d.blank{background:transparent}
+.heat .h{font-family:var(--mono);font-size:10px;text-align:center;color:var(--muted)}
+.toast{position:fixed;right:24px;bottom:24px;background:var(--gold);color:#241a00;font-weight:800;padding:12px 18px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.35);font-family:var(--display);font-size:17px;transition:opacity .3s,transform .3s}
+.toast[hidden]{display:block!important;opacity:0;transform:translateY(12px);pointer-events:none}
+.banner{background:var(--gold-soft);color:var(--gold);border-radius:12px;padding:10px 14px;font-size:14px}
 </style>
-
 </head><body>
-<div class="wrap">
-  <section class="ticket" aria-label="Tu sesión de hoy">
-    <div class="ticket-main">
-      <span class="label">English boarding pass · A2 → B1</span>
-      <div class="route"><span>BGA</span><span class="plane" aria-hidden="true"></span><span>USA</span></div>
-      <div class="meta">
-        <div><span class="label">Hoy</span><b id="t-date">—</b></div>
-        <div><span class="label">Semana</span><b id="t-week">—</b></div>
-        <div><span class="label">Tema</span><b id="t-topic">—</b></div>
-      </div>
+<div class="app">
+  <aside>
+    <div class="brand"><span class="logo" aria-hidden="true">✈</span><div><b>English<br>Boarding Pass</b><small>BGA → USA</small></div></div>
+    <nav id="nav">
+      <button data-go="home"><span class="i">🏠</span>Inicio</button>
+      <button data-go="path"><span class="i">🗺️</span>Ruta</button>
+      <button data-go="cards"><span class="i">🃏</span>Tarjetas<span class="badge" id="due-badge" hidden>0</span></button>
+      <button data-go="listen"><span class="i">🎧</span>Dictado</button>
+      <button data-go="talk"><span class="i">💬</span>Conversar</button>
+      <button data-go="progress"><span class="i">📈</span>Progreso</button>
+      <button data-go="settings"><span class="i">⚙️</span>Ajustes</button>
+    </nav>
+    <div class="rank">
+      <div class="row"><span class="label">Rango</span><span class="pill gold" id="r-xp">0 XP</span></div>
+      <b id="r-name">Pasajero</b>
+      <div class="bar"><i id="r-bar" style="width:0%"></i></div>
+      <small class="muted" id="r-next"></small>
     </div>
-    <div class="stub">
-      <span class="label">Racha</span>
-      <span class="big" id="t-streak">0</span>
-      <span class="label">días</span>
-    </div>
-  </section>
-
-  <nav class="tabs" role="tablist">
-    <button role="tab" id="tab-hoy" aria-selected="true" data-tab="hoy">Hoy</button>
-    <button role="tab" id="tab-hablar" aria-selected="false" data-tab="hablar">Conversar</button>
-    <button role="tab" id="tab-plan" aria-selected="false" data-tab="plan">Plan</button>
-    <button role="tab" id="tab-progreso" aria-selected="false" data-tab="progreso">Progreso</button>
-    <button role="tab" id="tab-ajustes" aria-selected="false" data-tab="ajustes">Ajustes</button>
-  </nav>
-
-  <!-- HOY -->
-  <section class="panel" id="p-hoy">
-    <div class="card">
-      <span class="label" id="h-eyebrow">Tema del día</span>
-      <h2 id="h-topic">—</h2>
-      <p class="muted" id="h-obj"></p>
-    </div>
-    <div class="card">
-      <div class="row" style="justify-content:space-between">
-        <h3>Tu hora de hoy</h3>
-        <span class="pill" id="h-count">0/5</span>
-      </div>
-      <div class="timer">
-        <span class="clock" id="clock">60:00</span>
-        <button class="btn primary" id="t-start">Empezar</button>
-        <button class="btn ghost" id="t-reset">Reiniciar</button>
-      </div>
-      <div class="blocks" id="blocks"></div>
-    </div>
-    <div class="card prose">
-      <span class="label">Gramática de la semana</span>
-      <h3 id="g-title"></h3>
-      <div id="g-expl"></div>
-      <span class="label">Ejemplos · tócalos para escucharlos</span>
-      <div class="chips" id="g-ex"></div>
-    </div>
-    <div class="card">
-      <span class="label">Frases de la semana · tócalas para escucharlas</span>
-      <div class="chips" id="vocab"></div>
-    </div>
-    <div class="card prose">
-      <span class="label">Input recomendado</span>
-      <p id="input"></p>
-      <span class="label">Misión de escritura (domingo)</span>
-      <p id="mision"></p>
-    </div>
-  </section>
-
-  <!-- HABLAR -->
-  <section class="panel" id="p-hablar" hidden>
-    <div class="card">
-      <span class="label">Elige qué practicar</span>
-      <div class="modes" id="modes"></div>
-    </div>
-    <div class="card">
-      <div class="banner" id="no-claude" hidden>Para conversar, primero pega tu clave de API en la pestaña <strong>Ajustes</strong>.</div>
-      <div class="chat" id="chat" aria-live="polite"></div>
-      <div class="composer">
-        <button class="mic" id="mic" title="Hablar" aria-label="Hablar con el micrófono">🎙</button>
-        <textarea id="input-text" rows="1" placeholder="Write or speak in English…"></textarea>
-        <button class="btn primary send" id="send">Enviar</button>
-      </div>
-      <p class="muted" id="mic-hint" style="font-size:13px;margin:0">Toca 🎙 para hablar. Si no funciona, usa el micrófono del teclado de tu celular: también cuenta como speaking.</p>
-      <div class="row" style="justify-content:space-between">
-        <label class="toggle"><input type="checkbox" id="autospeak" checked> Leer en voz alta las respuestas</label>
-        <div class="row">
-          <button class="btn ghost" id="new-chat">Nueva conversación</button>
-          <button class="btn" id="finish">Terminar y corregirme</button>
-        </div>
-      </div>
-    </div>
-    <div class="feedback" id="feedback" hidden></div>
-  </section>
-
-  <!-- PLAN -->
-  <section class="panel" id="p-plan" hidden>
-    <div class="card">
-      <h2>11 semanas hasta tu meta</h2>
-      <p class="muted">Del 17 de octubre al 3 de enero. Meta personal: pasar la entrevista del intercambio de Disney en inglés.</p>
-      <div class="chips">
-        <span class="chip">Fase 1 · Fundamentos (sem. 1–4)</span>
-        <span class="chip">Fase 2 · Fluidez (sem. 5–8)</span>
-        <span class="chip">Fase 3 · Conversación real (sem. 9–11)</span>
-      </div>
-    </div>
-    <div class="weeks" id="weeks"></div>
-  </section>
-
-  <!-- AJUSTES -->
-  <section class="panel" id="p-ajustes" hidden>
-    <div class="card">
-      <h2>Conectar con Claude</h2>
-      <p class="muted" style="margin:0">Para conversar, el programa usa tu propia clave de la API de Claude. Se guarda cifrada solo en este computador.</p>
-      <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px">
-        <li>Entra a <a href="https://console.anthropic.com/settings/keys" data-ext>console.anthropic.com</a> y crea una cuenta.</li>
-        <li>En <em>Billing</em>, agrega un poco de saldo (se paga por uso).</li>
-        <li>En <em>API Keys</em>, crea una clave y pégala aquí.</li>
-      </ol>
-      <label class="label" for="api-key">Clave de API</label>
-      <input id="api-key" type="password" placeholder="sk-ant-..." autocomplete="off" style="border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit">
-      <label class="label" for="model">Modelo</label>
-      <select id="model" style="border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit"></select>
-      <p class="muted" style="font-size:13px;margin:0">Opus 5.5 conversa mejor. Haiku 5.5 cuesta mucho menos y alcanza para practicar a nivel A2–B1.</p>
-      <div class="row"><button class="btn primary" id="save-settings">Guardar</button><span id="settings-status" class="muted" style="font-size:14px"></span></div>
-    </div>
-    <div class="card">
-      <h3>Hablar con tu voz</h3>
-      <p style="margin:0">En Windows, haz clic en la caja de texto de Conversar y presiona <strong>Windows + H</strong>. Habla en inglés y el texto aparece solo. Para que entienda inglés, agrega <em>English (United States)</em> en Configuración → Hora e idioma → Idioma.</p>
-    </div>
-  </section>
-
-  <!-- PROGRESO -->
-  <section class="panel" id="p-progreso" hidden>
-    <div class="stats">
-      <div class="stat"><span class="label">Días hechos</span><b id="s-days">0</b></div>
-      <div class="stat"><span class="label">Racha</span><b id="s-streak">0</b></div>
-      <div class="stat"><span class="label">Charlas</span><b id="s-chats">0</b></div>
-    </div>
-    <div class="card">
-      <h3>Calendario</h3>
-      <div class="cal" id="cal"></div>
-      <p class="muted" style="font-size:13px;margin:0">Verde fuerte: hora completa. Verde claro: hiciste parte. Regla: nunca dos días seguidos sin practicar.</p>
-    </div>
-    <div class="card">
-      <h3>Tu nivel</h3>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Fecha</th><th>Gramática</th><th>Lectura</th><th>Listening</th><th>Speaking</th><th>Nivel</th></tr></thead>
-        <tbody><tr><td>17 oct</td><td>8/20</td><td>3/4</td><td>75%</td><td>Fluidez 3 · Gram. 2 · Vocab. 2</td><td><span class="pill">A2</span></td></tr>
-        <tr><td>29 nov</td><td colspan="5" class="muted">Re-test</td></tr>
-        <tr><td>31 dic</td><td colspan="5" class="muted">Test final</td></tr></tbody>
-      </table></div>
-    </div>
-    <div class="card">
-      <h3>Mis errores frecuentes</h3>
-      <p class="muted" style="margin:0">Se agregan solos cuando terminas una conversación y pides corrección.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>❌ Lo que digo</th><th>✅ Correcto</th><th>Por qué</th></tr></thead>
-        <tbody id="errors"></tbody>
-      </table></div>
-    </div>
-  </section>
+  </aside>
+  <main id="main"></main>
 </div>
+<div class="toast" id="toast" hidden></div>
 
 <script>
-const WEEKS = [{"n": 1, "fechas": "19–25 octubre", "tema": "Yo, mi familia y mi trabajo", "obj": "Presentarte durante 2 minutos: nombre, origen, familia, trabajo o estudios, gustos.", "gram": "Verbo *to be* y presente simple", "expl": "- **to be** (ser/estar): I **am** · you/we/they **are** · he/she/it **is**. Negativo: *I'm not, she isn't, they aren't*. Pregunta: *Are you tired? Is she Colombian?*\n- **Presente simple** para hechos y hábitos: *I work, she work**s***. Negativo con *don't/doesn't*: *I don't smoke. He doesn't drive.* Pregunta: *Do you like coffee? Does she live here?*\n- Ojo: con *he/she/it* el verbo lleva **-s**: *she works, he watches, it goes*.", "ej": ["I'm Natalia and I'm from ___.", "I work as a ___ / I study ___.", "I live with my ___.", "I don't like waking up early.", "Does your sister work? — Yes, she does."], "vocab": ["Nice to meet you", "Where are you from?", "What do you do (for a living)?", "I'm in my twenties/thirties", "I'm an only child", "I have two brothers", "I get along with my mom", "I'm really into music", "In my free time I…", "I'm not a big fan of…", "I'm married / single / in a relationship", "My job is pretty demanding", "I work from home", "I'm learning English because…", "What about you?"], "inp": "BBC Learning English · *6 Minute English* o *English in a Minute* (YouTube) · ELLLO Level 1", "dias": ["Presentación personal: nombre, edad, ciudad", "Tu familia: ¿quién es quién?", "Tu trabajo o estudios", "Lo que te gusta y lo que no", "Role-play: conocer a alguien en una fiesta", "Ocio: una canción en inglés con letra (lyricstraining.com)", "Revisión semanal"], "mision": "Escribe 10 líneas: *All about me* (quién eres, familia, trabajo, gustos, por qué aprendes inglés).", "reto": "Usa *I've been working as… for… years* y *What I like most about my job is…*"}, {"n": 2, "fechas": "26 octubre – 1 noviembre", "tema": "Mi rutina y mi casa", "obj": "Contar un día normal de tu vida, de la mañana a la noche, con horas y frecuencia.", "gram": "Presente simple vs presente continuo · adverbios de frecuencia", "expl": "- **Presente simple** = hábitos: *I usually get up at 6.*\n- **Presente continuo** (*am/is/are + -ing*) = ahora mismo o temporal: *I'm studying English right now. I'm working a lot this month.*\n- **Frecuencia:** always (100%) · usually · often · sometimes · rarely · never (0%). Van antes del verbo: *I **often** cook*, pero después de *to be*: *I'm **always** tired*.\n- La hora: *at 7 o'clock, at half past seven, at a quarter to eight*.", "ej": ["I usually wake up at 6:30.", "I never skip breakfast.", "Right now I'm sitting in my living room.", "This week I'm working from home.", "How often do you exercise?"], "vocab": ["wake up / get up", "take a shower", "have breakfast/lunch/dinner", "commute to work", "get home", "do the dishes", "do the laundry", "go to bed", "take a nap", "on weekdays / on weekends", "once a week / twice a day", "I'm running late", "I'm a morning person / night owl", "the living room / kitchen / bedroom", "I can't stand traffic"], "inp": "ELLLO Level 1–2 (temas de rutina) · YouTube: *Easy English* (entrevistas en la calle)", "dias": ["Tu mañana: desde que te despiertas", "Tu tarde y tu noche", "Frecuencia: ¿qué haces siempre y qué nunca?", "Tu casa: describe cada espacio", "Role-play: entrevista para compartir apartamento", "Ocio: video de *a day in my life* en YouTube", "Revisión semanal"], "mision": "Escribe *My typical day* (12 líneas) y una segunda parte: *What I'm doing differently this month*.", "reto": "Añade conectores: *first, after that, then, while, as soon as, by the time*."}, {"n": 3, "fechas": "2–8 noviembre", "tema": "El pasado: mi fin de semana y mis recuerdos", "obj": "Contar qué hiciste el fin de semana pasado y un recuerdo de tu infancia.", "gram": "Pasado simple (verbos regulares e irregulares)", "expl": "- Regulares con **-ed**: *work → worked, study → studied, stop → stopped*. Pronunciación: /t/ *worked*, /d/ *played*, /ɪd/ *wanted*.\n- Irregulares (¡apréndelos de memoria, 5 por día!): *go → went, have → had, see → saw, eat → ate, make → made, get → got, buy → bought, take → took, come → came, do → did*.\n- Negativo y pregunta con **did** + verbo base: *I didn't go. Did you see it?* (nunca *did you went*).\n- Expresiones: *yesterday, last night, last weekend, two days ago, when I was a kid*.", "ej": ["Last weekend I went to my aunt's house.", "I didn't do much on Sunday.", "Did you have a good weekend?", "When I was a kid, I lived in ___.", "Two years ago I started a new job."], "vocab": ["How was your weekend?", "It was great / nothing special", "I stayed in / I went out", "I hung out with friends", "I caught up with…", "We had a blast", "I binge-watched a series", "I slept in", "When I was little…", "I grew up in…", "I remember when…", "It was a long time ago", "I'll never forget…", "to have fun / to have a good time", "It turned out to be…"], "inp": "ELLLO Level 2 · Podcast *Learning English for Everyone* o *The English We Speak* (BBC)", "dias": ["Tu fin de semana pasado", "10 verbos irregulares en historias cortas", "Un recuerdo de infancia", "Pronunciación del -ed (/t/ /d/ /ɪd/)", "Role-play: lunes en la oficina, '¿qué tal tu finde?'", "Ocio: episodio de *Friends* con subtítulos en inglés", "Revisión semanal"], "mision": "Escribe *The best day of my life* (12–15 líneas) en pasado.", "reto": "Usa *used to* para hábitos pasados: *I used to play outside every day.*"}, {"n": 4, "fechas": "9–15 noviembre", "tema": "Planes y viajes", "obj": "Explicar tus planes para diciembre y para 2027, y organizar un viaje.", "gram": "Futuro: *going to*, *will* y presente continuo para planes", "expl": "- **going to** = planes ya decididos: *I'm going to visit my parents in December.*\n- **will** = decisiones en el momento, promesas, predicciones: *I'll call you later. It will be fun.*\n- **Presente continuo** = citas fijas: *I'm meeting Ana on Friday.*\n- Expresiones: *next week, this weekend, in two weeks, by the end of the year*.", "ej": ["I'm going to travel to ___ in December.", "I think it will rain tomorrow.", "I'm having dinner with my family on Saturday.", "What are you doing this weekend?", "I'll help you with that."], "vocab": ["book a flight / a hotel", "pack my suitcase", "carry-on bag", "boarding pass", "check in / check out", "I'm looking forward to…", "I can't wait to…", "It's on my bucket list", "to go sightseeing", "a round-trip ticket", "What are your plans for…?", "I haven't decided yet", "I'm thinking of…", "It depends on…", "Let's play it by ear"], "inp": "YouTube: *English with Lucy* (viajes) · ELLLO Level 2–3", "dias": ["Tus planes para este fin de semana", "Tus planes para diciembre", "Tu viaje soñado", "Pronunciación: *going to* → *gonna*, *want to* → *wanna*", "Role-play: check-in en un hotel / aeropuerto", "Ocio: video de viajes en inglés", "Revisión semanal + balance del primer mes"], "mision": "Escribe un email a una amiga contándole tus planes de diciembre e invitándola a algo.", "reto": "Usa *I'm hoping to…, I'm planning to…, I might…*"}, {"n": 5, "fechas": "16–22 noviembre", "tema": "Comparar: ciudades, compras y comida", "obj": "Comparar dos lugares, dos productos o dos comidas y dar tu preferencia con razones.", "gram": "Comparativos y superlativos", "expl": "- Cortos: *cheap → cheap**er** → the cheap**est***; *big → bigger → the biggest*.\n- Largos: *expensive → **more** expensive → **the most** expensive*.\n- Irregulares: *good → better → the best · bad → worse → the worst · far → farther → the farthest*.\n- Igualdad: *as … as*: *It's **as** big **as** my old house.* · *not as … as*.", "ej": ["Bogotá is bigger than Medellín.", "This is the best restaurant in town.", "Online shopping is more convenient than going to stores.", "My new phone isn't as fast as I expected.", "What's the most beautiful place you've visited?"], "vocab": ["It's a rip-off", "It's worth it", "on sale", "Can I try it on?", "Do you have it in a smaller size?", "I'm just looking, thanks", "How much is it?", "I prefer X to Y", "I'd rather…", "It's way better", "spicy / sweet / salty / bland", "I'm starving", "Can I get the check, please?", "It's crowded", "It's quieter than…"], "inp": "BBC *6 Minute English* (temas de comida y ciudades) · *Easy English*", "dias": ["Tu ciudad vs otra ciudad", "Comida: tu plato favorito y por qué", "Compras: online vs en tienda", "Pronunciación: sonidos /ɪ/ vs /iː/ (*ship/sheep*)", "Role-play: restaurante y tienda de ropa", "Ocio: programa de cocina en inglés", "Revisión semanal"], "mision": "Escribe *My city vs. ___* (15 líneas) con al menos 6 comparativos.", "reto": "Usa *the more…, the more…* y *much / a lot / slightly + comparativo*."}, {"n": 6, "fechas": "23–29 noviembre", "tema": "Experiencias de vida", "obj": "Hablar de experiencias que has tenido o no, y de cosas que llevas tiempo haciendo.", "gram": "Presente perfecto: *ever, never, already, yet, for, since*", "expl": "- **have/has + participio**: *I **have been** to Mexico. She **has never** tried sushi.*\n- Experiencias (sin fecha): *Have you ever…?* — *Yes, I have / No, never.*\n- Con fecha concreta → pasado simple: *I **went** there in 2019.*\n- **for** (duración) vs **since** (punto de inicio): *for 3 years · since 2021*.\n- *already* (ya), *yet* (todavía, en negativas/preguntas), *just* (acabo de).", "ej": ["Have you ever been abroad?", "I've never ridden a horse.", "I've lived here for five years.", "I've worked here since 2022.", "I haven't finished yet."], "vocab": ["It was a once-in-a-lifetime experience", "I've always wanted to…", "I've never had the chance to…", "It's been ages since…", "I've just finished…", "so far", "lately / recently", "I've been there twice", "Have you tried…?", "It blew my mind", "I was so nervous", "It was worth it", "I'd love to do it again", "I've changed a lot", "How long have you…?"], "inp": "Podcast *Luke's English Podcast* (episodios cortos) · ELLLO Level 3", "dias": ["*Have you ever…?* 10 preguntas", "Cosas que nunca has hecho y quieres hacer", "*For / since*: tu vida en el tiempo", "Pronunciación: contracciones *I've, she's, haven't*", "Role-play: conversación con alguien nuevo sobre viajes", "Ocio: serie en inglés", "**Re-test de nivel** + revisión semanal"], "mision": "Escribe *Things I've done and things I haven't done yet* (15 líneas).", "reto": "Presente perfecto continuo: *I've been studying English for six weeks.*"}, {"n": 7, "fechas": "30 noviembre – 6 diciembre", "tema": "Salud, consejos y reglas", "obj": "Dar y pedir consejos, hablar de obligaciones y explicar reglas.", "gram": "Modales: *can, could, should, must, have to, don't have to*", "expl": "- **can / could**: habilidad y permiso: *I can swim. Could you help me?*\n- **should**: consejo: *You should drink more water.*\n- **must / have to**: obligación. *Must* = obligación personal o regla fuerte; *have to* = obligación externa.\n- **mustn't** (prohibido) ≠ **don't have to** (no es necesario).\n- Después del modal, verbo base sin *to*: *She should **go*** (no *should to go*).", "ej": ["You should get some rest.", "I have to work on Saturday.", "You mustn't park here.", "You don't have to bring anything.", "Can I ask you something?"], "vocab": ["I don't feel well", "I have a headache / sore throat", "I caught a cold", "I need to see a doctor", "Take care of yourself", "Get well soon", "If I were you, I'd…", "Why don't you…?", "It might be a good idea to…", "to work out", "a healthy diet", "I'm stressed out", "I need a break", "to get enough sleep", "You're allowed to / not allowed to…"], "inp": "BBC *6 Minute English* (salud) · YouTube: *Rachel's English* (pronunciación)", "dias": ["Tus hábitos de salud", "Dar consejos a una amiga con problemas", "Reglas en tu trabajo o casa", "Pronunciación: *can* vs *can't*", "Role-play: en el médico / farmacia", "Ocio: TED-Ed corto con subtítulos", "Revisión semanal"], "mision": "Escribe una respuesta a una carta de consejo: *Dear Natalia, I'm always tired and stressed…*", "reto": "Usa *You'd better…, You ought to…, It's essential that…*"}, {"n": 8, "fechas": "7–13 diciembre", "tema": "Historias y anécdotas", "obj": "Contar una anécdota de 3 minutos con principio, nudo y final, y reaccionar a las historias de otros.", "gram": "Pasado continuo + pasado simple · conectores narrativos", "expl": "- **Pasado continuo** (*was/were + -ing*) = acción en progreso en el pasado: *I was walking home…*\n- Acción que interrumpe → pasado simple: *…when it started to rain.*\n- **while** + continuo: *While I was cooking, the phone rang.*\n- Conectores: *first, then, after that, suddenly, at that moment, in the end, finally*.", "ej": ["I was sleeping when you called.", "While we were driving, we saw an accident.", "Suddenly, the lights went off.", "In the end, everything was fine.", "What were you doing at 8 last night?"], "vocab": ["You won't believe what happened", "So, basically…", "Out of nowhere…", "All of a sudden", "It was so embarrassing", "I was like…", "Long story short…", "No way!", "Seriously?", "That's crazy!", "What happened next?", "I felt terrible", "Luckily / unfortunately", "It turned out that…", "Anyway…"], "inp": "Podcast *The Moth* (historias reales, nivel más alto) · ELLLO Level 3 · *Easy English*", "dias": ["Una anécdota graciosa", "Una anécdota vergonzosa", "Reaccionar a historias: *No way! Really?*", "Pronunciación: entonación en preguntas y sorpresa", "Role-play: contar una historia a amigos en una cena", "Ocio: stand-up o serie", "Revisión semanal"], "mision": "Escribe tu mejor anécdota (una página) con al menos 6 conectores.", "reto": "Pasado perfecto: *When I arrived, the train had already left.*"}, {"n": 9, "fechas": "14–20 diciembre", "tema": "Sueños e hipótesis", "obj": "Hablar de condiciones reales e imaginarias: *si pasa X…*, *si yo fuera…*", "gram": "Condicionales 0, 1 y 2", "expl": "- **Cero** (verdades): *If you heat water, it boils.*\n- **Primero** (posible y real): *If it rains, I'll stay home.* (*if* + presente, *will* + verbo)\n- **Segundo** (imaginario): *If I won the lottery, I would travel the world.* (*if* + pasado, *would* + verbo). Con *to be*: *If I **were** you…*\n- *unless* = *if not*: *I won't go unless you come.*", "ej": ["If I have time, I'll call you.", "If I were rich, I'd buy a house by the beach.", "What would you do if you could live anywhere?", "If I spoke English fluently, I'd look for a job abroad.", "Unless we hurry, we'll be late."], "vocab": ["I wish I could…", "Imagine if…", "In an ideal world…", "It's my dream to…", "If I had the chance…", "I'd definitely…", "I'd probably…", "It's not realistic, but…", "What if…?", "That would be amazing", "to achieve a goal", "to make a living", "to take a risk", "to follow your dreams", "Who knows?"], "inp": "TED Talks cortos (con subtítulos en inglés) · Podcast *All Ears English*", "dias": ["*What would you do if…?* 10 preguntas", "Tu vida ideal en 10 años", "Situaciones posibles para el fin de año (1er condicional)", "Pronunciación: *I'd, you'd, would've*", "Role-play: entrevista de trabajo", "Ocio: película en inglés", "Revisión semanal"], "mision": "Escribe *If I could change one thing about the world…* (una página).", "reto": "Tercer condicional: *If I had studied English earlier, I would have…*"}, {"n": 10, "fechas": "21–27 diciembre", "tema": "Navidad, tradiciones y cultura", "obj": "Explicar tus tradiciones y costumbres a alguien de otro país, y preguntar por las suyas.", "gram": "*Used to* y phrasal verbs comunes", "expl": "- **used to** + verbo = costumbre pasada que ya no ocurre: *We used to make tamales every Christmas.*\n- **Phrasal verbs** (verbo + partícula): apréndelos en frases completas. Los más útiles:\n  *get up, wake up, look for, look forward to, find out, give up, put on, take off, turn on/off, come back, go out, hang out, set up, run out of, figure out, show up, catch up*.", "ej": ["When I was a kid, we used to open presents at midnight.", "We usually get together with the whole family.", "I'm looking forward to the holidays.", "We ran out of food!", "I'll catch up with my cousins."], "vocab": ["Merry Christmas! / Happy holidays!", "Christmas Eve / New Year's Eve", "to exchange gifts", "a family gathering", "to decorate the tree", "to make a toast", "New Year's resolutions", "It's a tradition to…", "In my country, we…", "Do you celebrate…?", "It's my favorite time of the year", "a get-together", "to wrap presents", "leftovers", "to count down"], "inp": "Videos de Navidad en inglés · canciones navideñas con letra · *The English We Speak*", "dias": ["Tus tradiciones de Navidad", "Cómo era la Navidad cuando eras niña (*used to*)", "15 phrasal verbs en historias", "Pronunciación: linking (*get up* → *ge-tup*)", "Role-play: explicar tus tradiciones a un amigo extranjero", "Nochebuena: 20 min de una película navideña en inglés", "Revisión semanal"], "mision": "Escribe *Christmas in my family* (una página) usando *used to* y 5 phrasal verbs.", "reto": "Usa *would* para hábitos pasados: *My grandma would cook for everyone.*"}, {"n": 11, "fechas": "28 diciembre – 3 enero", "tema": "Repaso final y metas 2027", "obj": "Mantener una conversación libre de 15 minutos y planificar cómo seguir en 2027.", "gram": "Repaso general de todos los tiempos", "expl": "- Repasa tus errores más frecuentes en [registro/errores.md](../registro/errores.md).\n- Mezcla tiempos en una misma conversación: presente (quién eres), pasado (qué hiciste este año), perfecto (qué has logrado), futuro (qué harás en 2027), condicional (qué harías si…).", "ej": ["This year I've learned a lot.", "In 2026 I started learning English seriously.", "Next year I'm going to take an official exam.", "If I keep practicing, I'll be fluent by the end of 2027.", "What I'm most proud of is…"], "vocab": ["Looking back…", "This year has been…", "I'm proud of myself for…", "My biggest challenge was…", "I've improved a lot in…", "I still need to work on…", "My goal for next year is…", "I'm determined to…", "step by step", "to keep up the good work", "to stay motivated", "to make progress", "Cheers to 2027!", "a fresh start", "I've come a long way"], "inp": "Elige tú: una serie, podcast o canal que te encante. Ya puedes.", "dias": ["Balance del año en inglés", "Repaso de tus errores frecuentes", "Metas para 2027", "Pronunciación: graba tu nota de voz final y compárala con la primera", "Role-play libre: tú eliges la situación", "31 dic: **re-test de nivel** + **conversación final de 15 min**", "Plan para 2027"], "mision": "Escribe una carta a ti misma para el 31 de diciembre de 2027.", "reto": "Prepárate para un examen oficial (IELTS, TOEFL o Cambridge B1/B2) si te interesa."}];
+const WEEKS = [{"n": 1, "fechas": "19–25 octubre", "tema": "Yo, mi familia y mi trabajo", "obj": "Presentarte durante 2 minutos: nombre, origen, familia, trabajo o estudios, gustos.", "gram": "Verbo *to be* y presente simple", "expl": "- **to be** (ser/estar): I **am** · you/we/they **are** · he/she/it **is**. Negativo: *I'm not, she isn't, they aren't*. Pregunta: *Are you tired? Is she Colombian?*\n- **Presente simple** para hechos y hábitos: *I work, she work**s***. Negativo con *don't/doesn't*: *I don't smoke. He doesn't drive.* Pregunta: *Do you like coffee? Does she live here?*\n- Ojo: con *he/she/it* el verbo lleva **-s**: *she works, he watches, it goes*.", "ej": ["My name is ___ and I'm from ___.", "I work as a ___ / I study ___.", "I live with my ___.", "I don't like waking up early.", "Does your sister work? — Yes, she does."], "vocab": ["Nice to meet you", "Where are you from?", "What do you do (for a living)?", "I'm in my twenties/thirties", "I'm an only child", "I have two brothers", "I get along with my mom", "I'm really into music", "In my free time I…", "I'm not a big fan of…", "I'm married / single / in a relationship", "My job is pretty demanding", "I work from home", "I'm learning English because…", "What about you?"], "inp": "BBC Learning English · *6 Minute English* o *English in a Minute* (YouTube) · ELLLO Level 1", "dias": ["Presentación personal: nombre, edad, ciudad", "Tu familia: ¿quién es quién?", "Tu trabajo o estudios", "Lo que te gusta y lo que no", "Role-play: conocer a alguien en una fiesta", "Ocio: una canción en inglés con letra (lyricstraining.com)", "Revisión semanal"], "mision": "Escribe 10 líneas: *All about me* (quién eres, familia, trabajo, gustos, por qué aprendes inglés).", "reto": "Usa *I've been working as… for… years* y *What I like most about my job is…*"}, {"n": 2, "fechas": "26 octubre – 1 noviembre", "tema": "Mi rutina y mi casa", "obj": "Contar un día normal de tu vida, de la mañana a la noche, con horas y frecuencia.", "gram": "Presente simple vs presente continuo · adverbios de frecuencia", "expl": "- **Presente simple** = hábitos: *I usually get up at 6.*\n- **Presente continuo** (*am/is/are + -ing*) = ahora mismo o temporal: *I'm studying English right now. I'm working a lot this month.*\n- **Frecuencia:** always (100%) · usually · often · sometimes · rarely · never (0%). Van antes del verbo: *I **often** cook*, pero después de *to be*: *I'm **always** tired*.\n- La hora: *at 7 o'clock, at half past seven, at a quarter to eight*.", "ej": ["I usually wake up at 6:30.", "I never skip breakfast.", "Right now I'm sitting in my living room.", "This week I'm working from home.", "How often do you exercise?"], "vocab": ["wake up / get up", "take a shower", "have breakfast/lunch/dinner", "commute to work", "get home", "do the dishes", "do the laundry", "go to bed", "take a nap", "on weekdays / on weekends", "once a week / twice a day", "I'm running late", "I'm a morning person / night owl", "the living room / kitchen / bedroom", "I can't stand traffic"], "inp": "ELLLO Level 1–2 (temas de rutina) · YouTube: *Easy English* (entrevistas en la calle)", "dias": ["Tu mañana: desde que te despiertas", "Tu tarde y tu noche", "Frecuencia: ¿qué haces siempre y qué nunca?", "Tu casa: describe cada espacio", "Role-play: entrevista para compartir apartamento", "Ocio: video de *a day in my life* en YouTube", "Revisión semanal"], "mision": "Escribe *My typical day* (12 líneas) y una segunda parte: *What I'm doing differently this month*.", "reto": "Añade conectores: *first, after that, then, while, as soon as, by the time*."}, {"n": 3, "fechas": "2–8 noviembre", "tema": "El pasado: mi fin de semana y mis recuerdos", "obj": "Contar qué hiciste el fin de semana pasado y un recuerdo de tu infancia.", "gram": "Pasado simple (verbos regulares e irregulares)", "expl": "- Regulares con **-ed**: *work → worked, study → studied, stop → stopped*. Pronunciación: /t/ *worked*, /d/ *played*, /ɪd/ *wanted*.\n- Irregulares (¡apréndelos de memoria, 5 por día!): *go → went, have → had, see → saw, eat → ate, make → made, get → got, buy → bought, take → took, come → came, do → did*.\n- Negativo y pregunta con **did** + verbo base: *I didn't go. Did you see it?* (nunca *did you went*).\n- Expresiones: *yesterday, last night, last weekend, two days ago, when I was a kid*.", "ej": ["Last weekend I went to my aunt's house.", "I didn't do much on Sunday.", "Did you have a good weekend?", "When I was a kid, I lived in ___.", "Two years ago I started a new job."], "vocab": ["How was your weekend?", "It was great / nothing special", "I stayed in / I went out", "I hung out with friends", "I caught up with…", "We had a blast", "I binge-watched a series", "I slept in", "When I was little…", "I grew up in…", "I remember when…", "It was a long time ago", "I'll never forget…", "to have fun / to have a good time", "It turned out to be…"], "inp": "ELLLO Level 2 · Podcast *Learning English for Everyone* o *The English We Speak* (BBC)", "dias": ["Tu fin de semana pasado", "10 verbos irregulares en historias cortas", "Un recuerdo de infancia", "Pronunciación del -ed (/t/ /d/ /ɪd/)", "Role-play: lunes en la oficina, '¿qué tal tu finde?'", "Ocio: episodio de *Friends* con subtítulos en inglés", "Revisión semanal"], "mision": "Escribe *The best day of my life* (12–15 líneas) en pasado.", "reto": "Usa *used to* para hábitos pasados: *I used to play outside every day.*"}, {"n": 4, "fechas": "9–15 noviembre", "tema": "Planes y viajes", "obj": "Explicar tus planes para diciembre y para 2027, y organizar un viaje.", "gram": "Futuro: *going to*, *will* y presente continuo para planes", "expl": "- **going to** = planes ya decididos: *I'm going to visit my parents in December.*\n- **will** = decisiones en el momento, promesas, predicciones: *I'll call you later. It will be fun.*\n- **Presente continuo** = citas fijas: *I'm meeting Ana on Friday.*\n- Expresiones: *next week, this weekend, in two weeks, by the end of the year*.", "ej": ["I'm going to travel to ___ in December.", "I think it will rain tomorrow.", "I'm having dinner with my family on Saturday.", "What are you doing this weekend?", "I'll help you with that."], "vocab": ["book a flight / a hotel", "pack my suitcase", "carry-on bag", "boarding pass", "check in / check out", "I'm looking forward to…", "I can't wait to…", "It's on my bucket list", "to go sightseeing", "a round-trip ticket", "What are your plans for…?", "I haven't decided yet", "I'm thinking of…", "It depends on…", "Let's play it by ear"], "inp": "YouTube: *English with Lucy* (viajes) · ELLLO Level 2–3", "dias": ["Tus planes para este fin de semana", "Tus planes para diciembre", "Tu viaje soñado", "Pronunciación: *going to* → *gonna*, *want to* → *wanna*", "Role-play: check-in en un hotel / aeropuerto", "Ocio: video de viajes en inglés", "Revisión semanal + balance del primer mes"], "mision": "Escribe un email a una amiga contándole tus planes de diciembre e invitándola a algo.", "reto": "Usa *I'm hoping to…, I'm planning to…, I might…*"}, {"n": 5, "fechas": "16–22 noviembre", "tema": "Comparar: ciudades, compras y comida", "obj": "Comparar dos lugares, dos productos o dos comidas y dar tu preferencia con razones.", "gram": "Comparativos y superlativos", "expl": "- Cortos: *cheap → cheap**er** → the cheap**est***; *big → bigger → the biggest*.\n- Largos: *expensive → **more** expensive → **the most** expensive*.\n- Irregulares: *good → better → the best · bad → worse → the worst · far → farther → the farthest*.\n- Igualdad: *as … as*: *It's **as** big **as** my old house.* · *not as … as*.", "ej": ["Bogotá is bigger than Medellín.", "This is the best restaurant in town.", "Online shopping is more convenient than going to stores.", "My new phone isn't as fast as I expected.", "What's the most beautiful place you've visited?"], "vocab": ["It's a rip-off", "It's worth it", "on sale", "Can I try it on?", "Do you have it in a smaller size?", "I'm just looking, thanks", "How much is it?", "I prefer X to Y", "I'd rather…", "It's way better", "spicy / sweet / salty / bland", "I'm starving", "Can I get the check, please?", "It's crowded", "It's quieter than…"], "inp": "BBC *6 Minute English* (temas de comida y ciudades) · *Easy English*", "dias": ["Tu ciudad vs otra ciudad", "Comida: tu plato favorito y por qué", "Compras: online vs en tienda", "Pronunciación: sonidos /ɪ/ vs /iː/ (*ship/sheep*)", "Role-play: restaurante y tienda de ropa", "Ocio: programa de cocina en inglés", "Revisión semanal"], "mision": "Escribe *My city vs. ___* (15 líneas) con al menos 6 comparativos.", "reto": "Usa *the more…, the more…* y *much / a lot / slightly + comparativo*."}, {"n": 6, "fechas": "23–29 noviembre", "tema": "Experiencias de vida", "obj": "Hablar de experiencias que has tenido o no, y de cosas que llevas tiempo haciendo.", "gram": "Presente perfecto: *ever, never, already, yet, for, since*", "expl": "- **have/has + participio**: *I **have been** to Mexico. She **has never** tried sushi.*\n- Experiencias (sin fecha): *Have you ever…?* — *Yes, I have / No, never.*\n- Con fecha concreta → pasado simple: *I **went** there in 2019.*\n- **for** (duración) vs **since** (punto de inicio): *for 3 years · since 2021*.\n- *already* (ya), *yet* (todavía, en negativas/preguntas), *just* (acabo de).", "ej": ["Have you ever been abroad?", "I've never ridden a horse.", "I've lived here for five years.", "I've worked here since 2022.", "I haven't finished yet."], "vocab": ["It was a once-in-a-lifetime experience", "I've always wanted to…", "I've never had the chance to…", "It's been ages since…", "I've just finished…", "so far", "lately / recently", "I've been there twice", "Have you tried…?", "It blew my mind", "I was so nervous", "It was worth it", "I'd love to do it again", "I've changed a lot", "How long have you…?"], "inp": "Podcast *Luke's English Podcast* (episodios cortos) · ELLLO Level 3", "dias": ["*Have you ever…?* 10 preguntas", "Cosas que nunca has hecho y quieres hacer", "*For / since*: tu vida en el tiempo", "Pronunciación: contracciones *I've, she's, haven't*", "Role-play: conversación con alguien nuevo sobre viajes", "Ocio: serie en inglés", "**Re-test de nivel** + revisión semanal"], "mision": "Escribe *Things I've done and things I haven't done yet* (15 líneas).", "reto": "Presente perfecto continuo: *I've been studying English for six weeks.*"}, {"n": 7, "fechas": "30 noviembre – 6 diciembre", "tema": "Salud, consejos y reglas", "obj": "Dar y pedir consejos, hablar de obligaciones y explicar reglas.", "gram": "Modales: *can, could, should, must, have to, don't have to*", "expl": "- **can / could**: habilidad y permiso: *I can swim. Could you help me?*\n- **should**: consejo: *You should drink more water.*\n- **must / have to**: obligación. *Must* = obligación personal o regla fuerte; *have to* = obligación externa.\n- **mustn't** (prohibido) ≠ **don't have to** (no es necesario).\n- Después del modal, verbo base sin *to*: *She should **go*** (no *should to go*).", "ej": ["You should get some rest.", "I have to work on Saturday.", "You mustn't park here.", "You don't have to bring anything.", "Can I ask you something?"], "vocab": ["I don't feel well", "I have a headache / sore throat", "I caught a cold", "I need to see a doctor", "Take care of yourself", "Get well soon", "If I were you, I'd…", "Why don't you…?", "It might be a good idea to…", "to work out", "a healthy diet", "I'm stressed out", "I need a break", "to get enough sleep", "You're allowed to / not allowed to…"], "inp": "BBC *6 Minute English* (salud) · YouTube: *Rachel's English* (pronunciación)", "dias": ["Tus hábitos de salud", "Dar consejos a una amiga con problemas", "Reglas en tu trabajo o casa", "Pronunciación: *can* vs *can't*", "Role-play: en el médico / farmacia", "Ocio: TED-Ed corto con subtítulos", "Revisión semanal"], "mision": "Escribe una respuesta a una carta de consejo: *Dear Natalia, I'm always tired and stressed…*", "reto": "Usa *You'd better…, You ought to…, It's essential that…*"}, {"n": 8, "fechas": "7–13 diciembre", "tema": "Historias y anécdotas", "obj": "Contar una anécdota de 3 minutos con principio, nudo y final, y reaccionar a las historias de otros.", "gram": "Pasado continuo + pasado simple · conectores narrativos", "expl": "- **Pasado continuo** (*was/were + -ing*) = acción en progreso en el pasado: *I was walking home…*\n- Acción que interrumpe → pasado simple: *…when it started to rain.*\n- **while** + continuo: *While I was cooking, the phone rang.*\n- Conectores: *first, then, after that, suddenly, at that moment, in the end, finally*.", "ej": ["I was sleeping when you called.", "While we were driving, we saw an accident.", "Suddenly, the lights went off.", "In the end, everything was fine.", "What were you doing at 8 last night?"], "vocab": ["You won't believe what happened", "So, basically…", "Out of nowhere…", "All of a sudden", "It was so embarrassing", "I was like…", "Long story short…", "No way!", "Seriously?", "That's crazy!", "What happened next?", "I felt terrible", "Luckily / unfortunately", "It turned out that…", "Anyway…"], "inp": "Podcast *The Moth* (historias reales, nivel más alto) · ELLLO Level 3 · *Easy English*", "dias": ["Una anécdota graciosa", "Una anécdota vergonzosa", "Reaccionar a historias: *No way! Really?*", "Pronunciación: entonación en preguntas y sorpresa", "Role-play: contar una historia a amigos en una cena", "Ocio: stand-up o serie", "Revisión semanal"], "mision": "Escribe tu mejor anécdota (una página) con al menos 6 conectores.", "reto": "Pasado perfecto: *When I arrived, the train had already left.*"}, {"n": 9, "fechas": "14–20 diciembre", "tema": "Sueños e hipótesis", "obj": "Hablar de condiciones reales e imaginarias: *si pasa X…*, *si yo fuera…*", "gram": "Condicionales 0, 1 y 2", "expl": "- **Cero** (verdades): *If you heat water, it boils.*\n- **Primero** (posible y real): *If it rains, I'll stay home.* (*if* + presente, *will* + verbo)\n- **Segundo** (imaginario): *If I won the lottery, I would travel the world.* (*if* + pasado, *would* + verbo). Con *to be*: *If I **were** you…*\n- *unless* = *if not*: *I won't go unless you come.*", "ej": ["If I have time, I'll call you.", "If I were rich, I'd buy a house by the beach.", "What would you do if you could live anywhere?", "If I spoke English fluently, I'd look for a job abroad.", "Unless we hurry, we'll be late."], "vocab": ["I wish I could…", "Imagine if…", "In an ideal world…", "It's my dream to…", "If I had the chance…", "I'd definitely…", "I'd probably…", "It's not realistic, but…", "What if…?", "That would be amazing", "to achieve a goal", "to make a living", "to take a risk", "to follow your dreams", "Who knows?"], "inp": "TED Talks cortos (con subtítulos en inglés) · Podcast *All Ears English*", "dias": ["*What would you do if…?* 10 preguntas", "Tu vida ideal en 10 años", "Situaciones posibles para el fin de año (1er condicional)", "Pronunciación: *I'd, you'd, would've*", "Role-play: entrevista de trabajo", "Ocio: película en inglés", "Revisión semanal"], "mision": "Escribe *If I could change one thing about the world…* (una página).", "reto": "Tercer condicional: *If I had studied English earlier, I would have…*"}, {"n": 10, "fechas": "21–27 diciembre", "tema": "Navidad, tradiciones y cultura", "obj": "Explicar tus tradiciones y costumbres a alguien de otro país, y preguntar por las suyas.", "gram": "*Used to* y phrasal verbs comunes", "expl": "- **used to** + verbo = costumbre pasada que ya no ocurre: *We used to make tamales every Christmas.*\n- **Phrasal verbs** (verbo + partícula): apréndelos en frases completas. Los más útiles:\n  *get up, wake up, look for, look forward to, find out, give up, put on, take off, turn on/off, come back, go out, hang out, set up, run out of, figure out, show up, catch up*.", "ej": ["When I was a kid, we used to open presents at midnight.", "We usually get together with the whole family.", "I'm looking forward to the holidays.", "We ran out of food!", "I'll catch up with my cousins."], "vocab": ["Merry Christmas! / Happy holidays!", "Christmas Eve / New Year's Eve", "to exchange gifts", "a family gathering", "to decorate the tree", "to make a toast", "New Year's resolutions", "It's a tradition to…", "In my country, we…", "Do you celebrate…?", "It's my favorite time of the year", "a get-together", "to wrap presents", "leftovers", "to count down"], "inp": "Videos de Navidad en inglés · canciones navideñas con letra · *The English We Speak*", "dias": ["Tus tradiciones de Navidad", "Cómo era la Navidad cuando eras niña (*used to*)", "15 phrasal verbs en historias", "Pronunciación: linking (*get up* → *ge-tup*)", "Role-play: explicar tus tradiciones a un amigo extranjero", "Nochebuena: 20 min de una película navideña en inglés", "Revisión semanal"], "mision": "Escribe *Christmas in my family* (una página) usando *used to* y 5 phrasal verbs.", "reto": "Usa *would* para hábitos pasados: *My grandma would cook for everyone.*"}, {"n": 11, "fechas": "28 diciembre – 3 enero", "tema": "Repaso final y metas 2027", "obj": "Mantener una conversación libre de 15 minutos y planificar cómo seguir en 2027.", "gram": "Repaso general de todos los tiempos", "expl": "- Repasa tus errores más frecuentes en [registro/errores.md](../registro/errores.md).\n- Mezcla tiempos en una misma conversación: presente (quién eres), pasado (qué hiciste este año), perfecto (qué has logrado), futuro (qué harás en 2027), condicional (qué harías si…).", "ej": ["This year I've learned a lot.", "In 2026 I started learning English seriously.", "Next year I'm going to take an official exam.", "If I keep practicing, I'll be fluent by the end of 2027.", "What I'm most proud of is…"], "vocab": ["Looking back…", "This year has been…", "I'm proud of myself for…", "My biggest challenge was…", "I've improved a lot in…", "I still need to work on…", "My goal for next year is…", "I'm determined to…", "step by step", "to keep up the good work", "to stay motivated", "to make progress", "Cheers to 2027!", "a fresh start", "I've come a long way"], "inp": "Elige tú: una serie, podcast o canal que te encante. Ya puedes.", "dias": ["Balance del año en inglés", "Repaso de tus errores frecuentes", "Metas para 2027", "Pronunciación: graba tu nota de voz final y compárala con la primera", "Role-play libre: tú eliges la situación", "31 dic: **re-test de nivel** + **conversación final de 15 min**", "Plan para 2027"], "mision": "Escribe una carta a ti misma para el 31 de diciembre de 2027.", "reto": "Prepárate para un examen oficial (IELTS, TOEFL o Cambridge B1/B2) si te interesa."}];
+const EXTRA = {"meanings": {"Nice to meet you": "Mucho gusto", "Where are you from?": "¿De dónde eres?", "What do you do (for a living)?": "¿A qué te dedicas?", "I'm in my twenties/thirties": "Tengo veintitantos / treinta y tantos", "I'm an only child": "Soy hijo único", "I have two brothers": "Tengo dos hermanos", "I get along with my mom": "Me llevo bien con mi mamá", "I'm really into music": "Me encanta la música", "In my free time I…": "En mi tiempo libre yo…", "I'm not a big fan of…": "No me gusta mucho…", "I'm married / single / in a relationship": "Estoy casado / soltero / en una relación", "My job is pretty demanding": "Mi trabajo es bastante exigente", "I work from home": "Trabajo desde casa", "I'm learning English because…": "Estoy aprendiendo inglés porque…", "What about you?": "¿Y tú?", "wake up / get up": "despertarse / levantarse", "take a shower": "ducharse", "have breakfast/lunch/dinner": "desayunar / almorzar / cenar", "commute to work": "desplazarse al trabajo", "get home": "llegar a casa", "do the dishes": "lavar los platos", "do the laundry": "lavar la ropa", "go to bed": "acostarse", "take a nap": "tomar una siesta", "on weekdays / on weekends": "entre semana / los fines de semana", "once a week / twice a day": "una vez a la semana / dos veces al día", "I'm running late": "Voy tarde", "I'm a morning person / night owl": "Soy madrugador / trasnochador", "the living room / kitchen / bedroom": "la sala / la cocina / el cuarto", "I can't stand traffic": "No soporto el tráfico"}, "grammar": {"1": [{"q": "She ___ a student.", "options": ["am", "is", "are"], "answer": 1, "explain": "Con *she* usamos **is**."}, {"q": "I ___ from Ocaña.", "options": ["am", "is", "are"], "answer": 0, "explain": "Con *I* siempre **am**."}, {"q": "My parents ___ in Cúcuta.", "options": ["live", "lives", "living"], "answer": 0, "explain": "*They* (my parents) → verbo sin -s."}, {"q": "He ___ tennis on Saturdays.", "options": ["play", "plays", "playing"], "answer": 1, "explain": "Con *he/she/it* el verbo lleva **-s**."}, {"q": "___ you like dogs?", "options": ["Do", "Does", "Are"], "answer": 0, "explain": "Preguntas con *you* → **Do**."}, {"q": "Rebecca ___ like cats.", "options": ["don't", "doesn't", "isn't"], "answer": 1, "explain": "Rebecca = *she* → **doesn't**."}, {"q": "I ___ 20 years old.", "options": ["have", "am", "is"], "answer": 1, "explain": "La edad va con *to be*: **I'm 20 years old**."}, {"q": "___ your sister work?", "options": ["Do", "Does", "Is"], "answer": 1, "explain": "*Your sister* = *she* → **Does**."}], "2": [{"q": "I usually ___ up at 6.", "options": ["get", "gets", "getting"], "answer": 0, "explain": "Hábito con *I* → **get**."}, {"q": "Right now I ___ English.", "options": ["study", "am studying", "studies"], "answer": 1, "explain": "*Right now* → presente continuo."}, {"q": "She ___ late.  (nunca)", "options": ["never is", "is never", "never"], "answer": 1, "explain": "Frecuencia va **después** de *to be*."}, {"q": "How often ___ you go to the gym?", "options": ["do", "are", "does"], "answer": 0, "explain": "Pregunta de hábito con *you* → **do**."}, {"q": "I ___ breakfast at 7.", "options": ["take", "have", "do"], "answer": 1, "explain": "Las comidas van con **have**."}, {"q": "This month I ___ a lot.", "options": ["work", "am working", "works"], "answer": 1, "explain": "Situación temporal → presente continuo."}, {"q": "I do the dishes ___ a week.", "options": ["two times", "twice", "second"], "answer": 1, "explain": "Dos veces = **twice**."}, {"q": "Listen! Rebecca ___.", "options": ["barks", "is barking", "bark"], "answer": 1, "explain": "*Listen!* = está pasando ahora."}]}, "build": {"1": [{"es": "Tengo 20 años.", "en": "I'm 20 years old"}, {"es": "Me llevo bien con mi mamá.", "en": "I get along with my mom"}, {"es": "Estudio ingeniería de sistemas.", "en": "I study systems engineering"}, {"es": "Mi perra se llama Rebecca.", "en": "My dog's name is Rebecca"}, {"es": "¿De dónde eres?", "en": "Where are you from"}, {"es": "En mi tiempo libre juego tenis.", "en": "In my free time I play tennis"}], "2": [{"es": "Me levanto a las seis.", "en": "I get up at six"}, {"es": "Nunca desayuno.", "en": "I never have breakfast"}, {"es": "Voy al gimnasio tres veces a la semana.", "en": "I go to the gym three times a week"}, {"es": "Ahora estoy estudiando inglés.", "en": "Right now I'm studying English"}, {"es": "No soporto el tráfico.", "en": "I can't stand traffic"}, {"es": "Voy tarde.", "en": "I'm running late"}]}, "seedErrors": [{"mal": "I have 20 years", "bien": "I'm 20 years old", "porque": "La edad va con to be"}, {"mal": "the last weekend i travel", "bien": "Last weekend I traveled", "porque": "Pasado con -ed, sin 'the'"}, {"mal": "in December i travel", "bien": "In December I'm going to travel", "porque": "Futuro con going to"}, {"mal": "my mother and your family", "bien": "my mother and her family", "porque": "his (de él), her (de ella)"}, {"mal": "I like play tennis", "bien": "I like playing tennis", "porque": "Después de like va -ing"}, {"mal": "my meta is", "bien": "my goal is", "porque": "Falso amigo"}, {"mal": "take a breakfast", "bien": "have breakfast", "porque": "Las comidas van con have"}, {"mal": "for sleep", "bien": "to sleep", "porque": "Para + verbo = to + verbo"}]};
 const PROFILE = `The student is a 20-year-old Colombian systems engineering student (6th semester) in Bucaramanga, from Ocaña. Has a 1-year-old Yorkshire terrier called Rebecca, plays tennis and goes to the gym, girlfriend called Sara. Family in Cúcuta (mother) and Ocaña (father). Goal: apply to an international exchange program at Disney in the USA, pass the interview in English, work and save money there. Level: A2. Main problems: uses present tense for past and future; switches to Spanish words when stuck; confuses his/her/your; "I have 20 years"; "for + verb" instead of "to + verb"; "before" meaning "after that"; spelling.`;
-const BLOCKS = [
-  {m:5,  t:"Warm-up", d:"Repasa tus frases (Anki o la lista de abajo), en voz alta."},
-  {m:15, t:"Input", d:"Escucha o lee el material del día: sin texto, con texto, sin texto."},
-  {m:10, t:"Gramática", d:"Lee el punto de la semana y escribe 5 frases sobre tu vida."},
-  {m:20, t:"Conversar", d:"5 min de shadowing + 15 min de conversación en la pestaña Conversar."},
-  {m:10, t:"Escribir", d:"5–10 líneas sobre el tema del día. Pide corrección en Conversar."}
-];
-const DAYS_ES=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
-const MONTHS=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
-const START = new Date(2026,9,17), W1 = new Date(2026,9,19);
-const $ = s => document.querySelector(s);
-const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const md = s => esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1");
-function mdBlock(s){
-  const lines=s.split("\n"); let out="",inList=false;
-  for(const l of lines){
-    if(/^\s*- /.test(l)){ if(!inList){out+="<ul>";inList=true} out+="<li>"+md(l.replace(/^\s*- /,""))+"</li>"; }
-    else if(/^\s+\S/.test(l)&&inList){ out=out.replace(/<\/li>$/," "+md(l.trim())+"</li>"); }
-    else { if(inList){out+="</ul>";inList=false} if(l.trim()) out+="<p>"+md(l)+"</p>"; }
-  }
-  return out+(inList?"</ul>":"");
-}
-const key = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-const today = new Date(); today.setHours(0,0,0,0);
-const TODAY = key(today);
-function weekOf(d){
-  if(d < W1) return 0;
-  return Math.min(11, Math.floor((d - W1)/(7*864e5)) + 1);
-}
-const dow = d => (d.getDay()+6)%7;
-const WK = weekOf(today);
-const week = WEEKS.find(w=>w.n===Math.max(1,WK));
-const topicToday = WK===0 ? (dow(today)===5 ? "Test de nivel y primera conversación" : "Prepara tus herramientas y lee la Semana 1") : week.dias[dow(today)];
+const RANKS=[["Pasajero",0],["Cadete",150],["Copiloto",400],["Piloto",800],["Capitán",1400],["Comandante",2200]];
+const DAYS=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+const MON=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1");
+const key=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const today=new Date(); today.setHours(0,0,0,0);
+const TODAY=key(today);
+const W1=new Date(2026,9,19), START=new Date(2026,9,17), END=new Date(2027,0,3);
+const dow=d=>(d.getDay()+6)%7;
+const WK=today<W1?0:Math.min(11,Math.floor((today-W1)/(7*864e5))+1);
+const CUR=Math.max(1,WK);
+const week=n=>WEEKS.find(w=>w.n===n);
+const topicToday=WK===0?(dow(today)===5?"Test de nivel y primera conversación":"Prepara tus herramientas y lee la Semana 1"):week(CUR).dias[dow(today)];
 
-/* ---------- State (db per-user, localStorage fallback) ---------- */
-let state = {done:{}, errors:[], chats:0};
-function loadLocal(){ try{ const s=JSON.parse(localStorage.getItem("ebp-state")||"null"); if(s) state=Object.assign(state,s);}catch(e){} }
-function saveLocal(){ try{ localStorage.setItem("ebp-state",JSON.stringify(state)); }catch(e){} }
-function save(){
-  saveLocal();
-}
-loadLocal();
-function mergeErr(a,b){ const seen=new Set(); return [...a,...b].filter(e=>{const k=(e.mal||"")+"|"+(e.bien||""); if(seen.has(k))return false; seen.add(k); return true;}); }
+/* ---------- State ---------- */
+const DEFAULT={name:"Santiago",xp:0,xpLog:{},minutes:{},lessons:{},cards:{},errors:[],chats:0,dictations:0,theme:"dark"};
+let S=Object.assign({},DEFAULT);
+try{Object.assign(S,JSON.parse(localStorage.getItem("ebp2")||"{}"))}catch(e){}
+function save(){try{localStorage.setItem("ebp2",JSON.stringify(S))}catch(e){}}
+function addXP(n,why){S.xp+=n;S.xpLog[TODAY]=(S.xpLog[TODAY]||0)+n;save();toast("+"+n+" XP · "+why);renderRank()}
+function addMin(n){S.minutes[TODAY]=(S.minutes[TODAY]||0)+n;save()}
+let toastT;function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,1800)}
+document.documentElement.dataset.theme=S.theme;
 
 /* ---------- Speech ---------- */
 let voice=null;
-function pickVoice(){ const vs=speechSynthesis.getVoices(); voice=vs.find(v=>/en-US/i.test(v.lang)&&/Samantha|Google US|Jenny|Aria|Natural/i.test(v.name))||vs.find(v=>/en-US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null; }
-if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
-function speak(text,rate=0.92){
-  if(!("speechSynthesis" in window)) return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text.replace(/[*_#>]/g,"")); u.lang="en-US"; u.rate=rate; if(voice) u.voice=voice;
-  speechSynthesis.speak(u);
-}
+function pickVoice(){const vs=speechSynthesis.getVoices();voice=vs.find(v=>/en-US/i.test(v.lang)&&/Aria|Jenny|Guy|Zira|Natural|Google US|Samantha/i.test(v.name))||vs.find(v=>/en-US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null}
+if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function speak(t,rate=.92){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t).replace(/[*_#>]/g,"").replace(/___/g,"blank"));u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.addEventListener("click",e=>{const s=e.target.closest("[data-say]");if(s)speak(s.dataset.say,s.dataset.rate?+s.dataset.rate:.92)});
 
-/* ---------- Header ---------- */
-function streak(){
-  let n=0; const d=new Date(today);
-  if(!(state.done[key(d)]||[]).length) d.setDate(d.getDate()-1);
-  while((state.done[key(d)]||[]).length){ n++; d.setDate(d.getDate()-1); }
-  return n;
-}
-function renderHeader(){
-  $("#t-date").textContent=today.getDate()+" "+MONTHS[today.getMonth()];
-  $("#t-week").textContent=WK+" / 11";
-  $("#t-topic").textContent=WK===0?"Arranque":week.tema;
-  $("#t-streak").textContent=streak();
-}
+/* ---------- Derived ---------- */
+function rank(){let i=0;RANKS.forEach((r,j)=>{if(S.xp>=r[1])i=j});const cur=RANKS[i],nxt=RANKS[i+1];return{name:cur[0],pct:nxt?Math.round((S.xp-cur[1])/(nxt[1]-cur[1])*100):100,next:nxt}}
+function streak(){let n=0;const d=new Date(today);if(!S.xpLog[key(d)])d.setDate(d.getDate()-1);while(S.xpLog[key(d)]){n++;d.setDate(d.getDate()-1)}return n}
+function renderRank(){const r=rank();$("#r-xp").textContent=S.xp+" XP";$("#r-name").textContent=r.name;$("#r-bar").style.width=r.pct+"%";$("#r-next").textContent=r.next?`${r.next[1]-S.xp} XP para ${r.next[0]}`:"Rango máximo";const due=dueCards().length;$("#due-badge").hidden=!due;$("#due-badge").textContent=due}
+function allCards(){const out=[];WEEKS.filter(w=>w.n<=CUR).forEach(w=>w.vocab.forEach(v=>out.push({id:v,en:v,es:(EXTRA.meanings[v]||""),wk:w.n})));return out}
+function dueCards(){const now=Date.now();return allCards().filter(c=>{const s=S.cards[c.id];return !s||s.due<=now})}
+function learned(){return Object.values(S.cards).filter(c=>c.reps>=2).length}
+function lessonsOf(n){const w=week(n);return[
+  {id:n+"-g",icon:"📘",t:"Gramática",sub:w.gram,kind:"grammar"},
+  {id:n+"-b",icon:"🧩",t:"Construye frases",sub:"Ordena las palabras",kind:"build"},
+  {id:n+"-d",icon:"🎧",t:"Dictado",sub:"Escucha y escribe",kind:"dict"},
+  {id:n+"-t",icon:"💬",t:"Conversación",sub:"Habla del tema",kind:"talk"},
+  {id:n+"-w",icon:"✍️",t:"Misión",sub:"Escribe y corrige",kind:"write"}]}
+function nextLesson(){for(const w of WEEKS){if(w.n>CUR)break;for(const l of lessonsOf(w.n))if(!S.lessons[l.id])return l}return null}
 
-/* ---------- Hoy ---------- */
-function renderHoy(){
-  $("#h-eyebrow").textContent=DAYS_ES[dow(today)]+" · Semana "+WK;
-  $("#h-topic").textContent=topicToday;
-  $("#h-obj").textContent="Objetivo de la semana: "+(WK===0?WEEKS[0].obj:week.obj);
-  const done=state.done[TODAY]||[];
-  $("#blocks").innerHTML=BLOCKS.map((b,i)=>`<div class="block ${done.includes(i)?"done":""}"><span class="min">${b.m} min</span><div class="t"><strong>${b.t}</strong><span>${b.d}</span></div><button class="chk" data-i="${i}" aria-label="Marcar ${b.t}" aria-pressed="${done.includes(i)}">✓</button></div>`).join("");
-  $("#h-count").textContent=done.length+"/5";
-  $("#h-count").className="pill"+(done.length===5?" ok":"");
-  $("#g-title").textContent=week.gram;
-  $("#g-expl").innerHTML=mdBlock(week.expl);
-  $("#g-ex").innerHTML=week.ej.map(e=>`<button class="chip" data-say="${esc(e)}">🔊 ${esc(e)}</button>`).join("");
-  $("#vocab").innerHTML=week.vocab.map(e=>`<button class="chip" data-say="${esc(e)}">${esc(e)}</button>`).join("");
-  $("#input").innerHTML=md(week.inp);
-  $("#mision").innerHTML=md(week.mision);
-}
-document.addEventListener("click",e=>{
-  const s=e.target.closest("[data-say]"); if(s){ speak(s.dataset.say.replace(/___/g,"blank")); }
-  const c=e.target.closest(".chk"); if(c){
-    const i=+c.dataset.i; const d=state.done[TODAY]||[];
-    state.done[TODAY]= d.includes(i)? d.filter(x=>x!==i) : [...d,i];
-    save(); renderHoy(); renderHeader(); renderProgreso();
-  }
-});
-/* Timer */
-let remaining=3600, tick=null;
-function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
-$("#t-start").onclick=()=>{
-  if(tick){ clearInterval(tick); tick=null; $("#t-start").textContent="Seguir"; return; }
-  $("#t-start").textContent="Pausar";
-  tick=setInterval(()=>{ remaining=Math.max(0,remaining-1); $("#clock").textContent=fmt(remaining); if(!remaining){clearInterval(tick);tick=null;$("#t-start").textContent="Empezar";speak("Great job! Your English hour is done.");} },1000);
+/* ---------- Router ---------- */
+let view="home";
+function go(v,arg){view=v;speechSynthesis&&speechSynthesis.cancel();document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.go===v?"page":"false"));$("#main").scrollTop=0;(VIEWS[v]||VIEWS.home)(arg)}
+$("#nav").onclick=e=>{const b=e.target.closest("[data-go]");if(b)go(b.dataset.go)};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-nav]");if(b){go(b.dataset.nav,b.dataset.arg)}});
+
+const VIEWS={};
+/* ---------- Home ---------- */
+VIEWS.home=()=>{
+  const r=rank(),nl=nextLesson(),due=dueCards().length,st=streak();
+  const hour=new Date().getHours();const greet=hour<12?"Good morning":hour<19?"Good afternoon":"Good evening";
+  const totalDays=Math.round((END-START)/864e5),gone=Math.max(0,Math.round((today-START)/864e5));
+  const pct=Math.min(100,Math.round(gone/totalDays*100));
+  const wps=[...Array(12)].map((_,i)=>{const d=i===0?START:new Date(W1.getTime()+(i-1)*7*864e5);const p=Math.round((d-START)/(END-START)*100);return`<span class="wp ${d<=today?"on":""}" style="left:${p}%" title="Semana ${i}"></span>`}).join("");
+  const days=[...Array(7)].map((_,i)=>{const d=new Date(today);d.setDate(d.getDate()-6+i);return d});
+  const vals=days.map(d=>S.xpLog[key(d)]||0);const max=Math.max(100,...vals);
+  const blocks=[["Repasar tarjetas","5 min · frases de la semana","cards"],["Lección del día",nl?nl.t+" · Semana "+nl.id.split("-")[0]:"¡Ruta al día!","path"],["Dictado","10 min · entrena tu oído","listen"],["Conversar con Claude","15 min · "+topicToday,"talk"],["Misión de escritura","10 min · corrígela con Claude","path"]];
+  const doneB=[(S.xpLog[TODAY]&&Object.values(S.cards).some(c=>c.last===TODAY)),!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&!/-t$|-w$/.test(k)),(S.dictLog||{})[TODAY],(S.chatLog||{})[TODAY],!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&/-w$/.test(k))];
+  $("#main").innerHTML=`<div class="screen">
+    <div class="hero">
+      <div>
+        <span class="label">${DAYS[dow(today)]} ${today.getDate()} ${MON[today.getMonth()]} · Semana ${WK} de 11</span>
+        <h2>${greet}, ${esc(S.name)}! 👋</h2>
+        <p class="muted" style="margin:6px 0 0">Hoy toca: <strong style="color:var(--ink)">${esc(topicToday)}</strong></p>
+        <div class="route"><div class="code">BGA<small>HOY</small></div><div class="track"><span class="done" style="width:${pct}%"></span>${wps}<span class="plane" style="left:${pct}%">✈</span></div><div class="code">MCO<small>DISNEY · 3 ENE</small></div></div>
+      </div>
+      <button class="btn gold big" data-nav="${nl?"lesson":"talk"}" data-arg="${nl?nl.id:""}">▶ ${nl?"Continuar":"Conversar"}</button>
+    </div>
+    <div class="grid g4">
+      <div class="card stat"><span class="ic" style="background:var(--gold-soft)">🔥</span><div><b>${st}</b><span>${st===1?"día de racha":"días de racha"}</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--blue-soft)">⭐</span><div><b>${S.xp}</b><span>XP · ${r.name}</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--green-soft)">🃏</span><div><b>${learned()}</b><span>frases aprendidas</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--panel-3)">🎯</span><div><b>A2</b><span>nivel actual · meta B1</span></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center"><h3>Tu hora de hoy</h3><span class="pill ${doneB.filter(Boolean).length===5?"ok":""}">${doneB.filter(Boolean).length}/5</span></div>
+        <div class="mission">${blocks.map((b,i)=>`<div class="step ${doneB[i]?"done":""}"><span class="n">${doneB[i]?"✓":i+1}</span><div><b>${b[0]}</b><small>${esc(b[1])}</small></div><button class="go" data-nav="${b[2]}" ${b[2]==="path"&&nl?`data-arg=""`:""}>${doneB[i]?"Repetir":"Ir →"}</button></div>`).join("")}</div>
+      </div>
+      <div class="card">
+        <h3>XP de la semana</h3>
+        <div class="chart">${days.map((d,i)=>`<div class="col"><span class="v">${vals[i]||""}</span><div class="b ${vals[i]>=100?"full":""} ${key(d)===TODAY?"today":""}" style="height:${Math.max(3,vals[i]/max*100)}%"></div><span class="d">${"LMXJVSD"[dow(d)]}</span></div>`).join("")}</div>
+        <p class="muted" style="margin:0;font-size:13px">Meta diaria: 100 XP. La barra llena = día completo.</p>
+      </div>
+    </div>
+    <div class="quick">
+      <button class="qa" data-nav="cards"><span class="e">🃏</span><b>Tarjetas</b><small>${due} pendientes por repasar</small></button>
+      <button class="qa" data-nav="talk"><span class="e">🏰</span><b>Entrevista Disney</b><small>Practica tu entrevista con Claude</small></button>
+      <button class="qa" data-nav="listen"><span class="e">🎧</span><b>Dictado</b><small>Escucha frases y escríbelas</small></button>
+    </div>
+  </div>`;
 };
-$("#t-reset").onclick=()=>{ clearInterval(tick); tick=null; remaining=3600; $("#clock").textContent=fmt(remaining); $("#t-start").textContent="Empezar"; };
 
-/* ---------- Conversar ---------- */
-const MODES=[
-  {id:"daily", t:"Tema del día", s:()=>topicToday, brief:()=>`Today's topic: "${topicToday}". This week's grammar: ${week.gram}. Ask questions one by one about the topic so the student practices that grammar.`},
-  {id:"free", t:"Charla libre", s:()=>"Hablamos de lo que quieras", brief:()=>"Free conversation about the student's life, interests and plans. Ask one question at a time."},
-  {id:"disney", t:"Entrevista Disney", s:()=>"Practica tu entrevista del intercambio", brief:()=>"Role-play: you are a friendly recruiter interviewing the student for the Disney International College / Cultural Exchange Program in the USA. Ask typical interview questions one at a time (tell me about yourself, why Disney, customer service experience, teamwork, a difficult situation, availability). Keep it realistic but kind."},
-  {id:"restaurant", t:"Role-play", s:()=>"Restaurante, hotel, aeropuerto", brief:()=>"Role-play everyday travel situations in the USA: start as a waiter in a restaurant; when it finishes, move to a hotel check-in, then an airport. You play the staff, the student is the customer."},
-  {id:"correct", t:"Corrige mi texto", s:()=>"Pega tu texto del día", brief:()=>"The student will paste a short text they wrote. Reply in Spanish with: the corrected version in English (bold the changes), then the 3 most important errors explained briefly, then one encouraging line. Then ask in English for the next text or a question about it."}
-];
-let mode="daily", history=[], sample=null, busy=false;
-function renderModes(){
-  $("#modes").innerHTML=MODES.map(m=>`<button class="mode" data-mode="${m.id}" aria-pressed="${m.id===mode}"><strong>${m.t}</strong><small>${esc(m.s())}</small></button>`).join("");
+/* ---------- Path ---------- */
+VIEWS.path=()=>{
+  const nl=nextLesson();
+  $("#main").innerHTML=`<div class="screen">
+    <div class="head"><div><h1>Tu ruta</h1><p>11 semanas, 5 lecciones por semana. Completa una para desbloquear la siguiente.</p></div><span class="pill">${Object.keys(S.lessons).length} / 55 lecciones</span></div>
+    ${WEEKS.map(w=>{const ls=lessonsOf(w.n);const locked=w.n>CUR;return`<div class="unit ${locked?"locked":""} ${w.n===CUR?"now":""}">
+      <div><span class="label">Semana · ${esc(w.fechas)}</span><div class="wk">${w.n}</div><b>${esc(w.tema)}</b></div>
+      <div class="nodes">${ls.map(l=>{const done=S.lessons[l.id];const isNext=nl&&nl.id===l.id;return`<button class="node ${done?"done":""} ${isNext?"next":""}" ${locked?"disabled title='Se desbloquea el "+esc(w.fechas.split("–")[0])+"'":`data-nav="lesson" data-arg="${l.id}"`}><span class="c">${locked?"🔒":done?"✓":l.icon}</span><span>${l.t}</span></button>`}).join("")}</div>
+    </div>`}).join("")}
+  </div>`;
+};
+
+/* ---------- Lesson engine ---------- */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const norm=s=>s.toLowerCase().replace(/[’']/g,"'").replace(/[^a-z0-9' ]/g," ").replace(/\s+/g," ").trim();
+function buildItems(n){const w=week(n);const ex=EXTRA.build[n]||w.ej.filter(e=>!e.includes("___")).map(e=>({en:e}));return ex.map(x=>({type:"build",es:x.es,answer:x.en}))}
+function dictItems(n){const w=week(n);return shuffle([...w.ej.filter(e=>!e.includes("___")),...w.vocab.filter(v=>!/[…\/(]/.test(v))]).slice(0,6).map(t=>({type:"dict",answer:t}))}
+let L=null;
+VIEWS.lesson=id=>{
+  const n=+String(id).split("-")[0],kind=lessonsOf(n).find(l=>l.id===id);
+  if(!kind){go("path");return}
+  if(kind.kind==="talk"){talkMode="daily";go("talk");return}
+  if(kind.kind==="write"){writeView(n,id);return}
+  const items=kind.kind==="grammar"?(EXTRA.grammar[n]||[]).map(q=>({type:"mc",...q})).concat(buildItems(n).slice(0,2)):kind.kind==="build"?buildItems(n):dictItems(n);
+  L={id,n,kind,items:items.length?items:buildItems(n),i:0,right:0,xp:0,answered:false,sel:null,tray:[]};
+  if(kind.kind==="grammar") L.intro=true;
+  renderLesson();
+};
+function renderLesson(){
+  const it=L.items[L.i],pct=Math.round(L.i/L.items.length*100);
+  let body="";
+  if(L.intro&&L.i===0&&!L.seenIntro){
+    const w=week(L.n);
+    body=`<div class="card"><span class="label">Antes de empezar</span><h3>${md(w.gram)}</h3><div>${mdBlock(w.expl)}</div><div class="chips">${w.ej.map(e=>`<button class="chip" data-say="${esc(e)}">🔊 ${esc(e)}</button>`).join("")}</div></div><button class="btn primary big" id="intro-ok">Entendido, ¡a practicar!</button>`;
+  } else if(it.type==="mc"){
+    const parts=it.q.split("___");
+    body=`<span class="label">Elige la opción correcta</span><div class="q">${parts.length>1?esc(parts[0])+`<span class="blank">${L.sel!=null?esc(it.options[L.sel]):"&nbsp;"}</span>`+esc(parts[1]):esc(it.q)}</div>
+      <div class="opts">${it.options.map((o,i)=>`<button class="opt ${L.sel===i?"sel":""} ${L.answered&&i===it.answer?"right":""} ${L.answered&&L.sel===i&&i!==it.answer?"wrong":""}" data-opt="${i}" ${L.answered?"disabled":""}><span class="k">${i+1}</span>${esc(o)}</button>`).join("")}</div>`;
+  } else if(it.type==="build"){
+    if(!L.bank){const words=it.answer.replace(/[.?!,]/g,"").split(" ");const extra=shuffle(["is","are","the","do","my","to","have"].filter(x=>!words.includes(x))).slice(0,2);L.bank=shuffle([...words,...extra]).map((w,i)=>({w,i}));L.tray=[]}
+    body=`<span class="label">${it.es?"Traduce esta frase":"Ordena la frase"}</span><div class="q">${it.es?esc(it.es):"🔊 Escucha y arma la frase"}</div>${it.es?"":`<div><button class="btn" data-say="${esc(it.answer)}">🔊 Escuchar</button></div>`}
+      <div class="tray">${L.tray.map(t=>`<button class="tile" data-untile="${t.i}" ${L.answered?"disabled":""}>${esc(t.w)}</button>`).join("")}</div>
+      <div class="bank">${L.bank.map(t=>`<button class="tile ${L.tray.some(x=>x.i===t.i)?"used":""}" data-tile="${t.i}" ${L.answered?"disabled":""}>${esc(t.w)}</button>`).join("")}</div>`;
+  } else if(it.type==="dict"){
+    body=`<span class="label">Escucha y escribe lo que oyes</span><div style="display:flex;gap:16px;align-items:center;justify-content:center;padding:10px 0"><button class="listenbtn" data-say="${esc(it.answer)}" data-rate="0.9" aria-label="Escuchar">🔊</button><button class="listenbtn slow" data-say="${esc(it.answer)}" data-rate="0.6" aria-label="Escuchar lento">🐢</button></div>
+      <textarea id="dict-in" placeholder="Escribe en inglés…" ${L.answered?"disabled":""}>${esc(L.typed||"")}</textarea>`;
+  }
+  let foot="";
+  if(!(L.intro&&L.i===0&&!L.seenIntro)){
+    if(L.answered){const ok=L.lastOk;foot=`<div class="feedback ${ok?"ok":"no"}"><div><b>${ok?"¡Excelente! 🎉":"Casi…"}</b><p>${ok?(it.explain?md(it.explain):"Sigue así."):`Respuesta correcta: <strong>${esc(it.type==="mc"?it.options[it.answer]:it.answer)}</strong>${it.explain?"<br>"+md(it.explain):""}`}</p></div><button class="btn ${ok?"primary":""} big" id="next">Continuar</button></div>`}
+    else foot=`<div style="display:flex;justify-content:flex-end"><button class="btn primary big" id="check" ${canCheck()?"":"disabled"}>Comprobar</button></div>`;
+  }
+  $("#main").innerHTML=`<div class="screen"><div class="lesson">
+    <div class="ltop"><button class="x" data-nav="path" aria-label="Salir">✕</button><div class="bar"><i style="width:${pct}%"></i></div><span class="xp">+${L.xp} XP</span></div>
+    <div><span class="label">Semana ${L.n} · ${esc(L.kind.t)}</span></div>
+    ${body}${foot}</div></div>`;
+  const io=$("#intro-ok");if(io)io.onclick=()=>{L.seenIntro=true;renderLesson()};
+  const ch=$("#check");if(ch)ch.onclick=check;
+  const nx=$("#next");if(nx)nx.onclick=next;
+  const di=$("#dict-in");if(di){di.focus();di.oninput=()=>{L.typed=di.value;const c=$("#check");if(c)c.disabled=!canCheck()};di.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();if(canCheck())check()}}}
+  if(it&&it.type==="dict"&&!L.answered&&!L.played){L.played=true;setTimeout(()=>speak(it.answer,.9),300)}
 }
-$("#modes").onclick=e=>{ const b=e.target.closest("[data-mode]"); if(!b)return; mode=b.dataset.mode; renderModes(); startChat(); };
-function system(){
-  const m=MODES.find(x=>x.id===mode);
-  return `You are Claude, a warm, patient English conversation partner for a Spanish-speaking student from Colombia. ${PROFILE}
+function canCheck(){const it=L.items[L.i];return it.type==="mc"?L.sel!=null:it.type==="build"?L.tray.length>0:(L.typed||"").trim().length>0}
+function check(){const it=L.items[L.i];let ok;
+  if(it.type==="mc")ok=L.sel===it.answer;
+  else if(it.type==="build")ok=norm(L.tray.map(t=>t.w).join(" "))===norm(it.answer);
+  else ok=norm(L.typed||"")===norm(it.answer);
+  L.answered=true;L.lastOk=ok;if(ok){L.right++;L.xp+=10}else if(it.type!=="mc"){S.errors=[{mal:it.type==="build"?L.tray.map(t=>t.w).join(" "):L.typed,bien:it.answer,porque:it.type==="dict"?"Dictado":"Orden de la frase"},...S.errors].slice(0,80);save()}
+  speak(it.type==="mc"?it.q.replace("___",it.options[it.answer]):it.answer);renderLesson()}
+function next(){L.i++;L.sel=null;L.answered=false;L.bank=null;L.tray=[];L.typed="";L.played=false;
+  if(L.i>=L.items.length){finishLesson();return}renderLesson()}
+function finishLesson(){const bonus=50;const total=L.xp+bonus;S.lessons[L.id]={date:TODAY,score:L.right+"/"+L.items.length};if(L.kind.kind==="dict"){S.dictLog=S.dictLog||{};S.dictLog[TODAY]=1;S.dictations=(S.dictations||0)+L.items.length}addMin(8);addXP(total,"Lección completa");
+  const nl=nextLesson();
+  $("#main").innerHTML=`<div class="screen done-screen"><div class="big">🏆</div><h1>¡Lección completa!</h1><p class="muted">Semana ${L.n} · ${esc(L.kind.t)}</p>
+  <div class="stats3"><div class="card"><span class="label">Aciertos</span><b style="font-family:var(--display);font-size:30px">${L.right}/${L.items.length}</b></div><div class="card"><span class="label">XP ganados</span><b style="font-family:var(--display);font-size:30px;color:var(--gold)">+${total}</b></div><div class="card"><span class="label">Racha</span><b style="font-family:var(--display);font-size:30px">🔥 ${streak()}</b></div></div>
+  <div style="display:flex;gap:10px">${nl?`<button class="btn primary big" data-nav="lesson" data-arg="${nl.id}">Siguiente: ${esc(nl.t)}</button>`:""}<button class="btn big" data-nav="home">Volver al inicio</button></div></div>`}
+document.addEventListener("click",e=>{if(view!=="lesson"||!L)return;
+  const o=e.target.closest("[data-opt]");if(o&&!L.answered){L.sel=+o.dataset.opt;renderLesson();return}
+  const t=e.target.closest("[data-tile]");if(t&&!L.answered){const i=+t.dataset.tile;if(!L.tray.some(x=>x.i===i)){L.tray.push(L.bank.find(b=>b.i===i));speak(L.bank.find(b=>b.i===i).w,1)}renderLesson();return}
+  const u=e.target.closest("[data-untile]");if(u&&!L.answered){const i=+u.dataset.untile;L.tray=L.tray.filter(x=>x.i!==i);renderLesson()}});
+document.addEventListener("keydown",e=>{if(view!=="lesson"||!L||e.target.tagName==="TEXTAREA")return;const it=L.items[L.i];if(it&&it.type==="mc"&&!L.answered&&/^[1-4]$/.test(e.key)&&+e.key<=it.options.length){L.sel=+e.key-1;renderLesson()}if(e.key==="Enter"){if(L.answered)next();else if(canCheck())check()}});
+function mdBlock(s){let out="",inL=false;for(const l of s.split("\n")){if(/^\s*- /.test(l)){if(!inL){out+="<ul style='margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px'>";inL=true}out+="<li>"+md(l.replace(/^\s*- /,""))+"</li>"}else if(/^\s+\S/.test(l)&&inL){out=out.replace(/<\/li>$/," "+md(l.trim())+"</li>")}else{if(inL){out+="</ul>";inL=false}if(l.trim())out+="<p style='margin:0'>"+md(l)+"</p>"}}return out+(inL?"</ul>":"")}
+
+/* ---------- Writing mission ---------- */
+function writeView(n,id){const w=week(n);view="lesson";
+  $("#main").innerHTML=`<div class="screen"><div class="lesson">
+    <div class="ltop"><button class="x" data-nav="path" aria-label="Salir">✕</button><span class="label">Semana ${n} · Misión de escritura</span></div>
+    <div class="q">✍️ ${md(w.mision)}</div>
+    <textarea id="w-in" style="min-height:220px" placeholder="Escribe aquí en inglés, sin traductor…">${esc((S.drafts||{})[id]||"")}</textarea>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span class="muted" id="w-count">0 palabras</span><button class="btn primary big" id="w-go">Corregir con Claude</button></div>
+    <div id="w-out"></div></div></div>`;
+  const ta=$("#w-in");const cnt=()=>{$("#w-count").textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+" palabras";S.drafts=S.drafts||{};S.drafts[id]=ta.value;save()};ta.oninput=cnt;cnt();
+  $("#w-go").onclick=async()=>{if(ta.value.trim().length<20){$("#w-out").innerHTML=`<div class="banner">Escribe un poco más antes de pedir corrección.</div>`;return}
+    $("#w-go").disabled=true;$("#w-out").innerHTML=`<div class="card"><span class="muted">Claude está corrigiendo tu texto…</span></div>`;
+    const res=await window.api.feedback(`You are an English teacher for a Spanish-speaking A2 student. ${PROFILE}
+Writing task: ${w.mision}
+Student text:
+"""${ta.value}"""
+Return JSON: {"corregido":"the full corrected text in English","errores":[{"mal":"...","bien":"...","porque":"short reason in Spanish"}],"bien":"one encouraging sentence in Spanish","puntaje":1-10}. 3 to 6 errors max.`);
+    $("#w-go").disabled=false;
+    if(!res.ok){$("#w-out").innerHTML=`<div class="banner">${esc(ERR[res.code]||ERR.error)}</div>`;return}
+    const r=res.data;S.errors=mergeErr(r.errores||[],S.errors);S.lessons[id]={date:TODAY,score:(r.puntaje||"")+"/10"};addMin(10);addXP(60,"Misión de escritura");
+    $("#w-out").innerHTML=`<div class="fbk"><h3 style="color:var(--green)">Puntaje: ${esc(r.puntaje)}/10</h3><p style="margin:0">${esc(r.bien)}</p><span class="label">Versión corregida</span><p style="margin:0;white-space:pre-wrap">${esc(r.corregido)}</p><button class="btn" data-say="${esc(r.corregido)}">🔊 Escuchar versión corregida</button>${errTable(r.errores||[])}</div>`}}
+function errTable(es){return`<div style="overflow-x:auto"><table><thead><tr><th>❌ Escribiste</th><th>✅ Mejor así</th><th>Por qué</th></tr></thead><tbody>${es.map(e=>`<tr><td>${esc(e.mal)}</td><td><strong>${esc(e.bien)}</strong></td><td class="muted">${esc(e.porque)}</td></tr>`).join("")}</tbody></table></div>`}
+function mergeErr(a,b){const seen=new Set();return[...a,...b].filter(e=>{if(!e||!e.mal)return false;const k=e.mal+"|"+e.bien;if(seen.has(k))return false;seen.add(k);return true}).slice(0,80)}
+
+/* ---------- Flashcards (spaced repetition) ---------- */
+let FC=null;
+VIEWS.cards=()=>{const due=shuffle(dueCards()).slice(0,20);FC={q:due,i:0,flip:false,done:0};renderCards()};
+function renderCards(){
+  if(!FC.q.length||FC.i>=FC.q.length){
+    $("#main").innerHTML=`<div class="screen done-screen"><div class="big">🃏</div><h1>${FC.done?"¡Repaso terminado!":"Todo al día"}</h1><p class="muted">${FC.done?`Repasaste ${FC.done} tarjetas.`:"No tienes tarjetas pendientes. Vuelven cuando toque repasarlas."}</p><p class="muted">Frases aprendidas: <strong style="color:var(--ink)">${learned()}</strong> de ${allCards().length}</p><button class="btn primary big" data-nav="home">Volver al inicio</button></div>`;return}
+  const c=FC.q[FC.i];
+  $("#main").innerHTML=`<div class="screen">
+    <div class="head"><div><h1>Tarjetas</h1><p>Di la frase en voz alta antes de voltearla.</p></div><span class="pill">${FC.i+1} / ${FC.q.length}</span></div>
+    <div class="fc-wrap"><div class="fc ${FC.flip?"flip":""}" id="fc">
+      <div class="side"><span class="label">Semana ${c.wk} · ¿Qué significa?</span><div class="phrase">${esc(c.en)}</div><button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button><span class="muted" style="font-size:13px">Clic o barra espaciadora para voltear</span></div>
+      <div class="side back"><span class="label">Significado</span><div class="phrase" style="font-size:26px">${esc(c.en)}</div><div class="mean">${esc(c.es||"Inventa una frase tuya con esta expresión")}</div><button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button></div>
+    </div></div>
+    <div class="rate" ${FC.flip?"":"style='visibility:hidden'"}>
+      <button class="r1" data-rate="1">Otra vez<small>1 min</small></button><button class="r2" data-rate="2">Difícil<small>${ivl(c,2)}</small></button><button class="r3" data-rate="3">Bien<small>${ivl(c,3)}</small></button><button class="r4" data-rate="4">Fácil<small>${ivl(c,4)}</small></button>
+    </div></div>`;
+  $("#fc").onclick=e=>{if(e.target.closest("[data-say]"))return;FC.flip=!FC.flip;renderCards();if(FC.flip)speak(c.en)};
+  document.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>rate(+b.dataset.rate));
+  if(!FC.flip&&!FC.spoke){FC.spoke=true;setTimeout(()=>speak(c.en),250)}
+}
+function sched(c,g){const s=S.cards[c.id]||{ease:2.5,int:0,reps:0};let ease=s.ease,int=s.int,reps=s.reps;
+  if(g===1){reps=0;int=0}else{ease=Math.max(1.3,ease+(g===2?-.15:g===4?.15:0));int=reps===0?(g===4?3:1):reps===1?(g===2?2:g===4?6:4):Math.round(int*ease*(g===2?.7:g===4?1.3:1));reps++}
+  return{ease,int,reps,due:g===1?Date.now()+60e3:Date.now()+int*864e5,last:TODAY}}
+function ivl(c,g){const d=sched(c,g).int;return d<1?"1 min":d===1?"1 día":d+" días"}
+function rate(g){const c=FC.q[FC.i];S.cards[c.id]=sched(c,g);if(g===1)FC.q.push(c);FC.done++;addXP(2,"Tarjeta");FC.i++;FC.flip=false;FC.spoke=false;if(FC.done%10===0)addMin(5);renderCards()}
+document.addEventListener("keydown",e=>{if(view!=="cards"||!FC||e.target.tagName==="TEXTAREA"||e.target.tagName==="INPUT")return;if(e.key===" "){e.preventDefault();FC.flip=!FC.flip;renderCards();if(FC.flip)speak(FC.q[FC.i].en)}if(FC.flip&&/^[1-4]$/.test(e.key))rate(+e.key)});
+
+/* ---------- Dictation hub ---------- */
+VIEWS.listen=()=>{
+  $("#main").innerHTML=`<div class="screen">
+    <div class="head"><div><h1>Dictado</h1><p>Escucha frases reales y escríbelas. Entrena tu oído para los números, las contracciones y las palabras rápidas.</p></div><span class="pill">${S.dictations||0} frases escritas</span></div>
+    <div class="grid g3">${WEEKS.filter(w=>w.n<=CUR).map(w=>`<button class="qa" data-nav="lesson" data-arg="${w.n}-d"><span class="e">🎧</span><b>Semana ${w.n}</b><small>${esc(w.tema)}</small>${S.lessons[w.n+"-d"]?`<span class="pill ok" style="align-self:flex-start">✓ ${esc(S.lessons[w.n+"-d"].score)}</span>`:""}</button>`).join("")}</div>
+    <div class="card"><h3>Escucha libre</h3><p class="muted" style="margin:0">Toca para escuchar a velocidad normal o lenta. Repite en voz alta encima del audio (shadowing).</p>
+      <div class="chips">${week(CUR).ej.concat(week(CUR).vocab).map(e=>`<button class="chip" data-say="${esc(e)}">🔊 ${esc(e)}</button>`).join("")}</div></div>
+  </div>`};
+
+/* ---------- Talk ---------- */
+const SCEN=[
+  {id:"daily",e:"📅",t:"Tema del día",s:()=>topicToday,brief:()=>`Today's topic: "${topicToday}". This week's grammar: ${week(CUR).gram}. Ask questions one by one about the topic so the student practices that grammar.`},
+  {id:"disney",e:"🏰",t:"Entrevista Disney",s:()=>"Recruiter del programa de intercambio",brief:()=>"Role-play: you are a friendly recruiter interviewing the student for the Disney International College / Cultural Exchange Program in the USA. Ask typical interview questions one at a time (tell me about yourself, why Disney, customer service experience, teamwork, a difficult situation, availability). Keep it realistic but kind."},
+  {id:"free",e:"☕",t:"Charla libre",s:()=>"Hablamos de lo que quieras",brief:()=>"Free conversation about the student's life, interests and plans. Ask one question at a time."},
+  {id:"restaurant",e:"🍔",t:"Restaurante",s:()=>"Pide comida en USA",brief:()=>"Role-play: you are a waiter at a diner in Orlando. The student is the customer. Be natural and ask the usual questions (table, drinks, order, how they want it, check)."},
+  {id:"airport",e:"🛫",t:"Aeropuerto",s:()=>"Migración y check-in",brief:()=>"Role-play: you are a US immigration officer at Orlando airport, then an airline agent. Ask the usual questions (purpose of visit, how long, where staying, luggage)."},
+  {id:"park",e:"🎢",t:"Trabajo en el parque",s:()=>"Atiende a un visitante",brief:()=>"Role-play: the student works at a theme park attraction or store; you are a tourist with questions and a small complaint. The student must help you politely."},
+  {id:"correct",e:"✍️",t:"Corrige mi texto",s:()=>"Pega un texto tuyo",brief:()=>"The student will paste a short text they wrote. Reply in Spanish with: the corrected version in English (bold the changes), then the 3 most important errors explained briefly, then one encouraging line. Then ask in English for the next text."}
+];
+let talkMode="daily",hist=[],busy=false;
+function sysPrompt(){const m=SCEN.find(x=>x.id===talkMode);return`You are Claude, a warm, patient English conversation partner for a Spanish-speaking student from Colombia. ${PROFILE}
 Session: ${m.brief()}
-Rules: speak simple, natural English at A2 level (short sentences, common words). Keep each reply to 1–3 short sentences and always end with ONE question, unless the mode says otherwise. Do not correct every mistake during the chat; at most, if the student writes a Spanish word or brackets like [word], give the English word in one short parenthesis, e.g. (piscina = pool). If the student writes "?", rephrase your last message more simply. Be encouraging. Plain text only, no markdown headings.`;
-}
-function addMsg(role,text){
-  const el=document.createElement("div"); el.className="msg "+role;
-  el.textContent=text;
-  if(role==="bot"){ const b=document.createElement("button"); b.className="say"; b.textContent="🔊 Escuchar"; b.onclick=()=>speak(el.firstChild.textContent); el.appendChild(b); }
-  $("#chat").appendChild(el); $("#chat").scrollTop=$("#chat").scrollHeight; return el;
-}
-const ERRORS={no_key:"Primero pega tu clave de API en Ajustes.",bad_key:"La clave de API no es válida. Revísala en Ajustes.",no_credit:"Tu cuenta de la API no tiene saldo. Agrega saldo en console.anthropic.com.",rate_limited:"Muchas solicitudes seguidas. Espera un minuto y vuelve a intentar.",offline:"No hay conexión a internet. Revisa tu red y vuelve a intentar.",refusal:"No puedo responder eso. Cambiemos de tema.",error:"No pude responder. Intenta de nuevo."};
-async function getSample(){
-  const s=await window.api.getSettings();
-  $("#no-claude").hidden=s.hasKey;
-  return s.hasKey;
-}
+Rules: speak simple, natural English at A2 level (short sentences, common words). Keep each reply to 1–3 short sentences and always end with ONE question, unless the session says otherwise. Do not correct every mistake during the chat; if the student writes a Spanish word or [brackets], give the English word in one short parenthesis, e.g. (piscina = pool). If the student writes "?", rephrase your last message more simply. Be encouraging. Plain text only.`}
+VIEWS.talk=()=>{
+  const m=SCEN.find(x=>x.id===talkMode),w=week(CUR);
+  $("#main").innerHTML=`<div class="screen" style="max-width:1280px">
+    <div class="head"><div><h1>Conversar</h1><p>Habla con Claude en inglés. Al final, pide tu corrección.</p></div><div style="display:flex;gap:8px"><button class="btn" id="t-new">↻ Nueva</button><button class="btn gold" id="t-end">Terminar y corregirme</button></div></div>
+    <div class="banner" id="no-key" hidden>Para conversar, primero pega tu clave de API en <button class="btn" data-nav="settings" style="padding:2px 10px">Ajustes</button></div>
+    <div class="talk">
+      <div class="scen">${SCEN.map(s=>`<button class="sc" data-scen="${s.id}" aria-pressed="${s.id===talkMode}"><span class="e">${s.e}</span><span><b>${s.t}</b><small>${esc(s.s())}</small></span></button>`).join("")}</div>
+      <div class="chatbox">
+        <div class="chathead"><span class="avatar">🧑‍✈️</span><div><b>Claude · ${esc(m.t)}</b><small>● en línea · voz en inglés</small></div><label style="margin-left:auto;font-size:13px;color:var(--muted);display:flex;gap:6px;align-items:center"><input type="checkbox" id="autospeak" ${S.autospeak===false?"":"checked"}> Leer en voz alta</label></div>
+        <div class="msgs" id="msgs"></div>
+        <div class="composer"><button class="mic" title="Dictado de Windows: Windows + H" id="mic">🎙</button><textarea id="t-in" rows="1" placeholder="Escribe, o usa Windows + H para hablar"></textarea><button class="btn primary" id="t-send" style="height:48px">Enviar</button></div>
+      </div>
+      <div class="hints">
+        <div class="card"><span class="label">Frases útiles · semana ${CUR}</span><div class="chips">${w.vocab.slice(0,10).map(v=>`<button class="chip" data-insert="${esc(v)}">${esc(v)}</button>`).join("")}</div></div>
+        <div class="card"><span class="label">Salvavidas</span><div class="chips">${["Could you repeat that?","How do you say…?","What does … mean?","Let me think…","Sorry, I didn't catch that."].map(v=>`<button class="chip" data-insert="${esc(v)}">${esc(v)}</button>`).join("")}</div></div>
+        <div class="card"><span class="label">Gramática de la semana</span><b>${md(w.gram)}</b></div>
+      </div>
+    </div><div id="t-fb"></div></div>`;
+  $("#autospeak").onchange=e=>{S.autospeak=e.target.checked;save()};
+  $("#t-send").onclick=send;$("#t-new").onclick=()=>{hist=[];renderMsgs();ask()};$("#t-end").onclick=endTalk;
+  $("#mic").onclick=()=>{$("#t-in").focus();toast("Presiona Windows + H y habla en inglés")};
+  const ti=$("#t-in");ti.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}};ti.oninput=()=>{ti.style.height="auto";ti.style.height=Math.min(140,ti.scrollHeight)+"px"};
+  renderMsgs();if(!hist.length)ask();
+};
+document.addEventListener("click",e=>{const s=e.target.closest("[data-scen]");if(s){talkMode=s.dataset.scen;hist=[];VIEWS.talk()}const ins=e.target.closest("[data-insert]");if(ins){const t=$("#t-in");t.value=(t.value?t.value+" ":"")+ins.dataset.insert;t.focus()}});
+function renderMsgs(){const box=$("#msgs");if(!box)return;box.innerHTML=`<div class="msg note">${esc(SCEN.find(x=>x.id===talkMode).t)} · responde en inglés · escribe “?” si no entiendes</div>`+hist.map(m=>m.role==="assistant"?`<div class="msg bot">${esc(m.content)}<button class="say" data-say="${esc(m.content)}">🔊 Escuchar</button></div>`:`<div class="msg me">${esc(m.content)}</div>`).join("");box.scrollTop=box.scrollHeight}
+const ERR={no_key:"Primero pega tu clave de API en Ajustes.",bad_key:"La clave de API no es válida. Revísala en Ajustes.",no_credit:"Tu cuenta de la API no tiene saldo. Agrega saldo en console.anthropic.com.",rate_limited:"Muchas solicitudes seguidas. Espera un minuto.",offline:"No hay conexión a internet.",refusal:"No puedo responder eso. Cambiemos de tema.",error:"No pude responder. Intenta de nuevo."};
 async function ask(){
-  if(!(await getSample())){ return; }
-  busy=true; $("#send").disabled=true;
-  const el=addMsg("bot","…");
-  const textNode=el.firstChild;
-  const r=await window.api.chat(system(), [{role:"user",content:"Start the conversation now with a short greeting and your first question."},...history], text=>{ textNode.textContent=text||"…"; $("#chat").scrollTop=$("#chat").scrollHeight; });
-  if(r.ok){
-    textNode.textContent=r.text;
-    history.push({role:"assistant",content:r.text});
-    if($("#autospeak").checked) speak(r.text);
-  } else {
-    textNode.textContent=ERRORS[r.code]||ERRORS.error;
-    if(r.code==="no_key"||r.code==="bad_key") $("#no-claude").hidden=false;
-  }
-  busy=false; $("#send").disabled=false;
+  const st=await window.api.getSettings();if(!st.hasKey){const b=$("#no-key");if(b)b.hidden=false;return}
+  busy=true;const box=$("#msgs");const el=document.createElement("div");el.className="msg bot";el.textContent="…";box.appendChild(el);
+  const r=await window.api.chat(sysPrompt(),[{role:"user",content:"Start the conversation now with a short greeting and your first question."},...hist],t=>{el.textContent=t||"…";box.scrollTop=box.scrollHeight});
+  busy=false;
+  if(r.ok){hist.push({role:"assistant",content:r.text});renderMsgs();if(S.autospeak!==false)speak(r.text)}else{el.textContent=ERR[r.code]||ERR.error}
 }
-function startChat(){
-  speechSynthesis&&speechSynthesis.cancel();
-  history=[]; $("#chat").innerHTML=""; $("#feedback").hidden=true;
-  addMsg("note","Modo: "+MODES.find(x=>x.id===mode).t+". Responde en inglés. Escribe “?” si no entiendes.");
-  ask();
-}
-async function send(){
-  const t=$("#input-text").value.trim(); if(!t||busy) return;
-  $("#input-text").value=""; autoGrow();
-  addMsg("me",t);
-  if(!history.length) history.push({role:"assistant",content:"Hi! Let's talk."});
-  history.push({role:"user",content:t});
-  await ask();
-}
-$("#send").onclick=send;
-$("#input-text").addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); send(); } });
-function autoGrow(){ const t=$("#input-text"); t.style.height="auto"; t.style.height=Math.min(140,t.scrollHeight)+"px"; }
-$("#input-text").addEventListener("input",autoGrow);
-$("#new-chat").onclick=startChat;
-$("#finish").onclick=async()=>{
-  const said=history.filter(m=>m.role==="user").map(m=>m.content);
-  if(!said.length){ addMsg("note","Primero conversa un poco y luego pide la corrección."); return; }
-  if(!(await getSample())) return;
-  $("#finish").disabled=true; $("#feedback").hidden=false; $("#feedback").innerHTML="<h3>Corrigiendo tu conversación…</h3>";
-  const prompt=`You are an English teacher for a Spanish-speaking A2 student. ${PROFILE}
-Here is everything the student wrote in a conversation (mode: ${MODES.find(x=>x.id===mode).t}):
+async function send(){const t=$("#t-in").value.trim();if(!t||busy)return;$("#t-in").value="";if(!hist.length)hist.push({role:"assistant",content:"Hi! Let's talk."});hist.push({role:"user",content:t});renderMsgs();await ask()}
+async function endTalk(){const said=hist.filter(m=>m.role==="user").map(m=>m.content);if(!said.length){toast("Conversa un poco primero");return}
+  $("#t-fb").innerHTML=`<div class="card"><span class="muted">Claude está revisando tu conversación…</span></div>`;
+  const res=await window.api.feedback(`You are an English teacher for a Spanish-speaking A2 student. ${PROFILE}
+Here is everything the student wrote in a conversation (scenario: ${SCEN.find(x=>x.id===talkMode).t}):
 ${said.map((x,i)=>(i+1)+". "+x).join("\n")}
-Return JSON only with this shape:
-{"bien":"one sentence in Spanish about what they did well",
- "errores":[{"mal":"exact wrong phrase","bien":"corrected English","porque":"very short reason in Spanish"}],
- "frases":["3 useful natural English phrases for this topic"],
- "puntajes":{"fluidez":1-5,"gramatica":1-5,"vocabulario":1-5},
- "consejo":"one concrete tip in Spanish for next time"}
-Give the 3 to 5 most important errors only.`;
-  try{
-    const res=await window.api.feedback(prompt);
-    if(!res.ok) throw new Error(res.code);
-    const r=res.data;
-    const errs=(r.errores||[]).filter(e=>e&&e.mal&&e.bien);
-    state.errors=mergeErr(errs,state.errors).slice(0,60); state.chats=(state.chats||0)+1;
-    const d=state.done[TODAY]||[]; if(!d.includes(3)) state.done[TODAY]=[...d,3];
-    save(); renderAll();
-    const p=r.puntajes||{};
-    $("#feedback").innerHTML=`<h3>¡Buen trabajo!</h3><p>${esc(r.bien||"")}</p>
-      <div class="chips"><span class="chip">Fluidez ${esc(p.fluidez??"–")}/5</span><span class="chip">Gramática ${esc(p.gramatica??"–")}/5</span><span class="chip">Vocabulario ${esc(p.vocabulario??"–")}/5</span></div>
-      <div class="tablewrap"><table><thead><tr><th>❌ Dijiste</th><th>✅ Mejor así</th><th>Por qué</th></tr></thead><tbody>${errs.map(e=>`<tr><td>${esc(e.mal)}</td><td><strong>${esc(e.bien)}</strong></td><td>${esc(e.porque||"")}</td></tr>`).join("")}</tbody></table></div>
-      <span class="label">Frases para aprender · tócalas</span>
-      <div class="chips">${(r.frases||[]).map(f=>`<button class="chip" data-say="${esc(f)}">🔊 ${esc(f)}</button>`).join("")}</div>
-      <p><strong>Consejo:</strong> ${esc(r.consejo||"")}</p>
-      <p class="muted" style="margin:0">Guardé tus errores en Progreso y marqué el bloque Conversar de hoy.</p>`;
-  }catch(e){
-    $("#feedback").innerHTML="<h3>No pude corregir ahora</h3><p>"+esc(ERRORS[e.message]||ERRORS.error)+"</p>";
-  }
-  $("#finish").disabled=false;
-};
-/* Mic: browser speech recognition when the frame allows it */
-const SR=null;
-let rec=null, listening=false;
-if(!SR){ $("#mic").hidden=true; $("#mic-hint").innerHTML="Para hablar con tu voz: haz clic en la caja y presiona <strong>Windows + H</strong>. Habla en inglés."; }
-$("#mic").onclick=()=>{
-  if(!SR) return;
-  if(listening){ rec&&rec.stop(); return; }
-  try{
-    rec=new SR(); rec.lang="en-US"; rec.interimResults=true; rec.continuous=false;
-    const base=$("#input-text").value;
-    rec.onresult=e=>{ let t=""; for(const r of e.results) t+=r[0].transcript; $("#input-text").value=(base?base+" ":"")+t; autoGrow(); };
-    rec.onend=()=>{ listening=false; $("#mic").classList.remove("on"); };
-    rec.onerror=()=>{ listening=false; $("#mic").classList.remove("on"); $("#mic-hint").textContent="El micrófono no está disponible aquí. Usa el micrófono del teclado de tu celular: funciona igual de bien."; };
-    speechSynthesis&&speechSynthesis.cancel();
-    rec.start(); listening=true; $("#mic").classList.add("on");
-  }catch(e){ $("#mic-hint").textContent="El micrófono no está disponible aquí. Usa el micrófono del teclado de tu celular."; }
-};
+Return JSON: {"bien":"one sentence in Spanish about what they did well","errores":[{"mal":"exact wrong phrase","bien":"corrected English","porque":"very short reason in Spanish"}],"frases":["3 useful natural English phrases for this topic"],"puntajes":{"fluidez":1-5,"gramatica":1-5,"vocabulario":1-5},"consejo":"one concrete tip in Spanish"}. 3 to 5 errors max.`);
+  if(!res.ok){$("#t-fb").innerHTML=`<div class="banner">${esc(ERR[res.code]||ERR.error)}</div>`;return}
+  const r=res.data,p=r.puntajes||{};S.errors=mergeErr(r.errores||[],S.errors);S.chats=(S.chats||0)+1;S.chatLog=S.chatLog||{};S.chatLog[TODAY]=1;S.scores=S.scores||[];S.scores.push({date:TODAY,...p});addMin(15);addXP(40,"Conversación");
+  $("#t-fb").innerHTML=`<div class="fbk"><h3 style="color:var(--green)">¡Buen trabajo! Fluidez ${esc(p.fluidez)}/5 · Gramática ${esc(p.gramatica)}/5 · Vocabulario ${esc(p.vocabulario)}/5</h3><p style="margin:0">${esc(r.bien)}</p>${errTable(r.errores||[])}<span class="label">Frases para aprender</span><div class="chips">${(r.frases||[]).map(f=>`<button class="chip" data-say="${esc(f)}">🔊 ${esc(f)}</button>`).join("")}</div><p style="margin:0"><strong>Consejo:</strong> ${esc(r.consejo)}</p></div>`;
+  $("#t-fb").scrollIntoView({behavior:"smooth"})}
 
-/* ---------- Plan ---------- */
-function renderPlan(){
-  $("#weeks").innerHTML=WEEKS.map(w=>{
-    const status = w.n<WK ? '<span class="pill ok">Hecha</span>' : w.n===Math.max(1,WK) ? '<span class="pill">Ahora</span>' : "";
-    return `<details class="week ${w.n===Math.max(1,WK)?"now":""}" ${w.n===Math.max(1,WK)?"open":""}>
-      <summary><span class="wn">${w.n}</span><span class="wt"><strong>${esc(w.tema)}</strong><span>${esc(w.fechas)} · ${md(w.gram)}</span></span>${status}</summary>
-      <div class="body prose">
-        <p><strong>Objetivo:</strong> ${md(w.obj)}</p>
-        <div class="tablewrap"><table><tbody>${w.dias.map((d,i)=>`<tr><td class="muted">${DAYS_ES[i]}</td><td>${md(d)}</td></tr>`).join("")}</tbody></table></div>
-        <p><strong>Misión:</strong> ${md(w.mision)}</p>
-        <p><strong>Reto B1+:</strong> ${md(w.reto)}</p>
-      </div></details>`;
-  }).join("");
-}
+/* ---------- Progress ---------- */
+VIEWS.progress=()=>{
+  const lessonsDone=Object.keys(S.lessons).length;
+  const sk=[["Speaking",Math.min(100,(S.chats||0)*4+20)],["Listening",Math.min(100,(S.dictations||0)*1.5+35)],["Gramática",Math.min(100,lessonsDone*3+25)],["Vocabulario",Math.min(100,learned()*1.2+20)],["Writing",Math.min(100,Object.keys(S.lessons).filter(k=>/-w$/.test(k)).length*8+20)]];
+  let heat=["L","M","X","J","V","S","D"].map(h=>`<span class="h">${h}</span>`).join("");
+  for(let d=new Date(2026,9,12);d<=END;d.setDate(d.getDate()+1)){if(d<START){heat+='<span class="d blank"></span>';continue}const x=S.xpLog[key(d)]||0;heat+=`<span class="d ${x>=100?"l3":x>=50?"l2":x>0?"l1":""} ${key(d)===TODAY?"today":""}" title="${d.getDate()} ${MON[d.getMonth()]}: ${x} XP">${d.getDate()}</span>`}
+  const mins=Object.values(S.minutes).reduce((a,b)=>a+b,0);
+  $("#main").innerHTML=`<div class="screen">
+    <div class="head"><div><h1>Tu progreso</h1><p>Del 17 de octubre al 3 de enero. Meta: B1 y entrevista de Disney.</p></div></div>
+    <div class="grid g4">
+      <div class="card stat"><span class="ic" style="background:var(--gold-soft)">🔥</span><div><b>${streak()}</b><span>racha actual</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--blue-soft)">⏱️</span><div><b>${Math.round(mins/60*10)/10}</b><span>horas practicadas</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--green-soft)">📘</span><div><b>${lessonsDone}</b><span>lecciones de 55</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--panel-3)">💬</span><div><b>${S.chats||0}</b><span>conversaciones</span></div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Habilidades</h3>${sk.map(s=>`<div class="skill"><span>${s[0]}</span><div class="bar"><i style="width:${Math.round(s[1])}%"></i></div><b>${Math.round(s[1])}%</b></div>`).join("")}<p class="muted" style="margin:0;font-size:13px">Suben con lo que practicas en cada sección.</p></div>
+      <div class="card"><h3>Calendario</h3><div class="heat">${heat}</div></div>
+    </div>
+    <div class="card"><h3>Nivel</h3><div style="overflow-x:auto"><table><thead><tr><th>Fecha</th><th>Gramática</th><th>Lectura</th><th>Listening</th><th>Speaking</th><th>Nivel</th></tr></thead><tbody>
+      <tr><td>17 oct</td><td>8/20</td><td>3/4</td><td>75%</td><td>Fluidez 3 · Gram. 2 · Vocab. 2</td><td><span class="pill">A2</span></td></tr>
+      <tr><td>29 nov</td><td colspan="5" class="muted">Re-test</td></tr><tr><td>31 dic</td><td colspan="5" class="muted">Test final</td></tr></tbody></table></div></div>
+    <div class="card"><h3>Mis errores frecuentes</h3>${S.errors.length?errTable(S.errors):'<p class="muted">Aún no hay errores guardados.</p>'}</div>
+  </div>`};
 
-/* ---------- Progreso ---------- */
-function renderProgreso(){
-  const days=Object.values(state.done).filter(d=>d.length).length;
-  $("#s-days").textContent=days; $("#s-streak").textContent=streak(); $("#s-chats").textContent=state.chats||0;
-  let html=["L","M","X","J","V","S","D"].map(h=>`<span class="h">${h}</span>`).join("");
-  const first=new Date(2026,9,12);
-  for(let d=new Date(first); d<=new Date(2027,0,3); d.setDate(d.getDate()+1)){
-    if(d<START){ html+='<span class="d blank"></span>'; continue; }
-    const n=(state.done[key(d)]||[]).length;
-    html+=`<span class="d ${n>=5?"full":n?"part":""} ${key(d)===TODAY?"today":""}" title="${d.getDate()} ${MONTHS[d.getMonth()]}">${d.getDate()}</span>`;
-  }
-  $("#cal").innerHTML=html;
-  $("#errors").innerHTML=state.errors.length?state.errors.map(e=>`<tr><td>${esc(e.mal)}</td><td><strong>${esc(e.bien)}</strong></td><td class="muted">${esc(e.porque||"")}</td></tr>`).join(""):'<tr><td colspan="3" class="muted">Aún no hay errores guardados.</td></tr>';
-}
-
-/* ---------- Tabs ---------- */
-document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>show(b.dataset.tab));
-function show(t){
-  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===t));
-  ["hoy","hablar","plan","progreso","ajustes"].forEach(x=>$("#p-"+x).hidden=x!==t);
-  if(t==="hablar"&&!$("#chat").children.length) startChat();
-}
-async function loadSettings(){
+/* ---------- Settings ---------- */
+VIEWS.settings=async()=>{
   const s=await window.api.getSettings();
-  $("#model").innerHTML=Object.entries(s.models).map(([id,m])=>`<option value="${id}" ${id===s.model?"selected":""}>${esc(m.label)}</option>`).join("");
-  $("#settings-status").textContent=s.hasKey?"✓ Clave guardada":"Aún no hay clave";
-  $("#api-key").placeholder=s.hasKey?"•••••••• (guardada; pega otra para cambiarla)":"sk-ant-...";
-  return s;
-}
-$("#save-settings").onclick=async()=>{
-  const s=await window.api.setSettings({key:$("#api-key").value,model:$("#model").value});
-  $("#api-key").value="";
-  $("#settings-status").textContent=s.hasKey?"✓ Guardado. Ya puedes conversar.":"Falta la clave de API.";
-  $("#no-claude").hidden=s.hasKey;
-};
-document.addEventListener("click",e=>{ const a=e.target.closest("a[href^='https://']"); if(a){ e.preventDefault(); window.api.openExternal(a.href); } });
-loadSettings().then(s=>{ if(!s.hasKey) $("#no-claude").hidden=false; });
-function renderAll(){ renderHeader(); renderHoy(); renderModes(); renderPlan(); renderProgreso(); }
-const SEED_ERRORS=[
-  {mal:"I have 20 years",bien:"I'm 20 years old",porque:"La edad va con to be"},
-  {mal:"the last weekend i travel",bien:"Last weekend I traveled",porque:"Pasado con -ed, sin 'the'"},
-  {mal:"in December i travel",bien:"In December I'm going to travel",porque:"Futuro con going to"},
-  {mal:"my mother and your family",bien:"my mother and her family",porque:"his (de él), her (de ella)"},
-  {mal:"I like play tennis",bien:"I like playing tennis",porque:"Después de like va -ing"},
-  {mal:"my meta is",bien:"my goal is",porque:"Falso amigo"},
-  {mal:"take a breakfast",bien:"have breakfast",porque:"Las comidas van con have"},
-  {mal:"for sleep",bien:"to sleep",porque:"Para + verbo = to + verbo"}
-];
-if(!state.errors.length) state.errors=SEED_ERRORS.slice();
-if(!(state.done["2026-10-17"]||[]).length) state.done["2026-10-17"]=[1,2,3,4];
-renderAll();
-if(location.hash==="#conversar") show("hablar");
+  $("#main").innerHTML=`<div class="screen" style="max-width:760px">
+    <div class="head"><div><h1>Ajustes</h1></div></div>
+    <div class="card"><h3>Tu perfil</h3><label class="label" for="s-name">Nombre</label><input id="s-name" value="${esc(S.name)}">
+      <label class="label">Tema</label><div style="display:flex;gap:8px"><button class="btn ${S.theme==="dark"?"primary":""}" data-theme-set="dark">🌙 Oscuro</button><button class="btn ${S.theme==="light"?"primary":""}" data-theme-set="light">☀️ Claro</button></div></div>
+    <div class="card"><h3>Conectar con Claude</h3><p class="muted" style="margin:0">Para conversar y corregir, el programa usa tu clave de la API de Claude. Se guarda cifrada solo en este computador.</p>
+      <ol style="margin:0;padding-left:20px"><li>Entra a <a href="https://console.anthropic.com/settings/keys" style="color:var(--blue)">console.anthropic.com</a> y crea una cuenta.</li><li>En <em>Billing</em>, agrega saldo (se paga por uso).</li><li>En <em>API Keys</em>, crea una clave y pégala aquí.</li></ol>
+      <label class="label" for="s-key">Clave de API</label><input id="s-key" type="password" autocomplete="off" placeholder="${s.hasKey?"•••••••• guardada (pega otra para cambiarla)":"sk-ant-..."}">
+      <label class="label" for="s-model">Modelo</label><select id="s-model">${Object.entries(s.models).map(([id,m])=>`<option value="${id}" ${id===s.model?"selected":""}>${esc(m.label)}</option>`).join("")}</select>
+      <div style="display:flex;gap:10px;align-items:center"><button class="btn primary" id="s-save">Guardar</button><span class="muted" id="s-status">${s.hasKey?"✓ Clave guardada":"Aún no hay clave"}</span></div></div>
+    <div class="card"><h3>Hablar con tu voz</h3><p style="margin:0">En Conversar, haz clic en la caja de texto y presiona <strong>Windows + H</strong>. Para que entienda inglés, agrega <em>English (United States)</em> en Configuración → Hora e idioma → Idioma.</p></div>
+  </div>`;
+  $("#s-name").oninput=e=>{S.name=e.target.value||"Santiago";save()};
+  document.querySelectorAll("[data-theme-set]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.themeSet;document.documentElement.dataset.theme=S.theme;save();VIEWS.settings()});
+  $("#s-save").onclick=async()=>{const r=await window.api.setSettings({key:$("#s-key").value,model:$("#s-model").value});$("#s-key").value="";$("#s-status").textContent=r.hasKey?"✓ Guardado. Ya puedes conversar.":"Falta la clave de API."}};
+document.addEventListener("click",e=>{const a=e.target.closest("a[href^='https://']");if(a){e.preventDefault();window.api.openExternal(a.href)}});
+
+/* ---------- Boot ---------- */
+if(!S.seeded){S.seeded=true;S.errors=EXTRA.seedErrors;if(TODAY==="2026-10-17"){S.xp=80;S.xpLog[TODAY]=80;S.minutes[TODAY]=60}save()}
+renderRank();go("home");
 </script>
 </body></html>
