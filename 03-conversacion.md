@@ -34,7 +34,7 @@ Tu compañero de conversación diario soy yo, en el hilo del proyecto "Curso Ing
 
 **Fase 2:** ir al médico · quejarte de un producto · planear un viaje con una amiga · hablar con un compañero de trabajo · llamar para reservar.
 
-**Fase 3:** entrevista de trabajo · cena con amigos extranjeros · problema en el aeropuerto · presentar una idea en el trabajo · conversación libre de 15 minutos.
+**Fase 3:** ⭐ entrevista para el intercambio de Disney (*"Claude, Disney interview practice"*) · entrevista de trabajo · cena con amigos extranjeros · problema en el aeropuerto · presentar una idea en el trabajo · conversación libre de 15 minutos.
 
 ## Tip para hablar de verdad (no solo escribir)
 1. En el celular, toca el **micrófono del teclado** y dicta en inglés. Si el teclado entiende lo que dices, ¡tu pronunciación es buena!

@@ -15,4 +15,12 @@ Cada vez que Claude te corrija algo que se repite, anótalo aquí. Repásalo cad
 | whit | **with** | Ortografía |
 | i | **I** | *I* siempre en mayúscula |
 | born for (= porque) | **because** | *Because* = porque |
+| the last weekend i travel | **Last weekend I traveled** | Pasado: verbo + -ed. Sin *the* antes de *last* |
+| in december i travel / i saw | **In December I'm going to travel / visit** | Futuro con *going to* |
+| my mother and your family | my mother and **her** family | his (de él) · her (de ella) · your (tuyo) |
+| before (= después) | **after that / then** | *Before* = antes |
+| take a breakfast / my lunch | **have** breakfast / lunch | Las comidas van con *have* |
+| for sleep / for go | **to** sleep / **to** go | Para + verbo = *to* + verbo |
+| firts, breatfast, luch, nigth, theeths, cloths | first, breakfast, lunch, night, teeth, clothes | Ortografía |
+| palabras en español | *How do you say ___?* o [palabra] | Pregunta en inglés, no cambies de idioma |
 | | | |

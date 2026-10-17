@@ -27,4 +27,5 @@ Marca cada día con ✅ (hora completa), 🟡 (versión corta) o ❌ (no hice). 
 ## Evaluación semanal de speaking (de Claude, 1–5)
 | Semana | Fluidez | Gramática | Vocabulario | Pronunciación | Comentario |
 |---|---|---|---|---|---|
+| 0 (17 oct, test) | 3 | 2 | 2 | — | Habla sin parar (¡bien!). Mezcla español cuando no sabe una palabra; usa presente para pasado y futuro. |
 | 1 | | | | | |
