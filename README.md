@@ -10,6 +10,10 @@ Sistema personal para **hablar, escribir, entender y conversar en inglés**, con
 
 Ábrela cada día: te muestra la rutina de hoy con temporizador, la gramática y frases (con audio), **conversación por voz con Claude** con corrección al final, el plan de 11 semanas y tu progreso. El código está en [app.html](app.html).
 
+## 🖥️ Programa para Windows
+
+Descarga el instalador en [Releases](https://github.com/SantiagoJacome14/english-system/releases/latest). Instrucciones en [desktop/README.md](desktop/README.md).
+
 ## 🚀 Cómo empezar HOY (sábado 17 de octubre)
 
 1. **Haz el test de nivel** → [00-test-de-nivel.md](00-test-de-nivel.md) (20 min). Escribe tus respuestas en el hilo del proyecto en Claude y te digo tu nivel.

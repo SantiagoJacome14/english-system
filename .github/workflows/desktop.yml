@@ -1,0 +1,34 @@
+name: Instalador de Windows
+
+on:
+  push:
+    branches: [main]
+    paths: ["desktop/**", ".github/workflows/desktop.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar dependencias
+        working-directory: desktop
+        run: npm install
+      - name: Crear instalador
+        working-directory: desktop
+        run: npx electron-builder --win nsis --publish never
+      - name: Publicar en Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: English Boarding Pass (versión ${{ github.run_number }})
+          body: |
+            Descarga **English Boarding Pass Setup.exe**, ábrelo e instálalo.
+            Si Windows muestra "Windows protegió tu PC", toca **Más información → Ejecutar de todas formas** (el programa no está firmado).
+          files: desktop/dist/*.exe
