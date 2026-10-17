@@ -2,6 +2,8 @@
 
 Sistema personal para **hablar, escribir, entender y conversar en inglés**, con **60 minutos al día**, del **17 de octubre al 31 de diciembre de 2026** (11 semanas).
 
+> 🎯 **Meta personal:** aplicar al programa de intercambio de Disney en USA y pasar la entrevista en inglés.
+>
 > Meta de diciembre: mantener una conversación de 10–15 minutos en inglés sobre tu vida, tu trabajo y tus planes, entender audios cotidianos sin subtítulos en español y escribir un texto de una página sin traductor.
 
 ## 🚀 Cómo empezar HOY (sábado 17 de octubre)
