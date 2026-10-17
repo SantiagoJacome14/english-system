@@ -20,7 +20,7 @@ Marca cada día con ✅ (hora completa), 🟡 (versión corta) o ❌ (no hice). 
 ## Resultados del test de nivel
 | Fecha | Parte 1 (/20) | Lectura (/4) | Listening (%) | Nivel |
 |---|---|---|---|---|
-| 17 oct | | | | Básico (autoevaluado) |
+| 17 oct | 8 | 3 | 75% (ELLLO A2, 6/8) | A2 |
 | 29 nov | | | | |
 | 31 dic | | | | |
 
