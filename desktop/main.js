@@ -1,4 +1,6 @@
-const { app, BrowserWindow, ipcMain, safeStorage, shell, protocol, net, Notification, Tray, Menu, nativeImage, session } = require("electron");
+const { app, BrowserWindow, ipcMain, safeStorage, shell, protocol, net, Notification, Tray, Menu, nativeImage, session, dialog } = require("electron");
+const { spawn, execFile } = require("child_process");
+const netSock = require("net");
 const path = require("path");
 const fs = require("fs");
 const { Readable } = require("stream");
@@ -47,7 +49,91 @@ function provider() {
 }
 function ollamaCfg() {
   const s = readSettings();
-  return { url: (s.ollamaUrl || "http://127.0.0.1:11434").replace(/\/+$/, ""), model: s.ollamaModel || "llama3.2" };
+  const ssh = sshCfg();
+  return {
+    url: ssh.on ? "http://127.0.0.1:" + ssh.localPort : (s.ollamaUrl || "http://127.0.0.1:11434").replace(/\/+$/, ""),
+    model: s.ollamaModel || "llama3.2", ssh,
+  };
+}
+
+/* ---------- SSH tunnel to an Ollama running on a server (e.g. a VM) ---------- */
+// The student pastes the ssh command they already use; we keep its parts and open the tunnel ourselves.
+function parseSsh(cmd) {
+  const args = (String(cmd).match(/"[^"]*"|'[^']*'|\S+/g) || []).map((a) => a.replace(/^["']|["']$/g, ""));
+  if (!args.length || !/^ssh(\.exe)?$/i.test(path.basename(args[0]))) return null;
+  const out = { key: "", host: "", localPort: 11434, target: "127.0.0.1:11434", port: "" };
+  for (let i = 1; i < args.length; i++) {
+    const a = args[i];
+    if (a === "-i") out.key = args[++i];
+    else if (a === "-p") out.port = args[++i];
+    else if (a === "-L") {
+      const m = String(args[++i]).match(/^(?:[\w.]+:)?(\d+):([^:]+):(\d+)$/);
+      if (m && m[3] === "11434") { out.localPort = +m[1]; out.target = m[2] + ":" + m[3]; }
+    } else if (/^-[a-zA-Z]$/.test(a) && "oFJWbcDEeIlmOQRSw".includes(a[1])) i++;
+    else if (!a.startsWith("-") && !out.host) out.host = a;
+  }
+  return out.host ? out : null;
+}
+function sshCfg() {
+  const s = readSettings();
+  return { on: !!s.sshOn && !!(s.ssh && s.ssh.host), container: "ollama", ...(s.ssh || {}), localPort: (s.ssh && s.ssh.localPort) || 11434 };
+}
+function sshBin() {
+  const win = path.join(process.env.SystemRoot || "C:\\Windows", "System32", "OpenSSH", "ssh.exe");
+  return process.platform === "win32" && fs.existsSync(win) ? win : "ssh";
+}
+function sshBase(c) {
+  const a = ["-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=accept-new", "-o", "ConnectTimeout=10"];
+  if (c.key) a.push("-i", c.key);
+  if (c.port) a.push("-p", String(c.port));
+  return a;
+}
+function portOpen(port) {
+  return new Promise((res) => {
+    const sock = netSock.connect({ host: "127.0.0.1", port }, () => { sock.destroy(); res(true); });
+    sock.on("error", () => res(false));
+    sock.setTimeout(800, () => { sock.destroy(); res(false); });
+  });
+}
+// Docker gives the container a new address after restarts, so ask the server for the current one.
+function containerIp(c) {
+  return new Promise((res) => {
+    execFile(sshBin(), [...sshBase(c), c.host, `sudo -n docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${c.container} 2>/dev/null || docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${c.container}`],
+      { windowsHide: true, timeout: 15000 }, (err, stdout) => { const ip = String(stdout || "").trim().split(/\s+/)[0]; res(!err && /^\d+\.\d+\.\d+\.\d+$/.test(ip) ? ip : null); });
+  });
+}
+let tunnel = null, tunnelOpening = null;
+function ensureTunnel() {
+  const c = sshCfg();
+  if (!c.on) return Promise.resolve();
+  if (tunnelOpening) return tunnelOpening;
+  tunnelOpening = (async () => {
+    if (tunnel && tunnel.exitCode === null && (await portOpen(c.localPort))) return;
+    if (tunnel) { try { tunnel.kill(); } catch {} tunnel = null; }
+    else if (await portOpen(c.localPort)) return; // a tunnel opened by hand is already there
+    let ip = await containerIp(c);
+    if (ip) { const st = readSettings(); if (st.sshLastIp !== ip) { st.sshLastIp = ip; writeSettings(st); } }
+    else ip = readSettings().sshLastIp || c.target.split(":")[0];
+    let errText = "";
+    const proc = spawn(sshBin(), [...sshBase(c), "-N", "-o", "ExitOnForwardFailure=yes", "-o", "ServerAliveInterval=30", "-L", `${c.localPort}:${ip}:11434`, c.host], { windowsHide: true });
+    proc.stderr.on("data", (d) => { errText += d; });
+    proc.on("error", (e) => { errText += String(e.message); });
+    tunnel = proc;
+    for (let i = 0; i < 40; i++) {
+      if (proc.exitCode !== null || proc.killed) break;
+      if (await portOpen(c.localPort)) return;
+      await new Promise((r) => setTimeout(r, 400));
+    }
+    try { proc.kill(); } catch {}
+    tunnel = null;
+    let msg = errText.trim().split("\n").pop() || "";
+    if (/ENOENT/.test(msg)) msg = "no encontré ssh en Windows (Configuración → Aplicaciones → Características opcionales → Cliente OpenSSH)";
+    else if (/Permission denied/i.test(msg)) msg = "la VM rechazó la llave; revisa la ruta del archivo .pem y el usuario";
+    else if (/timed out|unreachable|No route/i.test(msg)) msg = "la VM no responde; revisa que esté prendida";
+    else if (/no such file|Identity file/i.test(msg)) msg = "no encontré el archivo de la llave en esa ruta";
+    const e = new Error(msg || "revisa el comando y que la VM esté prendida"); e.code = "ssh_fail"; throw e;
+  })().finally(() => { tunnelOpening = null; });
+  return tunnelOpening;
 }
 function reminderCfg() {
   const s = readSettings();
@@ -59,6 +145,7 @@ function publicSettings() {
     hasKey: !!getApiKey(), model: model(), models: MODELS, provider: provider(),
     ollama: ollamaCfg(), reminder: reminderCfg(),
     tray: s.tray !== false, openAtLogin: !!s.openAtLogin,
+    sshOn: !!s.sshOn, ssh: s.ssh ? { host: s.ssh.host, key: s.ssh.key, target: s.ssh.target, localPort: s.ssh.localPort } : null,
   };
 }
 
@@ -79,7 +166,7 @@ function requestParams(system, messages, maxTokens) {
   return params;
 }
 function errorCode(err) {
-  if (err.code === "no_key" || err.code === "no_ai" || /^ollama_/.test(err.code || "")) return err.code;
+  if (err.code === "no_key" || err.code === "no_ai" || err.code === "ssh_fail" || /^ollama_/.test(err.code || "")) return err.code;
   if (err instanceof Anthropic.AuthenticationError) return "bad_key";
   if (err instanceof Anthropic.RateLimitError) return "rate_limited";
   if (err instanceof Anthropic.APIConnectionError) return "offline";
@@ -101,6 +188,7 @@ async function claudeChat(system, messages, onText, maxTokens) {
 /* ---------- Ollama (free, runs on this computer) ---------- */
 async function ollamaFetch(p, body) {
   const { url } = ollamaCfg();
+  await ensureTunnel();
   let res;
   try {
     res = await fetch(url + p, body ? { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) } : {});
@@ -155,6 +243,12 @@ ipcMain.handle("settings:set", (_e, patch) => {
   if (PROVIDERS.includes(patch.provider)) s.provider = patch.provider;
   if (typeof patch.ollamaUrl === "string" && /^https?:\/\//.test(patch.ollamaUrl)) s.ollamaUrl = patch.ollamaUrl.trim();
   if (typeof patch.ollamaModel === "string" && patch.ollamaModel.trim()) s.ollamaModel = patch.ollamaModel.trim();
+  if (typeof patch.sshOn === "boolean") s.sshOn = patch.sshOn;
+  if (typeof patch.sshCommand === "string") {
+    const parsed = parseSsh(patch.sshCommand);
+    if (parsed) { s.ssh = parsed; s.sshOn = true; if (tunnel) { try { tunnel.kill(); } catch {} tunnel = null; } }
+    else { writeSettings(s); return { ...publicSettings(), sshError: true }; }
+  }
   if (typeof patch.reminderOn === "boolean") s.reminderOn = patch.reminderOn;
   if (/^\d\d:\d\d$/.test(patch.reminderTime || "")) s.reminderTime = patch.reminderTime;
   if (typeof patch.tray === "boolean") s.tray = patch.tray;
@@ -169,6 +263,9 @@ ipcMain.handle("open-external", (_e, url) => {
   if (/^https:\/\//.test(url)) shell.openExternal(url);
 });
 ipcMain.handle("ollama:test", async () => {
+  if (sshCfg().on) {
+    try { await ensureTunnel(); } catch (err) { return { ok: false, code: "ssh_fail", message: err.message }; }
+  }
   try {
     const res = await ollamaFetch("/api/tags");
     const { models = [] } = await res.json();
@@ -369,9 +466,10 @@ app.whenReady().then(() => {
   session.defaultSession.setPermissionCheckHandler((_wc, perm) => allow(perm));
   if (SELFTEST) { runSelftest(); return; }
   createWindow(START_HIDDEN);
+  if (provider() === "ollama") ensureTunnel().catch(() => {});
   if (readSettings().tray !== false) createTray();
   checkReminder();
   setInterval(checkReminder, 30e3);
 });
-app.on("before-quit", () => { quitting = true; });
+app.on("before-quit", () => { quitting = true; if (tunnel) { try { tunnel.kill(); } catch {} } });
 app.on("window-all-closed", () => { if (!tray || SELFTEST) app.quit(); });
