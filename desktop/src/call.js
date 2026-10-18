@@ -28,14 +28,29 @@ VIEWS.call = async (scen) => {
       <div class="grid g3">${SCEN.filter((s) => s.id !== "correct").map((s) => `<button class="qa scenq" data-nav="call" data-arg="${s.id}" ${gate || st.provider === "none" ? "disabled" : ""}><span class="e">${s.e}</span><b>${esc(s.t)}</b><small>${esc(s.s())}</small><span class="pill" style="align-self:flex-start">📞 Llamar</span></button>`).join("")}</div>
       <div class="card"><span class="label">Cómo funciona</span><div class="howto"><div><b>1 · Habla</b><small>Cuando veas “Te escucho”, habla normal. Al hacer una pausa, Max entiende que terminaste.</small></div><div><b>2 · Escucha</b><small>Max responde en voz alta. Activa los subtítulos si no entiendes.</small></div><div><b>3 · Cuelga</b><small>Recibes tu puntaje, tus errores y frases nuevas. Tus errores se vuelven tarjetas.</small></div></div></div>
     </div>`;
+    if (!gate && st.provider === "ollama") window.api.warm();
+    if (!gate) Voice.prefetch(SCEN.map((s) => greeting(s.id)), true);
     return;
   }
   startCall(scen);
 };
 
+// Max's first line is ready-made, so the call starts right away while the model warms up.
+const CALL_START = "(The phone call starts now. Greet the student by name and ask your first question.)";
+function greeting(scen) {
+  const n = S.name || "Santiago";
+  return ({
+    daily: `Hi ${n}, it's Max! Nice to hear you. How are you today?`,
+    disney: `Hello ${n}, thanks for joining the call. I'm Max, a recruiter for the Disney Cultural Exchange Program. Can you tell me a little about yourself?`,
+    free: `Hey ${n}, it's Max! How's your day going?`,
+    restaurant: `Hi there, welcome to Orlando Diner! Is it a table for one?`,
+    airport: `Good afternoon. Passport, please. What is the purpose of your visit?`,
+    park: `Excuse me, hi! Can you help me? I'm looking for the Space Mountain ride.`,
+  })[scen] || `Hi ${n}, it's Max! How are you today?`;
+}
 function callPrompt() {
   return sysPrompt() + `
-This is a VOICE PHONE CALL. The student's words come from speech recognition, so ignore small transcription mistakes and missing punctuation. You are speaking out loud: reply in 1–2 short sentences (max 30 words), no emojis, no lists, no parentheses, no Spanish. If the student uses a Spanish word, naturally say the English word in your reply. If the student says "repeat" or seems lost, say it again more slowly with simpler words.`;
+This is a VOICE PHONE CALL. The student's words come from speech recognition, so ignore small transcription mistakes and missing punctuation. You are speaking out loud: reply in 1–2 short sentences (max 30 words), no emojis, no lists, no parentheses, no Spanish. If the student uses a Spanish word, naturally say the English word in your reply. If the student asks how to say a Spanish word, say the English word clearly first, then use it in one short example sentence, then continue the conversation. If the student says "repeat" or seems lost, say it again more slowly with simpler words.`;
 }
 
 function startCall(scen) {
@@ -46,10 +61,10 @@ function startCall(scen) {
     <div class="call-top"><span class="label">📞 ${esc(m.t)}</span><span class="call-timer" id="c-time">00:00</span></div>
     <div class="call-mid">
       <button class="call-avatar" id="c-av" title="Toca para saltar lo que está diciendo"><span class="ring" id="c-ring"></span><span class="ring r2" id="c-ring2"></span><span class="face">🧑‍✈️</span></button>
-      <b class="call-name">Max</b><div class="call-state" id="c-state">Llamando…</div>
+      <b class="call-name">Max</b><div class="call-state" id="c-state">Llamando…</div><div class="call-lat" id="c-lat"></div>
       <div class="subs" id="c-subs" ${CALL.subs ? "" : "hidden"}></div>
     </div>
-    <div class="call-help">${["Could you repeat that?", "Sorry, I didn't catch that.", "How do you say… in English?", "Can you speak more slowly?", "Let me think…"].map((v) => `<button class="chip" data-callsay="${esc(v)}">${esc(v)}</button>`).join("")}</div>
+    <div class="call-help"><button class="chip es" id="c-es" title="Dila en español y Max te dice cómo se dice en inglés">🇪🇸 ¿Cómo se dice…?</button>${["Could you repeat that?", "Sorry, I didn't catch that.", "Can you speak more slowly?", "Let me think…"].map((v) => `<button class="chip" data-callsay="${esc(v)}">${esc(v)}</button>`).join("")}</div>
     <div class="ptt" id="c-ptt" ${CALL.ptt ? "" : "hidden"}><button class="btn big" id="c-pttb">🎙 Mantén presionado para hablar <kbd>Espacio</kbd></button></div>
     <div class="call-ctrls">
       <button class="cbtn" id="c-mute" title="Silenciar micrófono"><span>🎙️</span><small>Micrófono</small></button>
@@ -66,6 +81,11 @@ function startCall(scen) {
   const pb = $("#c-pttb");
   pb.onpointerdown = () => pttDown(); pb.onpointerup = pb.onpointerleave = () => pttUp();
   document.querySelectorAll("[data-callsay]").forEach((b) => (b.onclick = () => userSaid(b.dataset.callsay, 1)));
+  $("#c-es").onclick = askSpanish;
+  // Read Max's instructions and the greeting now, while the phone rings.
+  CALL.greet = greeting(scen);
+  window.api.warm(callPrompt(), [{ role: "user", content: CALL_START }, { role: "assistant", content: CALL.greet }]);
+  Voice.loadES();
   onLeave = () => { if (CALL && CALL.active) { CALL.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); } CALL = null; };
   const tick = setInterval(() => { if (!CALL || !CALL.active) return clearInterval(tick); $("#c-time").textContent = fmtTime((Date.now() - CALL.t0) / 1000); }, 500);
   animateCall();
@@ -101,15 +121,17 @@ async function listenOnce() {
     return new Promise((res) => { pttResolve = (p) => { pttResolve = null; p.then(res); }; CALL.cancelWait = () => { pttResolve = null; res(null); }; });
   }
   setCallState("listen", "Te escucho…");
-  return Voice.record({ vad: true, silenceMs: 1200, maxMs: 40000, onLevel: (l) => (CALL.micLevel = l), onStart: () => setCallState("listen", "Te escucho… 🟢") });
+  return Voice.record({ vad: true, silenceMs: 900, maxMs: 40000, onLevel: (l) => (CALL.micLevel = l), onStart: () => setCallState("listen", "Te escucho… 🟢") });
 }
 
 async function callLoop() {
   const me = CALL;
-  sfx("ring"); await sleep(1300);
+  sfx("ring"); await sleep(900);
   if (!me.active) return;
   if (!(await Voice.openMic())) { setCallState("error", "No pude usar el micrófono. Revisa que esté conectado y permitido en Windows."); return; }
-  await botTurn(me);
+  me.hist.push({ role: "assistant", content: me.greet }); renderSubs();
+  setCallState("speak", "Hablando…");
+  await Voice.say(me.greet, { rate: 1 });
   while (me.active) {
     if (me.busyChip) { await sleep(150); continue; }
     if (me.muted) { setCallState("muted", "Micrófono silenciado"); await sleep(300); continue; }
@@ -118,7 +140,13 @@ async function callLoop() {
     if (!audio || audio.length < 16000 * 0.4 || me.busyChip) continue;
     setCallState("think", "Entendiendo…");
     let text = "";
+    const t0 = performance.now();
     try { text = await Voice.transcribe(audio); } catch { setCallState("error", "El reconocimiento de voz falló. Intenta otra vez."); await sleep(1500); continue; }
+    me.heardMs = performance.now() - t0;
+    // "How do you say <Spanish word>?": listen to the same audio again in Spanish to get the word right.
+    if (/\bhow (?:do|can|would|should) (?:you|i) say\b|\bhow to say\b/i.test(text)) {
+      try { const w = spanishWord(await Voice.transcribe(audio, { lang: "es" })); if (w) { text = `How do you say "${w}" in English?`; addVocab(w); } } catch {}
+    }
     if (!me.active) return;
     me.speakSec += audio.length / 16000;
     if (!text) {
@@ -138,12 +166,31 @@ async function userSaid(text, fromChip, me = CALL) {
   if (fromChip) { await botTurn(me); me.busyChip = false; }
   else await botTurn(me);
 }
+// "¿Cómo se dice…?" button: the student says a word in Spanish and Max answers with the English.
+async function askSpanish() {
+  const me = CALL;
+  if (!me || !me.active || me.busyChip || me.thinking || me.state === "think") return;
+  me.busyChip = true; Voice.stop();
+  if (Voice.recording) Voice.recording.cancel(); if (me.cancelWait) me.cancelWait();
+  await sleep(120);
+  setCallState("listen", "🇪🇸 Di la palabra en español…");
+  const audio = await Voice.record({ vad: true, silenceMs: 800, maxMs: 8000, onLevel: (l) => (me.micLevel = l) });
+  if (!me.active) return;
+  let w = "";
+  if (audio && audio.length > 16000 * 0.3) {
+    setCallState("think", "Entendiendo…");
+    try { const t = await Voice.transcribe(audio, { lang: "es" }); w = spanishWord(t) || t.replace(/[¿?¡!.,"]/g, "").trim(); } catch { setCallState("error", "No pude cargar el español. La primera vez necesita internet."); await sleep(2000); }
+  }
+  if (w && me.active) { addVocab(w); me.hist.push({ role: "user", content: `How do you say "${w}" in English?` }); renderSubs(); await botTurn(me); }
+  me.busyChip = false;
+}
 async function botTurn(me) {
   if (me.thinking) return; me.thinking = true;
   setCallState("think", "Pensando…");
+  const t0 = performance.now();
   // Max starts talking as soon as the first sentence of the reply is written.
-  const sp = Voice.stream({ onStart: () => setCallState("speak", "Hablando…") });
-  const r = await window.api.chat(callPrompt(), [{ role: "user", content: "(The phone call starts now. Greet the student by name and ask your first question.)" }, ...me.hist], (t) => { if (me.active) sp.push(t); });
+  const sp = Voice.stream({ onStart: () => { setCallState("speak", "Hablando…"); const l = $("#c-lat"); if (l) l.textContent = `${me.heardMs ? `Te entendí en ${(me.heardMs / 1000).toFixed(1)} s · ` : ""}Max respondió en ${((performance.now() - t0) / 1000).toFixed(1)} s`; } });
+  const r = await window.api.chat(callPrompt(), [{ role: "user", content: CALL_START }, ...me.hist], (t) => { if (me.active) sp.push(t); });
   me.thinking = false;
   if (!me.active) { sp.cancel(); return; }
   if (!r.ok) { sp.cancel(); setCallState("error", ERR[r.code] || ERR.error); await sleep(2500); return; }
@@ -164,6 +211,7 @@ async function hangUp() {
     ${c.hist.length ? `<div class="card"><h3>Transcripción</h3><div class="transcript">${c.hist.map((h) => `<p class="${h.role === "assistant" ? "tb" : "tu"}"><b>${h.role === "assistant" ? "Max" : "Tú"}:</b> ${esc(h.content)}</p>`).join("")}</div></div>` : ""}
   </div>`;
   if (!said.length) return;
+  const asked = said.map(askedWord).filter(Boolean);
   S.calls = (S.calls || 0) + 1; S.speakSec = (S.speakSec || 0) + c.speakSec; S.chatLog = S.chatLog || {}; S.chatLog[TODAY] = 1;
   addMin(Math.max(1, Math.round(secs / 60))); addXP(30 + Math.min(40, said.length * 4), "Llamada en inglés");
   const res = await window.api.feedback(`You are an English teacher for a Spanish-speaking A2 student. ${PROFILE}
@@ -176,4 +224,9 @@ Return JSON: {"bien":"one sentence in Spanish about what they did well","errores
   S.errors = mergeErr(r.errores || [], S.errors); S.scores = S.scores || []; S.scores.push({ date: TODAY, ...p }); save();
   box.innerHTML = `<div class="fbk"><div class="scores3">${[["Fluidez", p.fluidez], ["Gramática", p.gramatica], ["Vocabulario", p.vocabulario]].map(([k, v]) => `<div><span class="label">${k}</span><b>${esc(v)}<small>/5</small></b></div>`).join("")}</div><p style="margin:0">${esc(r.bien)}</p>${nE ? errTable(r.errores) + `<p class="muted" style="margin:0">🧠 Estos errores ya están en tus tarjetas, en <button class="btn" data-nav="cards" data-arg="err" style="padding:2px 10px">Mis errores</button></p>` : ""}<span class="label">Frases para tu próxima llamada</span><div class="chips">${(r.frases || []).map((f) => `<button class="chip" data-say="${esc(f)}">🔊 ${esc(f)}</button>`).join("")}</div><p style="margin:0"><strong>Consejo:</strong> ${esc(r.consejo)}</p></div>`;
   checkAch();
+  if (asked.length || (S.vocab || []).some((v) => !v.en)) {
+    await resolveVocab();
+    const nw = (S.vocab || []).filter((v) => asked.some((a) => a.toLowerCase() === v.es.toLowerCase()) && v.en);
+    if (nw.length && $("#c-fb")) $("#c-fb").insertAdjacentHTML("beforeend", `<div class="card"><span class="label">📒 Palabras que preguntaste</span>${nw.map((v) => `<div class="vrow"><div><b>${esc(v.es)}</b> <span class="muted">→</span> <b style="color:var(--gold)">${esc(v.en)}</b>${v.ex ? `<small>${esc(v.ex)}</small>` : ""}</div><button class="btn" data-say="${esc(v.en)}">🔊</button></div>`).join("")}<div><button class="btn gold" data-nav="vocab">Ver Mis palabras</button></div></div>`);
+  }
 }

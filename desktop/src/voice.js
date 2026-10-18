@@ -8,12 +8,14 @@ const VOICES = [
   { id: "bf_emma", t: "Olivia · Reino Unido", e: "💂‍♀️" },
   { id: "bm_george", t: "George · Reino Unido", e: "🎩" },
 ];
-const STT_MODELS = { "Xenova/whisper-base.en": "Rápido (recomendado)", "Xenova/whisper-small.en": "Más preciso (descarga más grande)" };
+const STT_MODELS = { "Xenova/whisper-tiny.en": "El más rápido (entiende un poco menos)", "Xenova/whisper-base.en": "Rápido (recomendado)", "Xenova/whisper-small.en": "Más preciso (más lento)" };
+// Understands Spanish too; only used for "¿Cómo se dice…?".
+const STT_ES = "Xenova/whisper-base";
 const HALLUCINATION = /^(\s*(thank you|thanks for watching|you|bye|okay)[.!]?\s*|\s*[\[(].*[\])]\s*|\s*)$/i;
 
 const Voice = (() => {
   const cfg = () => Object.assign({ neural: true, voice: "af_heart", speed: 1, stt: "Xenova/whisper-base.en" }, S.voice || {});
-  const state = { tts: "idle", stt: "idle", progress: {} }; // idle | loading | ready | error
+  const state = { tts: "idle", stt: "idle", es: "idle", progress: {} }; // idle | loading | ready | error
   const listeners = new Set();
   const emit = () => listeners.forEach((f) => f(state));
   let tts = null, stt = null, seq = 0;
@@ -106,7 +108,11 @@ const Voice = (() => {
 
   /* ---- Generated audio: one job at a time, user requests first, cached in memory and on disk ---- */
   const mem = new Map(), queue = [], queued = new Map();
-  let busy = false;
+  // Background audio (this week's content) waits until nothing else is happening, one sentence
+  // at a time with a pause between them, so the computer stays responsive.
+  const bg = [], bgKeys = new Set();
+  let busy = false, lastFg = 0, sttBusy = false, bgTimer = null;
+  const fg = () => { lastFg = Date.now(); };
   const keyOf = (t, v, sp) => v + "|" + sp.toFixed(2) + "|" + t;
   const speedFor = (rate) => { const c = cfg(); return rate < 0.8 ? Math.max(0.6, c.speed * 0.72) : c.speed; };
   let dbp = null;
@@ -131,18 +137,37 @@ const Voice = (() => {
     try { d.transaction("tts", "readwrite").objectStore("tts").put({ pcm, rate: r.rate }, k); } catch {}
   }
   function pump() {
-    if (busy || !queue.length) return;
+    if (busy) return;
+    if (queue.length) {
+      busy = true;
+      const j = queue.shift(); queued.delete(j.k);
+      call(tts, { type: "say", text: j.text, voice: j.voice, speed: j.speed }).then((r) => {
+        busy = false;
+        j.res(r.ok ? { audio: r.audio, rate: r.rate } : null);
+        pump();
+      });
+      return;
+    }
+    if (!bg.length || bgTimer) return;
+    if (rec || sttBusy || playing || Date.now() - lastFg < 4000) { bgTimer = setTimeout(() => { bgTimer = null; pump(); }, 1500); return; }
     busy = true;
-    const j = queue.shift(); queued.delete(j.k);
+    const j = bg.shift(); bgKeys.delete(j.k);
     call(tts, { type: "say", text: j.text, voice: j.voice, speed: j.speed }).then((r) => {
       busy = false;
-      j.res(r.ok ? { audio: r.audio, rate: r.rate } : null);
+      if (r.ok && !mem.has(j.k)) diskPut(j.k, r);
+      bgTimer = setTimeout(() => { bgTimer = null; pump(); }, 700);
       pump();
     });
+  }
+  async function diskHas(k) {
+    const d = await db(); if (!d) return false;
+    return new Promise((res) => { try { const q = d.transaction("tts").objectStore("tts").getKey(k); q.onsuccess = () => res(q.result !== undefined); q.onerror = () => res(false); } catch { res(false); } });
   }
   // Returns a promise of {audio, rate} (or null if it failed). Urgent requests jump the queue.
   function gen(text, voice, speed, urgent) {
     const k = keyOf(text, voice, speed);
+    if (urgent) fg();
+    if (bgKeys.has(k)) { bgKeys.delete(k); const i = bg.findIndex((j) => j.k === k); if (i >= 0) bg.splice(i, 1); }
     if (mem.has(k)) {
       const j = queued.get(k);
       if (urgent && j) { queue.splice(queue.indexOf(j), 1); queue.unshift(j); }
@@ -161,10 +186,18 @@ const Voice = (() => {
     return p;
   }
   // Generates audio in the background so it plays instantly later.
-  function prefetch(texts) {
+  // Soon-needed audio (pass soon=true) is made right away; the rest is made in the background
+  // only when it isn't on disk yet, and isn't kept in memory.
+  async function prefetch(texts, soon) {
     const c = cfg();
     if (!c.neural || state.tts !== "ready") return;
-    for (const t of texts) for (const sTxt of sentences(t)) gen(sTxt, c.voice, c.speed, false);
+    for (const t of texts) for (const sTxt of sentences(t)) {
+      if (soon) { gen(sTxt, c.voice, c.speed, false); continue; }
+      const k = keyOf(sTxt, c.voice, c.speed);
+      if (mem.has(k) || bgKeys.has(k) || (await diskHas(k))) continue;
+      bgKeys.add(k); bg.push({ k, text: sTxt, voice: c.voice, speed: c.speed });
+    }
+    pump();
   }
   const within = (p, ms) => Promise.race([p.then((r) => ({ r })), new Promise((res) => setTimeout(() => res(null), ms))]);
 
@@ -246,6 +279,7 @@ const Voice = (() => {
   // Records one utterance at 16 kHz. With vad, it starts on speech and stops after a pause;
   // without it, it records until finish() is called (push to talk).
   function record({ vad = true, silenceMs = 1100, maxMs = 30000, onLevel, onStart } = {}) {
+    fg();
     return new Promise(async (resolve) => {
       if (!(await openMic())) return resolve(null);
       if (micCtx.state === "suspended") await micCtx.resume();
@@ -288,13 +322,25 @@ const Voice = (() => {
       src.connect(proc); proc.connect(mute); mute.connect(micCtx.destination);
     });
   }
-  async function transcribe(audio) {
+  async function transcribe(audio, { lang } = {}) {
     if (!audio || audio.length < 16000 * 0.3) return "";
     if (state.stt !== "ready" && !(await loadSTT())) throw new Error(state.sttError || "stt");
+    if (lang === "es" && !(await loadES())) throw new Error(state.esError || "stt-es");
     const copy = new Float32Array(audio);
-    const r = await call(stt, { type: "transcribe", audio: copy, model: cfg().stt }, [copy.buffer]);
-    if (!r.ok) throw new Error(r.error);
-    return HALLUCINATION.test(r.text) ? "" : r.text;
+    sttBusy = true; fg();
+    try {
+      const r = await call(stt, lang === "es" ? { type: "transcribe", audio: copy, model: STT_ES, language: "spanish" } : { type: "transcribe", audio: copy, model: cfg().stt }, [copy.buffer]);
+      if (!r.ok) throw new Error(r.error);
+      return HALLUCINATION.test(r.text) ? "" : r.text;
+    } finally { sttBusy = false; fg(); }
+  }
+  let esReady = null;
+  function loadES() {
+    if (!stt) stt = worker("stt");
+    if (state.es === "ready" || state.es === "loading") return esReady;
+    state.es = "loading"; emit();
+    esReady = call(stt, { type: "load", model: STT_ES }).then((r) => { state.es = r.ok ? "ready" : "error"; state.esError = r.error; emit(); return r.ok; });
+    return esReady;
   }
   function resample(samples, from, to) {
     const ratio = from / to, n = Math.floor(samples.length / ratio), out = new Float32Array(n);
@@ -308,7 +354,7 @@ const Voice = (() => {
   }
   return {
     state, cfg, on: (f) => { listeners.add(f); return () => listeners.delete(f); },
-    loadTTS, loadSTT, say, stream, prefetch, synth, stop, level, playBuffer, record, transcribe, openMic, closeMic, resample, downloadPct,
+    loadTTS, loadSTT, loadES, say, stream, prefetch, synth, stop, level, playBuffer, record, transcribe, openMic, closeMic, resample, downloadPct,
     get recording() { return rec; }, get speaking() { return !!playing || ("speechSynthesis" in window && speechSynthesis.speaking); },
   };
 })();

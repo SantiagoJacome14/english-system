@@ -141,3 +141,12 @@ input[type=range]{padding:0;border:0;accent-color:var(--blue);background:transpa
 @media (prefers-reduced-motion:reduce){.bz-card.pop,.bz-card.shake,.ptile.wrong,.ach-pop{animation:none}}
 aside{scrollbar-width:none}aside::-webkit-scrollbar{display:none}
 .scores3>div{display:flex;flex-direction:column;gap:2px}
+
+/* Mis palabras */
+.vlist{display:flex;flex-direction:column}
+.vrow{display:flex;align-items:center;gap:8px;padding:10px 0;border-top:1px solid var(--line)}
+.vrow:first-child{border-top:0}
+.vrow>div{flex:1;min-width:0}
+.vrow small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.call-lat{font-size:12px;color:var(--muted);min-height:16px;margin-top:4px}
+.chip.es{border-color:var(--gold);color:var(--gold)}

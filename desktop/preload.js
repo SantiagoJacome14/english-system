@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld("api", {
     try { return await ipcRenderer.invoke("chat", { id, system, messages }); }
     finally { listeners.delete(id); }
   },
+  warm: (system, messages) => ipcRenderer.invoke("ai:warm", system, messages),
   feedback: (prompt) => ipcRenderer.invoke("feedback", { prompt }),
   ollamaTest: () => ipcRenderer.invoke("ollama:test"),
   reminderTest: () => ipcRenderer.invoke("reminder:test"),
