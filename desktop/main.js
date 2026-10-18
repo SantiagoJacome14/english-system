@@ -354,7 +354,7 @@ ipcMain.handle("feedback", async (_e, { prompt }) => {
 const MIME = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
   ".css": "text/css; charset=utf-8", ".wasm": "application/wasm", ".json": "application/json", ".png": "image/png",
-  ".svg": "image/svg+xml", ".ico": "image/x-icon",
+  ".svg": "image/svg+xml", ".ico": "image/x-icon", ".woff2": "font/woff2",
 };
 // Cross-origin isolation lets the speech models run on several CPU threads.
 const ISOLATION = { "Cross-Origin-Opener-Policy": "same-origin", "Cross-Origin-Embedder-Policy": "credentialless", "Cross-Origin-Resource-Policy": "same-origin" };

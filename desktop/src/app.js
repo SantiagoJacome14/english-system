@@ -65,24 +65,28 @@ VIEWS.home=()=>{
   const blocks=[["Repasar tarjetas","5 min · frases de la semana","cards"],["Lección del día",nl?nl.t+" · Semana "+nl.id.split("-")[0]:"¡Ruta al día!","path"],["Dictado","10 min · entrena tu oído","listen"],["Llamada en inglés","15 min · "+topicToday,"call"],["Misión de escritura","10 min · escribe y corrige","path"]];
   const doneB=[(S.xpLog[TODAY]&&Object.values(S.cards).some(c=>c.last===TODAY)),!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&!/-t$|-w$/.test(k)),(S.dictLog||{})[TODAY],(S.chatLog||{})[TODAY],!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&/-w$/.test(k))];
   $("#main").innerHTML=`<div class="screen">
-    <div class="hero">
-      <div>
-        <span class="label">${DAYS[dow(today)]} ${today.getDate()} ${MON[today.getMonth()]} · Semana ${WK} de 11</span>
-        <h2>${greet}, ${esc(S.name)}! 👋</h2>
-        <p class="muted" style="margin:6px 0 0">Hoy toca: <strong style="color:var(--ink)">${esc(topicToday)}</strong></p>
-        <div class="route"><div class="code">BGA<small>HOY</small></div><div class="track"><span class="done" style="width:${pct}%"></span>${wps}<span class="plane" style="left:${pct}%">✈</span></div><div class="code">MCO<small>DISNEY · 3 ENE</small></div></div>
+    <div class="ticket">
+      <div class="tk-main">
+        <div class="tk-top"><span class="label">Boarding pass · Semana ${WK} de 11</span><span class="tk-class">A2 → B1</span></div>
+        <h2>${greet}, ${esc(S.name)}.</h2>
+        <div class="tk-route"><div class="code">BGA<small>BUCARAMANGA · HOY</small></div><div class="track"><span class="done" style="width:${pct}%"></span>${wps}<span class="plane" style="left:${pct}%"><svg viewBox="0 0 256 256"><use href="#i-plane"/></svg></span></div><div class="code">MCO<small>ORLANDO · 3 ENE</small></div></div>
+        <div class="tk-meta"><div><span>Pasajero</span><b>${esc(S.name).toUpperCase()}</b></div><div><span>Fecha</span><b>${DAYS[dow(today)]} ${today.getDate()} ${MON[today.getMonth()]}</b></div><div><span>Puerta de hoy</span><b>${esc(topicToday)}</b></div></div>
       </div>
-      <button class="btn gold big" data-nav="${nl?"lesson":"talk"}" data-arg="${nl?nl.id:""}">▶ ${nl?"Continuar":"Conversar"}</button>
+      <div class="tk-stub">
+        <div class="seat"><span>ASIENTO</span><b>${pct}%</b></div>
+        <div class="barcode"></div>
+        <button class="btn primary big" data-nav="${nl?"lesson":"talk"}" data-arg="${nl?nl.id:""}"><svg class="ic"><use href="#i-arrow"/></svg>${nl?"Continuar":"Conversar"}</button>
+      </div>
     </div>
     ${typeof classCard==="function"?classCard():""}
     <div class="grid g4">
-      <div class="card stat"><span class="ic" style="background:var(--gold-soft)">🔥</span><div><b>${st}</b><span>${st===1?"día de racha":"días de racha"}</span></div></div>
-      <div class="card stat"><span class="ic" style="background:var(--blue-soft)">⭐</span><div><b>${S.xp}</b><span>XP · ${r.name}</span></div></div>
-      <div class="card stat"><span class="ic" style="background:var(--green-soft)">🃏</span><div><b>${learned()}</b><span>frases aprendidas</span></div></div>
-      <div class="card stat"><span class="ic" style="background:var(--panel-3)">🎯</span><div><b>A2</b><span>nivel actual · meta B1</span></div></div>
+      <div class="card stat"><svg class="ic"><use href="#i-flame"/></svg><div><b>${st}</b><span>${st===1?"día de racha":"días de racha"}</span></div></div>
+      <div class="card stat"><svg class="ic"><use href="#i-star"/></svg><div><b>${S.xp}</b><span>XP · ${r.name}</span></div></div>
+      <div class="card stat"><svg class="ic"><use href="#i-cards"/></svg><div><b>${learned()}</b><span>frases aprendidas</span></div></div>
+      <div class="card stat"><svg class="ic"><use href="#i-pron"/></svg><div><b>A2</b><span>nivel actual · meta B1</span></div></div>
     </div>
     <div class="grid g2">
-      <div class="card pod"><span class="label">Frase del día</span><div class="pod-en">${esc(pod.en)}</div><div class="pod-es">${esc(pod.es)}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-say="${esc(pod.en)}">🔊 Escuchar</button><button class="btn" data-nav="pron" data-arg="${esc(pod.en)}">🎯 Practicar pronunciación</button></div></div>
+      <div class="card pod"><span class="label">Frase del día</span><div class="pod-en">${esc(pod.en)}</div><div class="pod-es">${esc(pod.es)}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-say="${esc(pod.en)}"><svg class="ic"><use href="#i-speaker"/></svg>Escuchar</button><button class="btn" data-nav="pron" data-arg="${esc(pod.en)}"><svg class="ic"><use href="#i-pron"/></svg>Practicar pronunciación</button></div></div>
       ${voiceCard()}
     </div>
     <div class="grid g2">
@@ -97,12 +101,12 @@ VIEWS.home=()=>{
       </div>
     </div>
     <div class="quick">
-      <button class="qa hot" data-nav="call"><span class="e">📞</span><b>Llamada en inglés</b><small>Habla con tu voz, manos libres</small></button>
-      <button class="qa" data-nav="story"><span class="e">✈️</span><b>Viaje a Orlando</b><small>Capítulo ${Math.min(CUR,11)} desbloqueado</small></button>
-      <button class="qa" data-nav="blitz"><span class="e">⚡</span><b>Reto relámpago</b><small>60 segundos · récord ${(S.best||{}).blitz||0}</small></button>
-      <button class="qa" data-nav="interview"><span class="e">🏰</span><b>Entrevista Disney</b><small>Simulador con preguntas reales</small></button>
-      <button class="qa" data-nav="pron"><span class="e">🎯</span><b>Pronunciación</b><small>Habla y mira qué palabras se entienden</small></button>
-      <button class="qa" data-nav="cards" data-arg="${dueCards("err").length?"err":"words"}"><span class="e">🃏</span><b>Tarjetas</b><small>${due} pendientes · ${dueCards("err").length} de tus errores</small></button>
+      <button class="qa hot" data-nav="call"><span class="e"><svg class="ic"><use href="#i-call"/></svg></span><b>Llamada en inglés</b><small>Habla con tu voz, manos libres</small></button>
+      <button class="qa" data-nav="story"><span class="e"><svg class="ic"><use href="#i-plane"/></svg></span><b>Viaje a Orlando</b><small>Capítulo ${Math.min(CUR,11)} desbloqueado</small></button>
+      <button class="qa" data-nav="blitz"><span class="e"><svg class="ic"><use href="#i-bolt"/></svg></span><b>Reto relámpago</b><small>60 segundos · récord ${(S.best||{}).blitz||0}</small></button>
+      <button class="qa" data-nav="interview"><span class="e"><svg class="ic"><use href="#i-disney"/></svg></span><b>Entrevista Disney</b><small>Simulador con preguntas reales</small></button>
+      <button class="qa" data-nav="pron"><span class="e"><svg class="ic"><use href="#i-pron"/></svg></span><b>Pronunciación</b><small>Habla y mira qué palabras se entienden</small></button>
+      <button class="qa" data-nav="cards" data-arg="${dueCards("err").length?"err":"words"}"><span class="e"><svg class="ic"><use href="#i-cards"/></svg></span><b>Tarjetas</b><small>${due} pendientes · ${dueCards("err").length} de tus errores</small></button>
     </div>
   </div>`;
 };
@@ -342,7 +346,7 @@ VIEWS.progress=()=>{
   $("#main").innerHTML=`<div class="screen">
     <div class="head"><div><h1>Tu progreso</h1><p>Del 17 de octubre al 3 de enero. Meta: B1 y entrevista de Disney.</p></div></div>
     <div class="grid g4">
-      <div class="card stat"><span class="ic" style="background:var(--gold-soft)">🔥</span><div><b>${streak()}</b><span>racha actual</span></div></div>
+      <div class="card stat"><svg class="ic"><use href="#i-flame"/></svg><div><b>${streak()}</b><span>racha actual</span></div></div>
       <div class="card stat"><span class="ic" style="background:var(--blue-soft)">⏱️</span><div><b>${Math.round(mins/60*10)/10}</b><span>horas practicadas</span></div></div>
       <div class="card stat"><span class="ic" style="background:var(--green-soft)">📘</span><div><b>${lessonsDone}</b><span>lecciones de 55</span></div></div>
       <div class="card stat"><span class="ic" style="background:var(--panel-3)">💬</span><div><b>${S.chats||0}</b><span>conversaciones</span></div></div>
