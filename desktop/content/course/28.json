@@ -8,7 +8,7 @@
   "sections": [
     {
       "h": "Comparativos: más que...",
-      "body": "Para comparar dos cosas, el adjetivo cambia según su longitud.\n\nAdjetivos cortos (una sílaba): agrega **-er** y usa **than**: *Orlando is hotter than Bogotá.* (Orlando es más caliente que Bogotá.)\n\nAdjetivos largos (dos o más sílabas): usa **more ... than**: *English is more interesting than math.*",
+      "body": "Para comparar dos cosas, el adjetivo cambia según su longitud.\n\nAdjetivos cortos (una sílaba): agrega **-er** y usa **than**: *Orlando is hotter than Bogotá.* (Orlando es más caliente que Bogotá.)\n\nAdjetivos largos (dos o más sílabas, salvo los terminados en -y como happy o easy): usa **more ... than**: *English is more interesting than math.*",
       "note": "Cambios de ortografía: big → bigger (se duplica la consonante), happy → happier (y cambia a i), large → larger (solo se agrega r)."
     },
     {
@@ -120,7 +120,7 @@
     { "type": "translate", "es": "Mi hermano es más alto que yo.", "answer": ["My brother is taller than me.", "My brother is taller than I am.", "My brother is taller than I."], "why": "Tall es corto: taller than." },
     { "type": "translate", "es": "Es el parque más grande.", "answer": ["It is the biggest park.", "It's the biggest park."], "why": "Big es corto: the biggest." },
     { "type": "translate", "es": "Prefiero el té al café.", "answer": ["I prefer tea to coffee.", "I prefer tea over coffee."], "why": "Prefer A to B." },
-    { "type": "translate", "es": "Creo que es divertido.", "answer": ["I think it is fun.", "I think it's fun.", "I think it is funny.", "I think it's funny."], "why": "I think da una opinión." }
+    { "type": "translate", "es": "Creo que es divertido.", "answer": ["I think it is fun.", "I think it's fun."], "why": "I think da una opinión." }
   ],
   "speak": [
     "My brother is taller than me.",

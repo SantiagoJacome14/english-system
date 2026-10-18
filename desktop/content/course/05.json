@@ -80,7 +80,7 @@
           ["10", "tenth (10th)", "décimo"]
         ]
       },
-      "note": "Después del 3 casi todos terminan en **-th**. Cuidado con **fifth** (la f cambia) y **twelfth**. Ejemplo: **the first day**, **the third floor**."
+      "note": "Después del 3 casi todos terminan en **-th**. Cuidado con **fifth** (la v de *five* cambia a f) y **twelfth**. Ejemplo: **the first day**, **the third floor**."
     }
   ],
   "vocab": [
@@ -124,13 +124,13 @@
     { "type": "choice", "q": "¿Cómo se dice 40?", "options": ["fourty", "forty", "fortie"], "answer": 1, "why": "Forty se escribe sin la u." },
     { "type": "choice", "q": "¿Cuál es la forma correcta de decir 200?", "options": ["two hundreds", "two hundred", "twenty hundred"], "answer": 1, "why": "Hundred no lleva -s cuando hay un número antes." },
     { "type": "choice", "q": "¿Cómo se lee 1999 como año?", "options": ["nineteen ninety-nine", "one thousand nine hundred ninety-nine", "ten ninety-nine"], "answer": 0, "why": "Los años se leen en dos pares: nineteen ninety-nine." },
-    { "type": "choice", "q": "¿Cómo se lee 2026 como año?", "options": ["twenty twenty-six", "two thousand twenty-six", "twenty twenty six hundred"], "answer": 0, "why": "En inglés americano se dice twenty twenty-six." },
+    { "type": "choice", "q": "¿Cómo se lee 2026 como año?", "options": ["twenty twenty-six", "twenty thousand twenty-six", "twenty twenty six hundred"], "answer": 0, "why": "En inglés americano se dice twenty twenty-six." },
     { "type": "choice", "q": "The ___ floor es el piso 3.", "options": ["three", "third", "threeth"], "answer": 1, "why": "El ordinal de 3 es third." },
     { "type": "fill", "q": "Escribe 13 en inglés: ___", "answer": ["thirteen"], "why": "13 es thirteen." },
     { "type": "fill", "q": "Escribe 21 en inglés: ___", "answer": ["twenty-one", "twenty one"], "why": "Las decenas se unen con guion: twenty-one." },
     { "type": "fill", "q": "Escribe 80 en inglés: ___", "answer": ["eighty"], "why": "80 es eighty." },
     { "type": "fill", "q": "Escribe 1,000 en inglés: one ___", "answer": ["thousand"], "why": "1,000 es one thousand." },
-    { "type": "fill", "q": "El ordinal de 5 es ___", "answer": ["fifth"], "why": "Fifth cambia la f por th." },
+    { "type": "fill", "q": "El ordinal de 5 es ___", "answer": ["fifth"], "why": "Fifth viene de five: la v cambia a f y se agrega th." },
     { "type": "order", "words": ["I'm", "years", "twenty", "old"], "answer": "I'm twenty years old", "es": "Tengo veinte años." },
     { "type": "order", "words": ["is", "How", "this", "much"], "answer": "How much is this", "es": "¿Cuánto cuesta esto?" },
     { "type": "order", "words": ["phone", "your", "What's", "number"], "answer": "What's your phone number", "es": "¿Cuál es tu número de teléfono?" },

@@ -121,7 +121,7 @@
     { "type": "choice", "q": "¿Cómo se escribe correctamente en inglés?", "options": ["monday", "Monday", "MONday"], "answer": 1, "why": "Los días de la semana siempre llevan mayúscula." },
     { "type": "fill", "q": "I work ___ Saturday. (in, on o at)", "answer": ["on"], "why": "Los días llevan on." },
     { "type": "fill", "q": "We travel ___ summer. (in, on o at)", "answer": ["in"], "why": "Las estaciones llevan in." },
-    { "type": "fill", "q": "El ordinal de 5 es ___", "answer": ["fifth"], "why": "Fifth cambia la f por th." },
+    { "type": "fill", "q": "El ordinal de 5 es ___", "answer": ["fifth"], "why": "Fifth viene de five: la v cambia a f y se agrega th." },
     { "type": "fill", "q": "Después de Sunday viene ___", "answer": ["monday"], "why": "El día siguiente a domingo es lunes: Monday." },
     { "type": "fill", "q": "El mes antes de November es ___", "answer": ["october"], "why": "Antes de noviembre está octubre: October." },
     { "type": "order", "words": ["is", "Today", "Sunday"], "answer": "Today is Sunday", "es": "Hoy es domingo." },

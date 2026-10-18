@@ -92,7 +92,7 @@
     { "en": "person / people", "es": "persona / personas", "ex": "Many people are here." },
     { "en": "this", "es": "esto / este", "ex": "This is my phone." },
     { "en": "that", "es": "eso / aquel", "ex": "That is my friend." },
-    { "en": "engineer", "es": "ingeniero/a", "ex": "I'm an engineer student." }
+    { "en": "engineer", "es": "ingeniero/a", "ex": "My brother is an engineer." }
   ],
   "examples": [
     { "en": "I like her.", "es": "Ella me cae bien." },

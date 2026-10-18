@@ -93,7 +93,7 @@
     { "type": "choice", "q": "Pablo has a car. ___ car is red.", "options": ["Her", "His", "Our"], "answer": 1, "why": "Pablo es hombre: his car." },
     { "type": "choice", "q": "How old ___ you?", "options": ["is", "have", "are"], "answer": 2, "why": "La edad se pregunta con to be: How old are you?" },
     { "type": "choice", "q": "¿Cómo se dice 'tía'?", "options": ["uncle", "aunt", "cousin"], "answer": 1, "why": "Aunt es tía; uncle es tío." },
-    { "type": "choice", "q": "They love ___ children.", "options": ["her", "their", "our"], "answer": 1, "why": "Para they el posesivo es their." },
+    { "type": "choice", "q": "They love ___ children. (los hijos de ellos)", "options": ["her", "their", "our"], "answer": 1, "why": "Para they el posesivo es their." },
     { "type": "fill", "q": "I ___ 20 years old. (to be)", "answer": ["am", "'m", "i'm"], "why": "La edad usa to be: I am 20." },
     { "type": "fill", "q": "He ___ two sisters. (have)", "answer": ["has"], "why": "Con he se usa has." },
     { "type": "fill", "q": "This is Ana___ brother.", "answer": ["'s", "’s"], "why": "El posesivo se forma con 's: Ana's brother." },

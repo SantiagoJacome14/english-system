@@ -73,7 +73,7 @@
   "vocab": [
     { "en": "not", "es": "no (negación)", "ex": "I'm not tired." },
     { "en": "isn't", "es": "no es / no está", "ex": "She isn't here." },
-    { "en": "aren't", "es": "no son / no estás", "ex": "We aren't late." },
+    { "en": "aren't", "es": "no son / no están", "ex": "We aren't late." },
     { "en": "yes", "es": "sí", "ex": "Yes, I am." },
     { "en": "no", "es": "no", "ex": "No, he isn't." },
     { "en": "what", "es": "qué / cuál", "ex": "What's your name?" },

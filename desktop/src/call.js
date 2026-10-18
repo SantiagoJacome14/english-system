@@ -70,6 +70,7 @@ function startCall(scen) {
       <button class="call-avatar" id="c-av" title="Toca para saltar lo que está diciendo"><span class="ring" id="c-ring"></span><span class="ring r2" id="c-ring2"></span><span class="face">🧑‍✈️</span></button>
       <b class="call-name">Max</b><div class="call-state" id="c-state">Llamando…</div><div class="call-lat" id="c-lat"></div>
       <div class="subs" id="c-subs" ${CALL.subs ? "" : "hidden"}></div>
+      <div class="cfix" id="c-fix"></div>
     </div>
     <div class="call-help"><button class="chip es" id="c-es" title="Dila en español y Max te dice cómo se dice en inglés">🇪🇸 ¿Cómo se dice…?</button>${["Could you repeat that?", "Sorry, I didn't catch that.", "Can you speak more slowly?", "Let me think…"].map((v) => `<button class="chip" data-callsay="${esc(v)}">${esc(v)}</button>`).join("")}</div>
     <div class="ptt" id="c-ptt" ${CALL.ptt ? "" : "hidden"}><button class="btn big" id="c-pttb">🎙 Mantén presionado para hablar <kbd>Espacio</kbd></button></div>
@@ -207,6 +208,14 @@ async function botTurn(me) {
   me.hist.push({ role: "assistant", content: r.text });
   renderSubs();
   await sp.end(r.text);
+  fixLast(me);
+}
+// While the student thinks about the next answer, check the last one and show the better version.
+async function fixLast(me) {
+  const u = [...me.hist].reverse().find((h) => h.role === "user");
+  if (!u || u.fixed) return; u.fixed = true;
+  const f = await liveFix(u.content);
+  if (f && me.active) { me.fixes = (me.fixes || 0) + 1; const el = $("#c-fix"); if (el) { el.innerHTML = fixHtml(f); } }
 }
 
 async function hangUp() {

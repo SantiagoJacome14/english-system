@@ -112,7 +112,7 @@
     { "type": "choice", "q": "What ___ she do?", "options": ["do", "does", "is"], "answer": 1, "why": "Con she se usa does en la pregunta." },
     { "type": "choice", "q": "At a theme park, what are the visitors called?", "options": ["guests", "drivers", "managers"], "answer": 0, "why": "En Disney a los visitantes se les llama guests." },
     { "type": "choice", "q": "Which word means 'turno de trabajo'?", "options": ["shift", "ticket", "ride"], "answer": 0, "why": "Shift es el turno." },
-    { "type": "choice", "q": "I study ___ a university.", "options": ["in", "at", "by"], "answer": 1, "why": "Con instituciones se usa at: at a university." },
+    { "type": "choice", "q": "I study ___ a university.", "options": ["on", "at", "by"], "answer": 1, "why": "Con instituciones se usa at: at a university." },
     { "type": "fill", "q": "What do you ___?", "answer": ["do"], "why": "La pregunta correcta es What do you do?" },
     { "type": "fill", "q": "I am ___ engineer.", "answer": ["an"], "why": "Engineer empieza con vocal: an." },
     { "type": "fill", "q": "She ___ at a restaurant. (work)", "answer": ["works"], "why": "Con she se agrega -s: works." },

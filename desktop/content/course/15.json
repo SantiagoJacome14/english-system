@@ -98,7 +98,7 @@
   "exercises": [
     { "type": "choice", "q": "___ me, where is the bank?", "options": ["Excuse", "Sorry", "Please"], "answer": 0, "why": "Excuse me es la forma educada para llamar la atención." },
     { "type": "choice", "q": "Go ___ for two blocks. (siga derecho)", "options": ["direct", "straight", "right"], "answer": 1, "why": "Siga derecho se dice go straight." },
-    { "type": "choice", "q": "I go to work ___ bus.", "options": ["in", "by", "on the"], "answer": 1, "why": "Con medios de transporte usamos by: by bus." },
+    { "type": "choice", "q": "I go to work ___ bus.", "options": ["in", "by", "on"], "answer": 1, "why": "Con medios de transporte usamos by: by bus." },
     { "type": "choice", "q": "The hotel is ___ the park. (al otro lado, frente a)", "options": ["across from", "behind", "under"], "answer": 0, "why": "Al frente (al otro lado) se dice across from." },
     { "type": "choice", "q": "Which place sells medicine?", "options": ["pharmacy", "airport", "bus stop"], "answer": 0, "why": "Pharmacy es la farmacia." },
     { "type": "choice", "q": "Turn ___ at the corner. (a la izquierda)", "options": ["left", "right", "straight"], "answer": 0, "why": "Izquierda es left." },
@@ -113,7 +113,7 @@
     { "type": "order", "words": ["go", "I", "bus", "to", "by", "work"], "answer": "I go to work by bus", "es": "Voy al trabajo en bus." },
     { "type": "translate", "es": "Siga derecho dos cuadras.", "answer": ["Go straight for two blocks.", "Go straight two blocks."], "why": "Go straight es siga derecho; blocks son cuadras." },
     { "type": "translate", "es": "El hotel está al lado del banco.", "answer": ["The hotel is next to the bank."], "why": "Al lado de se dice next to." },
-    { "type": "translate", "es": "¿Hay una farmacia cerca de aquí?", "answer": ["Is there a pharmacy near here?", "Is there a pharmacy near?"], "why": "Pregunta con there is en singular: Is there a...?" }
+    { "type": "translate", "es": "¿Hay una farmacia cerca de aquí?", "answer": ["Is there a pharmacy near here?"], "why": "Pregunta con there is en singular: Is there a...?" }
   ],
   "speak": [
     "Excuse me, where is the bank?",

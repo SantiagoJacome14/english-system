@@ -106,3 +106,17 @@ function coachCard() {
     <span class="label">Tu promedio por sesión (de 5)</span>${rows}
     ${topics.length ? `<span class="label">De qué ya hablaron</span><div class="chips">${topics.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>` : ""}</div>`;
 }
+
+/* ---------- Corrección al momento: after each thing the student says, a quick check while they think ---------- */
+async function liveFix(text) {
+  text = (text || "").trim();
+  if (text.split(/\s+/).length < 3 || /^how do you say/i.test(text)) return null;
+  const st = await window.api.getSettings(); if (st.provider === "none") return null;
+  const r = await window.api.feedback(`A Spanish-speaking A2 English student from Colombia said: "${text}". It is a speech-recognition or typed line, so ignore punctuation and capital letters. If it has a real grammar or word-choice mistake, return {"ok":false,"mejor":"the corrected, natural English sentence","porque":"very short reason in Spanish"}. If it is correct or just a small style difference, return {"ok":true}.`);
+  if (!r.ok || !r.data || r.data.ok !== false || !r.data.mejor) return null;
+  if (normEn(r.data.mejor) === normEn(text)) return null;
+  const f = { mal: text, bien: String(r.data.mejor), porque: String(r.data.porque || "") };
+  S.errors = mergeErr([f], S.errors); S.liveFixes = (S.liveFixes || 0) + 1; save();
+  return f;
+}
+const fixHtml = (f) => `<div class="fix"><div>💡 Mejor: <b>${esc(f.bien)}</b>${f.porque ? `<small>${esc(f.porque)}</small>` : ""}</div><button class="btn ghost" data-say="${esc(f.bien)}" title="Escuchar">🔊</button></div>`;

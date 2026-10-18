@@ -34,7 +34,7 @@ function allCards(){const out=[];WEEKS.filter(w=>w.n<=CUR).forEach(w=>w.vocab.fo
 // "Mis errores": every mistake saved from lessons, conversations, calls and writing becomes a card.
 function errorCards(){return S.errors.filter(e=>e&&e.bien).map(e=>({id:"err:"+e.mal+"|"+e.bien,en:e.bien,es:e.porque||"",mal:e.mal,err:true}))}
 function vocabCards(){return(S.vocab||[]).filter(v=>v.en).map(v=>({id:"voc:"+(v.src==="en"?"e:"+v.en.toLowerCase():v.es.toLowerCase()),en:v.en,es:v.es,ex:v.ex||"",voc:true,rev:v.src==="en",forms:v.forms||null}))}
-function dueCards(deck){const now=Date.now();const src=deck==="err"?errorCards():deck==="vocab"?vocabCards():deck==="words"?allCards():allCards().concat(errorCards(),vocabCards());return src.filter(c=>{const s=S.cards[c.id];return !s||s.due<=now})}
+function dueCards(deck){const now=Date.now();if(deck==="smart")return smartCards();const src=deck==="err"?errorCards():deck==="vocab"?vocabCards():deck==="words"?allCards():allCards().concat(errorCards(),vocabCards());return src.filter(c=>{const s=S.cards[c.id];return !s||s.due<=now})}
 function learned(){return Object.entries(S.cards).filter(([k,c])=>c.reps>=2&&!k.startsWith("err:")).length}
 function lessonsOf(n){const w=week(n);return[
   {id:n+"-g",icon:"📘",t:"Gramática",sub:w.gram,kind:"grammar"},
@@ -62,8 +62,7 @@ VIEWS.home=()=>{
   const wps=[...Array(12)].map((_,i)=>{const d=i===0?START:new Date(W1.getTime()+(i-1)*7*864e5);const p=Math.round((d-START)/(END-START)*100);return`<span class="wp ${d<=today?"on":""}" style="left:${p}%" title="Semana ${i}"></span>`}).join("");
   const days=[...Array(7)].map((_,i)=>{const d=new Date(today);d.setDate(d.getDate()-6+i);return d});
   const vals=days.map(d=>S.xpLog[key(d)]||0);const max=Math.max(100,...vals);
-  const blocks=[["Repasar tarjetas","5 min · frases de la semana","cards"],["Lección del día",nl?nl.t+" · Semana "+nl.id.split("-")[0]:"¡Ruta al día!","path"],["Dictado","10 min · entrena tu oído","listen"],["Llamada en inglés","15 min · "+topicToday,"call"],["Misión de escritura","10 min · escribe y corrige","path"]];
-  const doneB=[(S.xpLog[TODAY]&&Object.values(S.cards).some(c=>c.last===TODAY)),!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&!/-t$|-w$/.test(k)),(S.dictLog||{})[TODAY],(S.chatLog||{})[TODAY],!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&/-w$/.test(k))];
+  const plan=dailyPlan(),ps=planStats();
   $("#main").innerHTML=`<div class="screen">
     <div class="hall">
       <div class="hall-l">
@@ -74,12 +73,12 @@ VIEWS.home=()=>{
       </div>
       <div class="hall-r">
         <div><span class="label">Puerta de hoy</span><p style="margin:6px 0 0;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase">${esc(topicToday)}</p></div>
-        <button class="btn primary big" data-nav="${nl?"lesson":"talk"}" data-arg="${nl?nl.id:""}"><svg class="ic"><use href="#i-arrow"/></svg>${nl?"Continuar":"Conversar"}</button>
+        <div class="goal"><div class="goal-t"><span class="label">Meta de hoy</span><b>${ps.mins} / ${DAILY_GOAL} min</b></div><div class="bar"><i style="width:${ps.pct}%"></i></div><small class="muted">${ps.mins>=DAILY_GOAL?"¡Meta cumplida! Todo lo extra suma.":"Te faltan "+ps.left+" min."} Esta semana: ${ps.hit} de 7 días con meta.</small></div><button class="btn primary big" data-nav="${(plan.find(x=>!x.done)||plan[2]).go}" data-arg="${esc((plan.find(x=>!x.done)||{}).arg||"")}"><svg class="ic"><use href="#i-arrow"/></svg>${plan.every(x=>x.done)?"Hablar con Max":"Seguir con el plan"}</button>
       </div>
     </div>
     <div class="board">
       <div class="board-h"><span>Min</span><span>Vuelo</span><span>Actividad</span><span>Estado</span><span></span></div>
-      ${blocks.map((bk,i)=>{const first=doneB.findIndex(x=>!x);const st=doneB[i]?["ATERRIZADO","done"]:i===first?["ABORDANDO",""]:["PROGRAMADO",""];return`<div class="brow ${st[1]}"><span class="tm">${["05","—","10","15","10"][i]}</span><span class="fn">EB ${String(101+i)}</span><div class="ds"><b>${bk[0]}</b><small>${esc(bk[1])}</small></div><span class="stt">${i===first||doneB[i]?"<i></i>":""}${st[0]}</span><button class="btn" data-nav="${bk[2]}">${doneB[i]?"Repetir":"Ir"}</button></div>`}).join("")}
+      ${plan.map((bk,i)=>{const first=plan.findIndex(x=>!x.done);const st=bk.done?[bk.tag||"HECHO","done"]:i===first?["ABORDANDO",""]:["PROGRAMADO",""];return`<div class="brow ${st[1]}"><span class="tm">${bk.min?String(bk.min).padStart(2,"0"):"—"}</span><span class="fn">EB ${101+i}</span><div class="ds"><b>${esc(bk.t)}</b><small>${esc(bk.s)}</small></div><span class="stt">${i===first||bk.done?"<i></i>":""}${st[0]}</span><button class="btn" data-nav="${bk.go}" data-arg="${esc(bk.arg||"")}">${bk.done?"Repetir":"Ir"}</button></div>`}).join("")}
     </div>
     <div class="grid g4">
       <div class="card stat"><svg class="ic"><use href="#i-flame"/></svg><div><b>${st}</b><span>${st===1?"día de racha":"días de racha"}</span></div></div>
@@ -227,21 +226,21 @@ function mergeErr(a,b){const seen=new Set();return[...a,...b].filter(e=>{if(!e||
 
 /* ---------- Flashcards (spaced repetition) ---------- */
 let FC=null;
-VIEWS.cards=async deck=>{if(deck==="vocab"&&(S.vocab||[]).some(v=>!v.en))await resolveVocab();if(deck==="repeat"){FC={deck:"words",practice:true,q:shuffle(allCards().filter(c=>c.wk===CUR)),i:0,flip:false,done:0};renderCards();return}deck=deck||(FC&&FC.deck)||"words";const due=shuffle(dueCards(deck)).slice(0,20);FC={deck,q:due,i:0,flip:false,done:0};renderCards()};
-function deckTabs(){const a=dueCards("words").length,b=dueCards("err").length;return`<div class="tabs"><button class="tab" aria-pressed="${FC.deck==="words"}" data-nav="cards" data-arg="words">${FC.practice?"🔁 Repaso extra · ":""}🃏 Frases de la semana <span class="pill">${a}</span></button><button class="tab" aria-pressed="${FC.deck==="err"}" data-nav="cards" data-arg="err">🧠 Mis errores <span class="pill gold">${b}</span></button><button class="tab" aria-pressed="${FC.deck==="vocab"}" data-nav="cards" data-arg="vocab">📒 Mis palabras <span class="pill gold">${dueCards("vocab").length}</span></button></div>`}
+VIEWS.cards=async deck=>{if(deck==="vocab"&&(S.vocab||[]).some(v=>!v.en))await resolveVocab();if(deck==="repeat"){FC={deck:"words",practice:true,q:shuffle(allCards().filter(c=>c.wk===CUR)),i:0,flip:false,done:0};renderCards();return}deck=deck||(FC&&FC.deck)||"smart";const due=deck==="smart"?smartCards().slice(0,20):shuffle(dueCards(deck)).slice(0,20);FC={deck,q:due,i:0,flip:false,done:0};renderCards()};
+function deckTabs(){const a=dueCards("words").length,b=dueCards("err").length;return`<div class="tabs"><button class="tab" aria-pressed="${FC.deck==="smart"}" data-nav="cards" data-arg="smart">⚡ Repaso de hoy <span class="pill gold">${smartCards().length}</span></button><button class="tab" aria-pressed="${FC.deck==="words"}" data-nav="cards" data-arg="words">${FC.practice?"🔁 Repaso extra · ":""}🃏 Frases de la semana <span class="pill">${a}</span></button><button class="tab" aria-pressed="${FC.deck==="err"}" data-nav="cards" data-arg="err">🧠 Mis errores <span class="pill gold">${b}</span></button><button class="tab" aria-pressed="${FC.deck==="vocab"}" data-nav="cards" data-arg="vocab">📒 Mis palabras <span class="pill gold">${dueCards("vocab").length}</span></button></div>`}
 function renderCards(){
   if(!FC.q.length||FC.i>=FC.q.length){
     const voc=FC.deck==="vocab",err=FC.deck==="err"||voc,errDue=dueCards("err").length,first=FC.done&&!FC.practice;
     if(FC.done){sfx("win");if(!err)confetti()}
-    const title=voc?(FC.done?"¡Repasaste tus palabras!":(S.vocab||[]).length?"No hay palabras pendientes":"Aún no tienes palabras guardadas"):err?(FC.done?"¡Repasaste tus errores!":"No hay errores pendientes"):FC.practice?"¡Terminaste otra vuelta! 💪":FC.done?"¡Terminaste las frases de la semana! 🎉":"Ya terminaste las frases de la semana";
-    const sub=err?"Vuelven cuando toque repasarlas.":FC.done?`Repasaste ${FC.done} tarjetas. Las que marcaste difíciles vuelven pronto.`:"Las tarjetas vuelven solas cuando toca repasarlas.";
-    $("#main").innerHTML=`<div class="screen">${deckTabs()}</div><div class="screen done-screen" style="padding-top:0"><div class="big">${voc?"📒":err?"🧠":"🏁"}</div><h1>${title}</h1><p class="muted">${sub}</p>${err?"":`<p style="font-size:18px;margin:0">¿Las quieres repetir?</p>`}
-      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">${err?"":`<button class="btn gold big" data-nav="cards" data-arg="repeat">🔁 Sí, repetirlas</button>`}${!err&&errDue?`<button class="btn big" data-nav="cards" data-arg="err">🧠 Repasar mis errores (${errDue})</button>`:""}${voc?`<button class="btn gold big" data-nav="vocab">📒 Ir a Mis palabras</button>`:""}<button class="btn big" data-nav="home">${err?"Volver al inicio":"No, volver al inicio"}</button></div>
+    const smart=FC.deck==="smart";const title=smart?(FC.done?"¡Repaso de hoy completo! 🎯":"Hoy no tienes nada pendiente"):voc?(FC.done?"¡Repasaste tus palabras!":(S.vocab||[]).length?"No hay palabras pendientes":"Aún no tienes palabras guardadas"):err?(FC.done?"¡Repasaste tus errores!":"No hay errores pendientes"):FC.practice?"¡Terminaste otra vuelta! 💪":FC.done?"¡Terminaste las frases de la semana! 🎉":"Ya terminaste las frases de la semana";
+    const sub=smart?(FC.done?`Repasaste ${FC.done} tarjetas, las más débiles primero. Las que fallaste vuelven pronto.`:"Cuando algo toque repasarse aparece aquí solo."):err?"Vuelven cuando toque repasarlas.":FC.done?`Repasaste ${FC.done} tarjetas. Las que marcaste difíciles vuelven pronto.`:"Las tarjetas vuelven solas cuando toca repasarlas.";
+    $("#main").innerHTML=`<div class="screen">${deckTabs()}</div><div class="screen done-screen" style="padding-top:0"><div class="big">${smart?"⚡":voc?"📒":err?"🧠":"🏁"}</div><h1>${title}</h1><p class="muted">${sub}</p>${err||smart?"":`<p style="font-size:18px;margin:0">¿Las quieres repetir?</p>`}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">${smart?`<button class="btn gold big" data-nav="call">📞 Hablar con Max</button>`:""}${err||smart?"":`<button class="btn gold big" data-nav="cards" data-arg="repeat">🔁 Sí, repetirlas</button>`}${!err&&errDue?`<button class="btn big" data-nav="cards" data-arg="err">🧠 Repasar mis errores (${errDue})</button>`:""}${voc?`<button class="btn gold big" data-nav="vocab">📒 Ir a Mis palabras</button>`:""}<button class="btn big" data-nav="home">${err?"Volver al inicio":"No, volver al inicio"}</button></div>
       <p class="muted">Frases aprendidas: <strong style="color:var(--ink)">${learned()}</strong> de ${allCards().length}</p></div>`;return}
   const c=FC.q[FC.i];
   $("#main").innerHTML=`<div class="screen">
     <div class="head"><div><h1>Tarjetas</h1><p>${FC.deck==="err"?"Tus propios errores, convertidos en tarjetas. Di la forma correcta antes de voltear.":FC.deck==="vocab"?"Las palabras que preguntaste. Dila en inglés antes de voltear.":"Di la frase en voz alta antes de voltearla."}</p></div><span class="pill">${FC.i+1} / ${FC.q.length}</span></div>${deckTabs()}
-    <div class="fc-wrap"><div class="fc ${FC.flip?"flip":""}" id="fc">
+    <div class="fc-wrap">${FC.deck==="smart"?`<div class="tagrow"><span class="pill">${cardTag(c)}</span>${(S.cards[c.id]||{}).lapses?`<span class="pill gold">Te cuesta · fallada ${(S.cards[c.id]||{}).lapses}×</span>`:""}</div>`:""}<div class="fc ${FC.flip?"flip":""}" id="fc">
       ${c.voc?(c.rev?`<div class="side"><span class="label">📒 Tu palabra · ¿qué significa?</span><div class="phrase">${esc(c.en)}</div><button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button><span class="muted" style="font-size:13px">Piensa qué significa y voltea (clic o barra espaciadora)</span></div>`:`<div class="side"><span class="label">📒 Tu palabra · ¿cómo se dice en inglés?</span><div class="phrase">${esc(c.es)}</div><span class="muted" style="font-size:13px">Dila en inglés en voz alta y voltea (clic o barra espaciadora)</span></div>`):c.err?`<div class="side"><span class="label">🧠 Un error tuyo · ¿cómo se dice bien?</span><div class="phrase wrongp">${esc(c.mal)}</div><span class="muted" style="font-size:13px">Dila bien en voz alta y voltea (clic o barra espaciadora)</span></div>`:`<div class="side"><span class="label">Semana ${c.wk} · ¿Qué significa?</span><div class="phrase">${esc(c.en)}</div><button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button><span class="muted" style="font-size:13px">Clic o barra espaciadora para voltear</span></div>`}
       <div class="side back"><span class="label">${c.err?"✅ Mejor así":c.voc&&c.rev?"Significa":"Significado"}</span><div class="phrase" style="font-size:26px">${esc(c.voc&&c.rev?c.es:c.en)}</div><div class="mean">${esc(c.voc?(c.rev&&c.forms?formsLine(c.forms)+(c.ex?" · "+c.ex:""):c.ex):c.es||(c.err?"":"Inventa una frase tuya con esta expresión"))}</div>${c.voc&&c.ex?`<button class="btn" data-say="${esc(c.ex)}">🔊 Ejemplo</button>`:""}<button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button></div>
     </div></div>
@@ -254,9 +253,9 @@ function renderCards(){
 }
 function sched(c,g){const s=S.cards[c.id]||{ease:2.5,int:0,reps:0};let ease=s.ease,int=s.int,reps=s.reps;
   if(g===1){reps=0;int=0}else{ease=Math.max(1.3,ease+(g===2?-.15:g===4?.15:0));int=reps===0?(g===4?3:1):reps===1?(g===2?2:g===4?6:4):Math.round(int*ease*(g===2?.7:g===4?1.3:1));reps++}
-  return{ease,int,reps,due:g===1?Date.now()+60e3:Date.now()+int*864e5,last:TODAY}}
+  return{ease,int,reps,lapses:(s.lapses||0)+(g===1?1:0),due:g===1?Date.now()+60e3:Date.now()+int*864e5,last:TODAY}}
 function ivl(c,g){const d=sched(c,g).int;return d<1?"1 min":d===1?"1 día":d+" días"}
-function rate(g){const c=FC.q[FC.i];if(!FC.practice||g===1)S.cards[c.id]=sched(c,g);S.cardReviews=(S.cardReviews||0)+1;if(c.err)S.errReviews=(S.errReviews||0)+1;sfx(g===1?"bad":"tap");if(g===1)FC.q.push(c);FC.done++;addXP(2,"Tarjeta");FC.i++;FC.flip=false;FC.spoke=false;if(FC.done%10===0)addMin(5);renderCards()}
+function rate(g){const c=FC.q[FC.i];if(!FC.practice||g===1)S.cards[c.id]=sched(c,g);S.cardReviews=(S.cardReviews||0)+1;if(c.err)S.errReviews=(S.errReviews||0)+1;if(FC.deck==="smart"){S.smartDone=S.smartDone||{};S.smartDone[TODAY]=(S.smartDone[TODAY]||0)+1}sfx(g===1?"bad":"tap");if(g===1)FC.q.push(c);FC.done++;addXP(2,"Tarjeta");FC.i++;FC.flip=false;FC.spoke=false;if(FC.done%10===0)addMin(5);renderCards()}
 document.addEventListener("keydown",e=>{if(view!=="cards"||!FC||e.target.tagName==="TEXTAREA"||e.target.tagName==="INPUT")return;if(e.key===" "){e.preventDefault();FC.flip=!FC.flip;renderCards();if(FC.flip)speak(FC.q[FC.i].en)}if(FC.flip&&/^[1-4]$/.test(e.key))rate(+e.key)});
 
 /* ---------- Dictation hub ---------- */
@@ -307,7 +306,7 @@ VIEWS.talk=()=>{
   renderMsgs();if(!hist.length){newAngle();ask()}
 };
 document.addEventListener("click",e=>{const s=e.target.closest("[data-scen]");if(s){talkMode=s.dataset.scen;hist=[];VIEWS.talk()}const ins=e.target.closest("[data-insert]");if(ins){const t=$("#t-in");t.value=(t.value?t.value+" ":"")+ins.dataset.insert;t.focus()}});
-function renderMsgs(){const box=$("#msgs");if(!box)return;box.innerHTML=`<div class="msg note">${esc(SCEN.find(x=>x.id===talkMode).t)} · responde en inglés · escribe “?” si no entiendes</div>`+hist.map(m=>m.role==="assistant"?`<div class="msg bot" data-lk>${esc(m.content)}<button class="say" data-say="${esc(m.content)}">🔊 Escuchar</button>${m.ms?`<small class="lat">${(m.ms/1000).toFixed(1)} s</small>`:""}</div>`:`<div class="msg me">${esc(m.content)}</div>`).join("");box.scrollTop=box.scrollHeight}
+function renderMsgs(){const box=$("#msgs");if(!box)return;box.innerHTML=`<div class="msg note">${esc(SCEN.find(x=>x.id===talkMode).t)} · responde en inglés · escribe “?” si no entiendes</div>`+hist.map(m=>m.role==="assistant"?`<div class="msg bot" data-lk>${esc(m.content)}<button class="say" data-say="${esc(m.content)}">🔊 Escuchar</button>${m.ms?`<small class="lat">${(m.ms/1000).toFixed(1)} s</small>`:""}</div>`:`<div class="msg me">${esc(m.content)}</div>${m.fix?fixHtml(m.fix):""}`).join("");box.scrollTop=box.scrollHeight}
 const ERR={ssh_fail:"No pude conectarme a tu VM. Revisa que esté prendida y el comando ssh en Ajustes.",no_ai:"Elige un cerebro para conversar en Ajustes: Claude (API) u Ollama (gratis).",ollama_off:"Ollama no está abierto. Ábrelo (icono de la llama) e intenta de nuevo.",ollama_model:"Ese modelo no está instalado en Ollama. En una terminal escribe: ollama pull llama3.2",ollama_error:"Ollama tuvo un problema. Intenta de nuevo.",no_key:"Primero pega tu clave de API en Ajustes.",bad_key:"La clave de API no es válida. Revísala en Ajustes.",no_credit:"Tu cuenta de la API no tiene saldo. Agrega saldo en console.anthropic.com.",rate_limited:"Muchas solicitudes seguidas. Espera un minuto.",offline:"No hay conexión a internet.",refusal:"No puedo responder eso. Cambiemos de tema.",error:"No pude responder. Intenta de nuevo."};
 async function ask(){
   const st=await window.api.getSettings();if(st.provider==="none"){const b=$("#no-key");if(b)b.hidden=false;return}
@@ -316,7 +315,7 @@ async function ask(){
   busy=false;
   if(r.ok){hist.push({role:"assistant",content:r.text,ms:performance.now()-t0});renderMsgs();if(S.autospeak!==false)speak(r.text)}else{el.classList.remove("typing");el.textContent=ERR[r.code]||ERR.error}
 }
-async function send(){const t=$("#t-in").value.trim();if(!t||busy)return;const asked=askedWord(t);if(asked)addVocab(asked);$("#t-in").value="";if(!hist.length)hist.push({role:"assistant",content:"Hi! Let's talk."});hist.t0=hist.t0||Date.now();hist.push({role:"user",content:t});renderMsgs();await ask()}
+async function send(){const t=$("#t-in").value.trim();if(!t||busy)return;const asked=askedWord(t);if(asked)addVocab(asked);$("#t-in").value="";if(!hist.length)hist.push({role:"assistant",content:"Hi! Let's talk."});hist.t0=hist.t0||Date.now();const um={role:"user",content:t};hist.push(um);renderMsgs();await ask();liveFix(t).then(f=>{if(f&&view==="talk"){um.fix=f;renderMsgs()}})}
 async function micToText(){const b=$("#mic");if(Voice.recording){Voice.recording.finish();return}
   if(Voice.state.stt!=="ready"){if(!S.voiceReady){toast("Activa la voz en Ajustes para hablar");return}toast("Cargando el reconocimiento de voz…")}
   b.classList.add("rec");b.textContent="⏹";const audio=await Voice.record({vad:true,silenceMs:1300});b.classList.remove("rec");b.textContent="🎙";

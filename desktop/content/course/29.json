@@ -97,7 +97,7 @@
         "I'm lost. (Estoy perdido)",
         "Where is ...? (¿Dónde está...?)",
         "How much is it? (¿Cuánto cuesta?)",
-        "I'm hungry / thirsty / tired. (Tengo hambre / sed / sueño)",
+        "I'm hungry / thirsty / tired. (Tengo hambre / sed / estoy cansado)",
         "Help! / I need help. (¡Ayuda!)"
       ]
     },
@@ -154,7 +154,7 @@
   "exercises": [
     { "type": "choice", "q": "It's dark. Please ___ the light.", "options": ["turn on", "turn up", "get in"], "answer": 0, "why": "Turn on significa encender." },
     { "type": "choice", "q": "I can't find my keys. I'm ___ them.", "options": ["looking at", "looking for", "looking up"], "answer": 1, "why": "Look for significa buscar." },
-    { "type": "choice", "q": "The test is hard, but don't ___!", "options": ["give up", "give on", "give in"], "answer": 0, "why": "Give up significa rendirse." },
+    { "type": "choice", "q": "The test is hard, but don't ___!", "options": ["give up", "give on", "give off"], "answer": 0, "why": "Give up significa rendirse." },
     { "type": "choice", "q": "I ___ at 6 every morning. (despertarse)", "options": ["wake up", "wake on", "wake in"], "answer": 0, "why": "Wake up significa despertarse." },
     { "type": "choice", "q": "Someone says: Thank you! You answer: ___", "options": ["You're welcome.", "I'm sorry.", "Bless you."], "answer": 0, "why": "You're welcome es la respuesta a thank you." },
     { "type": "choice", "q": "You step on someone's foot. You say: ___", "options": ["Good luck!", "I'm sorry.", "See you later."], "answer": 1, "why": "I'm sorry se usa para disculparse." },

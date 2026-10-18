@@ -113,7 +113,7 @@
     { "type": "choice", "q": "___ bag is this? It's Ana's.", "options": ["Who", "Whose", "Which"], "answer": 1, "why": "Whose pregunta por el dueño de algo." },
     { "type": "choice", "q": "Where ___ she work?", "options": ["do", "does", "is"], "answer": 1, "why": "Con she en presente se usa does." },
     { "type": "choice", "q": "How ___ brothers do you have?", "options": ["much", "many", "old"], "answer": 1, "why": "Brothers es contable, así que how many." },
-    { "type": "choice", "q": "When ___ you arrive?", "options": ["do", "does", "did"], "answer": 2, "why": "Arrive en pasado se pregunta con did." },
+    { "type": "choice", "q": "When ___ you arrive last night?", "options": ["do", "does", "did"], "answer": 2, "why": "Arrive en pasado se pregunta con did." },
     { "type": "fill", "q": "___ is your name? (qué)", "answer": ["what"], "why": "Para preguntar el nombre se usa what." },
     { "type": "fill", "q": "How ___ are you? I'm 20.", "answer": ["old"], "why": "How old pregunta por la edad." },
     { "type": "fill", "q": "How ___ is the ticket? Fifty dollars.", "answer": ["much"], "why": "How much pregunta por el precio." },

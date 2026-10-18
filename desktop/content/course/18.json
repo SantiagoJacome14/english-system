@@ -96,7 +96,7 @@
     { "en": "once a week", "es": "una vez por semana", "ex": "I call my mother once a week." },
     { "en": "twice a week", "es": "dos veces por semana", "ex": "She goes to the gym twice a week." },
     { "en": "three times a month", "es": "tres veces al mes", "ex": "We visit my aunt three times a month." },
-    { "en": "like", "es": "gustar / querer", "ex": "Do you like theme parks?" },
+    { "en": "like", "es": "gustar", "ex": "Do you like theme parks?" },
     { "en": "want", "es": "querer", "ex": "He wants to work at Disney." },
     { "en": "need", "es": "necesitar", "ex": "I need a visa." },
     { "en": "know", "es": "saber / conocer", "ex": "Do you know Orlando?" },
@@ -116,7 +116,7 @@
     { "en": "What time does the park open?", "es": "¿A qué hora abre el parque?" },
     { "en": "I always drink coffee in the morning.", "es": "Siempre tomo café en la mañana." },
     { "en": "She is never late for class.", "es": "Ella nunca llega tarde a clase." },
-    { "en": "We usually don't eat breakfast at home.", "es": "Normalmente no desayunamos en casa." },
+    { "en": "We don't usually eat breakfast at home.", "es": "Normalmente no desayunamos en casa." },
     { "en": "How often do you practice English? Every day.", "es": "¿Con qué frecuencia practicas inglés? Todos los días." },
     { "en": "He sometimes works on Saturdays.", "es": "A veces él trabaja los sábados." }
   ],
