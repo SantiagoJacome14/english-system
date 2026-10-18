@@ -33,7 +33,8 @@ function renderRank(){const r=rank();$("#r-xp").textContent=S.xp+" XP";$("#r-nam
 function allCards(){const out=[];WEEKS.filter(w=>w.n<=CUR).forEach(w=>w.vocab.forEach(v=>out.push({id:v,en:v,es:(EXTRA.meanings[v]||""),wk:w.n})));return out}
 // "Mis errores": every mistake saved from lessons, conversations, calls and writing becomes a card.
 function errorCards(){return S.errors.filter(e=>e&&e.bien).map(e=>({id:"err:"+e.mal+"|"+e.bien,en:e.bien,es:e.porque||"",mal:e.mal,err:true}))}
-function dueCards(deck){const now=Date.now();const src=deck==="err"?errorCards():deck==="words"?allCards():allCards().concat(errorCards());return src.filter(c=>{const s=S.cards[c.id];return !s||s.due<=now})}
+function vocabCards(){return(S.vocab||[]).filter(v=>v.en).map(v=>({id:"voc:"+v.es.toLowerCase(),en:v.en,es:v.es,ex:v.ex||"",voc:true}))}
+function dueCards(deck){const now=Date.now();const src=deck==="err"?errorCards():deck==="vocab"?vocabCards():deck==="words"?allCards():allCards().concat(errorCards(),vocabCards());return src.filter(c=>{const s=S.cards[c.id];return !s||s.due<=now})}
 function learned(){return Object.entries(S.cards).filter(([k,c])=>c.reps>=2&&!k.startsWith("err:")).length}
 function lessonsOf(n){const w=week(n);return[
   {id:n+"-g",icon:"📘",t:"Gramática",sub:w.gram,kind:"grammar"},
@@ -46,7 +47,7 @@ function nextLesson(){for(const w of WEEKS){if(w.n>CUR)break;for(const l of less
 /* ---------- Router ---------- */
 let view="home";
 let onLeave=null;
-function go(v,arg){if(onLeave){const f=onLeave;onLeave=null;f()}view=v;Voice.stop();if(Voice.recording)Voice.recording.cancel();document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.go===(NAV_ALIAS[v]||v)?"page":"false"));$("#main").scrollTop=0;(VIEWS[v]||VIEWS.home)(arg)}
+function go(v,arg){if(view==="talk"&&v!=="talk"&&typeof resolveVocab==="function")resolveVocab();if(onLeave){const f=onLeave;onLeave=null;f()}view=v;Voice.stop();if(Voice.recording)Voice.recording.cancel();document.querySelectorAll("#nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.go===(NAV_ALIAS[v]||v)?"page":"false"));$("#main").scrollTop=0;(VIEWS[v]||VIEWS.home)(arg)}
 $("#nav").onclick=e=>{const b=e.target.closest("[data-go]");if(b)go(b.dataset.go)};
 document.addEventListener("click",e=>{const b=e.target.closest("[data-nav]");if(b){go(b.dataset.nav,b.dataset.arg)}});
 
@@ -222,30 +223,30 @@ function mergeErr(a,b){const seen=new Set();return[...a,...b].filter(e=>{if(!e||
 
 /* ---------- Flashcards (spaced repetition) ---------- */
 let FC=null;
-VIEWS.cards=deck=>{if(deck==="repeat"){FC={deck:"words",practice:true,q:shuffle(allCards().filter(c=>c.wk===CUR)),i:0,flip:false,done:0};renderCards();return}deck=deck||(FC&&FC.deck)||"words";const due=shuffle(dueCards(deck)).slice(0,20);FC={deck,q:due,i:0,flip:false,done:0};renderCards()};
-function deckTabs(){const a=dueCards("words").length,b=dueCards("err").length;return`<div class="tabs"><button class="tab" aria-pressed="${FC.deck==="words"}" data-nav="cards" data-arg="words">${FC.practice?"🔁 Repaso extra · ":""}🃏 Frases de la semana <span class="pill">${a}</span></button><button class="tab" aria-pressed="${FC.deck==="err"}" data-nav="cards" data-arg="err">🧠 Mis errores <span class="pill gold">${b}</span></button></div>`}
+VIEWS.cards=async deck=>{if(deck==="vocab"&&(S.vocab||[]).some(v=>!v.en))await resolveVocab();if(deck==="repeat"){FC={deck:"words",practice:true,q:shuffle(allCards().filter(c=>c.wk===CUR)),i:0,flip:false,done:0};renderCards();return}deck=deck||(FC&&FC.deck)||"words";const due=shuffle(dueCards(deck)).slice(0,20);FC={deck,q:due,i:0,flip:false,done:0};renderCards()};
+function deckTabs(){const a=dueCards("words").length,b=dueCards("err").length;return`<div class="tabs"><button class="tab" aria-pressed="${FC.deck==="words"}" data-nav="cards" data-arg="words">${FC.practice?"🔁 Repaso extra · ":""}🃏 Frases de la semana <span class="pill">${a}</span></button><button class="tab" aria-pressed="${FC.deck==="err"}" data-nav="cards" data-arg="err">🧠 Mis errores <span class="pill gold">${b}</span></button><button class="tab" aria-pressed="${FC.deck==="vocab"}" data-nav="cards" data-arg="vocab">📒 Mis palabras <span class="pill gold">${dueCards("vocab").length}</span></button></div>`}
 function renderCards(){
   if(!FC.q.length||FC.i>=FC.q.length){
-    const err=FC.deck==="err",errDue=dueCards("err").length,first=FC.done&&!FC.practice;
+    const voc=FC.deck==="vocab",err=FC.deck==="err"||voc,errDue=dueCards("err").length,first=FC.done&&!FC.practice;
     if(FC.done){sfx("win");if(!err)confetti()}
-    const title=err?(FC.done?"¡Repasaste tus errores!":"No hay errores pendientes"):FC.practice?"¡Terminaste otra vuelta! 💪":FC.done?"¡Terminaste las frases de la semana! 🎉":"Ya terminaste las frases de la semana";
+    const title=voc?(FC.done?"¡Repasaste tus palabras!":(S.vocab||[]).length?"No hay palabras pendientes":"Aún no tienes palabras guardadas"):err?(FC.done?"¡Repasaste tus errores!":"No hay errores pendientes"):FC.practice?"¡Terminaste otra vuelta! 💪":FC.done?"¡Terminaste las frases de la semana! 🎉":"Ya terminaste las frases de la semana";
     const sub=err?"Vuelven cuando toque repasarlas.":FC.done?`Repasaste ${FC.done} tarjetas. Las que marcaste difíciles vuelven pronto.`:"Las tarjetas vuelven solas cuando toca repasarlas.";
-    $("#main").innerHTML=`<div class="screen">${deckTabs()}</div><div class="screen done-screen" style="padding-top:0"><div class="big">${err?"🧠":"🏁"}</div><h1>${title}</h1><p class="muted">${sub}</p>${err?"":`<p style="font-size:18px;margin:0">¿Las quieres repetir?</p>`}
-      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">${err?"":`<button class="btn gold big" data-nav="cards" data-arg="repeat">🔁 Sí, repetirlas</button>`}${!err&&errDue?`<button class="btn big" data-nav="cards" data-arg="err">🧠 Repasar mis errores (${errDue})</button>`:""}<button class="btn big" data-nav="home">${err?"Volver al inicio":"No, volver al inicio"}</button></div>
+    $("#main").innerHTML=`<div class="screen">${deckTabs()}</div><div class="screen done-screen" style="padding-top:0"><div class="big">${voc?"📒":err?"🧠":"🏁"}</div><h1>${title}</h1><p class="muted">${sub}</p>${err?"":`<p style="font-size:18px;margin:0">¿Las quieres repetir?</p>`}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">${err?"":`<button class="btn gold big" data-nav="cards" data-arg="repeat">🔁 Sí, repetirlas</button>`}${!err&&errDue?`<button class="btn big" data-nav="cards" data-arg="err">🧠 Repasar mis errores (${errDue})</button>`:""}${voc?`<button class="btn gold big" data-nav="vocab">📒 Ir a Mis palabras</button>`:""}<button class="btn big" data-nav="home">${err?"Volver al inicio":"No, volver al inicio"}</button></div>
       <p class="muted">Frases aprendidas: <strong style="color:var(--ink)">${learned()}</strong> de ${allCards().length}</p></div>`;return}
   const c=FC.q[FC.i];
   $("#main").innerHTML=`<div class="screen">
-    <div class="head"><div><h1>Tarjetas</h1><p>${FC.deck==="err"?"Tus propios errores, convertidos en tarjetas. Di la forma correcta antes de voltear.":"Di la frase en voz alta antes de voltearla."}</p></div><span class="pill">${FC.i+1} / ${FC.q.length}</span></div>${deckTabs()}
+    <div class="head"><div><h1>Tarjetas</h1><p>${FC.deck==="err"?"Tus propios errores, convertidos en tarjetas. Di la forma correcta antes de voltear.":FC.deck==="vocab"?"Las palabras que preguntaste. Dila en inglés antes de voltear.":"Di la frase en voz alta antes de voltearla."}</p></div><span class="pill">${FC.i+1} / ${FC.q.length}</span></div>${deckTabs()}
     <div class="fc-wrap"><div class="fc ${FC.flip?"flip":""}" id="fc">
-      ${c.err?`<div class="side"><span class="label">🧠 Un error tuyo · ¿cómo se dice bien?</span><div class="phrase wrongp">${esc(c.mal)}</div><span class="muted" style="font-size:13px">Dila bien en voz alta y voltea (clic o barra espaciadora)</span></div>`:`<div class="side"><span class="label">Semana ${c.wk} · ¿Qué significa?</span><div class="phrase">${esc(c.en)}</div><button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button><span class="muted" style="font-size:13px">Clic o barra espaciadora para voltear</span></div>`}
-      <div class="side back"><span class="label">${c.err?"✅ Mejor así":"Significado"}</span><div class="phrase" style="font-size:26px">${esc(c.en)}</div><div class="mean">${esc(c.es||(c.err?"":"Inventa una frase tuya con esta expresión"))}</div><button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button></div>
+      ${c.voc?`<div class="side"><span class="label">📒 Tu palabra · ¿cómo se dice en inglés?</span><div class="phrase">${esc(c.es)}</div><span class="muted" style="font-size:13px">Dila en inglés en voz alta y voltea (clic o barra espaciadora)</span></div>`:c.err?`<div class="side"><span class="label">🧠 Un error tuyo · ¿cómo se dice bien?</span><div class="phrase wrongp">${esc(c.mal)}</div><span class="muted" style="font-size:13px">Dila bien en voz alta y voltea (clic o barra espaciadora)</span></div>`:`<div class="side"><span class="label">Semana ${c.wk} · ¿Qué significa?</span><div class="phrase">${esc(c.en)}</div><button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button><span class="muted" style="font-size:13px">Clic o barra espaciadora para voltear</span></div>`}
+      <div class="side back"><span class="label">${c.err?"✅ Mejor así":"Significado"}</span><div class="phrase" style="font-size:26px">${esc(c.en)}</div><div class="mean">${esc(c.voc?c.ex:c.es||(c.err?"":"Inventa una frase tuya con esta expresión"))}</div>${c.voc&&c.ex?`<button class="btn" data-say="${esc(c.ex)}">🔊 Ejemplo</button>`:""}<button class="btn" data-say="${esc(c.en)}">🔊 Escuchar</button></div>
     </div></div>
     <div class="rate" ${FC.flip?"":"style='visibility:hidden'"}>
       <button class="r1" data-rate="1">Otra vez<small>1 min</small></button><button class="r2" data-rate="2">Difícil<small>${ivl(c,2)}</small></button><button class="r3" data-rate="3">Bien<small>${ivl(c,3)}</small></button><button class="r4" data-rate="4">Fácil<small>${ivl(c,4)}</small></button>
     </div></div>`;
   $("#fc").onclick=e=>{if(e.target.closest("[data-say]"))return;FC.flip=!FC.flip;sfx("flip");renderCards();if(FC.flip)speak(c.en)};
   document.querySelectorAll("[data-rate]").forEach(b=>b.onclick=()=>rate(+b.dataset.rate));
-  if(!FC.flip&&!FC.spoke&&!c.err){FC.spoke=true;setTimeout(()=>speak(c.en),250)}
+  if(!FC.flip&&!FC.spoke&&!c.err&&!c.voc){FC.spoke=true;setTimeout(()=>speak(c.en),250)}
 }
 function sched(c,g){const s=S.cards[c.id]||{ease:2.5,int:0,reps:0};let ease=s.ease,int=s.int,reps=s.reps;
   if(g===1){reps=0;int=0}else{ease=Math.max(1.3,ease+(g===2?-.15:g===4?.15:0));int=reps===0?(g===4?3:1):reps===1?(g===2?2:g===4?6:4):Math.round(int*ease*(g===2?.7:g===4?1.3:1));reps++}
@@ -311,7 +312,7 @@ async function ask(){
   busy=false;
   if(r.ok){hist.push({role:"assistant",content:r.text});renderMsgs();if(S.autospeak!==false)speak(r.text)}else{el.textContent=ERR[r.code]||ERR.error}
 }
-async function send(){const t=$("#t-in").value.trim();if(!t||busy)return;$("#t-in").value="";if(!hist.length)hist.push({role:"assistant",content:"Hi! Let's talk."});hist.push({role:"user",content:t});renderMsgs();await ask()}
+async function send(){const t=$("#t-in").value.trim();if(!t||busy)return;const asked=askedWord(t);if(asked)addVocab(asked);$("#t-in").value="";if(!hist.length)hist.push({role:"assistant",content:"Hi! Let's talk."});hist.push({role:"user",content:t});renderMsgs();await ask()}
 async function micToText(){const b=$("#mic");if(Voice.recording){Voice.recording.finish();return}
   if(Voice.state.stt!=="ready"){if(!S.voiceReady){toast("Activa la voz en Ajustes para hablar");return}toast("Cargando el reconocimiento de voz…")}
   b.classList.add("rec");b.textContent="⏹";const audio=await Voice.record({vad:true,silenceMs:1300});b.classList.remove("rec");b.textContent="🎙";
@@ -426,3 +427,41 @@ VIEWS.settings=async()=>{
 };
 document.addEventListener("click",e=>{const a=e.target.closest("a[href^='https://']");if(a){e.preventDefault();window.api.openExternal(a.href)}});
 
+
+
+/* ---------- 📒 Mis palabras: words the student asks for ("How do you say…?") ---------- */
+// Returns the Spanish word in "How do you say X?" / "¿Cómo se dice X?", or "".
+function askedWord(t){const m=String(t).match(/(?:how (?:do|can|would|should) (?:you|i) say|how to say|c[oó]mo se dice|c[oó]mo digo)\s+(.+?)\s*(?:in english|en ingl[eé]s)?\s*[?.!]*$/i);if(!m)return"";const w=m[1].replace(/^["'“”‘’«»]+|["'“”‘’«»]+$/g,"").trim();return w&&w.split(/\s+/).length<=6?w:""}
+function addVocab(es,en=""){es=String(es).trim().replace(/[¿?¡!.,"“”]+/g,"").trim();if(!es)return;S.vocab=S.vocab||[];const k=es.toLowerCase();const old=S.vocab.find(v=>v.es.toLowerCase()===k);if(old){if(en&&!old.en)old.en=en;old.n=(old.n||1)+1;save();return}S.vocab.unshift({es,en,ex:"",d:TODAY,n:1});save();toast(`📒 Guardé “${es}” en Mis palabras`)}
+let vocabBusy=null;
+// Translates the saved words that don't have their English yet (one request for all of them).
+async function resolveVocab(){if(vocabBusy)return vocabBusy;const pend=(S.vocab||[]).filter(v=>!v.en);if(!pend.length)return;vocabBusy=(async()=>{
+  const r=await window.api.feedback(`A Spanish-speaking A2 English student from Colombia asked how to say these Spanish words or phrases in English. The speech recognizer may have small spelling mistakes; use the most likely intended Spanish word.
+${pend.map((v,i)=>i+1+". "+v.es).join("\n")}
+Return JSON: {"palabras":[{"es":"the Spanish word, correctly spelled","en":"the most common natural English equivalent (if a noun, without article unless needed)","ex":"one short, simple English example sentence using it (max 10 words)"}]} in the same order.`);
+  if(r.ok&&r.data&&Array.isArray(r.data.palabras))pend.forEach((v,i)=>{const x=r.data.palabras[i];if(x&&x.en){v.en=String(x.en).trim();v.ex=String(x.ex||"").trim();if(x.es)v.es=String(x.es).trim()}});
+  save();return r.ok})().finally(()=>{vocabBusy=null});return vocabBusy}
+VIEWS.vocab=async()=>{
+  const st=await window.api.getSettings(),noAi=st.provider==="none";
+  const V=S.vocab||[],due=dueCards("vocab").length;
+  $("#main").innerHTML=`<div class="screen">
+    <div class="head"><div><h1>Mis palabras</h1><p>Cada palabra que preguntas con <b>“How do you say…?”</b> en la llamada o el chat queda guardada aquí para repasarla.</p></div>${V.some(v=>v.en)?`<button class="btn gold" data-nav="cards" data-arg="vocab">🃏 Repasar${due?` (${due})`:""}</button>`:""}</div>
+    <div class="card"><span class="label">¿Cómo se dice…?</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><input id="vc-in" placeholder="Escribe una palabra en español, por ejemplo: mariposa" style="flex:1;min-width:220px"><button class="btn" id="vc-mic" title="Dila en español">🎙 Decirla</button><button class="btn primary" id="vc-go">Traducir</button></div>
+      ${noAi?`<p class="muted" style="margin:0">Para traducir necesitas un cerebro (Ollama o Claude) en <button class="btn" data-nav="settings" style="padding:2px 10px">Ajustes</button>. Igual puedes guardarla y se traduce después.</p>`:""}
+      <div id="vc-res"></div></div>
+    <div class="card"><span class="label">${V.length} ${V.length===1?"palabra":"palabras"}</span>${V.length?`<div class="vlist">${V.map((v,i)=>`<div class="vrow"><div><b>${esc(v.es)}</b> <span class="muted">→</span> ${v.en?`<b style="color:var(--gold)">${esc(v.en)}</b>`:`<span class="muted">${noAi?"sin traducir":"traduciendo…"}</span>`}${v.ex?`<small>${esc(v.ex)}</small>`:""}</div>${v.en?`<button class="btn" data-say="${esc(v.en)}" title="Escuchar">🔊</button>`:""}<button class="btn ghost" data-vdel="${i}" title="Borrar">✕</button></div>`).join("")}</div>`:`<p class="muted" style="margin:0">Aún no hay palabras. En una llamada toca <b>🇪🇸 ¿Cómo se dice…?</b> y di la palabra en español, o escríbela aquí arriba.</p>`}</div>
+  </div>`;
+  document.querySelectorAll("[data-vdel]").forEach(b=>b.onclick=()=>{S.vocab.splice(+b.dataset.vdel,1);save();VIEWS.vocab()});
+  const go1=async w=>{w=String(w||"").trim();if(!w)return;addVocab(w);$("#vc-in").value="";$("#vc-res").innerHTML=`<p class="muted" style="margin:8px 0 0">Buscando “${esc(w)}”…</p>`;if(!noAi)await resolveVocab();if(view==="vocab")VIEWS.vocab()};
+  $("#vc-go").onclick=()=>go1($("#vc-in").value);$("#vc-in").onkeydown=e=>{if(e.key==="Enter")go1($("#vc-in").value)};
+  $("#vc-mic").onclick=async()=>{if(Voice.state.stt!=="ready"&&!S.voiceReady){toast("Activa la voz en Ajustes para hablar");return}const b=$("#vc-mic");b.textContent="🔴 Te escucho…";b.disabled=true;Voice.stop();
+    try{const a=await Voice.record({vad:true,silenceMs:900,maxMs:8000});b.textContent="Entendiendo…";const t=a?await Voice.transcribe(a,{lang:"es"}):"";const w=spanishWord(t)||t;if(w)$("#vc-in").value=w.replace(/[¿?¡!.]+/g,"").trim();else toast("No te escuché. Intenta otra vez.")}catch{toast("No pude usar el reconocimiento en español. Revisa tu internet la primera vez.")}
+    b.textContent="🎙 Decirla";b.disabled=false};
+  if(!noAi&&V.some(v=>!v.en)){await resolveVocab();if(view==="vocab"&&!$("#vc-res").textContent)VIEWS.vocab()}
+};
+// From a Spanish transcription of "How do you say <word>", keeps the word.
+function spanishWord(t){let x=String(t||"").toLowerCase().replace(/[¿?¡!.,"“”«»]/g," ").replace(/\s+/g," ").trim();if(!x)return"";
+  const ms=[...x.matchAll(/\b(?:say|sei|sey|sai|zei|dice|decir|digo|dices)\b/g)];if(ms.length){const m=ms[ms.length-1];x=x.slice(m.index+m[0].length).trim()}
+  x=x.replace(/\s*\b(?:in|en|em)\s+(?:english|ingl[eé]s|inglis|inglich)\b.*$/,"").replace(/^(?:la palabra|the word)\s+/,"").trim();
+  return x&&x.split(" ").length<=5?x:""}

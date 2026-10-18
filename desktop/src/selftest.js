@@ -24,6 +24,7 @@
     const ratio = sp.rate / 16000, n = Math.floor(sp.audio.length / ratio), pcm = new Float32Array(n);
     for (let i = 0; i < n; i++) { const x = i * ratio, j = Math.floor(x), f = x - j; pcm[i] = sp.audio[j] * (1 - f) + (sp.audio[j + 1] || 0) * f; }
     t0 = performance.now();
+    const pcm2 = new Float32Array(pcm);
     const r = await call(stt, { type: "transcribe", audio: pcm }, [pcm.buffer]);
     t("stt", t0);
     if (!r.ok) throw new Error("stt: " + r.error);
@@ -38,6 +39,12 @@
     const c = await call(again, { type: "load" });
     t("reload_from_cache", t0);
     result.cached = c.ok;
+    // The multilingual model used for "¿Cómo se dice…?" loads and accepts a language.
+    t0 = performance.now();
+    const es = await call(stt, { type: "transcribe", audio: pcm2, model: "Xenova/whisper-base", language: "english" }, [pcm2.buffer]);
+    t("multilingual", t0);
+    result.multilingual = es.ok ? es.text : "ERROR " + es.error;
+    if (!es.ok) result.ok = false;
   } catch (e) {
     result.error = String(e && e.message || e);
   }

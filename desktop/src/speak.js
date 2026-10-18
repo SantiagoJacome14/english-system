@@ -17,7 +17,7 @@ VIEWS.pron = (target) => {
   const items = PR.set === "custom" ? PR.custom : (sets.find((s) => s.id === PR.set) || sets[0]).items;
   const t = items[PR.i % items.length];
   const finished = PR.i >= items.length;
-  if (!finished) Voice.prefetch(items.slice(PR.i, PR.i + 3));
+  if (!finished) Voice.prefetch(items.slice(PR.i, PR.i + 3), true);
   const gate = voiceGate("practicar tu pronunciación");
   const miss = Object.entries(S.pronMiss || {}).sort((a, b) => b[1] - a[1]).slice(0, 12);
   $("#main").innerHTML = `<div class="screen">

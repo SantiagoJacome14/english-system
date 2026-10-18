@@ -203,8 +203,10 @@ async function ollamaChat(system, messages, onText, json) {
   const { model: m } = ollamaCfg();
   const body = { model: m, messages: [{ role: "system", content: system }, ...messages], stream: !json, keep_alive: "30m", options: { temperature: json ? 0.2 : 0.7, num_predict: json ? 1200 : 220 } };
   if (json) body.format = "json";
+  // Models like qwen3 "think" before answering, which only adds waiting here.
+  if (THINKERS.test(m)) body.think = false;
   const res = await ollamaFetch("/api/chat", body);
-  if (json) return (await res.json()).message.content;
+  if (json) return noThink((await res.json()).message.content);
   const reader = res.body.getReader();
   const dec = new TextDecoder();
   let buf = "", text = "";
@@ -218,10 +220,20 @@ async function ollamaChat(system, messages, onText, json) {
       if (!line) continue;
       const msg = JSON.parse(line);
       if (msg.error) { const e = new Error(msg.error); e.code = "ollama_error"; throw e; }
-      if (msg.message && msg.message.content) { text += msg.message.content; if (onText) onText(text); }
+      if (msg.message && msg.message.content) { text += msg.message.content; const t = noThink(text); if (onText && t) onText(t); }
     }
   }
-  return text;
+  return noThink(text);
+}
+const THINKERS = /qwen3|deepseek-r1|magistral|thinking/i;
+// Older Ollama versions ignore think:false and send the thinking inside <think> tags.
+function noThink(t) { return /^\s*<think>/.test(t) ? (t.includes("</think>") ? t.slice(t.indexOf("</think>") + 8).trimStart() : "") : t; }
+// Loads the model and reads the prompt ahead of time, so the first real reply comes faster.
+async function ollamaWarm(system, messages) {
+  const { model: m } = ollamaCfg();
+  const body = { model: m, messages: system ? [{ role: "system", content: system }, ...(messages || [])] : [], stream: false, keep_alive: "30m", options: { temperature: 0.7, num_predict: 1 } };
+  if (THINKERS.test(m)) body.think = false;
+  await ollamaFetch("/api/chat", body).then((r) => r.text());
 }
 
 function chatWith(system, messages, onText, json) {
@@ -231,6 +243,10 @@ function chatWith(system, messages, onText, json) {
   const e = new Error("Sin IA"); e.code = "no_ai"; throw e;
 }
 
+ipcMain.handle("ai:warm", async (_e, system, messages) => {
+  if (provider() !== "ollama") return { ok: true };
+  try { await ollamaWarm(system, messages); return { ok: true }; } catch (err) { return { ok: false, code: errorCode(err) }; }
+});
 ipcMain.handle("settings:get", () => publicSettings());
 ipcMain.handle("settings:set", (_e, patch) => {
   const s = readSettings();
@@ -466,7 +482,7 @@ app.whenReady().then(() => {
   session.defaultSession.setPermissionCheckHandler((_wc, perm) => allow(perm));
   if (SELFTEST) { runSelftest(); return; }
   createWindow(START_HIDDEN);
-  if (provider() === "ollama") ensureTunnel().catch(() => {});
+  if (provider() === "ollama") ensureTunnel().then(() => ollamaWarm()).catch(() => {});
   if (readSettings().tray !== false) createTray();
   checkReminder();
   setInterval(checkReminder, 30e3);
