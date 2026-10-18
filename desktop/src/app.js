@@ -13,6 +13,7 @@ const dow=d=>(d.getDay()+6)%7;
 const WK=today<W1?0:Math.min(11,Math.floor((today-W1)/(7*864e5))+1);
 const CUR=Math.max(1,WK);
 const week=n=>WEEKS.find(w=>w.n===n);
+const opensOn=n=>{const d=new Date(W1.getTime()+(n-1)*7*864e5);return d.getDate()+" "+MON[d.getMonth()]};
 const topicToday=WK===0?(dow(today)===5?"Test de nivel y primera conversación":"Prepara tus herramientas y lee la Semana 1"):week(CUR).dias[dow(today)];
 
 /* ---------- State ---------- */
@@ -79,6 +80,10 @@ VIEWS.home=()=>{
       <div class="card stat"><span class="ic" style="background:var(--panel-3)">🎯</span><div><b>A2</b><span>nivel actual · meta B1</span></div></div>
     </div>
     <div class="grid g2">
+      <div class="card pod"><span class="label">Frase del día</span><div class="pod-en">${esc(pod.en)}</div><div class="pod-es">${esc(pod.es)}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-say="${esc(pod.en)}">🔊 Escuchar</button><button class="btn" data-nav="pron" data-arg="${esc(pod.en)}">🎯 Practicar pronunciación</button></div></div>
+      ${voiceCard()}
+    </div>
+    <div class="grid g2">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center"><h3>Tu hora de hoy</h3><span class="pill ${doneB.filter(Boolean).length===5?"ok":""}">${doneB.filter(Boolean).length}/5</span></div>
         <div class="mission">${blocks.map((b,i)=>`<div class="step ${doneB[i]?"done":""}"><span class="n">${doneB[i]?"✓":i+1}</span><div><b>${b[0]}</b><small>${esc(b[1])}</small></div><button class="go" data-nav="${b[2]}" ${b[2]==="path"&&nl?`data-arg=""`:""}>${doneB[i]?"Repetir":"Ir →"}</button></div>`).join("")}</div>
@@ -88,10 +93,6 @@ VIEWS.home=()=>{
         <div class="chart">${days.map((d,i)=>`<div class="col"><span class="v">${vals[i]||""}</span><div class="b ${vals[i]>=100?"full":""} ${key(d)===TODAY?"today":""}" style="height:${Math.max(3,vals[i]/max*100)}%"></div><span class="d">${"LMXJVSD"[dow(d)]}</span></div>`).join("")}</div>
         <p class="muted" style="margin:0;font-size:13px">Meta diaria: 100 XP. La barra llena = día completo.</p>
       </div>
-    </div>
-    <div class="grid g2">
-      <div class="card pod"><span class="label">Frase del día</span><div class="pod-en">${esc(pod.en)}</div><div class="pod-es">${esc(pod.es)}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-say="${esc(pod.en)}">🔊 Escuchar</button><button class="btn" data-nav="pron" data-arg="${esc(pod.en)}">🎯 Practicar pronunciación</button></div></div>
-      ${voiceCard()}
     </div>
     <div class="quick">
       <button class="qa hot" data-nav="call"><span class="e">📞</span><b>Llamada en inglés</b><small>Habla con tu voz, manos libres</small></button>
@@ -111,7 +112,7 @@ function voiceCard(){const st=Voice.state;
   return`<div class="card voice-cta"><span class="label">Nuevo · voz natural</span><h3>🎙️ Activa la conversación por voz</h3><p class="muted" style="margin:0">Descarga una sola vez las voces (unos 170 MB). Después la app te escucha y te habla en inglés sin internet y gratis.</p><div><button class="btn gold" id="voice-on">Activar voz</button></div></div>`}
 function enableVoice(){S.voice=Object.assign({},Voice.cfg(),{neural:true});save();Voice.loadTTS();Voice.loadSTT();if(view==="home")VIEWS.home()}
 document.addEventListener("click",e=>{if(e.target.closest("#voice-on"))enableVoice()});
-Voice.on(()=>{const b=$("#dl-bar");if(b)b.style.width=Voice.downloadPct()+"%";if(view==="home"&&(Voice.state.tts!=="loading"&&Voice.state.stt!=="loading"))VIEWS.home()});
+Voice.on(st=>{if((st.tts==="error"||st.stt==="error")&&!st.warned){st.warned=true;toast("No pude descargar las voces. Revisa tu internet e intenta otra vez.")}const b=$("#dl-bar");if(b)b.style.width=Voice.downloadPct()+"%";if(view==="home"&&(Voice.state.tts!=="loading"&&Voice.state.stt!=="loading"))VIEWS.home()});
 
 /* ---------- Path ---------- */
 VIEWS.path=()=>{
@@ -120,7 +121,7 @@ VIEWS.path=()=>{
     <div class="head"><div><h1>Tu ruta</h1><p>11 semanas, 5 lecciones por semana. Completa una para desbloquear la siguiente.</p></div><span class="pill">${Object.keys(S.lessons).length} / 55 lecciones</span></div>
     ${WEEKS.map(w=>{const ls=lessonsOf(w.n);const locked=w.n>CUR;return`<div class="unit ${locked?"locked":""} ${w.n===CUR?"now":""}">
       <div><span class="label">Semana · ${esc(w.fechas)}</span><div class="wk">${w.n}</div><b>${esc(w.tema)}</b></div>
-      <div class="nodes">${ls.map(l=>{const done=S.lessons[l.id];const isNext=nl&&nl.id===l.id;return`<button class="node ${done?"done":""} ${isNext?"next":""}" ${locked?"disabled title='Se desbloquea el "+esc(w.fechas.split("–")[0])+"'":`data-nav="lesson" data-arg="${l.id}"`}><span class="c">${locked?"🔒":done?"✓":l.icon}</span><span>${l.t}</span></button>`}).join("")}</div>
+      <div class="nodes">${ls.map(l=>{const done=S.lessons[l.id];const isNext=nl&&nl.id===l.id;return`<button class="node ${done?"done":""} ${isNext?"next":""}" ${locked?"disabled title='Se desbloquea el "+opensOn(w.n)+"'":`data-nav="lesson" data-arg="${l.id}"`}><span class="c">${locked?"🔒":done?"✓":l.icon}</span><span>${l.t}</span></button>`}).join("")}</div>
     </div>`}).join("")}
   </div>`;
 };

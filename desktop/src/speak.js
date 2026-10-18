@@ -19,7 +19,7 @@ VIEWS.pron = (target) => {
   const gate = voiceGate("practicar tu pronunciación");
   const miss = Object.entries(S.pronMiss || {}).sort((a, b) => b[1] - a[1]).slice(0, 12);
   $("#main").innerHTML = `<div class="screen">
-    <div class="head"><div><h1>Pronunciación</h1><p>Di la frase. Las palabras que la app entiende salen en verde; las que no, en rojo.</p></div><span class="pill">${S.pronCount || 0} frases · mejor ${S.pronBest || 0}%</span></div>
+    <div class="head"><div><h1>Pronunciación</h1><p>Di la frase. Las palabras que la app entiende salen en verde; las que no, en rojo.</p></div><span class="pill" id="p-stats">${S.pronCount || 0} frases · mejor ${S.pronBest || 0}%</span></div>
     ${gate}
     <div class="grid pron-grid">
       <div class="card"><span class="label">Elige qué practicar</span><div class="setlist">${(PR.set === "custom" ? [{ id: "custom", t: "Frase del día" }] : []).concat(sets).map((s) => `<button class="sc" data-pset="${s.id}" aria-pressed="${PR.set === s.id}"><span class="e">${{ week: "📅", disney: "🏰", story: "✈️", hard: "👅", err: "🧠", custom: "⭐" }[s.id]}</span><span><b>${esc(s.t)}</b><small>${s.items ? s.items.length + " frases" : ""}</small></span></button>`).join("")}</div>
@@ -55,6 +55,7 @@ VIEWS.pron = (target) => {
     S.pronMiss = S.pronMiss || {};
     a.words.filter((x) => !x.ok).forEach((x) => { const w = wordsOf(x.w)[0]; if (w) S.pronMiss[w] = (S.pronMiss[w] || 0) + 1; });
     save();
+    $("#p-stats").textContent = `${S.pronCount} frases · mejor ${S.pronBest}%`;
     sfx(a.score >= 80 ? "ok" : "bad");
     if (a.score >= 80) addXP(a.score === 100 ? 15 : 10, "Pronunciación"); else addXP(3, "Práctica de pronunciación");
     if (a.score === 100) confetti();

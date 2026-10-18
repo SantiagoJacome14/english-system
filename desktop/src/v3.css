@@ -139,3 +139,5 @@ input[type=range]{padding:0;border:0;accent-color:var(--blue);background:transpa
 @keyframes drop{from{transform:translate(-50%,-30px);opacity:0}}
 .confetti{position:fixed;inset:0;pointer-events:none;z-index:70}
 @media (prefers-reduced-motion:reduce){.bz-card.pop,.bz-card.shake,.ptile.wrong,.ach-pop{animation:none}}
+aside{scrollbar-width:none}aside::-webkit-scrollbar{display:none}
+.scores3>div{display:flex;flex-direction:column;gap:2px}
