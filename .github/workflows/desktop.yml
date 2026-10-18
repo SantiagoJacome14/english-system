@@ -22,7 +22,7 @@ jobs:
         run: npm install
       - name: Crear instalador
         working-directory: desktop
-        run: npx electron-builder --win nsis --publish never
+        run: npm run dist
       - name: Publicar en Releases
         uses: softprops/action-gh-release@v2
         with:

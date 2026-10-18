@@ -1,0 +1,38 @@
+name: Prueba de voz en Windows
+
+# Builds the app the same way as the installer and runs a speech round trip
+# (Kokoro speaks a sentence, Whisper must recognize it) inside the packaged app.
+on:
+  push:
+    branches-ignore: [main]
+    paths: ["desktop/**", ".github/workflows/voice-selftest.yml"]
+  workflow_dispatch:
+
+jobs:
+  selftest:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar dependencias
+        working-directory: desktop
+        run: npm install
+      - name: Empaquetar la app
+        working-directory: desktop
+        run: npx electron-builder --win dir --publish never
+      - name: Probar voz (hablar y escuchar)
+        working-directory: desktop
+        shell: pwsh
+        run: |
+          $out = Join-Path $PWD "selftest.json"
+          $p = Start-Process -FilePath "dist\win-unpacked\English Boarding Pass.exe" -ArgumentList "--selftest=$out" -Wait -PassThru
+          Get-Content $out
+          if ($p.ExitCode -ne 0) { exit 1 }
+      - name: Tamaño de la app
+        working-directory: desktop
+        shell: pwsh
+        run: |
+          "{0:N0} MB" -f ((Get-ChildItem -Recurse dist\win-unpacked | Measure-Object -Sum Length).Sum / 1MB)
