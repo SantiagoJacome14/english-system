@@ -1,28 +1,51 @@
 {
   "name": "english-boarding-pass",
   "productName": "English Boarding Pass",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Tu app diaria de inglés: rutina, conversación por voz con Claude, plan y progreso",
   "main": "main.js",
   "author": "SantiagoJacome14",
   "license": "MIT",
   "scripts": {
-    "start": "electron .",
-    "dist": "electron-builder --win nsis --publish never"
+    "start": "node scripts/vendor.js && electron .",
+    "dist": "node scripts/vendor.js && electron-builder --win nsis --publish never",
+    "postinstall": "node scripts/vendor.js",
+    "selftest": "node scripts/vendor.js && electron . --selftest=selftest.json"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.131.0"
   },
   "devDependencies": {
     "electron": "43.7.7",
-    "electron-builder": "26.17.0"
+    "electron-builder": "26.17.0",
+    "@huggingface/transformers": "3.8.1",
+    "kokoro-js": "1.2.1"
   },
   "build": {
     "appId": "com.santiagojacome.englishboardingpass",
     "productName": "English Boarding Pass",
-    "directories": { "output": "dist" },
-    "files": ["main.js", "preload.js", "index.html", "package.json"],
-    "win": { "target": "nsis" },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "shortcutName": "English Boarding Pass" }
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "package.json",
+      "src/**",
+      "workers/**",
+      "assets/**",
+      "vendor/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "English Boarding Pass"
+    }
   }
 }

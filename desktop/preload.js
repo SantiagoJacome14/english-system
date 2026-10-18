@@ -1,6 +1,8 @@
 const { contextBridge, ipcRenderer } = require("electron");
 const listeners = new Map();
 ipcRenderer.on("chat:delta", (_e, { id, text }) => { const fn = listeners.get(id); if (fn) fn(text); });
+let onNav = null;
+ipcRenderer.on("navigate", (_e, v) => { if (onNav) onNav(v); });
 contextBridge.exposeInMainWorld("api", {
   getSettings: () => ipcRenderer.invoke("settings:get"),
   setSettings: (s) => ipcRenderer.invoke("settings:set", s),
@@ -12,4 +14,10 @@ contextBridge.exposeInMainWorld("api", {
     finally { listeners.delete(id); }
   },
   feedback: (prompt) => ipcRenderer.invoke("feedback", { prompt }),
+  ollamaTest: () => ipcRenderer.invoke("ollama:test"),
+  reminderTest: () => ipcRenderer.invoke("reminder:test"),
+  voiceCache: () => ipcRenderer.invoke("voice:cache"),
+  voiceClear: () => ipcRenderer.invoke("voice:clear"),
+  onNavigate: (fn) => { onNav = fn; },
+  selftestDone: (r) => ipcRenderer.invoke("selftest:done", r),
 });
