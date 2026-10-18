@@ -65,20 +65,22 @@ VIEWS.home=()=>{
   const blocks=[["Repasar tarjetas","5 min · frases de la semana","cards"],["Lección del día",nl?nl.t+" · Semana "+nl.id.split("-")[0]:"¡Ruta al día!","path"],["Dictado","10 min · entrena tu oído","listen"],["Llamada en inglés","15 min · "+topicToday,"call"],["Misión de escritura","10 min · escribe y corrige","path"]];
   const doneB=[(S.xpLog[TODAY]&&Object.values(S.cards).some(c=>c.last===TODAY)),!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&!/-t$|-w$/.test(k)),(S.dictLog||{})[TODAY],(S.chatLog||{})[TODAY],!!Object.entries(S.lessons).some(([k,v])=>v.date===TODAY&&/-w$/.test(k))];
   $("#main").innerHTML=`<div class="screen">
-    <div class="ticket">
-      <div class="tk-main">
-        <div class="tk-top"><span class="label">Boarding pass · Semana ${WK} de 11</span><span class="tk-class">A2 → B1</span></div>
-        <h2>${greet}, ${esc(S.name)}.</h2>
-        <div class="tk-route"><div class="code">BGA<small>BUCARAMANGA · HOY</small></div><div class="track"><span class="done" style="width:${pct}%"></span>${wps}<span class="plane" style="left:${pct}%"><svg viewBox="0 0 256 256"><use href="#i-plane"/></svg></span></div><div class="code">MCO<small>ORLANDO · 3 ENE</small></div></div>
-        <div class="tk-meta"><div><span>Pasajero</span><b>${esc(S.name).toUpperCase()}</b></div><div><span>Fecha</span><b>${DAYS[dow(today)]} ${today.getDate()} ${MON[today.getMonth()]}</b></div><div><span>Puerta de hoy</span><b>${esc(topicToday)}</b></div></div>
+    <div class="hall">
+      <div class="hall-l">
+        <div class="hall-t"><i class="live"></i><span class="label">${DAYS[dow(today)]} ${today.getDate()} ${MON[today.getMonth()]} · Semana ${WK} de 11 · ${greet}, ${esc(S.name)}</span></div>
+        <h2>Tu vuelo a <em>Orlando</em> sale en</h2>
+        <div class="countdown"><span class="flap-n" data-n="${String(Math.max(0,totalDays-gone)).padStart(3,"0")}"></span><small>días para<br>despegar</small></div>
+        <div class="tk-route"><div class="code">BGA<small>BUCARAMANGA</small></div><div class="track"><span class="done" style="width:${pct}%"></span>${wps}<span class="plane" style="left:${pct}%"><svg viewBox="0 0 256 256"><use href="#i-plane"/></svg></span></div><div class="code">MCO<small>ORLANDO</small></div></div>
       </div>
-      <div class="tk-stub">
-        <div class="seat"><span>ASIENTO</span><b>${pct}%</b></div>
-        <div class="barcode"></div>
+      <div class="hall-r">
+        <div><span class="label">Puerta de hoy</span><p style="margin:6px 0 0;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase">${esc(topicToday)}</p></div>
         <button class="btn primary big" data-nav="${nl?"lesson":"talk"}" data-arg="${nl?nl.id:""}"><svg class="ic"><use href="#i-arrow"/></svg>${nl?"Continuar":"Conversar"}</button>
       </div>
     </div>
-    ${typeof classCard==="function"?classCard():""}
+    <div class="board">
+      <div class="board-h"><span>Min</span><span>Vuelo</span><span>Actividad</span><span>Estado</span><span></span></div>
+      ${blocks.map((bk,i)=>{const first=doneB.findIndex(x=>!x);const st=doneB[i]?["ATERRIZADO","done"]:i===first?["ABORDANDO",""]:["PROGRAMADO",""];return`<div class="brow ${st[1]}"><span class="tm">${["05","—","10","15","10"][i]}</span><span class="fn">EB ${String(101+i)}</span><div class="ds"><b>${bk[0]}</b><small>${esc(bk[1])}</small></div><span class="stt">${i===first||doneB[i]?"<i></i>":""}${st[0]}</span><button class="btn" data-nav="${bk[2]}">${doneB[i]?"Repetir":"Ir"}</button></div>`}).join("")}
+    </div>
     <div class="grid g4">
       <div class="card stat"><svg class="ic"><use href="#i-flame"/></svg><div><b>${st}</b><span>${st===1?"día de racha":"días de racha"}</span></div></div>
       <div class="card stat"><svg class="ic"><use href="#i-star"/></svg><div><b>${S.xp}</b><span>XP · ${r.name}</span></div></div>
@@ -91,14 +93,11 @@ VIEWS.home=()=>{
     </div>
     <div class="grid g2">
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center"><h3>Tu hora de hoy</h3><span class="pill ${doneB.filter(Boolean).length===5?"ok":""}">${doneB.filter(Boolean).length}/5</span></div>
-        <div class="mission">${blocks.map((b,i)=>`<div class="step ${doneB[i]?"done":""}"><span class="n">${doneB[i]?"✓":i+1}</span><div><b>${b[0]}</b><small>${esc(b[1])}</small></div><button class="go" data-nav="${b[2]}" ${b[2]==="path"&&nl?`data-arg=""`:""}>${doneB[i]?"Repetir":"Ir →"}</button></div>`).join("")}</div>
-      </div>
-      <div class="card">
         <h3>XP de la semana</h3>
         <div class="chart">${days.map((d,i)=>`<div class="col"><span class="v">${vals[i]||""}</span><div class="b ${vals[i]>=100?"full":""} ${key(d)===TODAY?"today":""}" style="height:${Math.max(3,vals[i]/max*100)}%"></div><span class="d">${"LMXJVSD"[dow(d)]}</span></div>`).join("")}</div>
         <p class="muted" style="margin:0;font-size:13px">Meta diaria: 100 XP. La barra llena = día completo.</p>
       </div>
+      ${typeof classCard==="function"?classCard():""}
     </div>
     <div class="quick">
       <button class="qa hot" data-nav="call"><span class="e"><svg class="ic"><use href="#i-call"/></svg></span><b>Llamada en inglés</b><small>Habla con tu voz, manos libres</small></button>

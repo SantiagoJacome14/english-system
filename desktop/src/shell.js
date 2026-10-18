@@ -6,7 +6,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const root = document.documentElement;
 
-  if (!S.skinV) { S.skinV = 1; S.theme = "light"; root.dataset.theme = "light"; save(); }
+  if (S.skinV !== 2) { S.skinV = 2; S.theme = "dark"; root.dataset.theme = "dark"; save(); }
 
   function place() {
     const act = $("#tabs button[aria-current=page]"), sl = $("#slider"); if (!act || !sl) return;
@@ -25,6 +25,7 @@
     paintShell(v);
     const sc = $("#main").firstElementChild;
     if (sc) { sc.classList.remove("enter"); void sc.offsetWidth; sc.classList.add("enter"); [...sc.children].forEach((c, i) => c.style.setProperty("--i", Math.min(i, 9))); }
+    flaps();
     countUp();
   };
   $("#tabs").addEventListener("click", e => {
@@ -50,6 +51,23 @@
       el.textContent = "0"; requestAnimationFrame(step);
     });
   }
+
+  /* split-flap type: letters settle one by one */
+  const CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  function flapify(el, big) {
+    const t = el.dataset.n || el.textContent.trim(); el.setAttribute("aria-label", t); el.classList.add("flaps");
+    el.innerHTML = t.split(" ").map(w => `<span class="w" aria-hidden="true">${[...w].map(c => `<i class="fl${/[\p{L}\p{N}]/u.test(c) ? "" : " pn"}">${esc(c)}</i>`).join("")}</span>`).join("");
+    [...el.querySelectorAll(".fl")].forEach((f, i) => {
+      const fin = f.textContent, up = fin.toUpperCase(); if (!/[\p{L}\p{N}]/u.test(up)) return;
+      const keep = up; let n = 0; const total = 4 + Math.floor(Math.random() * 4);
+      f.textContent = " "; f.classList.add("go");
+      setTimeout(function tick() { if (n++ < total) { f.textContent = CH[Math.floor(Math.random() * CH.length)]; setTimeout(tick, 55); } else { f.textContent = keep; f.classList.remove("go"); } }, 30 + i * 20);
+    });
+  }
+  function flaps() {
+    $$("#main .flap-n:not(.flaps), #main .head h1:not(.flaps)").forEach(e => flapify(e, true));
+  }
+  new MutationObserver(() => flaps()).observe($("#main"), { childList: true, subtree: true });
 
   /* boarding pass tilt on hover */
   document.addEventListener("pointermove", e => {
