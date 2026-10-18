@@ -39,7 +39,7 @@ const Voice = (() => {
   function loadTTS() {
     if (!tts) tts = worker("tts");
     if (state.tts === "ready" || state.tts === "loading") return ttsReady;
-    state.tts = "loading"; emit();
+    state.tts = "loading"; state.warned = false; emit();
     ttsReady = call(tts, { type: "load" }).then((r) => { state.tts = r.ok ? "ready" : "error"; state.ttsError = r.error; emit(); return r.ok; });
     return ttsReady;
   }

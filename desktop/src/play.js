@@ -4,7 +4,7 @@ VIEWS.story = () => {
   $("#main").innerHTML = `<div class="screen">
     <div class="head"><div><h1>Viaje a Orlando</h1><p>Vive tu intercambio en Disney en 11 capítulos. Cada semana se abre uno nuevo con la gramática que estás aprendiendo.</p></div><span class="pill">${Object.keys(done).length} / ${STORY.length} capítulos</span></div>
     <div class="chapters">${STORY.map((c) => { const w = week(c.n), locked = c.n > CUR, d = done[c.n]; return `<button class="chap ${locked ? "locked" : ""} ${d ? "done" : ""} ${!locked && !d ? "open" : ""}" ${locked ? "disabled" : `data-nav="chapter" data-arg="${c.n}"`}>
-      <span class="chap-n">Cap. ${c.n}</span><span class="chap-e">${locked ? "🔒" : c.e}</span><b>${esc(c.t)}</b><small>${locked ? "Se abre el " + esc(w.fechas.split("–")[0]) : esc(w.gram)}</small>
+      <span class="chap-n">Cap. ${c.n}</span><span class="chap-e">${locked ? "🔒" : c.e}</span><b>${esc(c.t)}</b><small>${locked ? "Se abre el " + opensOn(c.n) : esc(w.gram)}</small>
       ${d ? `<span class="stars">${"★".repeat(d.stars)}<span class="off">${"★".repeat(4 - d.stars)}</span></span>` : ""}</button>`; }).join("")}</div>
   </div>`;
 };
@@ -72,7 +72,7 @@ function nextScene() {
   $("#main").innerHTML = `<div class="screen done-screen"><div class="big">${c.e}</div><h1>¡Capítulo ${c.n} completo!</h1><p class="muted">${esc(c.t)}</p>
     <div class="stars big">${"★".repeat(ST.stars)}<span class="off">${"★".repeat(4 - ST.stars)}</span></div>
     <p class="muted">${ST.stars === 4 ? "¡Todas las respuestas perfectas a la primera!" : "Repite el capítulo para conseguir las 4 estrellas."}</p>
-    <div style="display:flex;gap:10px">${next && next.n <= CUR ? `<button class="btn primary big" data-nav="chapter" data-arg="${next.n}">Capítulo ${next.n} →</button>` : next ? `<span class="pill">El capítulo ${next.n} se abre el ${esc(week(next.n).fechas.split("–")[0])}</span>` : ""}<button class="btn big" data-nav="story">Ver capítulos</button></div></div>`;
+    <div style="display:flex;gap:10px">${next && next.n <= CUR ? `<button class="btn primary big" data-nav="chapter" data-arg="${next.n}">Capítulo ${next.n} →</button>` : next ? `<span class="pill">El capítulo ${next.n} se abre el ${opensOn(next.n)}</span>` : ""}<button class="btn big" data-nav="story">Ver capítulos</button></div></div>`;
 }
 document.addEventListener("keydown", (e) => { if (view === "chapter" && ST && /^[1-3]$/.test(e.key) && ST.pick == null && e.target.tagName !== "TEXTAREA") pickScene(+e.key - 1); else if (view === "chapter" && ST && e.key === "Enter" && ST.pick != null) nextScene(); });
 
