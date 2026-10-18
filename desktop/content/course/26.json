@@ -1,0 +1,141 @@
+{
+  "n": 26,
+  "block": "Para comunicarte",
+  "title": "Palabras de pregunta",
+  "emoji": "❓",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás hacer preguntas con what, where, when, why, who, which, whose y how, y mantener una conversación básica.",
+  "sections": [
+    {
+      "h": "Las palabras de pregunta",
+      "table": {
+        "head": ["Palabra", "Pregunta por...", "Ejemplo", "Significa"],
+        "rows": [
+          ["what", "cosas (qué)", "What is your name?", "¿Cuál es tu nombre?"],
+          ["where", "lugar (dónde)", "Where do you live?", "¿Dónde vives?"],
+          ["when", "tiempo (cuándo)", "When is the class?", "¿Cuándo es la clase?"],
+          ["why", "razón (por qué)", "Why are you here?", "¿Por qué estás aquí?"],
+          ["who", "personas (quién)", "Who is that man?", "¿Quién es ese hombre?"],
+          ["which", "elegir entre opciones (cuál)", "Which bus is yours?", "¿Cuál bus es el tuyo?"],
+          ["whose", "posesión (de quién)", "Whose bag is this?", "¿De quién es esta mochila?"],
+          ["how", "manera (cómo)", "How are you?", "¿Cómo estás?"]
+        ]
+      },
+      "note": "La palabra de pregunta va siempre al principio de la frase."
+    },
+    {
+      "h": "Preguntas con to be",
+      "body": "Con **to be** (am/is/are/was/were) la estructura es sencilla: **palabra de pregunta + to be + sujeto**.\n\n**Where are you from?** (¿De dónde eres?) **What is your job?** (¿Cuál es tu trabajo?) **Why is she sad?** (¿Por qué está triste?)\n\nNo se necesita do/does con to be."
+    },
+    {
+      "h": "Preguntas con do, does y did",
+      "table": {
+        "head": ["Tiempo", "Estructura", "Ejemplo", "Significa"],
+        "rows": [
+          ["Presente (I, you, we, they)", "palabra + do + sujeto + verbo", "Where do you work?", "¿Dónde trabajas?"],
+          ["Presente (he, she, it)", "palabra + does + sujeto + verbo", "What does she study?", "¿Qué estudia ella?"],
+          ["Pasado", "palabra + did + sujeto + verbo", "When did you arrive?", "¿Cuándo llegaste?"]
+        ]
+      },
+      "note": "Después de do, does y did el verbo va en forma base, sin -s ni -ed: Where does he live? (no Where does he lives?). Where did you go? (no Where did you went?)."
+    },
+    {
+      "h": "How + adjetivo o palabra",
+      "table": {
+        "head": ["Expresión", "Pregunta por...", "Ejemplo", "Significa"],
+        "rows": [
+          ["how much", "precio o cantidad (no contable)", "How much is the ticket?", "¿Cuánto cuesta el boleto?"],
+          ["how many", "cantidad (contable)", "How many brothers do you have?", "¿Cuántos hermanos tienes?"],
+          ["how old", "edad", "How old are you?", "¿Cuántos años tienes?"],
+          ["how long", "duración", "How long is the flight?", "¿Cuánto dura el vuelo?"],
+          ["how often", "frecuencia", "How often do you study?", "¿Con qué frecuencia estudias?"]
+        ]
+      }
+    },
+    {
+      "h": "Preguntas típicas de conversación",
+      "list": [
+        "What is your name? / My name is Santiago.",
+        "Where do you live? / I live in Medellín.",
+        "Where are you from? / I'm from Colombia.",
+        "What do you do? / I'm a student.",
+        "Why are you learning English? / Because I want to work at Disney.",
+        "When did you start? / I started in January.",
+        "How old are you? / I'm 20 years old.",
+        "Who is your favorite singer? / My favorite singer is Shakira.",
+        "Which food do you like, pizza or pasta? / I like pizza."
+      ],
+      "note": "Practica respondiendo en voz alta con frases completas."
+    }
+  ],
+  "vocab": [
+    { "en": "what", "es": "qué, cuál", "ex": "What time is it?" },
+    { "en": "where", "es": "dónde", "ex": "Where is the hotel?" },
+    { "en": "when", "es": "cuándo", "ex": "When is your birthday?" },
+    { "en": "why", "es": "por qué", "ex": "Why are you late?" },
+    { "en": "because", "es": "porque", "ex": "Because I missed the bus." },
+    { "en": "who", "es": "quién", "ex": "Who is your teacher?" },
+    { "en": "which", "es": "cuál", "ex": "Which book do you want?" },
+    { "en": "whose", "es": "de quién", "ex": "Whose phone is this?" },
+    { "en": "how", "es": "cómo", "ex": "How do you say this in English?" },
+    { "en": "how much", "es": "cuánto (precio)", "ex": "How much is this shirt?" },
+    { "en": "how many", "es": "cuántos", "ex": "How many people are in your family?" },
+    { "en": "how old", "es": "qué edad", "ex": "How old is your brother?" },
+    { "en": "how long", "es": "cuánto tiempo", "ex": "How long is the class?" },
+    { "en": "how often", "es": "con qué frecuencia", "ex": "How often do you exercise?" },
+    { "en": "live", "es": "vivir", "ex": "I live in Bogotá." },
+    { "en": "learn", "es": "aprender", "ex": "I learn English online." },
+    { "en": "start", "es": "empezar", "ex": "When does the class start?" },
+    { "en": "arrive", "es": "llegar", "ex": "When did you arrive?" },
+    { "en": "price", "es": "precio", "ex": "What is the price?" },
+    { "en": "flight", "es": "vuelo", "ex": "The flight is four hours long." }
+  ],
+  "examples": [
+    { "en": "What is your name?", "es": "¿Cuál es tu nombre?" },
+    { "en": "Where do you live?", "es": "¿Dónde vives?" },
+    { "en": "When does your class start?", "es": "¿Cuándo empieza tu clase?" },
+    { "en": "Why are you learning English?", "es": "¿Por qué estás aprendiendo inglés?" },
+    { "en": "Who is your best friend?", "es": "¿Quién es tu mejor amigo?" },
+    { "en": "Which color do you like, red or blue?", "es": "¿Qué color te gusta, rojo o azul?" },
+    { "en": "Whose jacket is this?", "es": "¿De quién es esta chaqueta?" },
+    { "en": "How do you go to the university?", "es": "¿Cómo vas a la universidad?" },
+    { "en": "How much is a ticket to Disney World?", "es": "¿Cuánto cuesta un boleto para Disney World?" },
+    { "en": "How many classes do you have today?", "es": "¿Cuántas clases tienes hoy?" },
+    { "en": "How old is your mother?", "es": "¿Cuántos años tiene tu mamá?" },
+    { "en": "How long is the flight to Orlando?", "es": "¿Cuánto dura el vuelo a Orlando?" },
+    { "en": "How often do you practice English?", "es": "¿Con qué frecuencia practicas inglés?" },
+    { "en": "Where did you go last weekend?", "es": "¿A dónde fuiste el fin de semana pasado?" }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "___ do you live? In Medellín.", "options": ["What", "Where", "Who"], "answer": 1, "why": "Responde un lugar, así que se pregunta con where." },
+    { "type": "choice", "q": "___ is your birthday? In March.", "options": ["When", "Why", "Which"], "answer": 0, "why": "In March es un momento en el tiempo: when." },
+    { "type": "choice", "q": "___ are you studying English? Because I want to travel.", "options": ["How", "Who", "Why"], "answer": 2, "why": "Because responde a why." },
+    { "type": "choice", "q": "___ bag is this? It's Ana's.", "options": ["Who", "Whose", "Which"], "answer": 1, "why": "Whose pregunta por el dueño de algo." },
+    { "type": "choice", "q": "Where ___ she work?", "options": ["do", "does", "is"], "answer": 1, "why": "Con she en presente se usa does." },
+    { "type": "choice", "q": "How ___ brothers do you have?", "options": ["much", "many", "old"], "answer": 1, "why": "Brothers es contable, así que how many." },
+    { "type": "choice", "q": "When ___ you arrive?", "options": ["do", "does", "did"], "answer": 2, "why": "Arrive en pasado se pregunta con did." },
+    { "type": "fill", "q": "___ is your name? (qué)", "answer": ["what"], "why": "Para preguntar el nombre se usa what." },
+    { "type": "fill", "q": "How ___ are you? I'm 20.", "answer": ["old"], "why": "How old pregunta por la edad." },
+    { "type": "fill", "q": "How ___ is the ticket? Fifty dollars.", "answer": ["much"], "why": "How much pregunta por el precio." },
+    { "type": "fill", "q": "What ___ he study? (does/do)", "answer": ["does"], "why": "He pide does en presente." },
+    { "type": "fill", "q": "Where did you ___ yesterday? (go)", "answer": ["go"], "why": "Después de did el verbo va en forma base." },
+    { "type": "order", "words": ["you", "do", "Where", "live"], "answer": "Where do you live", "es": "¿Dónde vives?" },
+    { "type": "order", "words": ["is", "How", "ticket", "much", "the"], "answer": "How much is the ticket", "es": "¿Cuánto cuesta el boleto?" },
+    { "type": "order", "words": ["learning", "you", "English", "Why", "are"], "answer": "Why are you learning English", "es": "¿Por qué estás aprendiendo inglés?" },
+    { "type": "translate", "es": "¿De dónde eres?", "answer": ["Where are you from?"], "why": "Where are you from? es la pregunta estándar de origen." },
+    { "type": "translate", "es": "¿Cuántos años tienes?", "answer": ["How old are you?"], "why": "En inglés se usa to be: how old are you." },
+    { "type": "translate", "es": "¿Quién es tu profesor?", "answer": ["Who is your teacher?", "Who's your teacher?"], "why": "Who pregunta por personas." },
+    { "type": "translate", "es": "¿Con qué frecuencia estudias?", "answer": ["How often do you study?"], "why": "How often pregunta por la frecuencia y con you usa do." }
+  ],
+  "speak": [
+    "What is your name?",
+    "Where do you live?",
+    "Why are you learning English?",
+    "How old are you?",
+    "How much is a ticket to Orlando?",
+    "When does the class start?",
+    "Who is your favorite singer?",
+    "How often do you practice English?"
+  ],
+  "tip": "En español no necesitas ayuda para preguntar (¿Dónde vives?), pero en inglés casi siempre hace falta do/does/did. Error común: *Where you live?* o *Where does he lives?*. Correcto: Where do you live? / Where does he live?"
+}

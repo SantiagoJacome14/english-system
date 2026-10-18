@@ -1,0 +1,130 @@
+{
+  "n": 27,
+  "block": "Para comunicarte",
+  "title": "Tiempo y conectores",
+  "emoji": "🔗",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás usar in, on y at para el tiempo y unir ideas con and, but, or, because, so y then para hablar con frases más largas.",
+  "sections": [
+    {
+      "h": "In, on y at con el tiempo",
+      "table": {
+        "head": ["Preposición", "Se usa con...", "Ejemplo", "Significa"],
+        "rows": [
+          ["in", "meses, años, estaciones, partes del día", "in May, in 2027, in summer, in the morning", "en mayo, en 2027, en verano, en la mañana"],
+          ["on", "días y fechas", "on Monday, on July 4th, on my birthday", "el lunes, el 4 de julio, en mi cumpleaños"],
+          ["at", "horas y momentos exactos", "at 5 pm, at noon, at night", "a las 5 pm, al mediodía, en la noche"]
+        ]
+      },
+      "note": "Se dice in the morning/afternoon/evening, pero at night. Y atención: on the weekend (EE. UU.) o at the weekend (Reino Unido)."
+    },
+    {
+      "h": "From... to, before, after y during",
+      "body": "**From ... to ...** marca el inicio y el final: *I work from 9 to 5.* (Trabajo de 9 a 5).\n\n**Before** = antes de. *I study before class.* **After** = después de. *I eat after work.*\n\n**During** = durante. *I sleep during the flight.* Se usa con un sustantivo (during the class), no con un verbo."
+    },
+    {
+      "h": "For y since (lo básico)",
+      "table": {
+        "head": ["Palabra", "Idea", "Ejemplo", "Significa"],
+        "rows": [
+          ["for", "cuánto tiempo dura algo", "I study English for one hour.", "Estudio inglés durante una hora."],
+          ["for", "periodo de tiempo", "She has lived here for two years.", "Ella ha vivido aquí por dos años."],
+          ["since", "desde cuándo empezó", "I have studied English since January.", "Estudio inglés desde enero."]
+        ]
+      },
+      "note": "For va con una duración (two hours, three days). Since va con un punto de inicio (Monday, 2020, January). Con for y since se usa have/has + participio (I have lived, she has studied). Por ahora solo memoriza esa forma."
+    },
+    {
+      "h": "Conectores para unir ideas",
+      "table": {
+        "head": ["Conector", "Función", "Ejemplo", "Significa"],
+        "rows": [
+          ["and", "suma ideas", "I study and I work.", "Estudio y trabajo."],
+          ["but", "contraste", "I like pizza, but I don't like cheese.", "Me gusta la pizza, pero no el queso."],
+          ["or", "opción", "Do you want coffee or tea?", "¿Quieres café o té?"],
+          ["because", "da la razón", "I study English because I want to work in Orlando.", "Estudio inglés porque quiero trabajar en Orlando."],
+          ["so", "da el resultado", "I was tired, so I went to bed.", "Estaba cansado, así que me fui a dormir."]
+        ]
+      },
+      "note": "Because responde a why y so muestra el resultado. Compara: I stayed home because I was sick. / I was sick, so I stayed home."
+    },
+    {
+      "h": "First, next, then y finally",
+      "body": "Para contar pasos o una rutina usa estas palabras en orden: **First, ... Next, ... Then, ... Finally, ...**\n\n*First, I wake up at 6. Then I take a shower. Next, I have breakfast. Finally, I go to the university.*\n\nSe ponen al principio de la frase y llevan coma."
+    },
+    {
+      "h": "Construyendo frases más largas",
+      "body": "Empieza con una frase simple y agrégale información paso a paso.\n\n1. I study English.\n2. I study English every day.\n3. I study English every day because I want to work at Disney.\n4. I study English every day because I want to work at Disney, so I practice at night and on weekends.\n\nAsí, con conectores, tu inglés suena mucho más natural."
+    }
+  ],
+  "vocab": [
+    { "en": "in", "es": "en (meses, años)", "ex": "My birthday is in May." },
+    { "en": "on", "es": "en (días)", "ex": "I have class on Monday." },
+    { "en": "at", "es": "a (hora)", "ex": "The class starts at 5 pm." },
+    { "en": "from", "es": "desde, de", "ex": "I work from 9 to 5." },
+    { "en": "before", "es": "antes de", "ex": "I eat breakfast before class." },
+    { "en": "after", "es": "después de", "ex": "I rest after work." },
+    { "en": "during", "es": "durante", "ex": "I listen to music during the trip." },
+    { "en": "for", "es": "durante, por", "ex": "I wait for ten minutes." },
+    { "en": "since", "es": "desde", "ex": "I have lived here since 2020." },
+    { "en": "and", "es": "y", "ex": "I like music and movies." },
+    { "en": "but", "es": "pero", "ex": "I'm tired, but happy." },
+    { "en": "or", "es": "o", "ex": "Tea or coffee?" },
+    { "en": "because", "es": "porque", "ex": "I'm happy because it's Friday." },
+    { "en": "so", "es": "así que, entonces", "ex": "It's late, so I go home." },
+    { "en": "then", "es": "luego, entonces", "ex": "I eat, then I study." },
+    { "en": "first", "es": "primero", "ex": "First, open the app." },
+    { "en": "next", "es": "después, a continuación", "ex": "Next, choose your ticket." },
+    { "en": "finally", "es": "finalmente", "ex": "Finally, I arrive home." },
+    { "en": "morning", "es": "mañana", "ex": "I study in the morning." },
+    { "en": "weekend", "es": "fin de semana", "ex": "I rest on the weekend." }
+  ],
+  "examples": [
+    { "en": "My birthday is in October.", "es": "Mi cumpleaños es en octubre." },
+    { "en": "I have class on Tuesday.", "es": "Tengo clase el martes." },
+    { "en": "The park opens at 9 am.", "es": "El parque abre a las 9 am." },
+    { "en": "I work from Monday to Friday.", "es": "Trabajo de lunes a viernes." },
+    { "en": "I brush my teeth before bed.", "es": "Me cepillo los dientes antes de acostarme." },
+    { "en": "We eat dinner after the movie.", "es": "Cenamos después de la película." },
+    { "en": "I sleep during the flight.", "es": "Duermo durante el vuelo." },
+    { "en": "I study English for two hours every day.", "es": "Estudio inglés dos horas cada día." },
+    { "en": "I have studied English since January.", "es": "Estudio inglés desde enero." },
+    { "en": "I like coffee, but I don't like tea.", "es": "Me gusta el café, pero no el té." },
+    { "en": "Do you want to walk or take the bus?", "es": "¿Quieres caminar o tomar el bus?" },
+    { "en": "I'm learning English because I want to travel.", "es": "Estoy aprendiendo inglés porque quiero viajar." },
+    { "en": "It was raining, so we stayed home.", "es": "Estaba lloviendo, así que nos quedamos en casa." },
+    { "en": "First, buy a ticket. Then, go to the gate.", "es": "Primero, compra un boleto. Luego, ve a la puerta." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "My birthday is ___ June.", "options": ["in", "on", "at"], "answer": 0, "why": "Los meses van con in." },
+    { "type": "choice", "q": "I have class ___ Wednesday.", "options": ["in", "on", "at"], "answer": 1, "why": "Los días de la semana van con on." },
+    { "type": "choice", "q": "The movie starts ___ 8 pm.", "options": ["in", "on", "at"], "answer": 2, "why": "Las horas exactas van con at." },
+    { "type": "choice", "q": "I study ___ the morning.", "options": ["in", "on", "at"], "answer": 0, "why": "In the morning es una expresión fija." },
+    { "type": "choice", "q": "I'm tired ___ I worked all day.", "options": ["because", "so", "but"], "answer": 0, "why": "Because da la razón del cansancio." },
+    { "type": "choice", "q": "It's late, ___ I go to bed.", "options": ["because", "so", "or"], "answer": 1, "why": "So presenta el resultado." },
+    { "type": "choice", "q": "I have lived here ___ 2022.", "options": ["for", "since", "during"], "answer": 1, "why": "2022 es un punto de inicio, por eso since." },
+    { "type": "fill", "q": "I eat dinner ___ night. (at)", "answer": ["at"], "why": "At night es una expresión fija." },
+    { "type": "fill", "q": "I like tea ___ I don't like coffee.", "answer": ["but"], "why": "But marca contraste." },
+    { "type": "fill", "q": "Do you want a taxi ___ a bus?", "answer": ["or"], "why": "Or presenta una opción." },
+    { "type": "fill", "q": "I wait for the bus ___ ten minutes.", "answer": ["for"], "why": "Ten minutes es una duración: for." },
+    { "type": "fill", "q": "___, I wake up. Then I take a shower.", "answer": ["first"], "why": "First indica el primer paso." },
+    { "type": "order", "words": ["on", "have", "I", "class", "Monday"], "answer": "I have class on Monday", "es": "Tengo clase el lunes." },
+    { "type": "order", "words": ["from", "work", "I", "9", "to", "5"], "answer": "I work from 9 to 5", "es": "Trabajo de 9 a 5." },
+    { "type": "order", "words": ["I", "study", "because", "want", "I", "to", "travel"], "answer": "I study because I want to travel", "es": "Estudio porque quiero viajar." },
+    { "type": "translate", "es": "Mi cumpleaños es en mayo.", "answer": ["My birthday is in May."], "why": "Con meses se usa in." },
+    { "type": "translate", "es": "La clase empieza a las cinco.", "answer": ["The class starts at five.", "The class starts at 5.", "The class begins at five.", "The class begins at 5."], "why": "Con horas se usa at." },
+    { "type": "translate", "es": "Estudio inglés porque quiero trabajar en Disney.", "answer": ["I study English because I want to work at Disney.", "I study English because I want to work in Disney."], "why": "Because explica la razón." },
+    { "type": "translate", "es": "Primero desayuno y luego voy a la universidad.", "answer": ["First I have breakfast and then I go to the university.", "First, I have breakfast and then I go to the university.", "First I have breakfast, then I go to the university.", "First, I have breakfast, then I go to the university.", "First I eat breakfast and then I go to the university.", "First, I eat breakfast and then I go to the university."], "why": "First y then ordenan los pasos." }
+  ],
+  "speak": [
+    "My birthday is in October.",
+    "I have class on Monday at 8 am.",
+    "I work from Monday to Friday.",
+    "I study English every day because I want to work in Orlando.",
+    "I like coffee, but I don't like tea.",
+    "It was late, so I went home.",
+    "First, I wake up. Then, I have breakfast.",
+    "I have studied English since January."
+  ],
+  "tip": "Los hispanohablantes dicen *in Monday* o *at May*. Recuerda la regla: in para meses y años, on para días y fechas, at para horas. Y no confundas for (cuánto tiempo) con since (desde cuándo)."
+}

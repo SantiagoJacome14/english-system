@@ -1,0 +1,141 @@
+{
+  "n": 14,
+  "block": "Mi mundo",
+  "title": "Ropa, cuerpo y clima",
+  "emoji": "🌦️",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás hablar de la ropa que llevas, las partes del cuerpo y el clima, incluyendo la temperatura en grados Fahrenheit.",
+  "sections": [
+    {
+      "h": "La ropa",
+      "body": "Para decir qué ropa llevas puesta usa **I'm wearing...** (estoy usando / llevo puesto).\n\n**I'm wearing a blue shirt and black pants.**\n\nCuidado con la palabra *pants*: en inglés americano siempre es plural. **My pants are new.**",
+      "table": {
+        "head": ["Inglés", "Español", "Ejemplo"],
+        "rows": [
+          ["shirt", "camisa", "a white shirt"],
+          ["T-shirt", "camiseta", "a red T-shirt"],
+          ["pants", "pantalón", "black pants"],
+          ["shorts", "pantalones cortos", "blue shorts"],
+          ["dress", "vestido", "a green dress"],
+          ["shoes", "zapatos", "new shoes"],
+          ["jacket", "chaqueta", "a warm jacket"],
+          ["hat", "sombrero / gorra", "a funny hat"]
+        ]
+      },
+      "note": "Pants, shorts, shoes y jeans son plurales: no se dice *a pants*. Se dice **a pair of pants** o simplemente **pants**."
+    },
+    {
+      "h": "Partes del cuerpo",
+      "body": "Te servirán en el trabajo, en una consulta médica y para describir personas:",
+      "table": {
+        "head": ["Inglés", "Español"],
+        "rows": [
+          ["head", "cabeza"],
+          ["eyes", "ojos"],
+          ["nose", "nariz"],
+          ["mouth", "boca"],
+          ["hand / hands", "mano / manos"],
+          ["arm", "brazo"],
+          ["leg", "pierna"],
+          ["foot / feet", "pie / pies"]
+        ]
+      },
+      "note": "Ojo con los plurales irregulares: **foot → feet**. Y recuerda: *my hand hurts* = me duele la mano (**My hand hurts**)."
+    },
+    {
+      "h": "El clima y las estaciones",
+      "body": "Para preguntar por el clima: **What's the weather like?** (¿Cómo está el clima?)\n\nPara responder con **It's** + adjetivo: **It's sunny. It's hot. It's cold.** O con **It's** + verbo -ing: **It's raining. It's snowing.**",
+      "table": {
+        "head": ["Palabra", "Significa", "Ejemplo"],
+        "rows": [
+          ["sunny", "soleado", "It's sunny today."],
+          ["cloudy", "nublado", "It's cloudy."],
+          ["rainy / raining", "lluvioso / lloviendo", "It's raining now."],
+          ["windy", "ventoso", "It's windy."],
+          ["hot / cold", "caliente / frío", "It's very hot."],
+          ["summer / winter", "verano / invierno", "Summer is hot in Orlando."],
+          ["spring / fall", "primavera / otoño", "Fall is nice."]
+        ]
+      },
+      "note": "En Estados Unidos el otoño se dice **fall**; en inglés británico, **autumn**."
+    },
+    {
+      "h": "Fahrenheit y Celsius",
+      "body": "En Colombia usamos grados **Celsius** (°C). En Estados Unidos usan **Fahrenheit** (°F). Esto es muy importante para tu viaje a Orlando.\n\n**32 °F = 0 °C** (el agua se congela)\n**68 °F = 20 °C** (clima agradable)\n**86 °F = 30 °C** (hace calor)\n**95 °F = 35 °C** (¡mucho calor!)\n\nEn verano, Orlando suele tener entre **90 y 95 degrees**. Se dice: **It's ninety-five degrees today.** (sin decir 'Fahrenheit').\n\nTruco rápido: resta 30 a los grados Fahrenheit y divide entre 2. Es solo aproximado, pero te da una idea."
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "No digas *I wear a blue shirt* para 'llevo puesta ahora'. Lo natural es **I'm wearing a blue shirt**.",
+        "No digas *Is hot* ni *Hace calor* literal. Se dice **It's hot**.",
+        "No digas *I have cold* para 'tengo frío'. Se dice **I'm cold**.",
+        "No digas *a pants*. **Pants** es plural: *my pants are black*."
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "shirt", "es": "camisa", "ex": "I'm wearing a white shirt." },
+    { "en": "T-shirt", "es": "camiseta", "ex": "He has a red T-shirt." },
+    { "en": "pants", "es": "pantalón", "ex": "My pants are black." },
+    { "en": "shorts", "es": "pantalones cortos", "ex": "I wear shorts in summer." },
+    { "en": "dress", "es": "vestido", "ex": "She's wearing a blue dress." },
+    { "en": "shoes", "es": "zapatos", "ex": "My shoes are new." },
+    { "en": "jacket", "es": "chaqueta", "ex": "It's cold. Take a jacket." },
+    { "en": "hat", "es": "sombrero / gorra", "ex": "I wear a hat in the sun." },
+    { "en": "head", "es": "cabeza", "ex": "My head hurts." },
+    { "en": "eyes", "es": "ojos", "ex": "She has green eyes." },
+    { "en": "hand", "es": "mano", "ex": "Wash your hands." },
+    { "en": "foot", "es": "pie", "ex": "My foot hurts." },
+    { "en": "weather", "es": "clima", "ex": "The weather is nice today." },
+    { "en": "sunny", "es": "soleado", "ex": "It's sunny in Orlando." },
+    { "en": "cloudy", "es": "nublado", "ex": "It's cloudy this morning." },
+    { "en": "raining", "es": "lloviendo", "ex": "It's raining now." },
+    { "en": "hot", "es": "caliente / hace calor", "ex": "It's very hot today." },
+    { "en": "cold", "es": "frío / hace frío", "ex": "I'm cold." },
+    { "en": "summer", "es": "verano", "ex": "Summer is hot in Florida." },
+    { "en": "degrees", "es": "grados", "ex": "It's ninety degrees." }
+  ],
+  "examples": [
+    { "en": "I'm wearing a blue shirt and black pants.", "es": "Llevo una camisa azul y pantalón negro." },
+    { "en": "She's wearing a green dress.", "es": "Ella lleva un vestido verde." },
+    { "en": "My shoes are new.", "es": "Mis zapatos son nuevos." },
+    { "en": "My head hurts.", "es": "Me duele la cabeza." },
+    { "en": "She has brown eyes.", "es": "Ella tiene ojos cafés." },
+    { "en": "What's the weather like today?", "es": "¿Cómo está el clima hoy?" },
+    { "en": "It's sunny and hot.", "es": "Está soleado y hace calor." },
+    { "en": "It's raining now.", "es": "Está lloviendo ahora." },
+    { "en": "It's ninety-five degrees in Orlando.", "es": "Hay 95 grados en Orlando." },
+    { "en": "I'm cold. I need a jacket.", "es": "Tengo frío. Necesito una chaqueta." },
+    { "en": "Summer is very hot in Florida.", "es": "El verano es muy caluroso en Florida." },
+    { "en": "I wear shorts in the summer.", "es": "Uso pantalones cortos en el verano." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "What's the weather like? It's ___ and I need an umbrella.", "options": ["sunny", "raining", "hot"], "answer": 1, "why": "Un paraguas se necesita cuando llueve: raining." },
+    { "type": "choice", "q": "I'm ___ a blue shirt.", "options": ["wearing", "wear", "having"], "answer": 0, "why": "Para ropa que llevas ahora: I'm wearing." },
+    { "type": "choice", "q": "My ___ are black.", "options": ["pants", "pant", "a pants"], "answer": 0, "why": "Pants es plural: my pants are." },
+    { "type": "choice", "q": "In Orlando in summer it is ___ degrees.", "options": ["35", "95", "5"], "answer": 1, "why": "Con Fahrenheit, 95 es unos 35 °C: mucho calor." },
+    { "type": "choice", "q": "How do you say 'Tengo frío'?", "options": ["I'm cold.", "I have cold.", "It's cold me."], "answer": 0, "why": "Para sensación personal usamos I'm cold." },
+    { "type": "choice", "q": "What is the plural of 'foot'?", "options": ["foots", "feet", "feets"], "answer": 1, "why": "Foot tiene plural irregular: feet." },
+    { "type": "choice", "q": "Which word means 'otoño' in the USA?", "options": ["fall", "spring", "summer"], "answer": 0, "why": "En inglés americano otoño es fall." },
+    { "type": "fill", "q": "It's ___ today. I need my hat. (soleado)", "answer": ["sunny"], "why": "Soleado se dice sunny." },
+    { "type": "fill", "q": "What's the ___ like today?", "answer": ["weather"], "why": "El clima es weather." },
+    { "type": "fill", "q": "It's ___ now. (llover, -ing)", "answer": ["raining"], "why": "Para algo que pasa ahora: raining." },
+    { "type": "fill", "q": "She has green ___. (ojos)", "answer": ["eyes"], "why": "Ojos en plural: eyes." },
+    { "type": "fill", "q": "I'm ___ shorts today. (llevar puesto)", "answer": ["wearing"], "why": "Ropa puesta: I'm wearing." },
+    { "type": "order", "words": ["like", "What's", "the", "weather", "today"], "answer": "What's the weather like today", "es": "¿Cómo está el clima hoy?" },
+    { "type": "order", "words": ["wearing", "I'm", "a", "jacket"], "answer": "I'm wearing a jacket", "es": "Llevo una chaqueta." },
+    { "type": "order", "words": ["hot", "very", "It's", "today"], "answer": "It's very hot today", "es": "Hoy hace mucho calor." },
+    { "type": "translate", "es": "Está lloviendo.", "answer": ["It's raining.", "It is raining."], "why": "Clima ahora: It's raining." },
+    { "type": "translate", "es": "Me duele la cabeza.", "answer": ["My head hurts.", "I have a headache."], "why": "My head hurts es la forma más común." },
+    { "type": "translate", "es": "Llevo una camiseta roja.", "answer": ["I'm wearing a red T-shirt.", "I am wearing a red T-shirt.", "I'm wearing a red shirt.", "I am wearing a red shirt."], "why": "Ropa puesta ahora: I'm wearing." }
+  ],
+  "speak": [
+    "What's the weather like today?",
+    "It's sunny and very hot.",
+    "It's ninety-five degrees in Orlando.",
+    "I'm wearing a blue shirt and black pants.",
+    "I'm cold. I need a jacket.",
+    "My head hurts."
+  ],
+  "tip": "Tendemos a decir *I have cold* o *I have hot* por 'tengo frío/calor'. En inglés se usa to be: **I'm cold**, **I'm hot**. Y recuerda: en EE. UU. los grados son Fahrenheit, no Celsius."
+}

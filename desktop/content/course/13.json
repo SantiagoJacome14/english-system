@@ -1,0 +1,123 @@
+{
+  "n": 13,
+  "block": "Mi mundo",
+  "title": "Comida y bebida: pedir en un restaurante",
+  "emoji": "🍔",
+  "minutes": 32,
+  "goal": "Al final de esta clase podrás hablar de comida y bebida, usar some y any, y pedir en un restaurante con I'd like.",
+  "sections": [
+    {
+      "h": "Comida y bebida",
+      "body": "En Orlando vas a comer (y servir) mucha comida rápida. Estas son palabras que verás en cualquier menú:",
+      "table": {
+        "head": ["Inglés", "Español", "Tipo"],
+        "rows": [
+          ["burger", "hamburguesa", "comida"],
+          ["fries", "papas fritas", "comida"],
+          ["chicken", "pollo", "comida"],
+          ["salad", "ensalada", "comida"],
+          ["pizza", "pizza", "comida"],
+          ["water", "agua", "bebida"],
+          ["soda", "gaseosa", "bebida"],
+          ["coffee", "café", "bebida"],
+          ["juice", "jugo", "bebida"]
+        ]
+      },
+      "note": "En Estados Unidos las papas fritas son **fries** (o **French fries**). **Chips** son las papitas de bolsa."
+    },
+    {
+      "h": "Contables y no contables",
+      "body": "Las cosas **contables** se pueden contar de una en una: **a burger, two burgers**.\n\nLas **no contables** no se cuentan directamente: **water, rice, milk, coffee, bread**. No existe *two waters* en una frase normal sobre cantidad; se dice **a glass of water** o **a cup of coffee**.\n\nLas no contables nunca llevan **a / an** ni plural."
+    },
+    {
+      "h": "A, an, some y any",
+      "table": {
+        "head": ["Tipo", "Afirmativo", "Negativo / pregunta"],
+        "rows": [
+          ["Contable singular", "I'd like a burger.", "I don't want a burger. / Do you have a burger?"],
+          ["Contable plural", "I have some fries.", "I don't have any fries. / Do you have any fries?"],
+          ["No contable", "There is some water.", "There isn't any water. / Is there any water?"]
+        ]
+      },
+      "note": "Usa **a** antes de consonante (a burger) y **an** antes de vocal (an apple). **Some** va en frases afirmativas y **any** en negativas y preguntas."
+    },
+    {
+      "h": "Pedir en un restaurante",
+      "body": "Para pedir con educación usa **I'd like...** (me gustaría). Es más amable que *I want*.\n\nMira este diálogo:\n\n**Waiter:** Hi! Are you ready to order?\n**Customer:** Yes. I'd like a burger and some fries, please.\n**Waiter:** Anything to drink?\n**Customer:** Yes, a soda, please.\n**Waiter:** Sure. Is that all?\n**Customer:** Yes, thank you. How much is it?\n**Waiter:** It's twelve dollars.\n\nPara preguntar el precio: **How much is it?** (uno) o **How much are they?** (varios)."
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "No digas *I want a burger* a un mesero: suena brusco. Mejor **I'd like a burger, please**.",
+        "No digas *I'd like a water*. Agua es no contable: **I'd like some water** o **a glass of water**.",
+        "No digas *How much cost?*. Es **How much is it?**",
+        "Con precios, el dinero se dice así: $12 = **twelve dollars**."
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "burger", "es": "hamburguesa", "ex": "I'd like a burger, please." },
+    { "en": "fries", "es": "papas fritas", "ex": "Can I have some fries?" },
+    { "en": "chicken", "es": "pollo", "ex": "The chicken is very good." },
+    { "en": "salad", "es": "ensalada", "ex": "I'd like a small salad." },
+    { "en": "pizza", "es": "pizza", "ex": "We want a big pizza." },
+    { "en": "sandwich", "es": "sándwich", "ex": "I eat a sandwich for lunch." },
+    { "en": "rice", "es": "arroz", "ex": "We have rice and beans." },
+    { "en": "bread", "es": "pan", "ex": "There is some bread on the table." },
+    { "en": "water", "es": "agua", "ex": "A glass of water, please." },
+    { "en": "soda", "es": "gaseosa", "ex": "I'd like a soda." },
+    { "en": "coffee", "es": "café", "ex": "She drinks coffee every morning." },
+    { "en": "juice", "es": "jugo", "ex": "Orange juice, please." },
+    { "en": "menu", "es": "menú / carta", "ex": "Can I see the menu?" },
+    { "en": "waiter", "es": "mesero", "ex": "The waiter is friendly." },
+    { "en": "bill", "es": "cuenta", "ex": "The bill, please." },
+    { "en": "I'd like", "es": "me gustaría", "ex": "I'd like some water." },
+    { "en": "How much is it?", "es": "¿Cuánto cuesta?", "ex": "How much is the burger?" },
+    { "en": "dollar", "es": "dólar", "ex": "It is ten dollars." },
+    { "en": "to drink", "es": "beber / tomar", "ex": "I drink water at work." },
+    { "en": "to eat", "es": "comer", "ex": "We eat dinner at seven." }
+  ],
+  "examples": [
+    { "en": "I'd like a burger, please.", "es": "Quisiera una hamburguesa, por favor." },
+    { "en": "I'd like some fries and a soda.", "es": "Quisiera unas papas fritas y una gaseosa." },
+    { "en": "Do you have any juice?", "es": "¿Tiene jugo?" },
+    { "en": "There isn't any milk.", "es": "No hay leche." },
+    { "en": "We have some rice and chicken.", "es": "Tenemos arroz y pollo." },
+    { "en": "Can I see the menu, please?", "es": "¿Puedo ver el menú, por favor?" },
+    { "en": "Are you ready to order?", "es": "¿Están listos para ordenar?" },
+    { "en": "Anything to drink?", "es": "¿Algo de beber?" },
+    { "en": "How much is it?", "es": "¿Cuánto cuesta?" },
+    { "en": "It's twelve dollars.", "es": "Cuesta doce dólares." },
+    { "en": "How much are the fries?", "es": "¿Cuánto cuestan las papas?" },
+    { "en": "The bill, please.", "es": "La cuenta, por favor." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I'd like ___ burger, please.", "options": ["a", "an", "some"], "answer": 0, "why": "Burger es contable singular y empieza con consonante: a burger." },
+    { "type": "choice", "q": "I'd like ___ apple.", "options": ["a", "an", "any"], "answer": 1, "why": "Apple empieza con vocal: an apple." },
+    { "type": "choice", "q": "I'd like ___ water, please.", "options": ["a", "an", "some"], "answer": 2, "why": "Water es no contable, por eso some." },
+    { "type": "choice", "q": "Do you have ___ juice?", "options": ["some", "any", "an"], "answer": 1, "why": "En preguntas se usa any." },
+    { "type": "choice", "q": "There isn't ___ bread.", "options": ["any", "some", "a"], "answer": 0, "why": "En negativo se usa any." },
+    { "type": "choice", "q": "Which one is uncountable?", "options": ["burger", "rice", "sandwich"], "answer": 1, "why": "Rice (arroz) es no contable; burger y sandwich se cuentan." },
+    { "type": "choice", "q": "How do you ask the price of a burger?", "options": ["How much is it?", "How many is it?", "What cost it?"], "answer": 0, "why": "El precio se pregunta con How much is it?" },
+    { "type": "fill", "q": "I'd ___ a soda, please.", "answer": ["like"], "why": "I'd like = me gustaría." },
+    { "type": "fill", "q": "We have ___ fries. (afirmativo)", "answer": ["some"], "why": "En frases afirmativas con plural se usa some." },
+    { "type": "fill", "q": "Is there ___ coffee? (pregunta)", "answer": ["any"], "why": "En preguntas se usa any." },
+    { "type": "fill", "q": "How ___ is the pizza?", "answer": ["much"], "why": "El precio se pregunta con how much." },
+    { "type": "fill", "q": "Can I see the ___, please? (la carta del restaurante)", "answer": ["menu"], "why": "El menú del restaurante es menu." },
+    { "type": "order", "words": ["like", "I'd", "a", "burger", "please"], "answer": "I'd like a burger please", "es": "Quisiera una hamburguesa, por favor." },
+    { "type": "order", "words": ["is", "much", "How", "it"], "answer": "How much is it", "es": "¿Cuánto cuesta?" },
+    { "type": "order", "words": ["any", "Do", "you", "have", "juice"], "answer": "Do you have any juice", "es": "¿Tiene jugo?" },
+    { "type": "translate", "es": "Quisiera un poco de agua, por favor.", "answer": ["I'd like some water, please.", "I would like some water, please."], "why": "Agua es no contable: some water." },
+    { "type": "translate", "es": "No hay pan.", "answer": ["There isn't any bread.", "There is not any bread.", "There's no bread."], "why": "Negativo con no contable: there isn't any." },
+    { "type": "translate", "es": "¿Cuánto cuestan las papas fritas?", "answer": ["How much are the fries?", "How much are fries?"], "why": "Fries es plural: how much are." }
+  ],
+  "speak": [
+    "I'd like a burger and some fries, please.",
+    "Can I see the menu, please?",
+    "Do you have any juice?",
+    "A glass of water, please.",
+    "How much is it?",
+    "The bill, please."
+  ],
+  "tip": "Mucha gente dice *I want a coffee* o *I'd like a water*. En un restaurante usa **I'd like...** (más amable) y recuerda que water, rice y coffee son no contables: **some water**, **a cup of coffee**."
+}

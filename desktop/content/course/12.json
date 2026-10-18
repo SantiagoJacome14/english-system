@@ -1,0 +1,132 @@
+{
+  "n": 12,
+  "block": "Mi mundo",
+  "title": "Adjetivos, colores y descripciones",
+  "emoji": "🎨",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás describir personas, cosas y lugares usando colores, adjetivos opuestos y palabras como very y really.",
+  "sections": [
+    {
+      "h": "Los colores",
+      "table": {
+        "head": ["Color", "Español", "Ejemplo"],
+        "rows": [
+          ["red", "rojo", "a red bus"],
+          ["blue", "azul", "a blue shirt"],
+          ["green", "verde", "a green tree"],
+          ["yellow", "amarillo", "a yellow taxi"],
+          ["black", "negro", "a black phone"],
+          ["white", "blanco", "a white house"],
+          ["orange", "naranja", "an orange ball"],
+          ["pink", "rosado", "a pink bag"],
+          ["brown", "café / marrón", "a brown dog"],
+          ["gray", "gris", "a gray car"]
+        ]
+      },
+      "note": "Para preguntar: **What color is it?** Respuesta: **It's red.**"
+    },
+    {
+      "h": "Opuestos comunes",
+      "body": "Aprender los adjetivos en pares es mucho más fácil:",
+      "table": {
+        "head": ["Adjetivo", "Opuesto", "Significa"],
+        "rows": [
+          ["big", "small", "grande / pequeño"],
+          ["new", "old", "nuevo / viejo"],
+          ["cheap", "expensive", "barato / caro"],
+          ["tall", "short", "alto / bajo"],
+          ["hot", "cold", "caliente / frío"],
+          ["good", "bad", "bueno / malo"],
+          ["fast", "slow", "rápido / lento"],
+          ["easy", "difficult", "fácil / difícil"]
+        ]
+      }
+    },
+    {
+      "h": "Dónde va el adjetivo",
+      "body": "En español el adjetivo va después: *un carro rojo*. En inglés va **antes del sustantivo**: **a red car**.\n\nAdemás, el adjetivo **nunca cambia a plural**. No existe el -s ni el género:\n\n**a red car** → **two red cars** (no *reds cars*)\n**a tall man** → **tall women** (no *talls*)\n\nSi usas a/an, mira la primera letra del adjetivo: **an old house**, **a new house**."
+    },
+    {
+      "h": "To be + adjetivo",
+      "body": "También puedes poner el adjetivo después de **to be**, sin sustantivo:\n\n**The car is red.** El carro es rojo.\n**My phone is new.** Mi teléfono es nuevo.\n**They are tall.** Ellos son altos.\n\nPara describir a una persona: **My brother is tall and funny.** Y para el pelo o los ojos usa have: **She has long black hair.** **He has brown eyes.**"
+    },
+    {
+      "h": "Very, really, a bit",
+      "body": "Estas palabras cambian la fuerza del adjetivo y van **antes** de él:",
+      "table": {
+        "head": ["Palabra", "Fuerza", "Ejemplo"],
+        "rows": [
+          ["a bit", "poco", "The room is a bit small."],
+          ["very", "mucho", "The park is very big."],
+          ["really", "muchísimo", "The ride is really fast!"]
+        ]
+      },
+      "note": "No digas *very much big*. En inglés es simplemente **very big**."
+    }
+  ],
+  "vocab": [
+    { "en": "red", "es": "rojo", "ex": "The red bus is here." },
+    { "en": "blue", "es": "azul", "ex": "My shirt is blue." },
+    { "en": "green", "es": "verde", "ex": "The grass is green." },
+    { "en": "yellow", "es": "amarillo", "ex": "A yellow taxi is outside." },
+    { "en": "black", "es": "negro", "ex": "I have a black backpack." },
+    { "en": "white", "es": "blanco", "ex": "The castle is white." },
+    { "en": "big", "es": "grande", "ex": "Orlando is a big city." },
+    { "en": "small", "es": "pequeño", "ex": "My room is small." },
+    { "en": "new", "es": "nuevo", "ex": "I have a new laptop." },
+    { "en": "old", "es": "viejo", "ex": "That is an old car." },
+    { "en": "cheap", "es": "barato", "ex": "This shirt is cheap." },
+    { "en": "expensive", "es": "caro", "ex": "The tickets are expensive." },
+    { "en": "tall", "es": "alto", "ex": "My brother is tall." },
+    { "en": "short", "es": "bajo / corto", "ex": "She has short hair." },
+    { "en": "fast", "es": "rápido", "ex": "That roller coaster is fast." },
+    { "en": "slow", "es": "lento", "ex": "The bus is slow today." },
+    { "en": "beautiful", "es": "hermoso", "ex": "The park is beautiful." },
+    { "en": "very", "es": "muy", "ex": "It is very hot." },
+    { "en": "really", "es": "realmente / muy", "ex": "I am really happy." },
+    { "en": "a bit", "es": "un poco", "ex": "The coffee is a bit cold." }
+  ],
+  "examples": [
+    { "en": "I have a red backpack.", "es": "Tengo una mochila roja." },
+    { "en": "She has a new phone.", "es": "Ella tiene un teléfono nuevo." },
+    { "en": "It's an old house.", "es": "Es una casa vieja." },
+    { "en": "These are cheap shoes.", "es": "Estos son zapatos baratos." },
+    { "en": "The tickets are expensive.", "es": "Los boletos son caros." },
+    { "en": "My brother is tall and funny.", "es": "Mi hermano es alto y gracioso." },
+    { "en": "He has short black hair.", "es": "Él tiene el pelo corto y negro." },
+    { "en": "The room is a bit small.", "es": "El cuarto es un poco pequeño." },
+    { "en": "The park is very big.", "es": "El parque es muy grande." },
+    { "en": "The ride is really fast!", "es": "¡La atracción es rapidísima!" },
+    { "en": "What color is your bag?", "es": "¿De qué color es tu bolso?" },
+    { "en": "It's a beautiful day.", "es": "Es un día hermoso." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I have a ___ car.", "options": ["car red", "red", "reds"], "answer": 1, "why": "El adjetivo va antes del sustantivo y no lleva -s." },
+    { "type": "choice", "q": "What is the opposite of 'big'?", "options": ["small", "old", "cheap"], "answer": 0, "why": "El opuesto de big es small." },
+    { "type": "choice", "q": "They are two ___ dogs.", "options": ["blacks", "black", "blacken"], "answer": 1, "why": "Los adjetivos no cambian en plural: two black dogs." },
+    { "type": "choice", "q": "It is ___ old house.", "options": ["a", "an", "the one"], "answer": 1, "why": "Old empieza con vocal, por eso an." },
+    { "type": "choice", "q": "The pool is ___ big. (muchísimo)", "options": ["really", "a bit", "much"], "answer": 0, "why": "Really es la forma fuerte, antes del adjetivo." },
+    { "type": "choice", "q": "What color is the sky on a sunny day?", "options": ["blue", "black", "brown"], "answer": 0, "why": "Un cielo soleado es azul: blue." },
+    { "type": "fill", "q": "The tickets are very ___. (caro)", "answer": ["expensive"], "why": "Caro en inglés es expensive." },
+    { "type": "fill", "q": "My phone is ___. (nuevo)", "answer": ["new"], "why": "Nuevo se dice new." },
+    { "type": "fill", "q": "She ___ long black hair. (have)", "answer": ["has"], "why": "Para el pelo usamos have; con she, has." },
+    { "type": "fill", "q": "The coffee is a ___ cold. (un poco)", "answer": ["bit"], "why": "Un poco se dice a bit." },
+    { "type": "fill", "q": "My brother ___ tall. (to be)", "answer": ["is", "'s"], "why": "He/brother es singular: is." },
+    { "type": "fill", "q": "It is a ___ day. (hermoso)", "answer": ["beautiful"], "why": "Hermoso se dice beautiful." },
+    { "type": "order", "words": ["a", "I", "red", "have", "bag"], "answer": "I have a red bag", "es": "Tengo un bolso rojo." },
+    { "type": "order", "words": ["is", "very", "The", "park", "big"], "answer": "The park is very big", "es": "El parque es muy grande." },
+    { "type": "order", "words": ["color", "What", "is", "your", "bag"], "answer": "What color is your bag", "es": "¿De qué color es tu bolso?" },
+    { "type": "translate", "es": "Tengo una camisa azul.", "answer": ["I have a blue shirt.", "I've got a blue shirt."], "why": "El color va antes del sustantivo: a blue shirt." },
+    { "type": "translate", "es": "Mi hermano es muy alto.", "answer": ["My brother is very tall.", "My brother's very tall."], "why": "to be + very + adjetivo." },
+    { "type": "translate", "es": "La casa es vieja.", "answer": ["The house is old.", "The house's old."], "why": "to be + adjetivo: is old." }
+  ],
+  "speak": [
+    "I have a red backpack.",
+    "My phone is new.",
+    "The tickets are expensive.",
+    "My brother is tall and funny.",
+    "The park is very big.",
+    "The ride is really fast!"
+  ],
+  "tip": "En español el adjetivo va después (*carro rojo*) y tiene plural (*rojos*). En inglés va antes y no cambia: **red cars**. Nunca digas *reds cars* ni *car red*."
+}

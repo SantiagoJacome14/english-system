@@ -1,0 +1,151 @@
+{
+  "n": 17,
+  "block": "Verbos y tiempos",
+  "title": "Presente simple I: tu rutina diaria",
+  "emoji": "⏰",
+  "minutes": 35,
+  "goal": "Al final de esta clase podrás contar tu rutina y la de otras personas usando el presente simple afirmativo.",
+  "sections": [
+    {
+      "h": "¿Para qué sirve el presente simple?",
+      "body": "El **presente simple** (*simple present*) sirve para hablar de **rutinas, hábitos y hechos que siempre son verdad**.\n\nEn español usamos el presente: *me levanto a las 7*, *trabajo en Orlando*, *el sol sale por el este*. En inglés también, pero con una regla especial para **he / she / it**.\n\nLos tres momentos con el verbo **work**:\n\n- Pasado: **I worked** yesterday. (Trabajé ayer.)\n- Presente: **I work** every day. (Trabajo todos los días.)\n- Futuro: **I will work** tomorrow. (Trabajaré mañana.)\n\nHoy nos concentramos en el **presente**."
+    },
+    {
+      "h": "Cómo se forma: I / you / we / they + verbo base",
+      "body": "Con **I, you, we, they** usas el **verbo base**, sin cambiar nada. El verbo base es el verbo tal como aparece en el diccionario, sin *to*.\n\n**I study** at the university. (Estudio en la universidad.)\n\n**They live** in Bogotá. (Ellos viven en Bogotá.)\n\nNo se agrega nada. No hay un verbo auxiliar en la afirmación: solo pronombre + verbo."
+    },
+    {
+      "h": "Conjugación completa del verbo work",
+      "table": {
+        "head": ["Pronombre", "Presente: work", "Ejemplo", "Significa"],
+        "rows": [
+          ["I", "work", "I work in the morning.", "Trabajo en la mañana."],
+          ["you", "work", "You work every day.", "Tú trabajas todos los días."],
+          ["he / she / it", "works", "She works at a hotel.", "Ella trabaja en un hotel."],
+          ["we", "work", "We work together.", "Trabajamos juntos."],
+          ["they", "work", "They work in Orlando.", "Ellos trabajan en Orlando."]
+        ]
+      },
+      "note": "Mira la diferencia: solo he / she / it cambia (work → works). Esa es la famosa **-s de la tercera persona**."
+    },
+    {
+      "h": "He / she / it: la regla de la -s",
+      "body": "Con **he, she, it** el verbo lleva **-s** o **-es** al final. Hay cuatro reglas de escritura:",
+      "table": {
+        "head": ["Regla", "Verbo base", "He / she / it", "Significa"],
+        "rows": [
+          ["Casi todos: + s", "eat", "eats", "come"],
+          ["Casi todos: + s", "work", "works", "trabaja"],
+          ["Termina en -s, -sh, -ch, -x, -o: + es", "watch", "watches", "mira"],
+          ["Termina en -s, -sh, -ch, -x, -o: + es", "go", "goes", "va"],
+          ["Consonante + y: quita y, pone -ies", "study", "studies", "estudia"],
+          ["Vocal + y: solo + s", "play", "plays", "juega"],
+          ["Irregular", "have", "has", "tiene"]
+        ]
+      },
+      "note": "**Have** es el único realmente irregular: he **has**, nunca *he haves*. **Do** también cambia de sonido: he **does**."
+    },
+    {
+      "h": "25 verbos de todos los días",
+      "list": [
+        "**wake up** (despertarse), **get up** (levantarse), **take a shower** (bañarse), **brush** (cepillar), **eat** (comer)",
+        "**drink** (beber), **go** (ir), **study** (estudiar), **work** (trabajar), **have** (tener / comer)",
+        "**read** (leer), **write** (escribir), **watch** (mirar), **play** (jugar), **listen** (escuchar)",
+        "**walk** (caminar), **cook** (cocinar), **clean** (limpiar), **start** (empezar), **finish** (terminar)",
+        "**live** (vivir), **speak** (hablar), **drive** (manejar), **sleep** (dormir), **come** (venir)"
+      ],
+      "note": "Con **he / she / it**: wakes up, gets up, takes, brushes, eats, drinks, goes, studies, works, has, reads, writes, watches, plays, listens, walks, cooks, cleans, starts, finishes, lives, speaks, drives, sleeps, comes."
+    },
+    {
+      "h": "Expresiones de tiempo para la rutina",
+      "table": {
+        "head": ["Expresión", "Significa", "Ejemplo", "Traducción"],
+        "rows": [
+          ["every day", "todos los días", "I study every day.", "Estudio todos los días."],
+          ["every morning", "todas las mañanas", "He drinks coffee every morning.", "Él toma café todas las mañanas."],
+          ["in the morning", "en la mañana", "We work in the morning.", "Trabajamos en la mañana."],
+          ["in the afternoon", "en la tarde", "They play soccer in the afternoon.", "Ellos juegan fútbol en la tarde."],
+          ["at night", "en la noche", "She reads at night.", "Ella lee en la noche."],
+          ["at 7 o'clock", "a las 7", "I get up at 7.", "Me levanto a las 7."],
+          ["on Mondays", "los lunes", "I go to class on Mondays.", "Voy a clase los lunes."]
+        ]
+      },
+      "note": "Usa **at** con horas (at 7), **in** con partes del día (in the morning), **on** con días (on Monday). Excepción: **at night**."
+    },
+    {
+      "h": "Error típico: olvidar la -s",
+      "body": "En español el verbo cambia con todas las personas, así que en inglés es fácil olvidar que **he / she / it** necesita su -s.\n\n- Mal: *She work at Disney.*\n- Bien: **She works at Disney.**\n\nY al revés: no pongas -s con I / you / we / they. *I works* está mal; **I work** está bien."
+    }
+  ],
+  "vocab": [
+    { "en": "wake up", "es": "despertarse", "ex": "I wake up at 6." },
+    { "en": "get up", "es": "levantarse", "ex": "She gets up at 7." },
+    { "en": "take a shower", "es": "bañarse / ducharse", "ex": "He takes a shower in the morning." },
+    { "en": "eat", "es": "comer", "ex": "We eat lunch at noon." },
+    { "en": "drink", "es": "beber / tomar", "ex": "I drink coffee every day." },
+    { "en": "go", "es": "ir", "ex": "They go to the university." },
+    { "en": "study", "es": "estudiar", "ex": "He studies English at night." },
+    { "en": "work", "es": "trabajar", "ex": "She works in Orlando." },
+    { "en": "have", "es": "tener / comer (una comida)", "ex": "I have breakfast at 7." },
+    { "en": "read", "es": "leer", "ex": "He reads emails every morning." },
+    { "en": "watch", "es": "mirar / ver", "ex": "She watches TV at night." },
+    { "en": "play", "es": "jugar / tocar", "ex": "We play soccer on Sundays." },
+    { "en": "walk", "es": "caminar", "ex": "I walk to class." },
+    { "en": "cook", "es": "cocinar", "ex": "My mother cooks dinner." },
+    { "en": "clean", "es": "limpiar", "ex": "They clean the house on Saturdays." },
+    { "en": "start", "es": "empezar", "ex": "Class starts at 8." },
+    { "en": "finish", "es": "terminar", "ex": "He finishes work at 5." },
+    { "en": "live", "es": "vivir", "ex": "I live in Medellín." },
+    { "en": "every day", "es": "todos los días", "ex": "I practice English every day." },
+    { "en": "in the morning", "es": "en la mañana", "ex": "She works in the morning." },
+    { "en": "at night", "es": "en la noche", "ex": "We study at night." },
+    { "en": "at 7 o'clock", "es": "a las 7 en punto", "ex": "He gets up at 7 o'clock." }
+  ],
+  "examples": [
+    { "en": "I wake up at 6 in the morning.", "es": "Me despierto a las 6 de la mañana." },
+    { "en": "I take a shower and brush my teeth.", "es": "Me baño y me cepillo los dientes." },
+    { "en": "You study systems engineering.", "es": "Tú estudias ingeniería de sistemas." },
+    { "en": "She works at a hotel in Orlando.", "es": "Ella trabaja en un hotel en Orlando." },
+    { "en": "He eats breakfast at 7.", "es": "Él desayuna a las 7." },
+    { "en": "My brother plays video games every night.", "es": "Mi hermano juega videojuegos todas las noches." },
+    { "en": "We go to the university every day.", "es": "Vamos a la universidad todos los días." },
+    { "en": "They live near the park.", "es": "Ellos viven cerca del parque." },
+    { "en": "The bus comes at 7:30.", "es": "El bus llega a las 7:30." },
+    { "en": "My mother cooks lunch for the family.", "es": "Mi mamá cocina el almuerzo para la familia." },
+    { "en": "He studies English and watches movies at night.", "es": "Él estudia inglés y ve películas en la noche." },
+    { "en": "Class starts at 8 and finishes at 10.", "es": "La clase empieza a las 8 y termina a las 10." },
+    { "en": "Yesterday I worked a lot. Today I work less. Tomorrow I will rest.", "es": "Ayer trabajé mucho. Hoy trabajo menos. Mañana descansaré." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "She ___ at a hotel.", "options": ["work", "works", "working"], "answer": 1, "why": "She es tercera persona singular, así que el verbo lleva -s: works." },
+    { "type": "choice", "q": "They ___ to the university every day.", "options": ["go", "goes", "going"], "answer": 0, "why": "They usa el verbo base: go." },
+    { "type": "choice", "q": "He ___ English at night.", "options": ["study", "studys", "studies"], "answer": 2, "why": "Study termina en consonante + y, entonces la y cambia a -ies." },
+    { "type": "choice", "q": "My sister ___ a car.", "options": ["have", "haves", "has"], "answer": 2, "why": "Have es irregular con he / she / it: has." },
+    { "type": "choice", "q": "I get up ___ 7 o'clock.", "options": ["in", "at", "on"], "answer": 1, "why": "Con horas exactas se usa at." },
+    { "type": "choice", "q": "We work ___ the morning.", "options": ["in", "at", "on"], "answer": 0, "why": "Con partes del día (the morning) se usa in." },
+    { "type": "choice", "q": "¿Cuál es el presente correcto de watch con she?", "options": ["watchs", "watches", "watchies"], "answer": 1, "why": "Los verbos que terminan en -ch llevan -es." },
+    { "type": "fill", "q": "He ___ coffee every morning. (drink)", "answer": ["drinks"], "why": "He necesita -s: drinks." },
+    { "type": "fill", "q": "I ___ at 6 every day. (wake up)", "answer": ["wake up"], "why": "Con I se usa el verbo base: wake up." },
+    { "type": "fill", "q": "She ___ TV at night. (watch)", "answer": ["watches"], "why": "Watch termina en -ch, entonces agrega -es." },
+    { "type": "fill", "q": "My father ___ to work by bus. (go)", "answer": ["goes"], "why": "Go termina en -o, entonces agrega -es." },
+    { "type": "fill", "q": "The class ___ at 8. (start)", "answer": ["starts"], "why": "The class equivale a it, así que lleva -s." },
+    { "type": "fill", "q": "Santiago ___ English every day. (study)", "answer": ["studies"], "why": "Study cambia la y por -ies con he / she / it." },
+    { "type": "order", "words": ["at", "I", "7", "get", "up"], "answer": "I get up at 7", "es": "Me levanto a las 7." },
+    { "type": "order", "words": ["lives", "in", "She", "Orlando"], "answer": "She lives in Orlando", "es": "Ella vive en Orlando." },
+    { "type": "order", "words": ["every", "play", "They", "soccer", "Sunday"], "answer": "They play soccer every Sunday", "es": "Ellos juegan fútbol todos los domingos." },
+    { "type": "translate", "es": "Yo trabajo todos los días.", "answer": ["I work every day."], "why": "Con I se usa el verbo base: work." },
+    { "type": "translate", "es": "Ella estudia en la noche.", "answer": ["She studies at night.", "She studies in the evening."], "why": "She lleva -ies en study, y at night es la expresión usual." },
+    { "type": "translate", "es": "Mi hermano come a las 12.", "answer": ["My brother eats at 12.", "My brother eats at noon.", "My brother eats at 12 o'clock."], "why": "My brother equivale a he, así que eat pasa a eats." }
+  ],
+  "speak": [
+    "I wake up at six every day.",
+    "I take a shower in the morning.",
+    "I study systems engineering.",
+    "My mother cooks dinner at night.",
+    "My brother works in the afternoon.",
+    "She goes to the university on Mondays.",
+    "We eat lunch at noon.",
+    "He watches TV and studies English at night."
+  ],
+  "tip": "Error típico: olvidar la -s con he / she / it (*She work*) o ponerla con I / you / we / they (*I works*). Antes de hablar, pregúntate: ¿es he, she o it? Entonces agrega -s / -es / -ies."
+}

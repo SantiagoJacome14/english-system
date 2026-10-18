@@ -1,0 +1,146 @@
+{
+  "n": 6,
+  "block": "Primeros pasos",
+  "title": "Días, meses y fechas",
+  "emoji": "📅",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás decir los días, los meses y las estaciones, y dar una fecha en inglés americano.",
+  "sections": [
+    {
+      "h": "Los días de la semana",
+      "table": {
+        "head": ["Inglés", "Español", "Ejemplo"],
+        "rows": [
+          ["Monday", "lunes", "I have class on Monday."],
+          ["Tuesday", "martes", "Tuesday is a busy day."],
+          ["Wednesday", "miércoles", "See you on Wednesday."],
+          ["Thursday", "jueves", "Thursday is my day off."],
+          ["Friday", "viernes", "Friday is a good day!"],
+          ["Saturday", "sábado", "We play soccer on Saturday."],
+          ["Sunday", "domingo", "Sunday is family day."]
+        ]
+      },
+      "note": "Los días y los meses **siempre se escriben con mayúscula** en inglés: *Monday*, *October*. En español no. Y la semana en Estados Unidos suele empezar el **domingo**."
+    },
+    {
+      "h": "Los meses y las estaciones",
+      "table": {
+        "head": ["Mes", "Español", "Mes", "Español"],
+        "rows": [
+          ["January", "enero", "July", "julio"],
+          ["February", "febrero", "August", "agosto"],
+          ["March", "marzo", "September", "septiembre"],
+          ["April", "abril", "October", "octubre"],
+          ["May", "mayo", "November", "noviembre"],
+          ["June", "junio", "December", "diciembre"]
+        ]
+      },
+      "note": "Las estaciones: **spring** (primavera), **summer** (verano), **fall** o **autumn** (otoño), **winter** (invierno). En Estados Unidos se dice más **fall**."
+    },
+    {
+      "h": "Los ordinales para las fechas",
+      "body": "Para decir el día del mes se usan **ordinales**: *primero, segundo, tercero*, etc. En inglés se escriben con número y letras: **1st, 2nd, 3rd, 4th**.\n\nLa regla es sencilla: **1st, 2nd, 3rd** son especiales. Del **4th** al **20th** terminan en **-th**. Del **21st** al **31st** vuelves a empezar: 21st, 22nd, 23rd, 24th... 30th, 31st."
+    },
+    {
+      "h": "Ordinales del 1 al 31",
+      "table": {
+        "head": ["Número", "Inglés", "Número", "Inglés"],
+        "rows": [
+          ["1st", "first", "12th", "twelfth"],
+          ["2nd", "second", "13th", "thirteenth"],
+          ["3rd", "third", "15th", "fifteenth"],
+          ["4th", "fourth", "18th", "eighteenth"],
+          ["5th", "fifth", "20th", "twentieth"],
+          ["8th", "eighth", "21st", "twenty-first"],
+          ["9th", "ninth", "22nd", "twenty-second"],
+          ["10th", "tenth", "30th", "thirtieth"],
+          ["11th", "eleventh", "31st", "thirty-first"]
+        ]
+      },
+      "note": "Cuidado con **fifth** (5th), **eighth** (8th), **ninth** (9th, sin e) y **twelfth** (12th, la f)."
+    },
+    {
+      "h": "Cómo se dice una fecha en inglés americano",
+      "body": "En Estados Unidos el orden es **mes + día + año**, distinto al nuestro.\n\n**October 18th, 2026** se lee **October eighteenth, twenty twenty-six**.\n\nEn números, **10/18/2026** significa 18 de octubre. Pero **03/04/2026** es **March 4th** (no 3 de abril). Esto confunde mucho a los latinos.\n\nSe pregunta con **What's the date today?** o **What day is it today?** (esa última se contesta con el día de la semana: **It's Sunday.**)\n\nPara contestar: **It's October eighteenth.** (Se dice el ordinal aunque escribas solo *18*.)"
+    },
+    {
+      "h": "Preposiciones in, on, at (resumen)",
+      "table": {
+        "head": ["Preposición", "Se usa con", "Ejemplo"],
+        "rows": [
+          ["on", "días y fechas", "on Monday, on October 18th"],
+          ["in", "meses, años, estaciones", "in October, in 2026, in summer"],
+          ["in", "partes del día", "in the morning, in the afternoon"],
+          ["at", "horas y night", "at 5:00, at night"]
+        ]
+      },
+      "note": "Error típico: *in Monday* o *on October*. Lo correcto es **on Monday** e **in October**. Si el día está junto al mes, vuelve **on**: **on October 18th**."
+    }
+  ],
+  "vocab": [
+    { "en": "Monday", "es": "lunes", "ex": "I have class on Monday." },
+    { "en": "Tuesday", "es": "martes", "ex": "Tuesday is busy." },
+    { "en": "Wednesday", "es": "miércoles", "ex": "See you on Wednesday." },
+    { "en": "Thursday", "es": "jueves", "ex": "Thursday is my day off." },
+    { "en": "Friday", "es": "viernes", "ex": "Friday is a good day." },
+    { "en": "Saturday", "es": "sábado", "ex": "We play soccer on Saturday." },
+    { "en": "Sunday", "es": "domingo", "ex": "Sunday is family day." },
+    { "en": "month", "es": "mes", "ex": "October is my favorite month." },
+    { "en": "week", "es": "semana", "ex": "I study every week." },
+    { "en": "weekend", "es": "fin de semana", "ex": "Have a nice weekend!" },
+    { "en": "date", "es": "fecha", "ex": "What's the date today?" },
+    { "en": "today", "es": "hoy", "ex": "Today is Sunday." },
+    { "en": "tomorrow", "es": "mañana", "ex": "Tomorrow is Monday." },
+    { "en": "yesterday", "es": "ayer", "ex": "Yesterday was Saturday." },
+    { "en": "birthday", "es": "cumpleaños", "ex": "My birthday is in May." },
+    { "en": "spring", "es": "primavera", "ex": "Spring is beautiful." },
+    { "en": "summer", "es": "verano", "ex": "Summer is hot in Orlando." },
+    { "en": "fall", "es": "otoño", "ex": "Fall is my favorite season." },
+    { "en": "winter", "es": "invierno", "ex": "Winter is cold in New York." }
+  ],
+  "examples": [
+    { "en": "Today is Sunday.", "es": "Hoy es domingo." },
+    { "en": "Tomorrow is Monday.", "es": "Mañana es lunes." },
+    { "en": "What's the date today?", "es": "¿Cuál es la fecha de hoy?" },
+    { "en": "It's October eighteenth.", "es": "Es 18 de octubre." },
+    { "en": "My birthday is on May fifth.", "es": "Mi cumpleaños es el 5 de mayo." },
+    { "en": "I have class on Monday.", "es": "Tengo clase el lunes." },
+    { "en": "We go to Orlando in December.", "es": "Vamos a Orlando en diciembre." },
+    { "en": "The trip is in 2027.", "es": "El viaje es en 2027." },
+    { "en": "Summer is hot in Florida.", "es": "El verano es caluroso en Florida." },
+    { "en": "I work on Saturday and Sunday.", "es": "Trabajo el sábado y el domingo." },
+    { "en": "The party is on December twenty-fifth.", "es": "La fiesta es el 25 de diciembre." },
+    { "en": "I study in the morning.", "es": "Estudio en la mañana." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I have class ___ Monday.", "options": ["in", "on", "at"], "answer": 1, "why": "Con días de la semana se usa on." },
+    { "type": "choice", "q": "My birthday is ___ May.", "options": ["on", "at", "in"], "answer": 2, "why": "Con meses se usa in." },
+    { "type": "choice", "q": "The party is ___ December 25th.", "options": ["in", "on", "at"], "answer": 1, "why": "Con una fecha completa se usa on." },
+    { "type": "choice", "q": "¿Cuál es el ordinal correcto de 3?", "options": ["3th", "3rd", "3nd"], "answer": 1, "why": "El 3 es third (3rd)." },
+    { "type": "choice", "q": "En EE. UU., ¿qué significa normalmente 04/10/2026?", "options": ["10 de abril", "4 de octubre", "10 de abril de 2010"], "answer": 0, "why": "En EE. UU. el orden es mes/día/año, así que 04/10 es April 10th." },
+    { "type": "choice", "q": "¿Cómo se escribe correctamente en inglés?", "options": ["monday", "Monday", "MONday"], "answer": 1, "why": "Los días de la semana siempre llevan mayúscula." },
+    { "type": "fill", "q": "I work ___ Saturday. (in, on o at)", "answer": ["on"], "why": "Los días llevan on." },
+    { "type": "fill", "q": "We travel ___ summer. (in, on o at)", "answer": ["in"], "why": "Las estaciones llevan in." },
+    { "type": "fill", "q": "El ordinal de 5 es ___", "answer": ["fifth"], "why": "Fifth cambia la f por th." },
+    { "type": "fill", "q": "Después de Sunday viene ___", "answer": ["monday"], "why": "El día siguiente a domingo es lunes: Monday." },
+    { "type": "fill", "q": "El mes antes de November es ___", "answer": ["october"], "why": "Antes de noviembre está octubre: October." },
+    { "type": "order", "words": ["is", "Today", "Sunday"], "answer": "Today is Sunday", "es": "Hoy es domingo." },
+    { "type": "order", "words": ["the", "What's", "date", "today"], "answer": "What's the date today", "es": "¿Cuál es la fecha de hoy?" },
+    { "type": "order", "words": ["birthday", "My", "is", "May", "in"], "answer": "My birthday is in May", "es": "Mi cumpleaños es en mayo." },
+    { "type": "order", "words": ["on", "I", "Monday", "work"], "answer": "I work on Monday", "es": "Trabajo el lunes." },
+    { "type": "translate", "es": "Mañana es lunes.", "answer": ["Tomorrow is Monday."], "why": "Tomorrow es mañana, y Monday va con mayúscula." },
+    { "type": "translate", "es": "Mi cumpleaños es en octubre.", "answer": ["My birthday is in October."], "why": "Con meses se usa in." },
+    { "type": "translate", "es": "Hoy es 18 de octubre.", "answer": ["Today is October 18th.", "Today is October eighteenth.", "Today is October 18.", "It's October 18th.", "It's October eighteenth.", "It is October 18th.", "It is October eighteenth."], "why": "En inglés americano primero va el mes y luego el día." }
+  ],
+  "speak": [
+    "Today is Sunday.",
+    "Tomorrow is Monday.",
+    "What's the date today?",
+    "It's October eighteenth.",
+    "My birthday is in May.",
+    "I have class on Monday.",
+    "We go to Orlando in December.",
+    "Summer is hot in Florida."
+  ],
+  "tip": "Error común: escribir *monday* o *october* en minúscula, y usar mal las preposiciones: *in Monday* u *on October*. Recuerda: **on Monday**, **in October**, **on October 18th**. Y en una fecha como 04/10, en Estados Unidos va primero el mes: es **April 10th**, no el 4 de octubre."
+}

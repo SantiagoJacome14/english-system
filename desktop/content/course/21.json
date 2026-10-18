@@ -1,0 +1,158 @@
+{
+  "n": 21,
+  "block": "Verbos y tiempos",
+  "title": "Pasado simple I: was / were y verbos regulares",
+  "emoji": "⏪",
+  "minutes": 35,
+  "goal": "Al final de esta clase podrás decir dónde estabas y contar qué hiciste usando was / were y los verbos regulares en pasado.",
+  "sections": [
+    {
+      "h": "Ideas clave: hablar del pasado",
+      "body": "El **pasado simple** (*simple past*) cuenta cosas que **empezaron y terminaron** en un momento del pasado: *ayer*, *la semana pasada*, *en 2020*.\n\nHay dos casos que veremos hoy:\n\n1. El verbo **to be**: en pasado es **was / were**.\n2. Los verbos **regulares**: base + **-ed**.\n\nLos tres momentos con **to be**:\n\n- Pasado: **I was** tired yesterday. (Estaba cansado ayer.)\n- Presente: **I am** tired now. (Estoy cansado ahora.)\n- Futuro: **I will be** tired tomorrow. (Estaré cansado mañana.)\n\nLos tres momentos con **work**:\n\n- Pasado: **I worked** on Monday. (Trabajé el lunes.)\n- Presente: **I work** every day. (Trabajo todos los días.)\n- Futuro: **I will work** next week. (Trabajaré la próxima semana.)"
+    },
+    {
+      "h": "Was / were: conjugación completa",
+      "table": {
+        "head": ["Pronombre", "Pasado de be", "Ejemplo", "Significa"],
+        "rows": [
+          ["I", "was", "I was at home.", "Estaba en casa."],
+          ["you", "were", "You were late.", "Tú llegaste tarde / estabas tarde."],
+          ["he / she / it", "was", "She was at work.", "Ella estaba en el trabajo."],
+          ["we", "were", "We were in Orlando.", "Estuvimos en Orlando."],
+          ["they", "were", "They were happy.", "Ellos estaban felices."]
+        ]
+      },
+      "note": "Dos formas, no más: **was** (I, he, she, it) y **were** (you, we, they)."
+    },
+    {
+      "h": "Negativo y preguntas con was / were",
+      "body": "Para negar agrega **not**: **wasn't** (was not) y **weren't** (were not). Para preguntar, invierte el orden: **Was / Were + sujeto?**",
+      "table": {
+        "head": ["Tipo", "Con was", "Con were"],
+        "rows": [
+          ["Afirmativo", "She was at work.", "They were at work."],
+          ["Negativo", "She wasn't at work.", "They weren't at work."],
+          ["Pregunta", "Was she at work?", "Were they at work?"],
+          ["Respuesta corta sí", "Yes, she was.", "Yes, they were."],
+          ["Respuesta corta no", "No, she wasn't.", "No, they weren't."],
+          ["Wh-", "Where was she?", "Where were they?"]
+        ]
+      },
+      "note": "Con was / were **no** se usa did: *Did you were late?* está mal. Es **Were you late?**"
+    },
+    {
+      "h": "Verbos regulares: base + -ed",
+      "body": "Los verbos regulares usan **la misma forma para todas las personas**: no hay diferencia entre I, he o they.\n\n**I worked**, **you worked**, **she worked**, **we worked**, **they worked**.",
+      "table": {
+        "head": ["Pronombre", "Pasado: work", "Ejemplo", "Significa"],
+        "rows": [
+          ["I", "worked", "I worked yesterday.", "Trabajé ayer."],
+          ["you", "worked", "You worked a lot.", "Trabajaste mucho."],
+          ["he / she / it", "worked", "He worked at a hotel.", "Él trabajó en un hotel."],
+          ["we", "worked", "We worked together.", "Trabajamos juntos."],
+          ["they", "worked", "They worked last week.", "Ellos trabajaron la semana pasada."]
+        ]
+      },
+      "note": "Recuerda las reglas: *live → lived*, *study → studied*, *stop → stopped*, *play → played*. Ya no existe la -s de la tercera persona en pasado."
+    },
+    {
+      "h": "Expresiones de tiempo del pasado",
+      "table": {
+        "head": ["Expresión", "Significa", "Ejemplo", "Traducción"],
+        "rows": [
+          ["yesterday", "ayer", "I studied yesterday.", "Estudié ayer."],
+          ["last night", "anoche", "We watched a movie last night.", "Vimos una película anoche."],
+          ["last week", "la semana pasada", "She visited Orlando last week.", "Ella visitó Orlando la semana pasada."],
+          ["last year", "el año pasado", "I started English last year.", "Empecé inglés el año pasado."],
+          ["two days ago", "hace dos días", "They arrived two days ago.", "Ellos llegaron hace dos días."],
+          ["in 2020", "en 2020", "He lived in Cali in 2020.", "Él vivió en Cali en 2020."],
+          ["when I was a child", "cuando era niño", "I played soccer when I was a child.", "Jugaba fútbol cuando era niño."]
+        ]
+      },
+      "note": "**Ago** va después del tiempo: *two days ago*. **Last** va antes: *last week*."
+    },
+    {
+      "h": "Contar lo que hiciste",
+      "body": "Para contar un día completo combina los verbos en orden:\n\n*Yesterday I **got up** at 6. I **worked** in the morning. I **studied** English in the afternoon. I **watched** TV at night.*\n\nLos verbos irregulares como *get up* los veremos en la próxima clase.\n\nUsa conectores simples: **then** (luego), **after that** (después de eso), **and** (y), **but** (pero)."
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "Mal: *I was work yesterday.* Bien: **I worked yesterday.** (was no se mezcla con un verbo normal en pasado simple).",
+        "Mal: *She were at home.* Bien: **She was at home.**",
+        "Mal: *They was happy.* Bien: **They were happy.**",
+        "Mal: *I study yesterday.* Bien: **I studied yesterday.**",
+        "Mal: *Last year I am in Orlando.* Bien: **Last year I was in Orlando.**"
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "was", "es": "era / estaba / fue (I, he, she, it)", "ex": "I was at home." },
+    { "en": "were", "es": "eras / estabas / fueron (you, we, they)", "ex": "They were in Orlando." },
+    { "en": "wasn't", "es": "no era / no estaba", "ex": "She wasn't tired." },
+    { "en": "weren't", "es": "no eran / no estaban", "ex": "We weren't late." },
+    { "en": "worked", "es": "trabajó / trabajé", "ex": "I worked in a store." },
+    { "en": "studied", "es": "estudió / estudié", "ex": "He studied all night." },
+    { "en": "visited", "es": "visitó / visité", "ex": "We visited a museum." },
+    { "en": "watched", "es": "miró / miré", "ex": "I watched a movie." },
+    { "en": "played", "es": "jugó / jugué", "ex": "They played cards." },
+    { "en": "walked", "es": "caminó / caminé", "ex": "She walked home." },
+    { "en": "cooked", "es": "cocinó / cociné", "ex": "I cooked pasta." },
+    { "en": "cleaned", "es": "limpió / limpié", "ex": "He cleaned his room." },
+    { "en": "arrived", "es": "llegó / llegué", "ex": "The bus arrived late." },
+    { "en": "called", "es": "llamó / llamé", "ex": "My mother called me." },
+    { "en": "yesterday", "es": "ayer", "ex": "I was busy yesterday." },
+    { "en": "last night", "es": "anoche", "ex": "We studied last night." },
+    { "en": "last week", "es": "la semana pasada", "ex": "I visited my aunt last week." },
+    { "en": "two days ago", "es": "hace dos días", "ex": "She called two days ago." },
+    { "en": "in 2020", "es": "en 2020", "ex": "I started school in 2020." },
+    { "en": "then", "es": "luego", "ex": "I cooked, then I ate." }
+  ],
+  "examples": [
+    { "en": "I was at the university yesterday.", "es": "Ayer estuve en la universidad." },
+    { "en": "She was tired last night.", "es": "Ella estaba cansada anoche." },
+    { "en": "We were in Orlando last year.", "es": "Estuvimos en Orlando el año pasado." },
+    { "en": "They weren't at home.", "es": "Ellos no estaban en casa." },
+    { "en": "Were you at the party?", "es": "¿Estuviste en la fiesta?" },
+    { "en": "Where was he two days ago?", "es": "¿Dónde estaba él hace dos días?" },
+    { "en": "I worked in a store in 2020.", "es": "Trabajé en una tienda en 2020." },
+    { "en": "He studied English last night.", "es": "Él estudió inglés anoche." },
+    { "en": "We watched a movie and then we cooked dinner.", "es": "Vimos una película y luego cocinamos la cena." },
+    { "en": "My friend called me two days ago.", "es": "Mi amigo me llamó hace dos días." },
+    { "en": "They arrived at the airport at 9.", "es": "Ellos llegaron al aeropuerto a las 9." },
+    { "en": "I played soccer when I was a child.", "es": "Jugaba fútbol cuando era niño." },
+    { "en": "She visited her aunt last week.", "es": "Ella visitó a su tía la semana pasada." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I ___ at home yesterday.", "options": ["was", "were", "am"], "answer": 0, "why": "I usa was en pasado." },
+    { "type": "choice", "q": "They ___ in Orlando last year.", "options": ["was", "were", "are"], "answer": 1, "why": "They usa were en pasado." },
+    { "type": "choice", "q": "She ___ at work last night.", "options": ["wasn't", "weren't", "doesn't"], "answer": 0, "why": "She va con was; en negativo es wasn't." },
+    { "type": "choice", "q": "___ you tired yesterday?", "options": ["Was", "Were", "Did"], "answer": 1, "why": "You usa were, y con to be no se usa did." },
+    { "type": "choice", "q": "I ___ English two days ago.", "options": ["study", "studied", "studyed"], "answer": 1, "why": "Study cambia la y por ied: studied." },
+    { "type": "choice", "q": "We ___ a movie last night.", "options": ["watch", "watches", "watched"], "answer": 2, "why": "Last night pide pasado: watched." },
+    { "type": "choice", "q": "¿Cuál oración es correcta?", "options": ["She were happy.", "She was happy.", "She is happy yesterday."], "answer": 1, "why": "She usa was." },
+    { "type": "fill", "q": "He ___ in Cali in 2020. (live, past)", "answer": ["lived"], "why": "Live termina en e, solo agrega -d." },
+    { "type": "fill", "q": "We ___ in Orlando last week. (be, past)", "answer": ["were"], "why": "We usa were." },
+    { "type": "fill", "q": "She ___ her mother yesterday. (call, past)", "answer": ["called"], "why": "Call es regular: called." },
+    { "type": "fill", "q": "They ___ at the party. (not be, past)", "answer": ["weren't", "were not"], "why": "They usa were y en negativo weren't." },
+    { "type": "fill", "q": "I ___ soccer last Sunday. (play, past)", "answer": ["played"], "why": "Vocal + y solo agrega -ed: played." },
+    { "type": "fill", "q": "She arrived two days ___.", "answer": ["ago"], "why": "Hace dos días se dice two days ago." },
+    { "type": "order", "words": ["was", "I", "yesterday", "tired"], "answer": "I was tired yesterday", "es": "Ayer estaba cansado." },
+    { "type": "order", "words": ["Were", "you", "at", "the", "party"], "answer": "Were you at the party", "es": "¿Estuviste en la fiesta?" },
+    { "type": "order", "words": ["visited", "She", "Orlando", "last", "year"], "answer": "She visited Orlando last year", "es": "Ella visitó Orlando el año pasado." },
+    { "type": "translate", "es": "Ellos estaban en casa.", "answer": ["They were at home.", "They were home."], "why": "They usa were." },
+    { "type": "translate", "es": "Ayer estudié inglés.", "answer": ["I studied English yesterday.", "Yesterday I studied English."], "why": "Study cambia a studied." },
+    { "type": "translate", "es": "Ella no estaba cansada.", "answer": ["She wasn't tired.", "She was not tired."], "why": "She usa was y en negativo wasn't." }
+  ],
+  "speak": [
+    "I was at home yesterday.",
+    "We were in Orlando last year.",
+    "She wasn't tired.",
+    "Were you at the party?",
+    "I worked in a store in 2020.",
+    "He studied English last night.",
+    "They arrived two days ago.",
+    "I played soccer when I was a child."
+  ],
+  "tip": "Error típico: usar presente con palabras de pasado (*I study yesterday*) o mezclar was con otro verbo (*I was study*). En pasado simple, un solo verbo en pasado: studied. Y con to be, was o were solos."
+}

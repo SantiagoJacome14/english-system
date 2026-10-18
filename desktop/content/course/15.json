@@ -1,0 +1,127 @@
+{
+  "n": 15,
+  "block": "Mi mundo",
+  "title": "La ciudad y las direcciones",
+  "emoji": "🗺️",
+  "minutes": 32,
+  "goal": "Al final de esta clase podrás preguntar y dar direcciones en la ciudad, y hablar de medios de transporte.",
+  "sections": [
+    {
+      "h": "Lugares de la ciudad",
+      "body": "Cuando llegues a Orlando necesitarás encontrar muchos lugares. Estas son las palabras más útiles:",
+      "table": {
+        "head": ["Inglés", "Español", "Ejemplo"],
+        "rows": [
+          ["bank", "banco", "The bank is open."],
+          ["bus stop", "parada de bus", "The bus stop is near."],
+          ["supermarket", "supermercado", "I go to the supermarket."],
+          ["airport", "aeropuerto", "The airport is far."],
+          ["hotel", "hotel", "My hotel is nice."],
+          ["restaurant", "restaurante", "The restaurant is busy."],
+          ["pharmacy", "farmacia", "The pharmacy is closed."],
+          ["hospital", "hospital", "The hospital is big."],
+          ["park", "parque", "We walk in the park."]
+        ]
+      }
+    },
+    {
+      "h": "Preguntar dónde está algo",
+      "body": "Para llamar la atención de alguien con amabilidad empieza con **Excuse me**.\n\n**Excuse me, where is the bank?** Disculpe, ¿dónde está el banco?\n**Excuse me, how do I get to the airport?** ¿Cómo llego al aeropuerto?\n**Is there a pharmacy near here?** ¿Hay una farmacia cerca de aquí?\n\nCuando alguien te ayuda, di **Thank you!** o **Thanks a lot!**"
+    },
+    {
+      "h": "Dar direcciones",
+      "table": {
+        "head": ["Frase", "Significa"],
+        "rows": [
+          ["Go straight.", "Siga derecho."],
+          ["Turn left.", "Gire a la izquierda."],
+          ["Turn right.", "Gire a la derecha."],
+          ["It's next to the bank.", "Está al lado del banco."],
+          ["It's across from the park.", "Está al frente (al otro lado) del parque."],
+          ["It's on the corner.", "Está en la esquina."],
+          ["It's on the left / right.", "Está a la izquierda / derecha."],
+          ["It's two blocks away.", "Está a dos cuadras."]
+        ]
+      },
+      "note": "Las órdenes (**go, turn, walk**) no llevan sujeto. Ejemplo completo: **Go straight for two blocks, then turn left. The hotel is on the corner.**"
+    },
+    {
+      "h": "El transporte",
+      "body": "Para decir cómo viajas usamos **by** + medio de transporte: **by bus, by taxi, by train, by plane, by car**.\n\nExcepción: caminando se dice **on foot** o **I walk**.\n\n**I go to work by bus.** Voy al trabajo en bus.\n**We travel to Orlando by plane.** Viajamos a Orlando en avión.\n\nAlgunas preguntas útiles: **How do you get to work?** **How long is the trip?**"
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "No digas *Go direct*. Es **Go straight**.",
+        "No digas *I go in the bus*. Con medio de transporte generalizado se usa **by bus**.",
+        "No uses *in front of* para 'al frente, al otro lado de la calle'. Mejor **across from**.",
+        "Para llamar la atención no grites *Hey!*: di **Excuse me**."
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "bank", "es": "banco", "ex": "The bank is on Main Street." },
+    { "en": "bus stop", "es": "parada de bus", "ex": "The bus stop is near my hotel." },
+    { "en": "supermarket", "es": "supermercado", "ex": "The supermarket is open." },
+    { "en": "airport", "es": "aeropuerto", "ex": "I'm at the airport." },
+    { "en": "hotel", "es": "hotel", "ex": "My hotel is across from the park." },
+    { "en": "pharmacy", "es": "farmacia", "ex": "Is there a pharmacy near here?" },
+    { "en": "restaurant", "es": "restaurante", "ex": "The restaurant is on the corner." },
+    { "en": "street", "es": "calle", "ex": "Turn left on this street." },
+    { "en": "corner", "es": "esquina", "ex": "It's on the corner." },
+    { "en": "block", "es": "cuadra", "ex": "It's two blocks away." },
+    { "en": "turn left", "es": "gire a la izquierda", "ex": "Turn left at the bank." },
+    { "en": "turn right", "es": "gire a la derecha", "ex": "Turn right at the hotel." },
+    { "en": "go straight", "es": "siga derecho", "ex": "Go straight for one block." },
+    { "en": "across from", "es": "al frente de", "ex": "The bank is across from the park." },
+    { "en": "bus", "es": "bus", "ex": "I go to work by bus." },
+    { "en": "taxi", "es": "taxi", "ex": "We take a taxi to the hotel." },
+    { "en": "train", "es": "tren", "ex": "The train is fast." },
+    { "en": "plane", "es": "avión", "ex": "I travel by plane." },
+    { "en": "far", "es": "lejos", "ex": "The airport is far from here." },
+    { "en": "excuse me", "es": "disculpe", "ex": "Excuse me, where is the bank?" }
+  ],
+  "examples": [
+    { "en": "Excuse me, where is the bank?", "es": "Disculpe, ¿dónde está el banco?" },
+    { "en": "Is there a pharmacy near here?", "es": "¿Hay una farmacia cerca de aquí?" },
+    { "en": "How do I get to the airport?", "es": "¿Cómo llego al aeropuerto?" },
+    { "en": "Go straight for two blocks.", "es": "Siga derecho dos cuadras." },
+    { "en": "Turn left at the corner.", "es": "Gire a la izquierda en la esquina." },
+    { "en": "Turn right, then go straight.", "es": "Gire a la derecha y siga derecho." },
+    { "en": "The bank is next to the supermarket.", "es": "El banco está al lado del supermercado." },
+    { "en": "The hotel is across from the park.", "es": "El hotel está frente al parque." },
+    { "en": "It's on the left.", "es": "Está a la izquierda." },
+    { "en": "I go to work by bus.", "es": "Voy al trabajo en bus." },
+    { "en": "We travel to Orlando by plane.", "es": "Viajamos a Orlando en avión." },
+    { "en": "Thank you very much!", "es": "¡Muchas gracias!" }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "___ me, where is the bank?", "options": ["Excuse", "Sorry", "Please"], "answer": 0, "why": "Excuse me es la forma educada para llamar la atención." },
+    { "type": "choice", "q": "Go ___ for two blocks. (siga derecho)", "options": ["direct", "straight", "right"], "answer": 1, "why": "Siga derecho se dice go straight." },
+    { "type": "choice", "q": "I go to work ___ bus.", "options": ["in", "by", "on the"], "answer": 1, "why": "Con medios de transporte usamos by: by bus." },
+    { "type": "choice", "q": "The hotel is ___ the park. (al otro lado, frente a)", "options": ["across from", "behind", "under"], "answer": 0, "why": "Al frente (al otro lado) se dice across from." },
+    { "type": "choice", "q": "Which place sells medicine?", "options": ["pharmacy", "airport", "bus stop"], "answer": 0, "why": "Pharmacy es la farmacia." },
+    { "type": "choice", "q": "Turn ___ at the corner. (a la izquierda)", "options": ["left", "right", "straight"], "answer": 0, "why": "Izquierda es left." },
+    { "type": "choice", "q": "How do you say 'a dos cuadras'?", "options": ["two blocks away", "two streets near", "two corners"], "answer": 0, "why": "A dos cuadras se dice two blocks away." },
+    { "type": "fill", "q": "Excuse me, where ___ the airport?", "answer": ["is"], "why": "Airport es singular: where is." },
+    { "type": "fill", "q": "Turn ___ at the bank. (a la derecha)", "answer": ["right"], "why": "Derecha es right." },
+    { "type": "fill", "q": "I travel to Orlando ___ plane.", "answer": ["by"], "why": "Transporte con by: by plane." },
+    { "type": "fill", "q": "The supermarket is ___ to the bank. (al lado)", "answer": ["next"], "why": "Al lado de se dice next to." },
+    { "type": "fill", "q": "It's on the ___. (la esquina)", "answer": ["corner"], "why": "Esquina es corner." },
+    { "type": "order", "words": ["is", "Excuse", "me", "where", "the", "bank"], "answer": "Excuse me where is the bank", "es": "Disculpe, ¿dónde está el banco?" },
+    { "type": "order", "words": ["Turn", "left", "the", "at", "corner"], "answer": "Turn left at the corner", "es": "Gire a la izquierda en la esquina." },
+    { "type": "order", "words": ["go", "I", "bus", "to", "by", "work"], "answer": "I go to work by bus", "es": "Voy al trabajo en bus." },
+    { "type": "translate", "es": "Siga derecho dos cuadras.", "answer": ["Go straight for two blocks.", "Go straight two blocks."], "why": "Go straight es siga derecho; blocks son cuadras." },
+    { "type": "translate", "es": "El hotel está al lado del banco.", "answer": ["The hotel is next to the bank."], "why": "Al lado de se dice next to." },
+    { "type": "translate", "es": "¿Hay una farmacia cerca de aquí?", "answer": ["Is there a pharmacy near here?", "Is there a pharmacy near?"], "why": "Pregunta con there is en singular: Is there a...?" }
+  ],
+  "speak": [
+    "Excuse me, where is the bank?",
+    "How do I get to the airport?",
+    "Go straight for two blocks.",
+    "Turn left at the corner.",
+    "The hotel is across from the park.",
+    "Thank you very much!"
+  ],
+  "tip": "Un error muy común es traducir 'siga derecho' como *go direct* o *go right straight*. Recuerda: **go straight**. Y para el transporte, no digas *in the bus*: usa **by bus**."
+}

@@ -1,0 +1,160 @@
+{
+  "n": 8,
+  "block": "Primeros pasos",
+  "title": "Países y nacionalidades",
+  "emoji": "🌎",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás decir de dónde eres, tu nacionalidad, tu idioma y hablar de países, ciudades y continentes.",
+  "sections": [
+    {
+      "h": "País, nacionalidad e idioma",
+      "body": "En inglés hay tres palabras que se parecen y que no debes mezclar: el **país** (Colombia), la **nacionalidad** (Colombian) y el **idioma** (Spanish).\n\nPara decir de dónde eres usa **I'm from + país**: **I'm from Colombia.**\nPara decir tu nacionalidad usa **I'm + nacionalidad**: **I'm Colombian.**\nPara el idioma: **I speak Spanish.**\n\nLas nacionalidades y los idiomas **siempre llevan mayúscula** en inglés, aunque en español no: *Colombian*, *Spanish*, *American*."
+    },
+    {
+      "h": "Países y nacionalidades (América)",
+      "table": {
+        "head": ["País", "Nacionalidad", "Idioma"],
+        "rows": [
+          ["Colombia", "Colombian", "Spanish"],
+          ["the United States", "American", "English"],
+          ["Mexico", "Mexican", "Spanish"],
+          ["Canada", "Canadian", "English / French"],
+          ["Brazil", "Brazilian", "Portuguese"],
+          ["Argentina", "Argentine", "Spanish"],
+          ["Peru", "Peruvian", "Spanish"],
+          ["Venezuela", "Venezuelan", "Spanish"],
+          ["Chile", "Chilean", "Spanish"],
+          ["Ecuador", "Ecuadorian", "Spanish"],
+          ["Cuba", "Cuban", "Spanish"]
+        ]
+      },
+      "note": "Las nacionalidades terminan muchas veces en **-an** o **-ian**. Cuidado con **American** (no *United Statesian*) y **Argentine**."
+    },
+    {
+      "h": "Países y nacionalidades (Europa, Asia y más)",
+      "table": {
+        "head": ["País", "Nacionalidad", "Idioma"],
+        "rows": [
+          ["Spain", "Spanish", "Spanish"],
+          ["France", "French", "French"],
+          ["Germany", "German", "German"],
+          ["Italy", "Italian", "Italian"],
+          ["Portugal", "Portuguese", "Portuguese"],
+          ["the United Kingdom (the UK)", "British", "English"],
+          ["Ireland", "Irish", "English / Irish"],
+          ["the Netherlands", "Dutch", "Dutch"],
+          ["Russia", "Russian", "Russian"],
+          ["China", "Chinese", "Chinese"],
+          ["Japan", "Japanese", "Japanese"],
+          ["South Korea", "Korean", "Korean"],
+          ["India", "Indian", "Hindi / English"],
+          ["Australia", "Australian", "English"],
+          ["the Philippines", "Filipino", "Filipino / English"],
+          ["Egypt", "Egyptian", "Arabic"]
+        ]
+      },
+      "note": "Las nacionalidades que terminan en **-ese** (Chinese, Japanese) y **-ch / -sh** (French, Spanish) no cambian en plural: **two Japanese**, **three Spanish**."
+    },
+    {
+      "h": "¿Cuándo se usa the con los países?",
+      "body": "La mayoría de países **no llevan the**: **Colombia, Mexico, France, Japan**. Lo correcto es **I'm from Colombia**, no *I'm from the Colombia*.\n\nPero algunos sí llevan **the**:\n- Países con **United**, **Republic** o **Kingdom** en el nombre: **the United States** (the USA), **the United Kingdom** (the UK), **the Dominican Republic**.\n- Países en plural: **the Netherlands**, **the Philippines**.\n\nPor eso: **I'm from the USA.** pero **I'm from Canada.**"
+    },
+    {
+      "h": "Preguntar y responder",
+      "table": {
+        "head": ["Pregunta", "Respuesta", "Significa"],
+        "rows": [
+          ["Where are you from?", "I'm from Colombia.", "¿De dónde eres? Soy de Colombia."],
+          ["Where is he from?", "He's from Medellín.", "¿De dónde es él? Es de Medellín."],
+          ["What's your nationality?", "I'm Colombian.", "¿Cuál es tu nacionalidad? Soy colombiano."],
+          ["What languages do you speak?", "I speak Spanish and English.", "¿Qué idiomas hablas? Hablo español e inglés."],
+          ["Are you American?", "No, I'm Colombian.", "¿Eres estadounidense? No, soy colombiano."]
+        ]
+      },
+      "note": "Usa **from** con el país o la ciudad, pero **no** con la nacionalidad. Es **I'm from Colombia** o **I'm Colombian**, nunca *I'm from Colombian*."
+    },
+    {
+      "h": "Ciudades y continentes",
+      "table": {
+        "head": ["Ciudad / continente", "Ejemplo", "Significa"],
+        "rows": [
+          ["Bogotá, Medellín, Cali", "I'm from Medellín, Colombia.", "Soy de Medellín, Colombia."],
+          ["Orlando, Miami, New York", "Orlando is in Florida.", "Orlando está en Florida."],
+          ["South America", "Colombia is in South America.", "Colombia está en Sudamérica."],
+          ["North America", "Canada is in North America.", "Canadá está en Norteamérica."],
+          ["Europe", "Spain is in Europe.", "España está en Europa."],
+          ["Asia, Africa, Oceania", "Japan is in Asia.", "Japón está en Asia."]
+        ]
+      },
+      "note": "Para ubicar algo usa **in**: **Orlando is in Florida. Florida is in the United States.**"
+    }
+  ],
+  "vocab": [
+    { "en": "country", "es": "país", "ex": "Colombia is my country." },
+    { "en": "nationality", "es": "nacionalidad", "ex": "What's your nationality?" },
+    { "en": "language", "es": "idioma", "ex": "Spanish is my language." },
+    { "en": "city", "es": "ciudad", "ex": "Orlando is a big city." },
+    { "en": "continent", "es": "continente", "ex": "South America is a continent." },
+    { "en": "Colombian", "es": "colombiano/a", "ex": "I'm Colombian." },
+    { "en": "American", "es": "estadounidense", "ex": "She's American." },
+    { "en": "Mexican", "es": "mexicano/a", "ex": "He's Mexican." },
+    { "en": "Brazilian", "es": "brasileño/a", "ex": "They're Brazilian." },
+    { "en": "British", "es": "británico/a", "ex": "My teacher is British." },
+    { "en": "French", "es": "francés/a", "ex": "She's French." },
+    { "en": "German", "es": "alemán/a", "ex": "He's German." },
+    { "en": "Japanese", "es": "japonés/a", "ex": "Our guest is Japanese." },
+    { "en": "Chinese", "es": "chino/a", "ex": "My friend is Chinese." },
+    { "en": "Spanish", "es": "español/a (idioma)", "ex": "I speak Spanish." },
+    { "en": "English", "es": "inglés (idioma)", "ex": "I'm learning English." },
+    { "en": "speak", "es": "hablar", "ex": "I speak two languages." },
+    { "en": "from", "es": "de (origen)", "ex": "I'm from Medellín." },
+    { "en": "Europe", "es": "Europa", "ex": "France is in Europe." },
+    { "en": "Asia", "es": "Asia", "ex": "Japan is in Asia." }
+  ],
+  "examples": [
+    { "en": "Where are you from?", "es": "¿De dónde eres?" },
+    { "en": "I'm from Colombia.", "es": "Soy de Colombia." },
+    { "en": "I'm Colombian.", "es": "Soy colombiano." },
+    { "en": "I'm from Medellín, Colombia.", "es": "Soy de Medellín, Colombia." },
+    { "en": "She's from the United States.", "es": "Ella es de Estados Unidos." },
+    { "en": "He's American.", "es": "Él es estadounidense." },
+    { "en": "My friends are Mexican.", "es": "Mis amigos son mexicanos." },
+    { "en": "I speak Spanish and English.", "es": "Hablo español e inglés." },
+    { "en": "Orlando is in Florida.", "es": "Orlando está en Florida." },
+    { "en": "Colombia is in South America.", "es": "Colombia está en Sudamérica." },
+    { "en": "We are from the UK.", "es": "Somos del Reino Unido." },
+    { "en": "Are you Brazilian? No, I'm not.", "es": "¿Eres brasileño? No, no lo soy." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I'm ___ Colombia.", "options": ["from", "in", "of"], "answer": 0, "why": "Para el origen se usa from." },
+    { "type": "choice", "q": "I'm from ___ United States.", "options": ["the", "a", "an"], "answer": 0, "why": "United States lleva the." },
+    { "type": "choice", "q": "¿Cuál es la nacionalidad de una persona de Japón?", "options": ["Japanese", "Japaner", "Japanian"], "answer": 0, "why": "La nacionalidad de Japan es Japanese." },
+    { "type": "choice", "q": "¿Cuál es correcta?", "options": ["I'm from the Colombia.", "I'm from Colombia.", "I'm from Colombian."], "answer": 1, "why": "Colombia no lleva the, y from va con el país." },
+    { "type": "choice", "q": "Paris is in ___.", "options": ["Europe", "Asia", "South America"], "answer": 0, "why": "París está en Francia, en Europa." },
+    { "type": "choice", "q": "Which sentence is correct?", "options": ["I speak colombian.", "I speak Spanish.", "I speak spanish."], "answer": 1, "why": "Spanish es el idioma y siempre lleva mayúscula." },
+    { "type": "fill", "q": "Where ___ you from?", "answer": ["are"], "why": "Con you se usa are." },
+    { "type": "fill", "q": "I'm from Colombia. I'm ___. (nacionalidad)", "answer": ["colombian"], "why": "La nacionalidad de Colombia es Colombian." },
+    { "type": "fill", "q": "She is from the USA. She is ___. (nacionalidad)", "answer": ["american"], "why": "La nacionalidad de USA es American." },
+    { "type": "fill", "q": "I'm from Mexico. I'm ___. (nacionalidad)", "answer": ["mexican"], "why": "La nacionalidad de Mexico es Mexican." },
+    { "type": "fill", "q": "Orlando is ___ Florida. (in, on o at)", "answer": ["in"], "why": "Para ubicar una ciudad se usa in." },
+    { "type": "fill", "q": "They are from Germany. They are ___. (nacionalidad)", "answer": ["german"], "why": "La nacionalidad de Germany es German." },
+    { "type": "order", "words": ["from", "I'm", "Colombia"], "answer": "I'm from Colombia", "es": "Soy de Colombia." },
+    { "type": "order", "words": ["Where", "from", "are", "you"], "answer": "Where are you from", "es": "¿De dónde eres?" },
+    { "type": "order", "words": ["speak", "I", "and", "Spanish", "English"], "answer": "I speak Spanish and English", "es": "Hablo español e inglés." },
+    { "type": "order", "words": ["is", "in", "Orlando", "Florida"], "answer": "Orlando is in Florida", "es": "Orlando está en Florida." },
+    { "type": "translate", "es": "Soy colombiano.", "answer": ["I am Colombian.", "I'm Colombian."], "why": "La nacionalidad se dice con to be y va con mayúscula." },
+    { "type": "translate", "es": "Ella es de Estados Unidos.", "answer": ["She is from the United States.", "She's from the United States.", "She is from the USA.", "She's from the USA.", "She is from the US.", "She's from the US."], "why": "Estados Unidos lleva the en inglés." },
+    { "type": "translate", "es": "Hablo español e inglés.", "answer": ["I speak Spanish and English."], "why": "Los idiomas llevan mayúscula y el verbo es speak." }
+  ],
+  "speak": [
+    "Where are you from?",
+    "I'm from Colombia.",
+    "I'm Colombian.",
+    "I'm from Medellín, Colombia.",
+    "I speak Spanish and English.",
+    "She's from the United States.",
+    "Orlando is in Florida.",
+    "Colombia is in South America."
+  ],
+  "tip": "Error común: decir *I'm from Colombian* o *I'm from the Colombia*, o escribir *colombian* y *spanish* en minúscula. En inglés: **I'm from Colombia** (país, sin the) o **I'm Colombian** (nacionalidad), y las nacionalidades e idiomas siempre llevan **mayúscula**. Solo algunos países llevan **the**: **the United States**, **the UK**, **the Netherlands**."
+}

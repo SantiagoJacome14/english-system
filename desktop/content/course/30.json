@@ -1,0 +1,169 @@
+{
+  "n": 30,
+  "block": "Para comunicarte",
+  "title": "Repaso general",
+  "emoji": "🔁",
+  "minutes": 35,
+  "goal": "Al final de esta clase habrás repasado todo el curso: to be, presente, pasado, futuro, presente continuo, can y las palabras de pregunta, y sabrás evitar los errores más comunes de los hispanohablantes.",
+  "sections": [
+    {
+      "h": "Resumen de los tiempos del curso",
+      "table": {
+        "head": ["Tema", "Estructura", "Ejemplo", "Significa"],
+        "rows": [
+          ["To be", "I am / you are / he, she, it is / we, you, they are", "She is a student.", "Ella es estudiante."],
+          ["Presente simple", "verbo base (+ s con he/she/it)", "He works every day.", "Él trabaja todos los días."],
+          ["Presente simple (neg. y preg.)", "don't / doesn't + verbo base; Do / Does + sujeto + verbo?", "Does she like pizza?", "¿A ella le gusta la pizza?"],
+          ["Pasado simple", "verbo + ed (regular) o forma irregular", "I watched a movie. / I went home.", "Vi una película. / Fui a casa."],
+          ["Pasado (neg. y preg.)", "didn't + verbo base; Did + sujeto + verbo base?", "Did you study? No, I didn't.", "¿Estudiaste? No."],
+          ["Futuro con will", "will + verbo base", "I will call you later.", "Te llamaré más tarde."],
+          ["Futuro con going to", "am/is/are + going to + verbo base", "We are going to travel next week.", "Vamos a viajar la próxima semana."],
+          ["Presente continuo", "am/is/are + verbo + ing", "They are playing soccer now.", "Ellos están jugando fútbol ahora."],
+          ["Can", "can / can't + verbo base (sin to)", "I can code. She can't swim.", "Sé programar. Ella no sabe nadar."]
+        ]
+      },
+      "note": "Regla de oro: en preguntas y negativos con do/does/did, el verbo principal vuelve a su forma base. Did you go? (no Did you went?)."
+    },
+    {
+      "h": "Palabras de pregunta",
+      "table": {
+        "head": ["Palabra", "Pregunta por", "Ejemplo", "Significa"],
+        "rows": [
+          ["What", "cosa", "What is your name?", "¿Cuál es tu nombre?"],
+          ["Where", "lugar", "Where do you live?", "¿Dónde vives?"],
+          ["When", "momento", "When is the class?", "¿Cuándo es la clase?"],
+          ["Who", "persona", "Who is he?", "¿Quién es él?"],
+          ["Why", "razón", "Why are you tired?", "¿Por qué estás cansado?"],
+          ["How", "manera o estado", "How are you?", "¿Cómo estás?"],
+          ["How many / How much", "cantidad", "How many brothers do you have?", "¿Cuántos hermanos tienes?"],
+          ["What time", "hora", "What time is it?", "¿Qué hora es?"]
+        ]
+      },
+      "note": "Estructura: palabra de pregunta + do/does/did (o is/are/can) + sujeto + verbo. Where did you go? / Why are you late?"
+    },
+    {
+      "h": "Errores que debes evitar",
+      "body": "Estos son los errores más típicos de quienes hablan español. Si los corriges, tu inglés mejora muchísimo:",
+      "list": [
+        "I have 20 years. → I am 20 years old. (la edad se dice con to be)",
+        "He go to work. → He goes to work. (con he/she/it el verbo lleva -s o -es)",
+        "I am agree. → I agree. (agree ya es verbo, no necesita am)",
+        "She cans swim. → She can swim. (can nunca lleva -s)",
+        "Do you can swim? → Can you swim? (can no usa do/does)",
+        "Did you went? → Did you go? (después de did, verbo base)",
+        "I no like coffee. → I don't like coffee. (el negativo usa don't)",
+        "Is cold today. → It is cold today. (en inglés siempre hay sujeto: it, there...)",
+        "I am agree / I am go → I agree / I go (no mezcles am con otro verbo, salvo -ing)",
+        "I have hunger. → I am hungry. (hambre, sed, frío y sueño usan to be)"
+      ],
+      "note": "Mientras hablas, hazte una pregunta rápida: ¿tengo sujeto y verbo? ¿el verbo está en la forma correcta?"
+    },
+    {
+      "h": "Recordatorio: la hora",
+      "body": "Para preguntar: **What time is it?** Para responder: **It's + hora**.\n\n**It's seven o'clock.** (7:00) · **It's seven thirty.** o **half past seven.** (7:30) · **It's a quarter past seven.** (7:15) · **It's a quarter to eight.** (7:45)\n\nPara decir *a qué hora* ocurre algo usa **at**: *The class is at 6 p.m.* Usa **a.m.** para la mañana y **p.m.** para la tarde y la noche.",
+      "note": "Cuidado: It's (hora) con it, no con they. Se dice It's three o'clock, no They are three."
+    },
+    {
+      "h": "Recordatorio: países y nacionalidades",
+      "table": {
+        "head": ["País", "Nacionalidad", "Ejemplo", "Significa"],
+        "rows": [
+          ["Colombia", "Colombian", "I'm from Colombia. I'm Colombian.", "Soy de Colombia. Soy colombiano."],
+          ["Mexico", "Mexican", "She is Mexican.", "Ella es mexicana."],
+          ["Spain", "Spanish", "He is from Spain.", "Él es de España."],
+          ["the United States", "American", "They are American.", "Ellos son estadounidenses."],
+          ["Brazil", "Brazilian", "My friend is Brazilian.", "Mi amigo es brasileño."],
+          ["Canada", "Canadian", "I want to visit Canada.", "Quiero visitar Canadá."]
+        ]
+      },
+      "note": "Los países y las nacionalidades siempre se escriben con mayúscula inicial: Colombian, Spanish, English."
+    },
+    {
+      "h": "Recordatorio: números",
+      "body": "**1-10:** one, two, three, four, five, six, seven, eight, nine, ten.\n\n**11-20:** eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty.\n\n**Decenas:** twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety, one hundred.\n\nPara unir: **twenty-one** (21), **thirty-five** (35), **ninety-nine** (99).",
+      "note": "No confundas thirteen (13) con thirty (30), ni fifteen (15) con fifty (50). Escucha dónde cae el acento: thirTEEN, THIRty."
+    },
+    {
+      "h": "Cómo seguir practicando",
+      "list": [
+        "Habla en voz alta cada día: presenta tu rutina en 5 frases.",
+        "Escribe un mini diario: What did I do yesterday? What am I going to do tomorrow?",
+        "Cambia el idioma de tu teléfono o de tus apps a inglés.",
+        "Mira series con subtítulos en inglés y repite frases cortas.",
+        "Lee documentación técnica en inglés: ya conoces muchas palabras de programación.",
+        "Repasa las clases anteriores y repite los ejercicios que te costaron más."
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "am / is / are", "es": "soy, estoy, eres, es, somos...", "ex": "She is my friend." },
+    { "en": "have / has", "es": "tener", "ex": "He has two brothers." },
+    { "en": "go / went", "es": "ir / fui, fue", "ex": "I went to the university yesterday." },
+    { "en": "do / does / did", "es": "auxiliares para preguntas y negativos", "ex": "Did you eat breakfast?" },
+    { "en": "don't / doesn't / didn't", "es": "no (presente y pasado)", "ex": "She doesn't like coffee." },
+    { "en": "will", "es": "futuro (promesa, decisión)", "ex": "I will help you." },
+    { "en": "going to", "es": "ir a (plan)", "ex": "I'm going to study tonight." },
+    { "en": "can / can't", "es": "poder, saber / no poder", "ex": "I can't drive." },
+    { "en": "now", "es": "ahora", "ex": "I'm studying English now." },
+    { "en": "yesterday", "es": "ayer", "ex": "I played soccer yesterday." },
+    { "en": "tomorrow", "es": "mañana", "ex": "We have class tomorrow." },
+    { "en": "every day", "es": "todos los días", "ex": "I practice English every day." },
+    { "en": "what / where / when", "es": "qué / dónde / cuándo", "ex": "Where do you live?" },
+    { "en": "who / why / how", "es": "quién / por qué / cómo", "ex": "Why are you late?" },
+    { "en": "how many", "es": "cuántos", "ex": "How many classes do you have?" },
+    { "en": "What time is it?", "es": "¿Qué hora es?", "ex": "What time is it? It's five o'clock." },
+    { "en": "years old", "es": "años de edad", "ex": "I am 20 years old." },
+    { "en": "agree", "es": "estar de acuerdo", "ex": "I agree with you." },
+    { "en": "I would like", "es": "quisiera", "ex": "I would like some water." },
+    { "en": "please / thank you", "es": "por favor / gracias", "ex": "Thank you for your help." }
+  ],
+  "examples": [
+    { "en": "I am Santiago and I am 20 years old.", "es": "Soy Santiago y tengo 20 años." },
+    { "en": "I am from Colombia. I am Colombian.", "es": "Soy de Colombia. Soy colombiano." },
+    { "en": "He goes to the university every day.", "es": "Él va a la universidad todos los días." },
+    { "en": "She doesn't work on Sundays.", "es": "Ella no trabaja los domingos." },
+    { "en": "Yesterday I studied programming for two hours.", "es": "Ayer estudié programación durante dos horas." },
+    { "en": "Did you go to class last Monday?", "es": "¿Fuiste a clase el lunes pasado?" },
+    { "en": "I will call you tonight.", "es": "Te llamaré esta noche." },
+    { "en": "We are going to travel next month.", "es": "Vamos a viajar el próximo mes." },
+    { "en": "They are playing video games right now.", "es": "Ellos están jugando videojuegos ahora mismo." },
+    { "en": "I can write code, but I can't draw.", "es": "Sé escribir código, pero no sé dibujar." },
+    { "en": "Where do you live?", "es": "¿Dónde vives?" },
+    { "en": "What time is the class? It's at six thirty.", "es": "¿A qué hora es la clase? Es a las seis y media." },
+    { "en": "I have thirty-five classmates.", "es": "Tengo treinta y cinco compañeros." },
+    { "en": "I agree with you. Thank you very much!", "es": "Estoy de acuerdo contigo. ¡Muchas gracias!" }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "Which sentence is correct?", "options": ["I am agree.", "I agree.", "I have agree."], "answer": 1, "why": "Agree ya es un verbo: se dice I agree, sin am." },
+    { "type": "choice", "q": "I ___ 20 years old.", "options": ["am", "have", "is"], "answer": 0, "why": "La edad se dice con to be: I am 20 years old, no I have 20 years." },
+    { "type": "choice", "q": "He ___ to the university every day.", "options": ["go", "goes", "going"], "answer": 1, "why": "Con he/she/it en presente simple el verbo lleva -es: goes." },
+    { "type": "choice", "q": "Yesterday I ___ a movie with my friends.", "options": ["watch", "watched", "watching"], "answer": 1, "why": "Yesterday indica pasado, y el pasado regular termina en -ed: watched." },
+    { "type": "choice", "q": "Look at those clouds! It ___ rain.", "options": ["is going to", "are going to", "go to"], "answer": 0, "why": "Para una predicción con evidencia se usa going to; con it va is." },
+    { "type": "choice", "q": "Which question asks about a place?", "options": ["Where do you live?", "When do you live?", "Who do you live?"], "answer": 0, "why": "Where pregunta por el lugar: ¿dónde?" },
+    { "type": "choice", "q": "Which sentence is correct?", "options": ["Do you can swim?", "You can swim?", "Can you swim?"], "answer": 2, "why": "Con can la pregunta se forma invirtiendo el orden, sin do/does: Can you swim?" },
+    { "type": "fill", "q": "They ___ my best friends. (to be)", "answer": ["are"], "why": "They usa are." },
+    { "type": "fill", "q": "She ___ like coffee. (negativo)", "answer": ["doesn't", "does not"], "why": "Con she el negativo del presente simple es doesn't." },
+    { "type": "fill", "q": "Last year I ___ in Medellín. (to be, pasado)", "answer": ["was"], "why": "El pasado de am es was." },
+    { "type": "fill", "q": "I ___ play the guitar. (sé tocar)", "answer": ["can"], "why": "Para habilidad se usa can." },
+    { "type": "fill", "q": "El número 30 en inglés es: ___", "answer": ["thirty"], "why": "30 es thirty; thirteen es 13." },
+    { "type": "order", "words": ["is", "She", "to", "going", "study", "tonight"], "answer": "She is going to study tonight", "es": "Ella va a estudiar esta noche." },
+    { "type": "order", "words": ["time", "is", "What", "it"], "answer": "What time is it", "es": "¿Qué hora es?" },
+    { "type": "order", "words": ["you", "Where", "did", "go", "yesterday"], "answer": "Where did you go yesterday", "es": "¿Adónde fuiste ayer?" },
+    { "type": "order", "words": ["fish", "He", "doesn't", "like"], "answer": "He doesn't like fish", "es": "A él no le gusta el pescado." },
+    { "type": "translate", "es": "Tengo 20 años.", "answer": ["I am 20 years old.", "I'm 20 years old.", "I am 20.", "I'm 20."], "why": "La edad se dice con to be: I am 20 years old." },
+    { "type": "translate", "es": "Estoy de acuerdo.", "answer": ["I agree.", "I agree"], "why": "Agree es un verbo; no se usa am." },
+    { "type": "translate", "es": "Ella está cocinando ahora.", "answer": ["She is cooking now.", "She's cooking now.", "She is cooking right now.", "She's cooking right now."], "why": "Presente continuo: is + cooking." },
+    { "type": "translate", "es": "Mañana voy a viajar a Canadá.", "answer": ["Tomorrow I am going to travel to Canada.", "Tomorrow I'm going to travel to Canada.", "I am going to travel to Canada tomorrow.", "I'm going to travel to Canada tomorrow."], "why": "Un plan se expresa con am going to + verbo base." }
+  ],
+  "speak": [
+    "I am Santiago and I am 20 years old.",
+    "I am from Colombia and I study systems engineering.",
+    "I go to the university every day.",
+    "Yesterday I studied English for one hour.",
+    "Tomorrow I am going to practice my speaking.",
+    "I can write code and I want to learn more English.",
+    "What time is it, please?",
+    "Thank you for your help!"
+  ],
+  "tip": "Antes de decir una frase, revisa tres cosas: sujeto, verbo y tiempo. Si dudas, usa frases cortas y simples; es mejor una frase sencilla y correcta que una larga con errores. Repasa esta clase cada semana."
+}

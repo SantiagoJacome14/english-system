@@ -1,0 +1,136 @@
+{
+  "n": 28,
+  "block": "Para comunicarte",
+  "title": "Comparar, gustos y opiniones",
+  "emoji": "⚖️",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás comparar cosas, decir qué te gusta o qué prefieres y dar tu opinión con frases simples.",
+  "sections": [
+    {
+      "h": "Comparativos: más que...",
+      "body": "Para comparar dos cosas, el adjetivo cambia según su longitud.\n\nAdjetivos cortos (una sílaba): agrega **-er** y usa **than**: *Orlando is hotter than Bogotá.* (Orlando es más caliente que Bogotá.)\n\nAdjetivos largos (dos o más sílabas): usa **more ... than**: *English is more interesting than math.*",
+      "note": "Cambios de ortografía: big → bigger (se duplica la consonante), happy → happier (y cambia a i), large → larger (solo se agrega r)."
+    },
+    {
+      "h": "Tabla de comparativos",
+      "table": {
+        "head": ["Adjetivo", "Comparativo", "Ejemplo", "Significa"],
+        "rows": [
+          ["tall", "taller", "My brother is taller than me.", "Mi hermano es más alto que yo."],
+          ["cheap", "cheaper", "The bus is cheaper than a taxi.", "El bus es más barato que un taxi."],
+          ["big", "bigger", "Disney World is bigger than my city.", "Disney World es más grande que mi ciudad."],
+          ["easy", "easier", "Spanish is easier for me.", "El español es más fácil para mí."],
+          ["expensive", "more expensive", "Orlando is more expensive than Cali.", "Orlando es más caro que Cali."],
+          ["good", "better", "This pizza is better than that one.", "Esta pizza es mejor que esa."],
+          ["bad", "worse", "The weather is worse today.", "El clima está peor hoy."]
+        ]
+      },
+      "note": "Good y bad son irregulares: good → better, bad → worse. Nunca digas more good ni more bad."
+    },
+    {
+      "h": "As... as: igual de...",
+      "body": "Para decir que dos cosas son iguales usa **as + adjetivo + as**: *I am as tall as my father.* (Soy tan alto como mi papá.)\n\nPara decir que no son iguales: **not as ... as**: *Tea is not as strong as coffee.* (El té no es tan fuerte como el café.)"
+    },
+    {
+      "h": "Superlativos: el más...",
+      "table": {
+        "head": ["Tipo", "Regla", "Ejemplo", "Significa"],
+        "rows": [
+          ["Corto", "the + adjetivo + -est", "the biggest, the tallest, the cheapest", "el más grande, el más alto, el más barato"],
+          ["Largo", "the most + adjetivo", "the most beautiful, the most expensive", "el más bonito, el más caro"],
+          ["Irregular", "the best / the worst", "the best day, the worst food", "el mejor día, la peor comida"]
+        ]
+      },
+      "note": "Siempre lleva the: This is the best park in Orlando. Y se dice in (in Orlando, in the world), no of."
+    },
+    {
+      "h": "Gustos: like, love, hate, enjoy, prefer",
+      "body": "Estos verbos hablan de gustos. Con otro verbo, este lleva **-ing**:\n\n**I like playing soccer.** (Me gusta jugar fútbol.)\n**She loves dancing.** **We hate waiting in line.** **He enjoys listening to music.**\n\nPara elegir entre dos cosas usa **prefer**: **I prefer tea to coffee.** o **I prefer to stay home.** Para preguntar: **What is your favorite food?**",
+      "note": "Enjoy siempre necesita algo: I enjoy my job / I enjoy working. Con he/she/it agrega -s: likes, loves, hates, enjoys, prefers."
+    },
+    {
+      "h": "Dar opiniones",
+      "list": [
+        "I think English is important. (Creo que el inglés es importante.)",
+        "I think it's too expensive. (Creo que es demasiado caro.)",
+        "In my opinion, Orlando is a great city. (En mi opinión...)",
+        "I agree. / I don't agree. (Estoy de acuerdo. / No estoy de acuerdo.)",
+        "What do you think? (¿Qué piensas?)",
+        "It's my favorite ride! (¡Es mi atracción favorita!)"
+      ],
+      "note": "Para opinar se usa I think, no I believe que suena más fuerte. Para disentir con cortesía: I don't think so."
+    }
+  ],
+  "vocab": [
+    { "en": "bigger", "es": "más grande", "ex": "This room is bigger." },
+    { "en": "smaller", "es": "más pequeño", "ex": "My phone is smaller than yours." },
+    { "en": "cheaper", "es": "más barato", "ex": "Buses are cheaper than taxis." },
+    { "en": "more expensive", "es": "más caro", "ex": "Hotels are more expensive in summer." },
+    { "en": "better", "es": "mejor", "ex": "English is better with practice." },
+    { "en": "worse", "es": "peor", "ex": "The traffic is worse today." },
+    { "en": "the best", "es": "el mejor", "ex": "This is the best day." },
+    { "en": "the worst", "es": "el peor", "ex": "That was the worst movie." },
+    { "en": "than", "es": "que (comparación)", "ex": "She is older than me." },
+    { "en": "as ... as", "es": "tan ... como", "ex": "He is as tall as me." },
+    { "en": "like", "es": "gustar", "ex": "I like pizza." },
+    { "en": "love", "es": "amar, encantar", "ex": "I love music." },
+    { "en": "hate", "es": "odiar", "ex": "I hate waiting." },
+    { "en": "enjoy", "es": "disfrutar", "ex": "I enjoy walking in the park." },
+    { "en": "prefer", "es": "preferir", "ex": "I prefer summer to winter." },
+    { "en": "favorite", "es": "favorito", "ex": "My favorite color is blue." },
+    { "en": "think", "es": "pensar, creer", "ex": "I think it's great." },
+    { "en": "opinion", "es": "opinión", "ex": "In my opinion, it's fun." },
+    { "en": "agree", "es": "estar de acuerdo", "ex": "I agree with you." },
+    { "en": "boring", "es": "aburrido", "ex": "This movie is boring." },
+    { "en": "interesting", "es": "interesante", "ex": "English is interesting." },
+    { "en": "fun", "es": "divertido", "ex": "The ride is fun." }
+  ],
+  "examples": [
+    { "en": "My brother is taller than me.", "es": "Mi hermano es más alto que yo." },
+    { "en": "The bus is cheaper than the taxi.", "es": "El bus es más barato que el taxi." },
+    { "en": "Orlando is hotter than my city.", "es": "Orlando es más caliente que mi ciudad." },
+    { "en": "Math is more difficult than English.", "es": "Las matemáticas son más difíciles que el inglés." },
+    { "en": "This burger is better than that one.", "es": "Esta hamburguesa es mejor que esa." },
+    { "en": "I am as tired as you.", "es": "Estoy tan cansado como tú." },
+    { "en": "Magic Kingdom is the biggest park in Orlando.", "es": "Magic Kingdom es el parque más grande de Orlando." },
+    { "en": "This is the most beautiful castle in the world.", "es": "Este es el castillo más hermoso del mundo." },
+    { "en": "It is the worst traffic of the year.", "es": "Es el peor tráfico del año." },
+    { "en": "I like playing video games.", "es": "Me gusta jugar videojuegos." },
+    { "en": "She loves dancing and singing.", "es": "A ella le encanta bailar y cantar." },
+    { "en": "I hate waiting in line.", "es": "Odio esperar en la fila." },
+    { "en": "I prefer tea to coffee.", "es": "Prefiero el té al café." },
+    { "en": "I think English is very useful.", "es": "Creo que el inglés es muy útil." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "My city is ___ than Orlando.", "options": ["small", "smaller", "more small"], "answer": 1, "why": "Small es corto, así que se agrega -er." },
+    { "type": "choice", "q": "This phone is ___ than that one.", "options": ["more expensive", "expensiver", "most expensive"], "answer": 0, "why": "Expensive es largo, así que se usa more ... than." },
+    { "type": "choice", "q": "This pizza is ___ than that pizza.", "options": ["more good", "gooder", "better"], "answer": 2, "why": "Good es irregular: better." },
+    { "type": "choice", "q": "It is ___ day of my life!", "options": ["the best", "the goodest", "the most good"], "answer": 0, "why": "El superlativo de good es the best." },
+    { "type": "choice", "q": "She is ___ tall as her brother.", "options": ["so", "as", "than"], "answer": 1, "why": "As tall as significa tan alto como." },
+    { "type": "choice", "q": "I enjoy ___ in the park.", "options": ["walk", "to walks", "walking"], "answer": 2, "why": "Enjoy va seguido de un verbo con -ing." },
+    { "type": "choice", "q": "It's the ___ park in Florida.", "options": ["most big", "biggest", "bigger"], "answer": 1, "why": "Big es corto: the biggest." },
+    { "type": "fill", "q": "My father is ___ than me. (old)", "answer": ["older"], "why": "Old es corto: older." },
+    { "type": "fill", "q": "English is ___ interesting than math. (more/most)", "answer": ["more"], "why": "Interesting es largo y se compara con more." },
+    { "type": "fill", "q": "This is the ___ movie ever! (bad)", "answer": ["worst"], "why": "El superlativo irregular de bad es worst." },
+    { "type": "fill", "q": "I like ___ music. (listen)", "answer": ["listening to"], "why": "Like va seguido de un verbo con -ing." },
+    { "type": "fill", "q": "I ___ it's a great idea. (opinión)", "answer": ["think"], "why": "I think se usa para dar opiniones." },
+    { "type": "order", "words": ["are", "than", "Taxis", "buses", "more", "expensive"], "answer": "Taxis are more expensive than buses", "es": "Los taxis son más caros que los buses." },
+    { "type": "order", "words": ["the", "is", "best", "This", "park"], "answer": "This is the best park", "es": "Este es el mejor parque." },
+    { "type": "order", "words": ["I", "playing", "love", "soccer"], "answer": "I love playing soccer", "es": "Amo jugar fútbol." },
+    { "type": "translate", "es": "Mi hermano es más alto que yo.", "answer": ["My brother is taller than me.", "My brother is taller than I am.", "My brother is taller than I."], "why": "Tall es corto: taller than." },
+    { "type": "translate", "es": "Es el parque más grande.", "answer": ["It is the biggest park.", "It's the biggest park."], "why": "Big es corto: the biggest." },
+    { "type": "translate", "es": "Prefiero el té al café.", "answer": ["I prefer tea to coffee.", "I prefer tea over coffee."], "why": "Prefer A to B." },
+    { "type": "translate", "es": "Creo que es divertido.", "answer": ["I think it is fun.", "I think it's fun.", "I think it is funny.", "I think it's funny."], "why": "I think da una opinión." }
+  ],
+  "speak": [
+    "My brother is taller than me.",
+    "English is more difficult than Spanish, but I like it.",
+    "This is the best day of my life.",
+    "I like playing soccer with my friends.",
+    "I hate waiting in line.",
+    "I prefer tea to coffee.",
+    "My favorite city is Orlando.",
+    "I think English is very useful."
+  ],
+  "tip": "Los hispanohablantes dicen *more tall* o *more good*, o usan *of* en lugar de *in*. Correcto: taller, better, the biggest park in Orlando. Y después de like/love/hate/enjoy usa verbo con -ing: I enjoy playing, no I enjoy to play."
+}

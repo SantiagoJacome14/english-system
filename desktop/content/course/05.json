@@ -1,0 +1,153 @@
+{
+  "n": 5,
+  "block": "Primeros pasos",
+  "title": "Los números",
+  "emoji": "🔢",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás contar hasta miles, decir teléfonos, precios, edades, años y los ordinales básicos.",
+  "sections": [
+    {
+      "h": "Del 0 al 20",
+      "table": {
+        "head": ["Número", "Inglés", "Número", "Inglés"],
+        "rows": [
+          ["0", "zero", "11", "eleven"],
+          ["1", "one", "12", "twelve"],
+          ["2", "two", "13", "thirteen"],
+          ["3", "three", "14", "fourteen"],
+          ["4", "four", "15", "fifteen"],
+          ["5", "five", "16", "sixteen"],
+          ["6", "six", "17", "seventeen"],
+          ["7", "seven", "18", "eighteen"],
+          ["8", "eight", "19", "nineteen"],
+          ["9", "nine", "20", "twenty"],
+          ["10", "ten", "", ""]
+        ]
+      },
+      "note": "Del 13 al 19 todos terminan en **-teen**. Cuidado con **15** (fifteen, no *fiveteen*) y **18** (eighteen, solo una t)."
+    },
+    {
+      "h": "De 20 a 100: las decenas",
+      "table": {
+        "head": ["Decena", "Inglés", "Ejemplo"],
+        "rows": [
+          ["20", "twenty", "twenty-one (21)"],
+          ["30", "thirty", "thirty-five (35)"],
+          ["40", "forty", "forty-two (42)"],
+          ["50", "fifty", "fifty-six (56)"],
+          ["60", "sixty", "sixty-seven (67)"],
+          ["70", "seventy", "seventy-eight (78)"],
+          ["80", "eighty", "eighty-nine (89)"],
+          ["90", "ninety", "ninety-nine (99)"],
+          ["100", "one hundred", "one hundred (100)"]
+        ]
+      },
+      "note": "Para números compuestos se une con guion: **twenty-one**, **forty-five**. Ojo con **forty**: se escribe sin la u, no *fourty*."
+    },
+    {
+      "h": "Cientos y miles",
+      "body": "Para los cientos, di el número y luego **hundred**: **two hundred** (200), **five hundred** (500).\n\nPara los miles, igual con **thousand**: **three thousand** (3,000), **ten thousand** (10,000).\n\nEn inglés americano normalmente no se dice **and** en medio: 125 es **one hundred twenty-five**. Y atención: *hundred* y *thousand* **no llevan -s** cuando hay un número antes: *two hundred*, no *two hundreds*.\n\nEn inglés los miles se separan con **coma** (1,000) y los decimales con **punto** (4.99). Es lo contrario de Colombia."
+    },
+    {
+      "h": "Teléfonos y datos personales",
+      "body": "Los números de teléfono se dicen **dígito por dígito**. El cero se puede decir **zero** u **oh**.\n\n(407) 555-0142 → **four oh seven, five five five, oh one four two.**\n\nEl signo $ se lee al final: $4.99 es **four ninety-nine** (informal) o **four dollars and ninety-nine cents** (formal). $20 es **twenty dollars**.\n\nPara la edad ya sabes: **I'm twenty years old.** Si preguntan **How old are you?** respondes solo con el número: **Twenty.**"
+    },
+    {
+      "h": "Cómo se dicen los años",
+      "table": {
+        "head": ["Año", "Se lee", "Nota"],
+        "rows": [
+          ["1999", "nineteen ninety-nine", "Se parte en dos pares"],
+          ["1984", "nineteen eighty-four", "Dos pares"],
+          ["2005", "two thousand five", "También: twenty oh five"],
+          ["2020", "twenty twenty", "Dos pares"],
+          ["2026", "twenty twenty-six", "Dos pares"],
+          ["2000", "two thousand", "Caso especial"]
+        ]
+      },
+      "note": "Los años no se leen como cantidades. *1999* no es *one thousand nine hundred...*, sino **nineteen ninety-nine**."
+    },
+    {
+      "h": "Ordinales básicos",
+      "table": {
+        "head": ["Número", "Ordinal", "Significa"],
+        "rows": [
+          ["1", "first (1st)", "primero"],
+          ["2", "second (2nd)", "segundo"],
+          ["3", "third (3rd)", "tercero"],
+          ["4", "fourth (4th)", "cuarto"],
+          ["5", "fifth (5th)", "quinto"],
+          ["10", "tenth (10th)", "décimo"]
+        ]
+      },
+      "note": "Después del 3 casi todos terminan en **-th**. Cuidado con **fifth** (la f cambia) y **twelfth**. Ejemplo: **the first day**, **the third floor**."
+    }
+  ],
+  "vocab": [
+    { "en": "zero", "es": "cero", "ex": "My phone number has a zero." },
+    { "en": "one", "es": "uno", "ex": "I have one brother." },
+    { "en": "ten", "es": "diez", "ex": "I have ten dollars." },
+    { "en": "thirteen", "es": "trece", "ex": "He's thirteen years old." },
+    { "en": "fifteen", "es": "quince", "ex": "It's fifteen dollars." },
+    { "en": "twenty", "es": "veinte", "ex": "I'm twenty years old." },
+    { "en": "thirty", "es": "treinta", "ex": "There are thirty students." },
+    { "en": "forty", "es": "cuarenta", "ex": "It's forty dollars." },
+    { "en": "fifty", "es": "cincuenta", "ex": "She's fifty." },
+    { "en": "hundred", "es": "cien", "ex": "One hundred people are here." },
+    { "en": "thousand", "es": "mil", "ex": "Two thousand dollars." },
+    { "en": "phone number", "es": "número de teléfono", "ex": "What's your phone number?" },
+    { "en": "price", "es": "precio", "ex": "What's the price?" },
+    { "en": "dollar", "es": "dólar", "ex": "It's five dollars." },
+    { "en": "cent", "es": "centavo", "ex": "Ninety-nine cents." },
+    { "en": "year", "es": "año", "ex": "The year is 2026." },
+    { "en": "first", "es": "primero", "ex": "Today is my first day." },
+    { "en": "second", "es": "segundo", "ex": "The second floor." },
+    { "en": "third", "es": "tercero", "ex": "The third question." },
+    { "en": "how much", "es": "cuánto cuesta", "ex": "How much is this?" }
+  ],
+  "examples": [
+    { "en": "I'm twenty years old.", "es": "Tengo veinte años." },
+    { "en": "There are thirty students.", "es": "Hay treinta estudiantes." },
+    { "en": "It's twenty-one dollars.", "es": "Cuesta veintiún dólares." },
+    { "en": "This is four ninety-nine.", "es": "Esto cuesta 4.99." },
+    { "en": "How much is this?", "es": "¿Cuánto cuesta esto?" },
+    { "en": "What's your phone number?", "es": "¿Cuál es tu número de teléfono?" },
+    { "en": "It's four oh seven, five five five, one two three four.", "es": "Es 407-555-1234." },
+    { "en": "I was born in nineteen ninety-nine.", "es": "Nací en 1999." },
+    { "en": "It's twenty twenty-six.", "es": "Estamos en 2026." },
+    { "en": "I live on the third floor.", "es": "Vivo en el tercer piso." },
+    { "en": "It's two hundred dollars.", "es": "Cuesta doscientos dólares." },
+    { "en": "Today is my first day.", "es": "Hoy es mi primer día." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "¿Cómo se dice 15?", "options": ["fiveteen", "fifteen", "fiftin"], "answer": 1, "why": "15 se escribe fifteen, no fiveteen." },
+    { "type": "choice", "q": "¿Cómo se dice 40?", "options": ["fourty", "forty", "fortie"], "answer": 1, "why": "Forty se escribe sin la u." },
+    { "type": "choice", "q": "¿Cuál es la forma correcta de decir 200?", "options": ["two hundreds", "two hundred", "twenty hundred"], "answer": 1, "why": "Hundred no lleva -s cuando hay un número antes." },
+    { "type": "choice", "q": "¿Cómo se lee 1999 como año?", "options": ["nineteen ninety-nine", "one thousand nine hundred ninety-nine", "ten ninety-nine"], "answer": 0, "why": "Los años se leen en dos pares: nineteen ninety-nine." },
+    { "type": "choice", "q": "¿Cómo se lee 2026 como año?", "options": ["twenty twenty-six", "two thousand twenty-six", "twenty twenty six hundred"], "answer": 0, "why": "En inglés americano se dice twenty twenty-six." },
+    { "type": "choice", "q": "The ___ floor es el piso 3.", "options": ["three", "third", "threeth"], "answer": 1, "why": "El ordinal de 3 es third." },
+    { "type": "fill", "q": "Escribe 13 en inglés: ___", "answer": ["thirteen"], "why": "13 es thirteen." },
+    { "type": "fill", "q": "Escribe 21 en inglés: ___", "answer": ["twenty-one", "twenty one"], "why": "Las decenas se unen con guion: twenty-one." },
+    { "type": "fill", "q": "Escribe 80 en inglés: ___", "answer": ["eighty"], "why": "80 es eighty." },
+    { "type": "fill", "q": "Escribe 1,000 en inglés: one ___", "answer": ["thousand"], "why": "1,000 es one thousand." },
+    { "type": "fill", "q": "El ordinal de 5 es ___", "answer": ["fifth"], "why": "Fifth cambia la f por th." },
+    { "type": "order", "words": ["I'm", "years", "twenty", "old"], "answer": "I'm twenty years old", "es": "Tengo veinte años." },
+    { "type": "order", "words": ["is", "How", "this", "much"], "answer": "How much is this", "es": "¿Cuánto cuesta esto?" },
+    { "type": "order", "words": ["phone", "your", "What's", "number"], "answer": "What's your phone number", "es": "¿Cuál es tu número de teléfono?" },
+    { "type": "order", "words": ["dollars", "It's", "ten"], "answer": "It's ten dollars", "es": "Cuesta diez dólares." },
+    { "type": "translate", "es": "Tengo veinte años.", "answer": ["I am twenty years old.", "I'm twenty years old.", "I am twenty.", "I'm twenty."], "why": "La edad se dice con to be más el número." },
+    { "type": "translate", "es": "¿Cuánto cuesta esto?", "answer": ["How much is this?", "How much does this cost?", "How much is it?"], "why": "How much is this? se usa para preguntar el precio." },
+    { "type": "translate", "es": "Cuesta cincuenta dólares.", "answer": ["It's fifty dollars.", "It is fifty dollars.", "It costs fifty dollars."], "why": "Fifty es 50, y dollars es el plural de dollar." }
+  ],
+  "speak": [
+    "I'm twenty years old.",
+    "How much is this?",
+    "It's four ninety-nine.",
+    "What's your phone number?",
+    "I was born in nineteen ninety-nine.",
+    "It's twenty twenty-six.",
+    "I live on the third floor.",
+    "There are one hundred people here."
+  ],
+  "tip": "Error común: decir los años como cantidades, por ejemplo *one thousand nine hundred ninety-nine* para 1999. En inglés se dicen en dos pares: **nineteen ninety-nine**. Y no escribas *fourty* ni *two hundreds*: es **forty** y **two hundred**. Además, el punto y la coma se usan al revés que en Colombia: **1,000** y **4.99**."
+}

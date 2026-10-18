@@ -1,0 +1,171 @@
+{
+  "n": 22,
+  "block": "Verbos y tiempos",
+  "title": "Pasado simple II: irregulares, didn't y Did...?",
+  "emoji": "📖",
+  "minutes": 40,
+  "goal": "Al final de esta clase podrás negar, preguntar y contar una historia corta en pasado con verbos irregulares.",
+  "sections": [
+    {
+      "h": "Verbos irregulares en afirmativo",
+      "body": "En la clase 20 aprendiste las formas irregulares. Ahora las usas en frases. En afirmativo solo cambias el verbo a su forma de **pasado** (2.ª columna) y es **igual para todas las personas**.\n\nLos tres momentos con **go**:\n\n- Pasado: **I went** to Orlando. (Fui a Orlando.)\n- Presente: **I go** to Orlando. (Voy a Orlando.)\n- Futuro: **I will go** to Orlando. (Iré a Orlando.)",
+      "table": {
+        "head": ["Pronombre", "Pasado: go", "Ejemplo", "Significa"],
+        "rows": [
+          ["I", "went", "I went to the park.", "Fui al parque."],
+          ["you", "went", "You went home early.", "Tú fuiste a casa temprano."],
+          ["he / she / it", "went", "She went to work.", "Ella fue al trabajo."],
+          ["we", "went", "We went to Disney.", "Fuimos a Disney."],
+          ["they", "went", "They went by bus.", "Ellos fueron en bus."]
+        ]
+      },
+      "note": "Ya no hay -s: en pasado he / she / it usa la misma forma que I."
+    },
+    {
+      "h": "Negativo: didn't + verbo base",
+      "body": "Para negar en pasado (con cualquier verbo, regular o irregular) usa **didn't** (did not) + **verbo base**. Ojo: **el pasado se queda en didn't**, el verbo principal vuelve a la forma base.\n\n- Bien: **I didn't go** to class.\n- Mal: *I didn't went* to class.",
+      "table": {
+        "head": ["Pronombre", "Negativo de eat", "Ejemplo", "Significa"],
+        "rows": [
+          ["I", "didn't eat", "I didn't eat breakfast.", "No desayuné."],
+          ["you", "didn't eat", "You didn't eat lunch.", "No almorzaste."],
+          ["he / she / it", "didn't eat", "He didn't eat meat.", "Él no comió carne."],
+          ["we", "didn't eat", "We didn't eat dinner.", "No cenamos."],
+          ["they", "didn't eat", "They didn't eat pizza.", "Ellos no comieron pizza."]
+        ]
+      },
+      "note": "Con **was / were** sigue siendo **wasn't / weren't**, sin did."
+    },
+    {
+      "h": "Preguntas con Did... ? y respuestas cortas",
+      "body": "Para preguntar en pasado: **Did + sujeto + verbo base?** Igual que en la negación, el verbo vuelve a la base.\n\n**Did you go to Orlando?** (¿Fuiste a Orlando?)\n\n**Did she see the fireworks?** (¿Ella vio los fuegos artificiales?)",
+      "table": {
+        "head": ["Pregunta", "Sí", "No"],
+        "rows": [
+          ["Did I go?", "Yes, I did.", "No, I didn't."],
+          ["Did you go?", "Yes, I did.", "No, I didn't."],
+          ["Did he / she / it go?", "Yes, she did.", "No, she didn't."],
+          ["Did we go?", "Yes, we did.", "No, we didn't."],
+          ["Did they go?", "Yes, they did.", "No, they didn't."]
+        ]
+      },
+      "note": "La respuesta corta usa **did**, no el verbo principal: *Yes, I did*, no *Yes, I went*."
+    },
+    {
+      "h": "Preguntas con Wh- en pasado",
+      "body": "La estructura es: **Wh- + did + sujeto + verbo base?**",
+      "table": {
+        "head": ["Pregunta", "Significa", "Respuesta posible"],
+        "rows": [
+          ["Where did you go?", "¿Adónde fuiste?", "I went to Orlando."],
+          ["What did you eat?", "¿Qué comiste?", "I ate a burger."],
+          ["When did she arrive?", "¿Cuándo llegó ella?", "She arrived yesterday."],
+          ["Who did you meet?", "¿A quién conociste?", "I met a new friend."],
+          ["Why did he leave?", "¿Por qué se fue él?", "Because he was tired."],
+          ["How did you get there?", "¿Cómo llegaste allá?", "I took a bus."],
+          ["What time did the movie start?", "¿A qué hora empezó la película?", "It started at 8."]
+        ]
+      },
+      "note": "Con **who** como sujeto no se usa did: **Who bought this?** (¿Quién compró esto?)."
+    },
+    {
+      "h": "Tabla de los tres tiempos: go, buy y eat",
+      "table": {
+        "head": ["Verbo", "Pasado", "Presente", "Futuro"],
+        "rows": [
+          ["go", "I went. (Fui.)", "I go. (Voy.)", "I will go. (Iré.)"],
+          ["buy", "I bought. (Compré.)", "I buy. (Compro.)", "I will buy. (Compraré.)"],
+          ["eat", "I ate. (Comí.)", "I eat. (Como.)", "I will eat. (Comeré.)"]
+        ]
+      },
+      "note": "La estructura negativa y la pregunta pasada siempre usan **didn't / Did** + verbo base."
+    },
+    {
+      "h": "Cómo contar una historia corta",
+      "body": "Una historia en pasado sigue un orden. Usa estos conectores: **first** (primero), **then** (luego), **after that** (después de eso), **finally** (finalmente), **but** (pero), **so** (así que).\n\n*Last summer I went to Orlando. First, I bought a ticket for Magic Kingdom. Then I took a bus to the park. I saw a big castle and I ate ice cream. But it rained, so I didn't stay late. Finally, I came home and slept ten hours.*\n\nObserva: todos los verbos están en pasado y solo hay un **didn't** con el verbo base (**stay**)."
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "Mal: *I didn't went.* Bien: **I didn't go.**",
+        "Mal: *Did you went to class?* Bien: **Did you go to class?**",
+        "Mal: *Yes, I went* como respuesta corta. Bien: **Yes, I did.**",
+        "Mal: *I eated pizza.* Bien: **I ate pizza.**",
+        "Mal: *What you did yesterday?* Bien: **What did you do yesterday?**"
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "went", "es": "fui / fue / fueron", "ex": "We went to the beach." },
+    { "en": "saw", "es": "vi / vio", "ex": "I saw a movie." },
+    { "en": "ate", "es": "comí / comió", "ex": "She ate a salad." },
+    { "en": "took", "es": "tomé / llevé", "ex": "He took a taxi." },
+    { "en": "made", "es": "hice / hizo", "ex": "I made a cake." },
+    { "en": "came", "es": "vine / vino", "ex": "They came late." },
+    { "en": "got", "es": "conseguí / obtuve", "ex": "I got a ticket." },
+    { "en": "gave", "es": "di / dio", "ex": "She gave me a gift." },
+    { "en": "had", "es": "tuve / comí / tomé", "ex": "We had lunch at noon." },
+    { "en": "bought", "es": "compré / compró", "ex": "He bought a hat." },
+    { "en": "wrote", "es": "escribí / escribió", "ex": "I wrote a letter." },
+    { "en": "spoke", "es": "hablé / habló", "ex": "She spoke with the manager." },
+    { "en": "slept", "es": "dormí / durmió", "ex": "We slept late." },
+    { "en": "met", "es": "conocí / encontré", "ex": "I met a friend." },
+    { "en": "left", "es": "salí / dejé", "ex": "They left early." },
+    { "en": "didn't", "es": "no (pasado)", "ex": "I didn't see him." },
+    { "en": "Did you...?", "es": "¿Tú...? (pasado)", "ex": "Did you eat breakfast?" },
+    { "en": "first", "es": "primero", "ex": "First, I got up." },
+    { "en": "then", "es": "luego", "ex": "Then I went to class." },
+    { "en": "after that", "es": "después de eso", "ex": "After that, I had lunch." },
+    { "en": "finally", "es": "finalmente", "ex": "Finally, I slept." },
+    { "en": "so", "es": "así que", "ex": "It rained, so we stayed home." }
+  ],
+  "examples": [
+    { "en": "I went to Orlando last summer.", "es": "Fui a Orlando el verano pasado." },
+    { "en": "We saw the fireworks at night.", "es": "Vimos los fuegos artificiales en la noche." },
+    { "en": "She ate pizza for dinner.", "es": "Ella comió pizza en la cena." },
+    { "en": "I didn't sleep well last night.", "es": "No dormí bien anoche." },
+    { "en": "He didn't buy a ticket.", "es": "Él no compró un boleto." },
+    { "en": "Did you go to the airport?", "es": "¿Fuiste al aeropuerto?" },
+    { "en": "Yes, I did. I took a taxi.", "es": "Sí. Tomé un taxi." },
+    { "en": "Did they meet the manager?", "es": "¿Ellos conocieron al gerente?" },
+    { "en": "No, they didn't.", "es": "No." },
+    { "en": "Where did you eat lunch?", "es": "¿Dónde almorzaste?" },
+    { "en": "What did she buy at the store?", "es": "¿Qué compró ella en la tienda?" },
+    { "en": "Why did you leave early?", "es": "¿Por qué te fuiste temprano?" },
+    { "en": "First I wrote an email, then I called my mother.", "es": "Primero escribí un correo, luego llamé a mi mamá." },
+    { "en": "Finally, we came home and slept.", "es": "Finalmente, volvimos a casa y dormimos." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I ___ to the park yesterday.", "options": ["go", "went", "goed"], "answer": 1, "why": "Yesterday pide pasado: went." },
+    { "type": "choice", "q": "She ___ pizza last night.", "options": ["eat", "eated", "ate"], "answer": 2, "why": "El pasado irregular de eat es ate." },
+    { "type": "choice", "q": "I didn't ___ my keys.", "options": ["find", "found", "finded"], "answer": 0, "why": "Después de didn't el verbo vuelve a la forma base: find." },
+    { "type": "choice", "q": "___ you see the show?", "options": ["Do", "Did", "Were"], "answer": 1, "why": "Para preguntar en pasado se usa Did." },
+    { "type": "choice", "q": "Did she buy a ticket? Respuesta corta negativa:", "options": ["No, she didn't.", "No, she didn't buy.", "No, she don't."], "answer": 0, "why": "La respuesta corta repite did: No, she didn't." },
+    { "type": "choice", "q": "¿Cuál oración es correcta?", "options": ["He didn't went.", "He didn't go.", "He no went."], "answer": 1, "why": "Después de didn't va el verbo base: go." },
+    { "type": "choice", "q": "Where ___ you go last year?", "options": ["did", "do", "were"], "answer": 0, "why": "Pregunta Wh- en pasado: Where did you go?" },
+    { "type": "fill", "q": "I ___ a new friend yesterday. (meet, past)", "answer": ["met"], "why": "Meet - met - met." },
+    { "type": "fill", "q": "She ___ me a gift. (give, past)", "answer": ["gave"], "why": "Give - gave - given." },
+    { "type": "fill", "q": "We ___ lunch at noon. (have, past)", "answer": ["had"], "why": "Have - had - had." },
+    { "type": "fill", "q": "He didn't ___ the bus. (take)", "answer": ["take"], "why": "Después de didn't el verbo va en base." },
+    { "type": "fill", "q": "___ they arrive on time? Yes, they did.", "answer": ["did"], "why": "Pregunta en pasado con Did." },
+    { "type": "fill", "q": "What ___ you eat for dinner?", "answer": ["did"], "why": "Wh- + did + sujeto + verbo base." },
+    { "type": "fill", "q": "I ___ an email last night. (write, past)", "answer": ["wrote"], "why": "Write - wrote - written." },
+    { "type": "order", "words": ["didn't", "I", "see", "the", "show"], "answer": "I didn't see the show", "es": "No vi el espectáculo." },
+    { "type": "order", "words": ["Did", "you", "eat", "breakfast"], "answer": "Did you eat breakfast", "es": "¿Desayunaste?" },
+    { "type": "order", "words": ["Where", "did", "she", "go"], "answer": "Where did she go", "es": "¿Adónde fue ella?" },
+    { "type": "translate", "es": "Ayer compré un boleto.", "answer": ["I bought a ticket yesterday.", "Yesterday I bought a ticket."], "why": "Buy es irregular: bought." },
+    { "type": "translate", "es": "Ella no comió carne.", "answer": ["She didn't eat meat.", "She did not eat meat."], "why": "Didn't + verbo base: eat." },
+    { "type": "translate", "es": "¿Qué hiciste anoche?", "answer": ["What did you do last night?"], "why": "Wh- + did + sujeto + verbo base: do." }
+  ],
+  "speak": [
+    "I went to Orlando last year.",
+    "I saw the castle.",
+    "I didn't sleep well.",
+    "Did you eat breakfast?",
+    "Yes, I did.",
+    "Where did you go yesterday?",
+    "What did you buy?",
+    "First I got up, then I went to class."
+  ],
+  "tip": "Error típico: poner el pasado dos veces (*I didn't went*, *Did you went?*). Cuando aparece did / didn't, el pasado ya está ahí: el verbo principal vuelve a su forma base."
+}

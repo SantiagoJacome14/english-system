@@ -104,7 +104,7 @@ function setCallState(s, text) { if (!CALL) return; CALL.state = s; const el = $
 function renderSubs() {
   const el = $("#c-subs"); if (!el || !CALL) return;
   const last = CALL.hist.slice(-2);
-  el.innerHTML = last.map((h) => h.role === "assistant" ? `<p class="sb">${esc(h.content)}</p>` : `<p class="su"><span class="label">Te entendí</span> ${esc(h.content)}</p>`).join("");
+  el.innerHTML = last.map((h) => h.role === "assistant" ? `<p class="sb" data-lk>${esc(h.content)}</p>` : `<p class="su"><span class="label">Te entendí</span> ${esc(h.content)}</p>`).join("");
 }
 function animateCall() {
   const r1 = $("#c-ring"), r2 = $("#c-ring2");
