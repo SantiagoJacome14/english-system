@@ -1,7 +1,7 @@
 {
   "name": "english-boarding-pass",
   "productName": "English Boarding Pass",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Tu app diaria de inglés: rutina, conversación por voz con Claude, plan y progreso",
   "main": "main.js",
   "author": "SantiagoJacome14",

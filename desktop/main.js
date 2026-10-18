@@ -113,7 +113,7 @@ async function ollamaFetch(p, body) {
 }
 async function ollamaChat(system, messages, onText, json) {
   const { model: m } = ollamaCfg();
-  const body = { model: m, messages: [{ role: "system", content: system }, ...messages], stream: !json, options: { temperature: json ? 0.2 : 0.7 } };
+  const body = { model: m, messages: [{ role: "system", content: system }, ...messages], stream: !json, keep_alive: "30m", options: { temperature: json ? 0.2 : 0.7, num_predict: json ? 1200 : 220 } };
   if (json) body.format = "json";
   const res = await ollamaFetch("/api/chat", body);
   if (json) return (await res.json()).message.content;

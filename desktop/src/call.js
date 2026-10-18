@@ -141,14 +141,15 @@ async function userSaid(text, fromChip, me = CALL) {
 async function botTurn(me) {
   if (me.thinking) return; me.thinking = true;
   setCallState("think", "Pensando…");
-  const r = await window.api.chat(callPrompt(), [{ role: "user", content: "(The phone call starts now. Greet the student by name and ask your first question.)" }, ...me.hist], () => {});
+  // Max starts talking as soon as the first sentence of the reply is written.
+  const sp = Voice.stream({ onStart: () => setCallState("speak", "Hablando…") });
+  const r = await window.api.chat(callPrompt(), [{ role: "user", content: "(The phone call starts now. Greet the student by name and ask your first question.)" }, ...me.hist], (t) => { if (me.active) sp.push(t); });
   me.thinking = false;
-  if (!me.active) return;
-  if (!r.ok) { setCallState("error", ERR[r.code] || ERR.error); await sleep(2500); return; }
+  if (!me.active) { sp.cancel(); return; }
+  if (!r.ok) { sp.cancel(); setCallState("error", ERR[r.code] || ERR.error); await sleep(2500); return; }
   me.hist.push({ role: "assistant", content: r.text });
   renderSubs();
-  setCallState("speak", "Hablando…");
-  await Voice.say(r.text);
+  await sp.end(r.text);
 }
 
 async function hangUp() {

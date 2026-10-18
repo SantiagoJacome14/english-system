@@ -40,7 +40,7 @@ const Voice = (() => {
     if (!tts) tts = worker("tts");
     if (state.tts === "ready" || state.tts === "loading") return ttsReady;
     state.tts = "loading"; state.warned = false; emit();
-    ttsReady = call(tts, { type: "load" }).then((r) => { state.tts = r.ok ? "ready" : "error"; state.ttsError = r.error; emit(); return r.ok; });
+    ttsReady = call(tts, { type: "load" }).then((r) => { state.tts = r.ok ? "ready" : "error"; state.ttsError = r.error; emit(); if (r.ok) gen("Hi.", cfg().voice, cfg().speed, false); return r.ok; });
     return ttsReady;
   }
   function loadSTT() {
@@ -104,23 +104,122 @@ const Voice = (() => {
     });
   }
 
+  /* ---- Generated audio: one job at a time, user requests first, cached in memory and on disk ---- */
+  const mem = new Map(), queue = [], queued = new Map();
+  let busy = false;
+  const keyOf = (t, v, sp) => v + "|" + sp.toFixed(2) + "|" + t;
+  const speedFor = (rate) => { const c = cfg(); return rate < 0.8 ? Math.max(0.6, c.speed * 0.72) : c.speed; };
+  let dbp = null;
+  function db() {
+    if (!dbp) dbp = new Promise((res) => {
+      try {
+        const r = indexedDB.open("ebp-voice", 1);
+        r.onupgradeneeded = () => r.result.createObjectStore("tts");
+        r.onsuccess = () => res(r.result); r.onerror = () => res(null);
+      } catch { res(null); }
+    });
+    return dbp;
+  }
+  async function diskGet(k) {
+    const d = await db(); if (!d) return null;
+    return new Promise((res) => { try { const q = d.transaction("tts").objectStore("tts").get(k); q.onsuccess = () => res(q.result || null); q.onerror = () => res(null); } catch { res(null); } });
+  }
+  async function diskPut(k, r) {
+    const d = await db(); if (!d) return;
+    const pcm = new Int16Array(r.audio.length);
+    for (let i = 0; i < pcm.length; i++) pcm[i] = Math.max(-1, Math.min(1, r.audio[i])) * 32767;
+    try { d.transaction("tts", "readwrite").objectStore("tts").put({ pcm, rate: r.rate }, k); } catch {}
+  }
+  function pump() {
+    if (busy || !queue.length) return;
+    busy = true;
+    const j = queue.shift(); queued.delete(j.k);
+    call(tts, { type: "say", text: j.text, voice: j.voice, speed: j.speed }).then((r) => {
+      busy = false;
+      j.res(r.ok ? { audio: r.audio, rate: r.rate } : null);
+      pump();
+    });
+  }
+  // Returns a promise of {audio, rate} (or null if it failed). Urgent requests jump the queue.
+  function gen(text, voice, speed, urgent) {
+    const k = keyOf(text, voice, speed);
+    if (mem.has(k)) {
+      const j = queued.get(k);
+      if (urgent && j) { queue.splice(queue.indexOf(j), 1); queue.unshift(j); }
+      return mem.get(k);
+    }
+    const p = (async () => {
+      const hit = await diskGet(k);
+      if (hit) { const a = new Float32Array(hit.pcm.length); for (let i = 0; i < a.length; i++) a[i] = hit.pcm[i] / 32767; return { audio: a, rate: hit.rate }; }
+      const r = await new Promise((res) => { const j = { k, text, voice, speed, res }; queued.set(k, j); if (urgent) queue.unshift(j); else queue.push(j); pump(); });
+      if (r) diskPut(k, r);
+      return r;
+    })();
+    mem.set(k, p);
+    p.then((r) => { if (!r) mem.delete(k); });
+    if (mem.size > 500) mem.delete(mem.keys().next().value);
+    return p;
+  }
+  // Generates audio in the background so it plays instantly later.
+  function prefetch(texts) {
+    const c = cfg();
+    if (!c.neural || state.tts !== "ready") return;
+    for (const t of texts) for (const sTxt of sentences(t)) gen(sTxt, c.voice, c.speed, false);
+  }
+  const within = (p, ms) => Promise.race([p.then((r) => ({ r })), new Promise((res) => setTimeout(() => res(null), ms))]);
+
   // Speaks text; resolves when it finishes (or is interrupted by stop()/another say()).
-  async function say(text, { rate = 0.95, voice } = {}) {
+  // Short texts never wait: if the natural voice isn't ready in 0.7 s, the Windows voice says it
+  // and the natural audio is kept for next time. Pass wait:true to always use the natural voice.
+  async function say(text, { rate = 0.95, voice, wait = false } = {}) {
     stop();
     const my = token;
     const c = cfg();
     if (!c.neural || state.tts !== "ready") return saySystem(text, rate, my);
-    const speed = Math.max(0.6, Math.min(1.3, c.speed * (rate / 0.95)));
-    const parts = sentences(text);
-    // Generate every sentence up front (the worker runs them in order) and play them as they arrive.
-    const jobs = parts.map((p) => call(tts, { type: "say", text: p, voice: voice || c.voice, speed }));
+    const speed = speedFor(rate), v = voice || c.voice;
+    const jobs = sentences(text).map((p) => gen(p, v, speed, true));
+    if (!jobs.length) return;
+    if (!wait) {
+      const first = await within(jobs[0], 700);
+      if (my !== token) return;
+      if (!first) return saySystem(text, rate, my);
+    }
     for (const j of jobs) {
       const r = await j;
       if (my !== token) return;
-      if (!r.ok) return saySystem(text, rate, my);
+      if (!r) return saySystem(text, rate, my);
       await playBuffer(r.audio, r.rate);
       if (my !== token) return;
     }
+  }
+  // For replies that arrive word by word: each sentence starts generating as soon as it's complete,
+  // so the first one plays while the rest of the reply is still being written.
+  function stream({ voice, onStart } = {}) {
+    stop();
+    const my = token, c = cfg(), v = voice || c.voice, neural = c.neural && state.tts === "ready";
+    let used = 0, chain = Promise.resolve(), started = false;
+    const enqueue = (raw) => {
+      const sTxt = clean(raw); if (!sTxt) return;
+      const job = neural ? gen(sTxt, v, c.speed, true) : null;
+      chain = chain.then(async () => {
+        if (my !== token) return;
+        const r = job ? await job : null;
+        if (my !== token) return;
+        if (!started) { started = true; if (onStart) onStart(); }
+        if (r) await playBuffer(r.audio, r.rate); else await saySystem(sTxt, 0.95, my);
+      });
+    };
+    return {
+      push(full) {
+        for (;;) {
+          const m = full.slice(used).match(/^[\s\S]*?[.!?]+["')\]]*\s+/);
+          if (!m) break;
+          used += m[0].length; enqueue(m[0]);
+        }
+      },
+      end(full) { if (full.length > used) enqueue(full.slice(used)); used = full.length; return chain; },
+      cancel() { if (my === token) stop(); },
+    };
   }
   async function synth(text, voice) {
     if (state.tts !== "ready" && !(await loadTTS())) return null;
@@ -209,7 +308,7 @@ const Voice = (() => {
   }
   return {
     state, cfg, on: (f) => { listeners.add(f); return () => listeners.delete(f); },
-    loadTTS, loadSTT, say, synth, stop, level, playBuffer, record, transcribe, openMic, closeMic, resample, downloadPct,
+    loadTTS, loadSTT, say, stream, prefetch, synth, stop, level, playBuffer, record, transcribe, openMic, closeMic, resample, downloadPct,
     get recording() { return rec; }, get speaking() { return !!playing || ("speechSynthesis" in window && speechSynthesis.speaking); },
   };
 })();
@@ -241,3 +340,18 @@ function alignWords(target, heard) {
   const counted = tw.filter(Boolean).length || 1;
   return { words: T.map((w, k) => ({ w, ok: ok[k] })), score: Math.round(ok.filter((x, k) => x && tw[k]).length / counted * 100) };
 }
+
+// Once the natural voice is ready, prepare the audio for this week's content in the background,
+// so cards, lessons, the story and the interview play instantly (it's saved for next time too).
+let prefetched = false;
+function weekTexts() {
+  const out = [], w = week(CUR);
+  out.push(...w.vocab, ...w.ej.filter((e) => !e.includes("___")));
+  (EXTRA.grammar[CUR] || []).forEach((q) => out.push(q.q.replace("___", q.options[q.answer])));
+  (EXTRA.build[CUR] || []).forEach((b) => out.push(b.en));
+  STORY.filter((c) => c.n === CUR).forEach((c) => c.scenes.forEach((sc) => out.push(sc.line, sc.choices.find((x) => x.ok === 2).en)));
+  S.errors.slice(0, 15).forEach((e) => e.bien && out.push(e.bien));
+  INTERVIEW.forEach((q) => out.push(q.q));
+  return out;
+}
+Voice.on((st) => { if (st.tts === "ready" && !prefetched) { prefetched = true; setTimeout(() => Voice.prefetch(weekTexts()), 1500); } });
