@@ -16,6 +16,8 @@ VIEWS.pron = (target) => {
   if (!PR || target) PR = { set: target ? "custom" : "week", i: 0, custom: target ? [target] : [] };
   const items = PR.set === "custom" ? PR.custom : (sets.find((s) => s.id === PR.set) || sets[0]).items;
   const t = items[PR.i % items.length];
+  const finished = PR.i >= items.length;
+  if (!finished) Voice.prefetch(items.slice(PR.i, PR.i + 3));
   const gate = voiceGate("practicar tu pronunciación");
   const miss = Object.entries(S.pronMiss || {}).sort((a, b) => b[1] - a[1]).slice(0, 12);
   $("#main").innerHTML = `<div class="screen">
@@ -25,7 +27,7 @@ VIEWS.pron = (target) => {
       <div class="card"><span class="label">Elige qué practicar</span><div class="setlist">${(PR.set === "custom" ? [{ id: "custom", t: "Frase del día" }] : []).concat(sets).map((s) => `<button class="sc" data-pset="${s.id}" aria-pressed="${PR.set === s.id}"><span class="e">${{ week: "📅", disney: "🏰", story: "✈️", hard: "👅", err: "🧠", custom: "⭐" }[s.id]}</span><span><b>${esc(s.t)}</b><small>${s.items ? s.items.length + " frases" : ""}</small></span></button>`).join("")}</div>
         ${miss.length ? `<span class="label">Tus palabras difíciles</span><div class="chips">${miss.map(([w, n]) => `<button class="chip" data-say="${esc(w)}" data-rate="0.7">🔊 ${esc(w)} <small class="muted">×${n}</small></button>`).join("")}</div>` : ""}
       </div>
-      <div class="card pron-main">
+      ${finished ? pronDone(items, sets) : `<div class="card pron-main">
         <div style="display:flex;justify-content:space-between"><span class="label">Frase ${PR.i % items.length + 1} de ${items.length}</span><button class="btn" id="p-next">Siguiente →</button></div>
         <div class="pron-target" id="p-target">${esc(t)}</div>
         <div class="pron-ctrl">
@@ -35,9 +37,14 @@ VIEWS.pron = (target) => {
         </div>
         <div class="muted" style="text-align:center" id="p-hint">${gate ? "" : "Toca 🎙 y habla. Se detiene solo cuando haces una pausa."}</div>
         <div id="p-out"></div>
-      </div>
+      </div>`}
     </div></div>`;
   document.querySelectorAll("[data-pset]").forEach((b) => (b.onclick = () => { PR = { set: b.dataset.pset, i: 0, custom: PR.custom }; VIEWS.pron(); }));
+  if (finished) {
+    $("#p-again").onclick = () => { PR.i = 0; PR.scores = {}; VIEWS.pron(); };
+    const nx = $("#p-nextset"); if (nx) nx.onclick = () => { PR = { set: nx.dataset.set, i: 0, custom: PR.custom }; VIEWS.pron(); };
+    return;
+  }
   $("#p-next").onclick = () => { PR.i++; VIEWS.pron(); };
   const rb = $("#p-rec");
   rb.onclick = async () => {
@@ -51,6 +58,7 @@ VIEWS.pron = (target) => {
     let heard = "";
     try { heard = await Voice.transcribe(audio); } catch { $("#p-hint").textContent = "El reconocimiento de voz falló. Intenta otra vez."; return; }
     const a = alignWords(t, heard);
+    PR.scores = PR.scores || {}; PR.scores[PR.i] = Math.max(PR.scores[PR.i] || 0, a.score);
     S.pronCount = (S.pronCount || 0) + 1; S.pronBest = Math.max(S.pronBest || 0, a.score);
     S.pronMiss = S.pronMiss || {};
     a.words.filter((x) => !x.ok).forEach((x) => { const w = wordsOf(x.w)[0]; if (w) S.pronMiss[w] = (S.pronMiss[w] || 0) + 1; });
@@ -157,4 +165,19 @@ Return JSON: {"total":1-5 (can be decimal),"resumen":"2 sentences in Spanish: ov
       <details><summary class="label">Respuesta modelo</summary><p>${esc(q.model)}</p><button class="btn" data-say="${esc(q.model)}">🔊 Escuchar</button></details></div>`; }).join("")}
   </div>`;
   $("#iv-again").onclick = () => { IV = { i: 0, ans: [] }; ivQuestion(); };
+}
+
+// Shown after the last sentence of a group: average score and the option to repeat it.
+function pronDone(items, sets) {
+  const sc = Object.values(PR.scores || {}), avg = sc.length ? Math.round(sc.reduce((a, b) => a + b, 0) / sc.length) : null;
+  const weak = items.filter((_, i) => (PR.scores || {})[i] != null && PR.scores[i] < 80);
+  const idx = sets.findIndex((x) => x.id === PR.set), next = sets[idx + 1];
+  setTimeout(() => { sfx("win"); if (avg >= 80) confetti(); }, 100);
+  return `<div class="card pron-main done-screen" style="justify-content:center">
+    <div class="big">🏁</div><h1>¡Terminaste ${PR.set === "week" ? "las frases de la semana" : "este grupo"}!</h1>
+    <p class="muted" style="margin:0">${avg == null ? "Escuchaste todas las frases." : `Dijiste ${sc.length} de ${items.length} frases. Promedio: <b style="color:var(--ink)">${avg}%</b>`}</p>
+    ${weak.length ? `<div><span class="label">Para repetir</span><div class="chips" style="justify-content:center">${weak.map((w) => `<button class="chip" data-say="${esc(w)}">🔊 ${esc(w)}</button>`).join("")}</div></div>` : ""}
+    <p style="font-size:18px;margin:0">¿Las quieres repetir?</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button class="btn gold big" id="p-again">🔁 Sí, repetirlas</button>${next ? `<button class="btn big" id="p-nextset" data-set="${next.id}">Siguiente grupo: ${esc(next.t)}</button>` : ""}</div>
+  </div>`;
 }

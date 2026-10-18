@@ -222,11 +222,17 @@ function mergeErr(a,b){const seen=new Set();return[...a,...b].filter(e=>{if(!e||
 
 /* ---------- Flashcards (spaced repetition) ---------- */
 let FC=null;
-VIEWS.cards=deck=>{deck=deck||(FC&&FC.deck)||"words";const due=shuffle(dueCards(deck)).slice(0,20);FC={deck,q:due,i:0,flip:false,done:0};renderCards()};
-function deckTabs(){const a=dueCards("words").length,b=dueCards("err").length;return`<div class="tabs"><button class="tab" aria-pressed="${FC.deck==="words"}" data-nav="cards" data-arg="words">🃏 Frases de la semana <span class="pill">${a}</span></button><button class="tab" aria-pressed="${FC.deck==="err"}" data-nav="cards" data-arg="err">🧠 Mis errores <span class="pill gold">${b}</span></button></div>`}
+VIEWS.cards=deck=>{if(deck==="repeat"){FC={deck:"words",practice:true,q:shuffle(allCards().filter(c=>c.wk===CUR)),i:0,flip:false,done:0};renderCards();return}deck=deck||(FC&&FC.deck)||"words";const due=shuffle(dueCards(deck)).slice(0,20);FC={deck,q:due,i:0,flip:false,done:0};renderCards()};
+function deckTabs(){const a=dueCards("words").length,b=dueCards("err").length;return`<div class="tabs"><button class="tab" aria-pressed="${FC.deck==="words"}" data-nav="cards" data-arg="words">${FC.practice?"🔁 Repaso extra · ":""}🃏 Frases de la semana <span class="pill">${a}</span></button><button class="tab" aria-pressed="${FC.deck==="err"}" data-nav="cards" data-arg="err">🧠 Mis errores <span class="pill gold">${b}</span></button></div>`}
 function renderCards(){
   if(!FC.q.length||FC.i>=FC.q.length){
-    $("#main").innerHTML=`<div class="screen">${deckTabs()}</div><div class="screen done-screen" style="padding-top:0"><div class="big">${FC.deck==="err"?"🧠":"🃏"}</div><h1>${FC.done?"¡Repaso terminado!":"Todo al día"}</h1><p class="muted">${FC.done?`Repasaste ${FC.done} tarjetas.`:"No tienes tarjetas pendientes. Vuelven cuando toque repasarlas."}</p><p class="muted">Frases aprendidas: <strong style="color:var(--ink)">${learned()}</strong> de ${allCards().length}</p><button class="btn primary big" data-nav="home">Volver al inicio</button></div>`;return}
+    const err=FC.deck==="err",errDue=dueCards("err").length,first=FC.done&&!FC.practice;
+    if(FC.done){sfx("win");if(!err)confetti()}
+    const title=err?(FC.done?"¡Repasaste tus errores!":"No hay errores pendientes"):FC.practice?"¡Terminaste otra vuelta! 💪":FC.done?"¡Terminaste las frases de la semana! 🎉":"Ya terminaste las frases de la semana";
+    const sub=err?"Vuelven cuando toque repasarlas.":FC.done?`Repasaste ${FC.done} tarjetas. Las que marcaste difíciles vuelven pronto.`:"Las tarjetas vuelven solas cuando toca repasarlas.";
+    $("#main").innerHTML=`<div class="screen">${deckTabs()}</div><div class="screen done-screen" style="padding-top:0"><div class="big">${err?"🧠":"🏁"}</div><h1>${title}</h1><p class="muted">${sub}</p>${err?"":`<p style="font-size:18px;margin:0">¿Las quieres repetir?</p>`}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">${err?"":`<button class="btn gold big" data-nav="cards" data-arg="repeat">🔁 Sí, repetirlas</button>`}${!err&&errDue?`<button class="btn big" data-nav="cards" data-arg="err">🧠 Repasar mis errores (${errDue})</button>`:""}<button class="btn big" data-nav="home">${err?"Volver al inicio":"No, volver al inicio"}</button></div>
+      <p class="muted">Frases aprendidas: <strong style="color:var(--ink)">${learned()}</strong> de ${allCards().length}</p></div>`;return}
   const c=FC.q[FC.i];
   $("#main").innerHTML=`<div class="screen">
     <div class="head"><div><h1>Tarjetas</h1><p>${FC.deck==="err"?"Tus propios errores, convertidos en tarjetas. Di la forma correcta antes de voltear.":"Di la frase en voz alta antes de voltearla."}</p></div><span class="pill">${FC.i+1} / ${FC.q.length}</span></div>${deckTabs()}
@@ -245,7 +251,7 @@ function sched(c,g){const s=S.cards[c.id]||{ease:2.5,int:0,reps:0};let ease=s.ea
   if(g===1){reps=0;int=0}else{ease=Math.max(1.3,ease+(g===2?-.15:g===4?.15:0));int=reps===0?(g===4?3:1):reps===1?(g===2?2:g===4?6:4):Math.round(int*ease*(g===2?.7:g===4?1.3:1));reps++}
   return{ease,int,reps,due:g===1?Date.now()+60e3:Date.now()+int*864e5,last:TODAY}}
 function ivl(c,g){const d=sched(c,g).int;return d<1?"1 min":d===1?"1 día":d+" días"}
-function rate(g){const c=FC.q[FC.i];S.cards[c.id]=sched(c,g);S.cardReviews=(S.cardReviews||0)+1;if(c.err)S.errReviews=(S.errReviews||0)+1;sfx(g===1?"bad":"tap");if(g===1)FC.q.push(c);FC.done++;addXP(2,"Tarjeta");FC.i++;FC.flip=false;FC.spoke=false;if(FC.done%10===0)addMin(5);renderCards()}
+function rate(g){const c=FC.q[FC.i];if(!FC.practice||g===1)S.cards[c.id]=sched(c,g);S.cardReviews=(S.cardReviews||0)+1;if(c.err)S.errReviews=(S.errReviews||0)+1;sfx(g===1?"bad":"tap");if(g===1)FC.q.push(c);FC.done++;addXP(2,"Tarjeta");FC.i++;FC.flip=false;FC.spoke=false;if(FC.done%10===0)addMin(5);renderCards()}
 document.addEventListener("keydown",e=>{if(view!=="cards"||!FC||e.target.tagName==="TEXTAREA"||e.target.tagName==="INPUT")return;if(e.key===" "){e.preventDefault();FC.flip=!FC.flip;renderCards();if(FC.flip)speak(FC.q[FC.i].en)}if(FC.flip&&/^[1-4]$/.test(e.key))rate(+e.key)});
 
 /* ---------- Dictation hub ---------- */
