@@ -15,6 +15,7 @@ contextBridge.exposeInMainWorld("api", {
   },
   warm: (system, messages) => ipcRenderer.invoke("ai:warm", system, messages),
   feedback: (prompt) => ipcRenderer.invoke("feedback", { prompt }),
+  aiStatus: () => ipcRenderer.invoke("ai:status"),
   ollamaTest: () => ipcRenderer.invoke("ollama:test"),
   reminderTest: () => ipcRenderer.invoke("reminder:test"),
   voiceCache: () => ipcRenderer.invoke("voice:cache"),

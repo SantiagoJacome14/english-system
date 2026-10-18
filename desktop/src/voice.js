@@ -225,6 +225,11 @@ const Voice = (() => {
       if (my !== token) return;
     }
   }
+  // The natural voice, always: waits for it to load instead of using the Windows voice.
+  async function sayNatural(text, o = {}) {
+    if (cfg().neural && state.tts !== "ready") await loadTTS();
+    return say(text, { ...o, wait: true });
+  }
   // For replies that arrive word by word: each sentence starts generating as soon as it's complete,
   // so the first one plays while the rest of the reply is still being written.
   function stream({ voice, onStart } = {}) {
@@ -354,7 +359,7 @@ const Voice = (() => {
   }
   return {
     state, cfg, on: (f) => { listeners.add(f); return () => listeners.delete(f); },
-    loadTTS, loadSTT, loadES, say, stream, prefetch, synth, stop, level, playBuffer, record, transcribe, openMic, closeMic, resample, downloadPct,
+    loadTTS, loadSTT, loadES, say, sayNatural, stream, prefetch, synth, stop, level, playBuffer, record, transcribe, openMic, closeMic, resample, downloadPct,
     get recording() { return rec; }, get speaking() { return !!playing || ("speechSynthesis" in window && speechSynthesis.speaking); },
   };
 })();

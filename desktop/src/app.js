@@ -277,7 +277,7 @@ const SCEN=[
 let talkMode="daily",hist=[],busy=false;
 function sysPrompt(){const m=SCEN.find(x=>x.id===talkMode);return`You are Max, a warm, patient English conversation partner for a Spanish-speaking student from Colombia. ${PROFILE}
 Session: ${m.brief()}
-Rules: speak simple, natural English at A2 level (short sentences, common words). Keep each reply to 1–3 short sentences and always end with ONE question, unless the session says otherwise. Do not correct every mistake during the chat; if the student writes a Spanish word or [brackets], give the English word in one short parenthesis, e.g. (piscina = pool). If the student writes "?", rephrase your last message more simply. Be encouraging. Plain text only.`}
+Rules: speak simple, natural English at A2 level (short sentences, common words). Keep each reply to 1–3 short sentences and always end with ONE question, unless the session says otherwise. Do not correct every mistake during the chat; if the student writes a Spanish word or [brackets], give the English word in one short parenthesis, e.g. (piscina = pool). If the student writes "?", rephrase your last message more simply. Be encouraging. Plain text only.${coachBrief()}`}
 VIEWS.talk=()=>{
   const m=SCEN.find(x=>x.id===talkMode),w=week(CUR);
   $("#main").innerHTML=`<div class="screen" style="max-width:1280px">
@@ -297,36 +297,39 @@ VIEWS.talk=()=>{
       </div>
     </div><div id="t-fb"></div></div>`;
   $("#autospeak").onchange=e=>{S.autospeak=e.target.checked;save()};
-  $("#t-send").onclick=send;$("#t-new").onclick=()=>{hist=[];renderMsgs();ask()};$("#t-end").onclick=endTalk;
+  $("#t-send").onclick=send;$("#t-new").onclick=()=>{hist=[];newAngle();renderMsgs();ask()};$("#t-end").onclick=endTalk;
   $("#mic").onclick=micToText;
   const ti=$("#t-in");ti.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}};ti.oninput=()=>{ti.style.height="auto";ti.style.height=Math.min(140,ti.scrollHeight)+"px"};
-  renderMsgs();if(!hist.length)ask();
+  renderMsgs();if(!hist.length){newAngle();ask()}
 };
 document.addEventListener("click",e=>{const s=e.target.closest("[data-scen]");if(s){talkMode=s.dataset.scen;hist=[];VIEWS.talk()}const ins=e.target.closest("[data-insert]");if(ins){const t=$("#t-in");t.value=(t.value?t.value+" ":"")+ins.dataset.insert;t.focus()}});
-function renderMsgs(){const box=$("#msgs");if(!box)return;box.innerHTML=`<div class="msg note">${esc(SCEN.find(x=>x.id===talkMode).t)} · responde en inglés · escribe “?” si no entiendes</div>`+hist.map(m=>m.role==="assistant"?`<div class="msg bot">${esc(m.content)}<button class="say" data-say="${esc(m.content)}">🔊 Escuchar</button></div>`:`<div class="msg me">${esc(m.content)}</div>`).join("");box.scrollTop=box.scrollHeight}
+function renderMsgs(){const box=$("#msgs");if(!box)return;box.innerHTML=`<div class="msg note">${esc(SCEN.find(x=>x.id===talkMode).t)} · responde en inglés · escribe “?” si no entiendes</div>`+hist.map(m=>m.role==="assistant"?`<div class="msg bot">${esc(m.content)}<button class="say" data-say="${esc(m.content)}">🔊 Escuchar</button>${m.ms?`<small class="lat">${(m.ms/1000).toFixed(1)} s</small>`:""}</div>`:`<div class="msg me">${esc(m.content)}</div>`).join("");box.scrollTop=box.scrollHeight}
 const ERR={ssh_fail:"No pude conectarme a tu VM. Revisa que esté prendida y el comando ssh en Ajustes.",no_ai:"Elige un cerebro para conversar en Ajustes: Claude (API) u Ollama (gratis).",ollama_off:"Ollama no está abierto. Ábrelo (icono de la llama) e intenta de nuevo.",ollama_model:"Ese modelo no está instalado en Ollama. En una terminal escribe: ollama pull llama3.2",ollama_error:"Ollama tuvo un problema. Intenta de nuevo.",no_key:"Primero pega tu clave de API en Ajustes.",bad_key:"La clave de API no es válida. Revísala en Ajustes.",no_credit:"Tu cuenta de la API no tiene saldo. Agrega saldo en console.anthropic.com.",rate_limited:"Muchas solicitudes seguidas. Espera un minuto.",offline:"No hay conexión a internet.",refusal:"No puedo responder eso. Cambiemos de tema.",error:"No pude responder. Intenta de nuevo."};
 async function ask(){
   const st=await window.api.getSettings();if(st.provider==="none"){const b=$("#no-key");if(b)b.hidden=false;return}
-  busy=true;const box=$("#msgs");const el=document.createElement("div");el.className="msg bot";el.textContent="…";box.appendChild(el);
-  const r=await window.api.chat(sysPrompt(),[{role:"user",content:"Start the conversation now with a short greeting and your first question."},...hist],t=>{el.textContent=t||"…";box.scrollTop=box.scrollHeight});
+  busy=true;const box=$("#msgs");const el=document.createElement("div");el.className="msg bot typing";el.innerHTML="<span class='dots'><i></i><i></i><i></i></span>";box.appendChild(el);box.scrollTop=box.scrollHeight;const t0=performance.now();
+  const r=await window.api.chat(sysPrompt(),[{role:"user",content:"Start the conversation now with a short greeting and your first question."},...hist],t=>{if(t){el.classList.remove("typing");el.textContent=t}box.scrollTop=box.scrollHeight});
   busy=false;
-  if(r.ok){hist.push({role:"assistant",content:r.text});renderMsgs();if(S.autospeak!==false)speak(r.text)}else{el.textContent=ERR[r.code]||ERR.error}
+  if(r.ok){hist.push({role:"assistant",content:r.text,ms:performance.now()-t0});renderMsgs();if(S.autospeak!==false)speak(r.text)}else{el.classList.remove("typing");el.textContent=ERR[r.code]||ERR.error}
 }
-async function send(){const t=$("#t-in").value.trim();if(!t||busy)return;const asked=askedWord(t);if(asked)addVocab(asked);$("#t-in").value="";if(!hist.length)hist.push({role:"assistant",content:"Hi! Let's talk."});hist.push({role:"user",content:t});renderMsgs();await ask()}
+async function send(){const t=$("#t-in").value.trim();if(!t||busy)return;const asked=askedWord(t);if(asked)addVocab(asked);$("#t-in").value="";if(!hist.length)hist.push({role:"assistant",content:"Hi! Let's talk."});hist.t0=hist.t0||Date.now();hist.push({role:"user",content:t});renderMsgs();await ask()}
 async function micToText(){const b=$("#mic");if(Voice.recording){Voice.recording.finish();return}
   if(Voice.state.stt!=="ready"){if(!S.voiceReady){toast("Activa la voz en Ajustes para hablar");return}toast("Cargando el reconocimiento de voz…")}
   b.classList.add("rec");b.textContent="⏹";const audio=await Voice.record({vad:true,silenceMs:1300});b.classList.remove("rec");b.textContent="🎙";
   if(!audio||!audio.length)return;b.textContent="…";try{const t=await Voice.transcribe(audio);const ti=$("#t-in");if(t&&ti){ti.value=(ti.value?ti.value+" ":"")+t;ti.focus()}else if(!t)toast("No te escuché bien, intenta otra vez")}catch(e){toast("No pude usar el reconocimiento de voz")}b.textContent="🎙"}
 async function endTalk(){const said=hist.filter(m=>m.role==="user").map(m=>m.content);if(!said.length){toast("Conversa un poco primero");return}
   $("#t-fb").innerHTML=`<div class="card"><span class="muted">Revisando tu conversación…</span></div>`;
+  const sess=coachSession("chat",talkMode,hist),t0=hist.t0||Date.now();
   const res=await window.api.feedback(`You are an English teacher for a Spanish-speaking A2 student. ${PROFILE}
-Here is everything the student wrote in a conversation (scenario: ${SCEN.find(x=>x.id===talkMode).t}):
-${said.map((x,i)=>(i+1)+". "+x).join("\n")}
-Return JSON: {"bien":"one sentence in Spanish about what they did well","errores":[{"mal":"exact wrong phrase","bien":"corrected English","porque":"very short reason in Spanish"}],"frases":["3 useful natural English phrases for this topic"],"puntajes":{"fluidez":1-5,"gramatica":1-5,"vocabulario":1-5},"consejo":"one concrete tip in Spanish"}. 3 to 5 errors max.`);
+Here is a written conversation between Max (the tutor) and the student (scenario: ${SCEN.find(x=>x.id===talkMode).t}):
+${transcriptOf(hist)}
+Judge ONLY the student's lines. ${COACH_JSON}`);
   if(!res.ok){$("#t-fb").innerHTML=`<div class="banner">${esc(ERR[res.code]||ERR.error)}</div>`;return}
-  const r=res.data,p=r.puntajes||{};const nE=(r.errores||[]).length;S.errors=mergeErr(r.errores||[],S.errors);if(nE)setTimeout(()=>toast("🧠 "+nE+" errores nuevos en tus tarjetas"),1900);S.chats=(S.chats||0)+1;S.chatLog=S.chatLog||{};S.chatLog[TODAY]=1;S.scores=S.scores||[];S.scores.push({date:TODAY,...p});addMin(15);addXP(40,"Conversación");
-  $("#t-fb").innerHTML=`<div class="fbk"><h3 style="color:var(--green)">¡Buen trabajo! Fluidez ${esc(p.fluidez)}/5 · Gramática ${esc(p.gramatica)}/5 · Vocabulario ${esc(p.vocabulario)}/5</h3><p style="margin:0">${esc(r.bien)}</p>${errTable(r.errores||[])}<span class="label">Frases para aprender</span><div class="chips">${(r.frases||[]).map(f=>`<button class="chip" data-say="${esc(f)}">🔊 ${esc(f)}</button>`).join("")}</div><p style="margin:0"><strong>Consejo:</strong> ${esc(r.consejo)}</p></div>`;
-  $("#t-fb").scrollIntoView({behavior:"smooth"})}
+  const r=res.data,p=r.puntajes||{},nE=(r.errores||[]).length,prev=avgScores((S.scores||[]).slice(-3)),xp=40;
+  S.errors=mergeErr(r.errores||[],S.errors);S.chats=(S.chats||0)+1;S.chatLog=S.chatLog||{};S.chatLog[TODAY]=1;S.scores=S.scores||[];S.scores.push({date:TODAY,...p});addMin(15);addXP(xp,"Conversación");coachFinish(sess,r,p);
+  $("#t-fb").innerHTML=sessionReport({r,p,prev:S.scores.length>1?prev:null,said,secs:Math.max(60,Math.round((Date.now()-t0)/1000)),newWords:0,xp,again:`<button class="btn primary" id="t-again">↻ Nueva conversación</button>`});
+  const ag=$("#t-again");if(ag)ag.onclick=()=>{hist=[];newAngle();VIEWS.talk()};
+  checkAch();$("#t-fb").scrollIntoView({behavior:"smooth"})}
 
 /* ---------- Progress ---------- */
 VIEWS.progress=()=>{
@@ -347,6 +350,7 @@ VIEWS.progress=()=>{
       <div class="card"><h3>Habilidades</h3>${sk.map(s=>`<div class="skill"><span>${s[0]}</span><div class="bar"><i style="width:${Math.round(s[1])}%"></i></div><b>${Math.round(s[1])}%</b></div>`).join("")}<p class="muted" style="margin:0;font-size:13px">Suben con lo que practicas en cada sección.</p></div>
       <div class="card"><h3>Calendario</h3><div class="heat">${heat}</div></div>
     </div>
+    ${coachCard()}
     <div class="card"><h3>Nivel</h3><div style="overflow-x:auto"><table><thead><tr><th>Fecha</th><th>Gramática</th><th>Lectura</th><th>Listening</th><th>Speaking</th><th>Nivel</th></tr></thead><tbody>
       <tr><td>17 oct</td><td>8/20</td><td>3/4</td><td>75%</td><td>Fluidez 3 · Gram. 2 · Vocab. 2</td><td><span class="pill">A2</span></td></tr>
       <tr><td>29 nov</td><td colspan="5" class="muted">Re-test</td></tr><tr><td>31 dic</td><td colspan="5" class="muted">Test final</td></tr></tbody></table></div></div>
@@ -407,13 +411,17 @@ VIEWS.settings=async()=>{
   const ot=$("#s-otest");if(ot)ot.onclick=async()=>{const sc=$("#s-sshcmd");if(sc&&sc.value&&!$("#s-sshbox").hidden){const r=await set({sshCommand:sc.value});if(r.sshError){$("#s-ostatus").textContent="✗ Revisa el comando ssh";return}}
     const ou2=$("#s-ourl");await set({ollamaModel:$("#s-omodel").value,...(ou2&&!$("#s-sshon").checked?{ollamaUrl:ou2.value}:{})});$("#s-ostatus").textContent=$("#s-sshon")&&$("#s-sshon").checked?"Abriendo el túnel a tu VM…":"Probando…";const r=await window.api.ollamaTest();
     if(!r.ok){$("#s-ostatus").textContent="✗ "+(r.code==="ssh_fail"?"No pude abrir el túnel: "+(r.message||"revisa el comando y que la VM esté prendida"):(ERR[r.code]||ERR.ollama_off));return}
-    $("#s-olist").innerHTML=r.models.map(m=>`<option value="${esc(m)}">`).join("");const want=$("#s-omodel").value;const has=r.models.some(m=>m===want||m.split(":")[0]===want);
-    $("#s-ostatus").textContent=has?"✓ Conectado. Modelo "+want+" listo.":r.models.length?"Conectado, pero falta "+want+". Instalados: "+r.models.join(", "):"Conectado, pero no hay modelos. Escribe: ollama pull llama3.2"};
+    $("#s-olist").innerHTML=r.models.map(m=>`<option value="${esc(m)}">`).join("");
+    if(!r.models.length){$("#s-ostatus").textContent="Conectado, pero no hay modelos. Escribe: ollama pull llama3.2";return}
+    if(r.model)$("#s-omodel").value=r.model;
+    const wps=r.tps?r.tps*0.75:0;
+    $("#s-ostatus").textContent=`✓ Conectado. Modelo ${r.model||$("#s-omodel").value} listo.`+(r.tps?` Escribe ~${wps.toFixed(0)} palabras por segundo`+(wps<4?" (lento: prueba un modelo más pequeño como qwen2.5:1.5b).":wps<8?" (aceptable para llamadas).":" (rápido)."):"");
+    refreshAi()};
   const om=$("#s-omodel");if(om)om.onchange=()=>set({ollamaModel:om.value});
   const ou=$("#s-ourl");if(ou)ou.onchange=()=>set({ollamaUrl:ou.value});
   const vd=$("#v-dl");if(vd)vd.onclick=()=>{enableVoice();go("home")};
   const setV=patch=>{S.voice=Object.assign({},Voice.cfg(),patch);save()};
-  document.querySelectorAll("[data-voice]").forEach(b=>b.onclick=()=>{setV({voice:b.dataset.voice});document.querySelectorAll("[data-voice]").forEach(x=>x.setAttribute("aria-pressed",x===b));Voice.say("Hi Santiago! This is how I sound. Are you ready to practice?")});
+  document.querySelectorAll("[data-voice]").forEach(b=>b.onclick=()=>{setV({voice:b.dataset.voice});document.querySelectorAll("[data-voice]").forEach(x=>x.setAttribute("aria-pressed",x===b));{const t="Hi Santiago! This is how I sound. Are you ready to practice?";if(S.voiceReady&&Voice.cfg().neural){if(Voice.state.tts!=="ready")toast("Preparando la voz natural… un momento");Voice.sayNatural(t)}else Voice.say(t)}});
   $("#v-speed").oninput=e=>{setV({speed:+e.target.value});$("#v-sv").textContent=(+e.target.value).toFixed(2)+"×"};
   $("#v-speed").onchange=()=>Voice.say("This is my new speed.");
   $("#v-stt").onchange=e=>{setV({stt:e.target.value});toast("Se descargará la próxima vez que hables")};
@@ -465,3 +473,33 @@ function spanishWord(t){let x=String(t||"").toLowerCase().replace(/[¿?¡!.,"“
   const ms=[...x.matchAll(/\b(?:say|sei|sey|sai|zei|dice|decir|digo|dices)\b/g)];if(ms.length){const m=ms[ms.length-1];x=x.slice(m.index+m[0].length).trim()}
   x=x.replace(/\s*\b(?:in|en|em)\s+(?:english|ingl[eé]s|inglis|inglich)\b.*$/,"").replace(/^(?:la palabra|the word)\s+/,"").trim();
   return x&&x.split(" ").length<=5?x:""}
+
+
+/* ---------- Connection and voice status (sidebar): everything connects by itself on open ---------- */
+let AIST = { s: "wait", t: "Conectando…" };
+function paintStatus() {
+  const a = $("#st-ai"), v = $("#st-voice"); if (!a || !v) return;
+  a.dataset.s = AIST.s; a.querySelector("span").textContent = AIST.t; a.title = AIST.tip || "";
+  const st = Voice.state, neural = Voice.cfg().neural;
+  let vs = "wait", vt = "Voz sin descargar";
+  if (!neural) { vs = "warn"; vt = "Voz de Windows (robótica)"; }
+  else if (st.tts === "ready" && st.stt === "ready") { vs = "ok"; vt = "Voz natural lista"; }
+  else if (st.tts === "error" || st.stt === "error") { vs = "bad"; vt = "Voz con error"; }
+  else if (st.tts === "loading" || st.stt === "loading") { vs = "wait"; vt = "Cargando la voz…"; }
+  else if (S.voiceReady) { vs = "wait"; vt = "Iniciando la voz…"; }
+  v.dataset.s = vs; v.querySelector("span").textContent = vt;
+}
+let aiTries = 0;
+async function refreshAi() {
+  AIST = { s: "wait", t: "Conectando con la IA…" }; paintStatus();
+  const r = await window.api.aiStatus().catch(() => ({ ok: false }));
+  if (r.provider === "none") AIST = { s: "warn", t: "Sin IA: elígela en Ajustes" };
+  else if (r.ok) { AIST = { s: "ok", t: r.provider === "claude" ? "Claude listo" : "IA lista · " + r.model, tip: "Conectada. No necesitas probar la conexión." }; aiTries = 0; }
+  else {
+    AIST = { s: "bad", t: r.code === "ssh_fail" ? "No encuentro tu VM" : r.code === "ollama_model" ? "Falta un modelo en Ollama" : "IA sin conexión", tip: ERR[r.code] || "" };
+    if (aiTries++ < 4) setTimeout(refreshAi, 12000);
+  }
+  paintStatus();
+}
+Voice.on(paintStatus);
+document.addEventListener("click", (e) => { if (e.target.closest("#st-ai")) { if (AIST.s === "bad") refreshAi(); else go("settings"); } });

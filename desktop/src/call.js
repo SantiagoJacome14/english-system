@@ -29,7 +29,7 @@ VIEWS.call = async (scen) => {
       <div class="card"><span class="label">Cómo funciona</span><div class="howto"><div><b>1 · Habla</b><small>Cuando veas “Te escucho”, habla normal. Al hacer una pausa, Max entiende que terminaste.</small></div><div><b>2 · Escucha</b><small>Max responde en voz alta. Activa los subtítulos si no entiendes.</small></div><div><b>3 · Cuelga</b><small>Recibes tu puntaje, tus errores y frases nuevas. Tus errores se vuelven tarjetas.</small></div></div></div>
     </div>`;
     if (!gate && st.provider === "ollama") window.api.warm();
-    if (!gate) Voice.prefetch(SCEN.map((s) => greeting(s.id)), true);
+    if (!gate) { Voice.prefetch(SCEN.filter((s) => s.id !== "correct").map((s) => greeting(s.id)), true); Voice.loadTTS(); }
     return;
   }
   startCall(scen);
@@ -37,16 +37,23 @@ VIEWS.call = async (scen) => {
 
 // Max's first line is ready-made, so the call starts right away while the model warms up.
 const CALL_START = "(The phone call starts now. Greet the student by name and ask your first question.)";
+// Several openings per scenario, never the same twice in a row; the pick is cached so it can be prepared in advance.
+const GREET = {};
 function greeting(scen) {
-  const n = S.name || "Santiago";
-  return ({
-    daily: `Hi ${n}, it's Max! Nice to hear you. How are you today?`,
-    disney: `Hello ${n}, thanks for joining the call. I'm Max, a recruiter for the Disney Cultural Exchange Program. Can you tell me a little about yourself?`,
-    free: `Hey ${n}, it's Max! How's your day going?`,
-    restaurant: `Hi there, welcome to Orlando Diner! Is it a table for one?`,
-    airport: `Good afternoon. Passport, please. What is the purpose of your visit?`,
-    park: `Excuse me, hi! Can you help me? I'm looking for the Space Mountain ride.`,
-  })[scen] || `Hi ${n}, it's Max! How are you today?`;
+  if (GREET[scen]) return GREET[scen];
+  const n = S.name || "Santiago", h = new Date().getHours(), tod = h < 12 ? "morning" : h < 18 ? "afternoon" : "evening";
+  const last = (((S.coach || {}).sessions || [])[0]) || null, topic = last && last.topics && last.topics[0];
+  const V = {
+    daily: [`Hi ${n}, it's Max! Nice to hear you. How are you today?`, `Hello ${n}! It's Max. What did you do today?`, `Good ${tod}, ${n}! Max here. How is your day going?`, `Hi ${n}! Tell me, what's new with you?`, ...(topic && dayDiff(last.date) <= 4 ? [`Hi ${n}! Last time we talked about ${topic}. How have you been since then?`] : [])],
+    free: [`Hey ${n}, it's Max! How's your day going?`, `Hi ${n}! Good ${tod}. What's on your mind today?`, `Hello ${n}! Ready for a chat? How are you feeling?`],
+    disney: [`Hello ${n}, thanks for joining the call. I'm Max, a recruiter for the Disney Cultural Exchange Program. Can you tell me a little about yourself?`, `Good ${tod}, ${n}! This is Max from the Disney recruiting team. Thanks for taking my call. How are you today?`, `Hi ${n}, welcome! I'm Max, and I'll be doing your interview for the Disney program. Are you ready to start?`],
+    restaurant: [`Hi there, welcome to Orlando Diner! Is it a table for one?`, `Good ${tod}! Welcome in. Would you like a table or a seat at the counter?`, `Hey, welcome to the diner! How many people today?`],
+    airport: [`Good ${tod}. Passport, please. What is the purpose of your visit?`, `Next, please! Hello. Can I see your passport and your return ticket?`, `Welcome to Orlando. Where are you coming from today?`],
+    park: [`Excuse me, hi! Can you help me? I'm looking for the Space Mountain ride.`, `Hi! Sorry to bother you. Do you work here? I have a question about my ticket.`, `Hello! I'm lost. Which way is the Magic Kingdom entrance?`],
+  }[scen] || [`Hi ${n}, it's Max! How are you today?`];
+  const prev = (S.coach || {}).lastGreet;
+  const pool = V.filter((g) => g !== prev);
+  return (GREET[scen] = pool[Math.floor(Math.random() * pool.length)]);
 }
 function callPrompt() {
   return sysPrompt() + `
@@ -83,7 +90,8 @@ function startCall(scen) {
   document.querySelectorAll("[data-callsay]").forEach((b) => (b.onclick = () => userSaid(b.dataset.callsay, 1)));
   $("#c-es").onclick = askSpanish;
   // Read Max's instructions and the greeting now, while the phone rings.
-  CALL.greet = greeting(scen);
+  newAngle(); CALL.greet = greeting(scen); delete GREET[scen];
+  S.coach = S.coach || { sessions: [] }; S.coach.lastGreet = CALL.greet; save();
   window.api.warm(callPrompt(), [{ role: "user", content: CALL_START }, { role: "assistant", content: CALL.greet }]);
   Voice.loadES();
   onLeave = () => { if (CALL && CALL.active) { CALL.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); } CALL = null; };
@@ -129,9 +137,11 @@ async function callLoop() {
   sfx("ring"); await sleep(900);
   if (!me.active) return;
   if (!(await Voice.openMic())) { setCallState("error", "No pude usar el micrófono. Revisa que esté conectado y permitido en Windows."); return; }
+  // Max always speaks with the natural voice: wait for it instead of falling back to the Windows one.
+  if (Voice.cfg().neural && Voice.state.tts !== "ready") { setCallState("think", "Preparando la voz natural…"); await Promise.race([Voice.loadTTS(), sleep(40000)]); if (!me.active) return; }
   me.hist.push({ role: "assistant", content: me.greet }); renderSubs();
   setCallState("speak", "Hablando…");
-  await Voice.say(me.greet, { rate: 1 });
+  await Voice.say(me.greet, { rate: 1, wait: true });
   while (me.active) {
     if (me.busyChip) { await sleep(150); continue; }
     if (me.muted) { setCallState("muted", "Micrófono silenciado"); await sleep(300); continue; }
@@ -151,7 +161,7 @@ async function callLoop() {
     me.speakSec += audio.length / 16000;
     if (!text) {
       me.miss++;
-      if (me.miss >= 2) { me.miss = 0; setCallState("speak", "Hablando…"); await Voice.say("Sorry, I didn't catch that. Could you say it again?"); }
+      if (me.miss >= 2) { me.miss = 0; setCallState("speak", "Hablando…"); await Voice.say("Sorry, I didn't catch that. Could you say it again?", { wait: true }); }
       continue;
     }
     me.miss = 0;
@@ -203,6 +213,7 @@ async function hangUp() {
   if (!CALL) return;
   const c = CALL; c.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); if (c.cancelWait) c.cancelWait();
   sfx("hang"); CALL = null; onLeave = null;
+  const sess = c.hist.length ? coachSession("call", c.scen, c.hist) : null;
   const said = c.hist.filter((m) => m.role === "user").map((m) => m.content);
   const secs = Math.round((Date.now() - c.t0) / 1000);
   $("#main").innerHTML = `<div class="screen" style="max-width:860px">
@@ -215,14 +226,15 @@ async function hangUp() {
   S.calls = (S.calls || 0) + 1; S.speakSec = (S.speakSec || 0) + c.speakSec; S.chatLog = S.chatLog || {}; S.chatLog[TODAY] = 1;
   addMin(Math.max(1, Math.round(secs / 60))); addXP(30 + Math.min(40, said.length * 4), "Llamada en inglés");
   const res = await window.api.feedback(`You are an English teacher for a Spanish-speaking A2 student. ${PROFILE}
-Here is everything the student SAID in a voice call (speech recognition transcript, so ignore punctuation and capitalization; scenario: ${c.m.t}):
-${said.map((x, i) => i + 1 + ". " + x).join("\n")}
-Return JSON: {"bien":"one sentence in Spanish about what they did well","errores":[{"mal":"exact wrong phrase","bien":"corrected English","porque":"very short reason in Spanish"}],"frases":["3 useful natural English phrases for this topic"],"puntajes":{"fluidez":1-5,"gramatica":1-5,"vocabulario":1-5},"consejo":"one concrete tip in Spanish"}. Only real grammar or word-choice errors, 3 to 5 max.`);
+Here is a voice phone call between Max (the tutor) and the student (speech recognition transcript, so ignore punctuation and capitalization; scenario: ${c.m.t}):
+${transcriptOf(c.hist)}
+Judge ONLY the student's lines. ${COACH_JSON}`);
   const box = $("#c-fb"); if (!box) return;
   if (!res.ok) { box.innerHTML = `<div class="banner">${esc(ERR[res.code] || ERR.error)}</div>`; return; }
-  const r = res.data, p = r.puntajes || {}, nE = (r.errores || []).length;
-  S.errors = mergeErr(r.errores || [], S.errors); S.scores = S.scores || []; S.scores.push({ date: TODAY, ...p }); save();
-  box.innerHTML = `<div class="fbk"><div class="scores3">${[["Fluidez", p.fluidez], ["Gramática", p.gramatica], ["Vocabulario", p.vocabulario]].map(([k, v]) => `<div><span class="label">${k}</span><b>${esc(v)}<small>/5</small></b></div>`).join("")}</div><p style="margin:0">${esc(r.bien)}</p>${nE ? errTable(r.errores) + `<p class="muted" style="margin:0">🧠 Estos errores ya están en tus tarjetas, en <button class="btn" data-nav="cards" data-arg="err" style="padding:2px 10px">Mis errores</button></p>` : ""}<span class="label">Frases para tu próxima llamada</span><div class="chips">${(r.frases || []).map((f) => `<button class="chip" data-say="${esc(f)}">🔊 ${esc(f)}</button>`).join("")}</div><p style="margin:0"><strong>Consejo:</strong> ${esc(r.consejo)}</p></div>`;
+  const r = res.data, p = r.puntajes || {}, prev = avgScores((S.scores || []).slice(-3)), xp = 30 + Math.min(40, said.length * 4);
+  S.errors = mergeErr(r.errores || [], S.errors); S.scores = S.scores || []; S.scores.push({ date: TODAY, ...p }); coachFinish(sess, r, p); save();
+  const nw = (S.vocab || []).filter((v) => asked.some((a) => a.toLowerCase() === v.es.toLowerCase())).length;
+  box.innerHTML = sessionReport({ r, p, prev: S.scores.length > 1 ? prev : null, said, secs, newWords: nw, xp, again: `<button class="btn primary" data-nav="call" data-arg="${c.scen}">📞 Llamar otra vez</button>` });
   checkAch();
   if (asked.length || (S.vocab || []).some((v) => !v.en)) {
     await resolveVocab();

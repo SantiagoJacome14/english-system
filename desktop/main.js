@@ -199,9 +199,24 @@ async function ollamaFetch(p, body) {
   if (!res.ok) { const e = new Error("Ollama: " + res.status); e.code = "ollama_error"; throw e; }
   return res;
 }
+// If the chosen model isn't installed, picks the best installed one (and remembers it) instead of failing.
+async function resolveModel() {
+  const res = await ollamaFetch("/api/tags");
+  const names = ((await res.json()).models || []).map((m) => m.name);
+  if (!names.length) return null;
+  const want = ollamaCfg().model;
+  if (names.some((n) => n === want || (!want.includes(":") && n.split(":")[0] === want))) return want;
+  const pick = ["qwen2.5:3b", "qwen2.5", "llama3.2", "llama3.1", "gemma", "phi", "qwen3"].map((p) => names.find((n) => n.startsWith(p))).find(Boolean) || names[0];
+  const st = readSettings(); st.ollamaModel = pick; writeSettings(st);
+  return pick;
+}
 async function ollamaChat(system, messages, onText, json) {
+  try { return await ollamaChatOnce(system, messages, onText, json); }
+  catch (e) { if (e.code === "ollama_model" && (await resolveModel().catch(() => null))) return ollamaChatOnce(system, messages, onText, json); throw e; }
+}
+async function ollamaChatOnce(system, messages, onText, json) {
   const { model: m } = ollamaCfg();
-  const body = { model: m, messages: [{ role: "system", content: system }, ...messages], stream: !json, keep_alive: "30m", options: { temperature: json ? 0.2 : 0.7, num_predict: json ? 1200 : 220 } };
+  const body = { model: m, messages: [{ role: "system", content: system }, ...messages], stream: !json, keep_alive: "30m", options: { temperature: json ? 0.2 : 0.7, num_predict: json ? 1200 : /VOICE PHONE CALL/.test(system) ? 90 : 170 } };
   if (json) body.format = "json";
   // Models like qwen3 "think" before answering, which only adds waiting here.
   if (THINKERS.test(m)) body.think = false;
@@ -235,6 +250,17 @@ async function ollamaWarm(system, messages) {
   if (THINKERS.test(m)) body.think = false;
   await ollamaFetch("/api/chat", body).then((r) => r.text());
 }
+// Connects (opens the tunnel if needed), picks a model and tells the app whether it can chat.
+ipcMain.handle("ai:status", async () => {
+  const p = provider();
+  if (p === "none") return { ok: false, provider: p };
+  if (p === "claude") return { ok: !!readSettings().key, provider: p };
+  try {
+    await ensureTunnel();
+    const model = await resolveModel();
+    return model ? { ok: true, provider: p, model } : { ok: false, provider: p, code: "ollama_model" };
+  } catch (err) { return { ok: false, provider: p, code: errorCode(err), message: String(err.message || err) }; }
+});
 
 function chatWith(system, messages, onText, json) {
   const p = provider();
@@ -285,7 +311,21 @@ ipcMain.handle("ollama:test", async () => {
   try {
     const res = await ollamaFetch("/api/tags");
     const { models = [] } = await res.json();
-    return { ok: true, models: models.map((m) => m.name) };
+    const out = { ok: true, models: models.map((m) => m.name) };
+    // How fast is it? One short answer, timed by Ollama itself.
+    try {
+      const model = await resolveModel(); out.model = model;
+      if (model) {
+        const body = { model, messages: [{ role: "user", content: "Say hello to a friend in six words." }], stream: false, keep_alive: "30m", options: { num_predict: 24 } };
+        if (THINKERS.test(model)) body.think = false;
+        const t0 = Date.now();
+        const j = await (await ollamaFetch("/api/chat", body)).json();
+        out.secs = (Date.now() - t0) / 1000;
+        if (j.eval_count && j.eval_duration) out.tps = j.eval_count / (j.eval_duration / 1e9);
+        out.loadSecs = (j.load_duration || 0) / 1e9;
+      }
+    } catch {}
+    return out;
   } catch (err) {
     return { ok: false, code: err.code || "ollama_off" };
   }
