@@ -24,7 +24,7 @@ function renderScene() {
     <div class="scene">
       <span class="label">📍 ${esc(sc.place)}</span>
       <p class="narr">${esc(ST.es ? sc.narr_es : sc.narr)}</p>
-      <div class="bubble-row"><span class="avatar big">${sc.avatar}</span><div class="bubble"><b>${esc(sc.who)} <small class="muted">· ${esc(sc.role)}</small></b><p>${esc(sc.line)}</p>${ST.es ? `<p class="muted" style="margin:0">${esc(sc.line_es)}</p>` : ""}<div style="display:flex;gap:10px"><button class="linkb" data-say="${esc(sc.line)}">🔊 Escuchar</button><button class="linkb" id="st-es">${ST.es ? "Ocultar español" : "Ver en español"}</button></div></div></div>
+      <div class="bubble-row"><span class="avatar big">${sc.avatar}</span><div class="bubble"><b>${esc(sc.who)} <small class="muted">· ${esc(sc.role)}</small></b><p data-lk>${esc(sc.line)}</p>${ST.es ? `<p class="muted" style="margin:0">${esc(sc.line_es)}</p>` : ""}<div style="display:flex;gap:10px"><button class="linkb" data-say="${esc(sc.line)}">🔊 Escuchar</button><button class="linkb" id="st-es">${ST.es ? "Ocultar español" : "Ver en español"}</button></div></div></div>
     </div>
     <span class="label">¿Qué le respondes?</span>
     <div class="opts">${sc.choices.map((ch, i) => { const cls = ST.pick == null ? "" : ch.ok === 2 ? "right" : i === ST.pick ? "wrong" : ""; return `<button class="opt ${cls}" data-stc="${i}" ${ST.pick != null ? "disabled" : ""}><span class="k">${i + 1}</span>${esc(ch.en)}</button>`; }).join("")}</div>

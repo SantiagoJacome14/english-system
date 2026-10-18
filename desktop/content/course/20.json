@@ -1,0 +1,846 @@
+{
+  "n": 20,
+  "block": "Verbos y tiempos",
+  "title": "Verbos irregulares: los 60 más comunes",
+  "emoji": "🔀",
+  "minutes": 40,
+  "goal": "Al final de esta clase conocerás 60 verbos irregulares con su pasado y participio, y tendrás trucos para memorizarlos por grupos.",
+  "sections": [
+    {
+      "h": "¿Qué es un verbo irregular?",
+      "body": "En la clase anterior viste que los verbos regulares forman el pasado con **-ed**. Los **irregulares** no siguen esa regla: cambian de forma y hay que aprenderlos.\n\nLa buena noticia: los irregulares son los más usados. Si aprendes estos 60, puedes contar casi cualquier cosa.\n\nLos tres momentos con **go**:\n\n- Pasado: **I went** to Orlando last year. (Fui a Orlando el año pasado.)\n- Presente: **I go** to class every day. (Voy a clase todos los días.)\n- Futuro: **I will go** to Disney next year. (Iré a Disney el próximo año.)\n\nLas tablas siguen el orden: **base → past → past participle → Spanish**."
+    },
+    {
+      "h": "Tabla 1: los 15 más importantes",
+      "table": {
+        "head": [
+          "Base",
+          "Past",
+          "Past participle",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "be",
+            "was / were",
+            "been",
+            "ser / estar"
+          ],
+          [
+            "have",
+            "had",
+            "had",
+            "tener"
+          ],
+          [
+            "do",
+            "did",
+            "done",
+            "hacer"
+          ],
+          [
+            "go",
+            "went",
+            "gone",
+            "ir"
+          ],
+          [
+            "see",
+            "saw",
+            "seen",
+            "ver"
+          ],
+          [
+            "eat",
+            "ate",
+            "eaten",
+            "comer"
+          ],
+          [
+            "take",
+            "took",
+            "taken",
+            "tomar / llevar"
+          ],
+          [
+            "make",
+            "made",
+            "made",
+            "hacer / fabricar"
+          ],
+          [
+            "come",
+            "came",
+            "come",
+            "venir"
+          ],
+          [
+            "get",
+            "got",
+            "got / gotten",
+            "conseguir / obtener"
+          ],
+          [
+            "give",
+            "gave",
+            "given",
+            "dar"
+          ],
+          [
+            "know",
+            "knew",
+            "known",
+            "saber / conocer"
+          ],
+          [
+            "think",
+            "thought",
+            "thought",
+            "pensar"
+          ],
+          [
+            "say",
+            "said",
+            "said",
+            "decir"
+          ],
+          [
+            "tell",
+            "told",
+            "told",
+            "contar / decir a alguien"
+          ]
+        ]
+      },
+      "note": "**Be** es el más irregular: I **was**, you **were**, he / she / it **was**, we **were**, they **were**. En el participio: **been**."
+    },
+    {
+      "h": "Tabla 2: verbos de la vida diaria",
+      "table": {
+        "head": [
+          "Base",
+          "Past",
+          "Past participle",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "buy",
+            "bought",
+            "bought",
+            "comprar"
+          ],
+          [
+            "bring",
+            "brought",
+            "brought",
+            "traer"
+          ],
+          [
+            "write",
+            "wrote",
+            "written",
+            "escribir"
+          ],
+          [
+            "read",
+            "read",
+            "read",
+            "leer"
+          ],
+          [
+            "speak",
+            "spoke",
+            "spoken",
+            "hablar"
+          ],
+          [
+            "drink",
+            "drank",
+            "drunk",
+            "beber"
+          ],
+          [
+            "drive",
+            "drove",
+            "driven",
+            "manejar"
+          ],
+          [
+            "sleep",
+            "slept",
+            "slept",
+            "dormir"
+          ],
+          [
+            "run",
+            "ran",
+            "run",
+            "correr"
+          ],
+          [
+            "meet",
+            "met",
+            "met",
+            "conocer / encontrarse"
+          ],
+          [
+            "leave",
+            "left",
+            "left",
+            "salir / dejar"
+          ],
+          [
+            "pay",
+            "paid",
+            "paid",
+            "pagar"
+          ],
+          [
+            "send",
+            "sent",
+            "sent",
+            "enviar"
+          ],
+          [
+            "sit",
+            "sat",
+            "sat",
+            "sentarse"
+          ],
+          [
+            "stand",
+            "stood",
+            "stood",
+            "estar de pie / pararse"
+          ]
+        ]
+      },
+      "note": "**Read** se escribe igual en las tres formas, pero el pasado suena **/red/** (como *red*, rojo). El presente suena /riid/."
+    },
+    {
+      "h": "Tabla 3: más verbos útiles",
+      "table": {
+        "head": [
+          "Base",
+          "Past",
+          "Past participle",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "find",
+            "found",
+            "found",
+            "encontrar"
+          ],
+          [
+            "keep",
+            "kept",
+            "kept",
+            "guardar / mantener"
+          ],
+          [
+            "begin",
+            "began",
+            "begun",
+            "empezar"
+          ],
+          [
+            "break",
+            "broke",
+            "broken",
+            "romper"
+          ],
+          [
+            "build",
+            "built",
+            "built",
+            "construir"
+          ],
+          [
+            "catch",
+            "caught",
+            "caught",
+            "atrapar / coger"
+          ],
+          [
+            "choose",
+            "chose",
+            "chosen",
+            "elegir"
+          ],
+          [
+            "cost",
+            "cost",
+            "cost",
+            "costar"
+          ],
+          [
+            "cut",
+            "cut",
+            "cut",
+            "cortar"
+          ],
+          [
+            "fall",
+            "fell",
+            "fallen",
+            "caer"
+          ],
+          [
+            "feel",
+            "felt",
+            "felt",
+            "sentir"
+          ],
+          [
+            "fly",
+            "flew",
+            "flown",
+            "volar"
+          ],
+          [
+            "forget",
+            "forgot",
+            "forgotten",
+            "olvidar"
+          ],
+          [
+            "hear",
+            "heard",
+            "heard",
+            "oír"
+          ],
+          [
+            "hold",
+            "held",
+            "held",
+            "sostener"
+          ]
+        ]
+      }
+    },
+    {
+      "h": "Tabla 4: los últimos 15",
+      "table": {
+        "head": [
+          "Base",
+          "Past",
+          "Past participle",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "hurt",
+            "hurt",
+            "hurt",
+            "doler / lastimar"
+          ],
+          [
+            "lose",
+            "lost",
+            "lost",
+            "perder"
+          ],
+          [
+            "put",
+            "put",
+            "put",
+            "poner"
+          ],
+          [
+            "sell",
+            "sold",
+            "sold",
+            "vender"
+          ],
+          [
+            "sing",
+            "sang",
+            "sung",
+            "cantar"
+          ],
+          [
+            "swim",
+            "swam",
+            "swum",
+            "nadar"
+          ],
+          [
+            "teach",
+            "taught",
+            "taught",
+            "enseñar"
+          ],
+          [
+            "wear",
+            "wore",
+            "worn",
+            "llevar puesto"
+          ],
+          [
+            "win",
+            "won",
+            "won",
+            "ganar"
+          ],
+          [
+            "understand",
+            "understood",
+            "understood",
+            "entender"
+          ],
+          [
+            "wake",
+            "woke",
+            "woken",
+            "despertar"
+          ],
+          [
+            "lend",
+            "lent",
+            "lent",
+            "prestar"
+          ],
+          [
+            "let",
+            "let",
+            "let",
+            "dejar / permitir"
+          ],
+          [
+            "draw",
+            "drew",
+            "drawn",
+            "dibujar"
+          ],
+          [
+            "ride",
+            "rode",
+            "ridden",
+            "montar"
+          ]
+        ]
+      }
+    },
+    {
+      "h": "Trucos para memorizarlos por grupos",
+      "body": "No memorices 60 verbos sueltos. Agrúpalos por patrón:",
+      "table": {
+        "head": [
+          "Patrón",
+          "Verbos",
+          "Idea"
+        ],
+        "rows": [
+          [
+            "Los tres iguales",
+            "put - put - put, cut - cut - cut, let - let - let, cost - cost - cost, hurt - hurt - hurt, read - read - read",
+            "No cambian nada"
+          ],
+          [
+            "Pasado = participio (-ought / -aught)",
+            "buy - bought - bought, bring - brought - brought, think - thought - thought, catch - caught - caught, teach - taught - taught",
+            "Todos suenan parecido"
+          ],
+          [
+            "Pasado = participio con -t",
+            "sleep - slept, keep - kept, feel - felt, leave - left, send - sent, lend - lent, build - built, spend - spent",
+            "Cambian a una -t final"
+          ],
+          [
+            "i - a - u",
+            "sing - sang - sung, swim - swam - swum, drink - drank - drunk, begin - began - begun",
+            "Cambian las vocales: i, a, u"
+          ],
+          [
+            "-ow / -ew / -own",
+            "know - knew - known, fly - flew - flown, draw - drew - drawn",
+            "El participio termina en -n"
+          ],
+          [
+            "Participio con -en",
+            "take - took - taken, break - broke - broken, speak - spoke - spoken, choose - chose - chosen, wake - woke - woken, eat - ate - eaten, give - gave - given",
+            "El participio termina en -en"
+          ]
+        ]
+      },
+      "note": "Practica diciendo cada grupo en voz alta, como una canción: *buy, bought, bought; bring, brought, brought*."
+    },
+    {
+      "h": "Error típico y cómo usarlos",
+      "body": "Un error común es aplicar -ed a un irregular: *I goed*, *I eated*, *I buyed*. Eso no existe. Son **went**, **ate**, **bought**.\n\nEl **pasado** (2.ª columna) se usa para contar lo que pasó: **I bought a ticket yesterday.**\n\nEl **participio** (3.ª columna) lo usarás más adelante con *have* (**I have seen** that movie). Por ahora, apréndelo junto al pasado."
+    }
+  ],
+  "vocab": [
+    {
+      "en": "go - went - gone",
+      "es": "ir",
+      "ex": "I went to Orlando last year."
+    },
+    {
+      "en": "see - saw - seen",
+      "es": "ver",
+      "ex": "We saw a fireworks show."
+    },
+    {
+      "en": "eat - ate - eaten",
+      "es": "comer",
+      "ex": "She ate pizza for lunch."
+    },
+    {
+      "en": "take - took - taken",
+      "es": "tomar / llevar",
+      "ex": "I took a bus to the park."
+    },
+    {
+      "en": "make - made - made",
+      "es": "hacer / fabricar",
+      "ex": "He made coffee."
+    },
+    {
+      "en": "come - came - come",
+      "es": "venir",
+      "ex": "They came home late."
+    },
+    {
+      "en": "get - got - got / gotten",
+      "es": "conseguir",
+      "ex": "She got a job at a hotel."
+    },
+    {
+      "en": "give - gave - given",
+      "es": "dar",
+      "ex": "He gave me his phone number."
+    },
+    {
+      "en": "know - knew - known",
+      "es": "saber / conocer",
+      "ex": "I knew the answer."
+    },
+    {
+      "en": "think - thought - thought",
+      "es": "pensar",
+      "ex": "I thought it was easy."
+    },
+    {
+      "en": "say - said - said",
+      "es": "decir",
+      "ex": "She said hello."
+    },
+    {
+      "en": "tell - told - told",
+      "es": "contar / decir",
+      "ex": "He told me a story."
+    },
+    {
+      "en": "buy - bought - bought",
+      "es": "comprar",
+      "ex": "I bought a ticket."
+    },
+    {
+      "en": "bring - brought - brought",
+      "es": "traer",
+      "ex": "She brought her laptop."
+    },
+    {
+      "en": "write - wrote - written",
+      "es": "escribir",
+      "ex": "I wrote an email."
+    },
+    {
+      "en": "speak - spoke - spoken",
+      "es": "hablar",
+      "ex": "He spoke English with the guide."
+    },
+    {
+      "en": "drink - drank - drunk",
+      "es": "beber",
+      "ex": "We drank coffee."
+    },
+    {
+      "en": "sleep - slept - slept",
+      "es": "dormir",
+      "ex": "I slept eight hours."
+    },
+    {
+      "en": "meet - met - met",
+      "es": "conocer / encontrarse",
+      "ex": "I met a friend at the airport."
+    },
+    {
+      "en": "leave - left - left",
+      "es": "salir / dejar",
+      "ex": "The bus left at noon."
+    },
+    {
+      "en": "pay - paid - paid",
+      "es": "pagar",
+      "ex": "He paid for dinner."
+    },
+    {
+      "en": "send - sent - sent",
+      "es": "enviar",
+      "ex": "She sent me a message."
+    }
+  ],
+  "examples": [
+    {
+      "en": "I went to Orlando last year.",
+      "es": "Fui a Orlando el año pasado."
+    },
+    {
+      "en": "I saw Mickey Mouse at the park.",
+      "es": "Vi a Mickey Mouse en el parque."
+    },
+    {
+      "en": "We ate lunch at noon.",
+      "es": "Almorzamos al mediodía."
+    },
+    {
+      "en": "She took the bus to work.",
+      "es": "Ella tomó el bus al trabajo."
+    },
+    {
+      "en": "He bought two tickets.",
+      "es": "Él compró dos boletos."
+    },
+    {
+      "en": "I wrote an email to the manager.",
+      "es": "Escribí un correo al gerente."
+    },
+    {
+      "en": "They spoke English in the interview.",
+      "es": "Ellos hablaron inglés en la entrevista."
+    },
+    {
+      "en": "I slept well last night.",
+      "es": "Dormí bien anoche."
+    },
+    {
+      "en": "We met at the airport.",
+      "es": "Nos encontramos en el aeropuerto."
+    },
+    {
+      "en": "The plane left at 9.",
+      "es": "El avión salió a las 9."
+    },
+    {
+      "en": "She paid with her card.",
+      "es": "Ella pagó con su tarjeta."
+    },
+    {
+      "en": "I was tired, but I was happy.",
+      "es": "Estaba cansado, pero estaba feliz."
+    },
+    {
+      "en": "Yesterday I went out. Today I go to class. Tomorrow I will go home.",
+      "es": "Ayer salí. Hoy voy a clase. Mañana iré a casa."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "choice",
+      "q": "Pasado de go?",
+      "options": [
+        "goed",
+        "went",
+        "gone"
+      ],
+      "answer": 1,
+      "why": "Go es irregular: go - went - gone. El pasado es went."
+    },
+    {
+      "type": "choice",
+      "q": "Pasado de eat?",
+      "options": [
+        "eated",
+        "ate",
+        "eaten"
+      ],
+      "answer": 1,
+      "why": "Eat - ate - eaten. El pasado es ate."
+    },
+    {
+      "type": "choice",
+      "q": "Pasado de buy?",
+      "options": [
+        "buyed",
+        "boughted",
+        "bought"
+      ],
+      "answer": 2,
+      "why": "Buy - bought - bought."
+    },
+    {
+      "type": "choice",
+      "q": "Participio de write?",
+      "options": [
+        "wrote",
+        "written",
+        "writed"
+      ],
+      "answer": 1,
+      "why": "Write - wrote - written. El participio es written."
+    },
+    {
+      "type": "choice",
+      "q": "Pasado de see?",
+      "options": [
+        "saw",
+        "seen",
+        "seed"
+      ],
+      "answer": 0,
+      "why": "See - saw - seen. El pasado es saw."
+    },
+    {
+      "type": "choice",
+      "q": "¿Cuál de estos verbos NO cambia en pasado?",
+      "options": [
+        "put",
+        "take",
+        "sit"
+      ],
+      "answer": 0,
+      "why": "Put - put - put no cambia en ninguna forma."
+    },
+    {
+      "type": "choice",
+      "q": "Pasado de be con they?",
+      "options": [
+        "was",
+        "were",
+        "been"
+      ],
+      "answer": 1,
+      "why": "They usa were en pasado."
+    },
+    {
+      "type": "choice",
+      "q": "Pasado de think?",
+      "options": [
+        "thinked",
+        "thought",
+        "thinkt"
+      ],
+      "answer": 1,
+      "why": "Think - thought - thought, igual que buy / bring."
+    },
+    {
+      "type": "fill",
+      "q": "past de take: ___",
+      "answer": [
+        "took"
+      ],
+      "why": "Take - took - taken."
+    },
+    {
+      "type": "fill",
+      "q": "past de drink: ___",
+      "answer": [
+        "drank"
+      ],
+      "why": "Drink - drank - drunk (patrón i - a - u)."
+    },
+    {
+      "type": "fill",
+      "q": "past de sleep: ___",
+      "answer": [
+        "slept"
+      ],
+      "why": "Sleep - slept - slept."
+    },
+    {
+      "type": "fill",
+      "q": "past participle de speak: ___",
+      "answer": [
+        "spoken"
+      ],
+      "why": "Speak - spoke - spoken."
+    },
+    {
+      "type": "fill",
+      "q": "past de meet: ___",
+      "answer": [
+        "met"
+      ],
+      "why": "Meet - met - met."
+    },
+    {
+      "type": "fill",
+      "q": "past de leave: ___",
+      "answer": [
+        "left"
+      ],
+      "why": "Leave - left - left."
+    },
+    {
+      "type": "fill",
+      "q": "past de bring: ___",
+      "answer": [
+        "brought"
+      ],
+      "why": "Bring - brought - brought."
+    },
+    {
+      "type": "fill",
+      "q": "Yesterday I ___ a ticket. (buy, past)",
+      "answer": [
+        "bought"
+      ],
+      "why": "Yesterday pide pasado: bought."
+    },
+    {
+      "type": "order",
+      "words": [
+        "I",
+        "to",
+        "went",
+        "Orlando"
+      ],
+      "answer": "I went to Orlando",
+      "es": "Fui a Orlando."
+    },
+    {
+      "type": "order",
+      "words": [
+        "She",
+        "an",
+        "email",
+        "wrote"
+      ],
+      "answer": "She wrote an email",
+      "es": "Ella escribió un correo."
+    },
+    {
+      "type": "translate",
+      "es": "Ayer compré un boleto.",
+      "answer": [
+        "I bought a ticket yesterday.",
+        "Yesterday I bought a ticket."
+      ],
+      "why": "Buy es irregular y el pasado es bought."
+    },
+    {
+      "type": "translate",
+      "es": "Ella vio a Mickey.",
+      "answer": [
+        "She saw Mickey."
+      ],
+      "why": "El pasado de see es saw."
+    }
+  ],
+  "speak": [
+    "I went to Orlando.",
+    "I saw a big castle.",
+    "We ate lunch together.",
+    "She took a bus to work.",
+    "He bought a ticket.",
+    "They spoke English.",
+    "I slept eight hours.",
+    "I met a new friend."
+  ],
+  "tip": "Error típico: poner -ed a todos los verbos (*I goed*, *I eated*, *I buyed*). Si el verbo es uno de los 60, usa la segunda columna de la tabla. Practica por grupos de patrones, no uno por uno."
+}

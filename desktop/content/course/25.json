@@ -1,0 +1,131 @@
+{
+  "n": 25,
+  "block": "Para comunicarte",
+  "title": "Can, want, need y would like",
+  "emoji": "🙋",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás decir lo que sabes hacer, pedir permiso o ayuda con cortesía y expresar lo que quieres o necesitas, por ejemplo en un parque temático.",
+  "sections": [
+    {
+      "h": "Can: lo que puedes o sabes hacer",
+      "body": "**Can** significa *poder* o *saber hacer algo*. Es un verbo especial (modal): **no cambia** con he/she/it y después va el verbo en su forma base, **sin to**.\n\nSantiago puede decir **I can swim** (sé nadar) o **I can code** (sé programar). Y con tercera persona: **She can swim**, no *She cans*.",
+      "note": "Para decir que no puedes: **can't** (forma corta de cannot). I can't drive = No sé manejar / No puedo manejar."
+    },
+    {
+      "h": "Afirmativo, negativo y pregunta",
+      "table": {
+        "head": ["Tipo", "Estructura", "Ejemplo", "Significa"],
+        "rows": [
+          ["Afirmativo", "sujeto + can + verbo", "I can help you.", "Puedo ayudarte."],
+          ["Negativo", "sujeto + can't + verbo", "He can't swim.", "Él no sabe nadar."],
+          ["Pregunta", "Can + sujeto + verbo?", "Can you speak English?", "¿Hablas inglés?"],
+          ["Respuesta corta", "Yes, I can. / No, I can't.", "Yes, she can.", "Sí, ella puede."]
+        ]
+      },
+      "note": "No uses do/does con can. Se dice Can you swim?, nunca Do you can swim?"
+    },
+    {
+      "h": "Permiso y peticiones amables",
+      "body": "**Can I...?** sirve para pedir permiso: *Can I sit here?* (¿Puedo sentarme aquí?).\n\n**Can you...?** pide ayuda a otra persona: *Can you help me?*\n\n**Could** es más educado: **Could you...?** y **Could I...?** Úsalo con desconocidos, jefes o personal de un parque. *Could you open the door, please?* suena más amable que *Can you open the door?*. Agrega siempre **please**."
+    },
+    {
+      "h": "Want, need y would like",
+      "table": {
+        "head": ["Expresión", "Idea", "Con sustantivo", "Con verbo (to + verbo)"],
+        "rows": [
+          ["want", "querer", "I want a ticket.", "I want to go to Disney."],
+          ["need", "necesitar", "I need water.", "I need to buy a ticket."],
+          ["would like", "quisiera (educado)", "I'd like a map.", "I'd like to ask a question."]
+        ]
+      },
+      "note": "Con he/she/it: He wants, She needs. Pero would like no cambia: She would like a map."
+    },
+    {
+      "h": "Ofrecer e invitar",
+      "body": "Para ofrecer ayuda: **Can I help you?** o **Would you like some water?**\n\nPara invitar: **Would you like to come with us?** o **Do you want to join us?**\n\nPara aceptar: **Yes, please. / I'd love to!** Para rechazar con amabilidad: **No, thank you. / Sorry, I can't.**",
+      "note": "Después de would you like va to + verbo (Would you like to sit?) o un sustantivo (Would you like a drink?)."
+    },
+    {
+      "h": "Frases útiles en un parque temático",
+      "list": [
+        "Excuse me, where is the bathroom? (Disculpe, ¿dónde está el baño?)",
+        "Can I have a map, please? (¿Me da un mapa, por favor?)",
+        "Could you take a photo of us? (¿Podría tomarnos una foto?)",
+        "I need help, please. (Necesito ayuda, por favor.)",
+        "I'd like two tickets, please. (Quisiera dos boletos, por favor.)",
+        "Can I help you? How many people? (¿Puedo ayudarle? ¿Cuántas personas?)",
+        "You can't take food on this ride. (No puede subir comida a esta atracción.)",
+        "Would you like to wait here? (¿Le gustaría esperar aquí?)"
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "can", "es": "poder, saber", "ex": "I can swim." },
+    { "en": "can't", "es": "no poder, no saber", "ex": "I can't drive." },
+    { "en": "could", "es": "podría (más educado)", "ex": "Could you help me, please?" },
+    { "en": "want", "es": "querer", "ex": "I want a coffee." },
+    { "en": "need", "es": "necesitar", "ex": "I need a map." },
+    { "en": "would like", "es": "quisiera, me gustaría", "ex": "I would like some water." },
+    { "en": "please", "es": "por favor", "ex": "Two tickets, please." },
+    { "en": "help", "es": "ayudar, ayuda", "ex": "Can you help me?" },
+    { "en": "ticket", "es": "boleto, entrada", "ex": "I need a ticket for the park." },
+    { "en": "map", "es": "mapa", "ex": "Can I have a map?" },
+    { "en": "ride", "es": "atracción, paseo", "ex": "I want to go on this ride." },
+    { "en": "line", "es": "fila", "ex": "The line is very long." },
+    { "en": "photo", "es": "foto", "ex": "Could you take a photo?" },
+    { "en": "bathroom", "es": "baño", "ex": "Where is the bathroom?" },
+    { "en": "ask", "es": "preguntar, pedir", "ex": "I'd like to ask a question." },
+    { "en": "join", "es": "unirse", "ex": "Do you want to join us?" },
+    { "en": "swim", "es": "nadar", "ex": "She can swim very well." },
+    { "en": "drive", "es": "manejar, conducir", "ex": "My father can drive." },
+    { "en": "sit", "es": "sentarse", "ex": "Can I sit here?" },
+    { "en": "wait", "es": "esperar", "ex": "Please wait here." }
+  ],
+  "examples": [
+    { "en": "I can speak Spanish and a little English.", "es": "Hablo español y un poco de inglés." },
+    { "en": "She can't swim, but she can dance.", "es": "Ella no sabe nadar, pero sabe bailar." },
+    { "en": "Can you help me, please?", "es": "¿Puedes ayudarme, por favor?" },
+    { "en": "Could you repeat that, please?", "es": "¿Podría repetir eso, por favor?" },
+    { "en": "Can I sit here?", "es": "¿Puedo sentarme aquí?" },
+    { "en": "I want to work at Disney next year.", "es": "Quiero trabajar en Disney el próximo año." },
+    { "en": "I need to study more English.", "es": "Necesito estudiar más inglés." },
+    { "en": "He wants a hot dog and a soda.", "es": "Él quiere un perro caliente y una gaseosa." },
+    { "en": "I would like two tickets for today.", "es": "Quisiera dos boletos para hoy." },
+    { "en": "Would you like some water?", "es": "¿Quieres un poco de agua?" },
+    { "en": "Would you like to take a photo with us?", "es": "¿Te gustaría tomarte una foto con nosotros?" },
+    { "en": "Sorry, I can't. I have class tonight.", "es": "Lo siento, no puedo. Tengo clase esta noche." },
+    { "en": "Excuse me, can I have a map of the park?", "es": "Disculpe, ¿me da un mapa del parque?" },
+    { "en": "We need to wait in line for one hour.", "es": "Necesitamos esperar en la fila una hora." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "My sister ___ swim very well.", "options": ["can", "cans", "can to"], "answer": 0, "why": "Can no cambia con she y no lleva to después." },
+    { "type": "choice", "q": "Which sentence is correct?", "options": ["Do you can drive?", "Can you drive?", "You can drive?"], "answer": 1, "why": "Con can la pregunta se forma invirtiendo: Can you drive?" },
+    { "type": "choice", "q": "You are at a theme park. You ask a worker politely. You say: ___ you tell me where the bathroom is?", "options": ["Could", "Do", "Are"], "answer": 0, "why": "Could you... es una petición educada, ideal para el personal." },
+    { "type": "choice", "q": "I ___ a ticket for the park.", "options": ["needs", "need", "needing"], "answer": 1, "why": "Con I se usa need sin -s." },
+    { "type": "choice", "q": "He ___ to work at Disney.", "options": ["want", "wants", "wanting"], "answer": 1, "why": "Con he/she/it, want lleva -s: wants." },
+    { "type": "choice", "q": "Which is the most polite way to order?", "options": ["I want a coffee.", "Give me a coffee.", "I would like a coffee, please."], "answer": 2, "why": "I would like ... please es la forma más cortés." },
+    { "type": "fill", "q": "I ___ speak Spanish and English. (puedo)", "answer": ["can"], "why": "Para habilidad se usa can." },
+    { "type": "fill", "q": "She ___ drive, so she takes the bus. (no sabe)", "answer": ["can't", "cannot", "can not"], "why": "La forma negativa de can es can't o cannot." },
+    { "type": "fill", "q": "I need ___ buy a ticket.", "answer": ["to"], "why": "Need + to + verbo." },
+    { "type": "fill", "q": "___ you like some water? (oferta)", "answer": ["would"], "why": "Would you like...? es la forma educada de ofrecer." },
+    { "type": "fill", "q": "My brother ___ a new phone. (wants)", "answer": ["wants"], "why": "Con he/she/it, want lleva -s." },
+    { "type": "order", "words": ["help", "Can", "you", "me"], "answer": "Can you help me", "es": "¿Puedes ayudarme?" },
+    { "type": "order", "words": ["like", "I", "two", "would", "tickets"], "answer": "I would like two tickets", "es": "Quisiera dos boletos." },
+    { "type": "order", "words": ["can't", "swim", "He"], "answer": "He can't swim", "es": "Él no sabe nadar." },
+    { "type": "translate", "es": "¿Puedo sentarme aquí?", "answer": ["Can I sit here?", "Could I sit here?"], "why": "Para pedir permiso se usa Can I...? o Could I...?" },
+    { "type": "translate", "es": "Necesito un mapa.", "answer": ["I need a map.", "I need a map"], "why": "Need + sustantivo, sin to." },
+    { "type": "translate", "es": "Quiero ir a Orlando.", "answer": ["I want to go to Orlando.", "I want to go to Orlando"], "why": "Want + to + verbo." },
+    { "type": "translate", "es": "¿Quieres un poco de agua?", "answer": ["Would you like some water?", "Do you want some water?", "Would you like water?", "Do you want water?"], "why": "Para ofrecer se usa Would you like...? o Do you want...?" }
+  ],
+  "speak": [
+    "I can speak Spanish and a little English.",
+    "Can I have a map, please?",
+    "Could you help me, please?",
+    "I would like two tickets for today.",
+    "I want to work at Disney next year.",
+    "I need to practice my English every day.",
+    "Would you like some water?",
+    "Sorry, I can't, but thank you."
+  ],
+  "tip": "Los hispanohablantes dicen a veces *Do you can swim?* o *She cans*. Recuerda: can nunca usa do/does ni lleva -s, y el verbo siguiente va sin to: Can you swim? / She can swim."
+}

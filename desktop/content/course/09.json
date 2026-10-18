@@ -1,0 +1,128 @@
+{
+  "n": 9,
+  "block": "Mi mundo",
+  "title": "La casa: there is / there are",
+  "emoji": "🏠",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás describir tu casa, sus cuartos y lo que hay dentro usando there is y there are.",
+  "sections": [
+    {
+      "h": "Los cuartos de la casa",
+      "body": "Empecemos por lo básico: ¿dónde vives y cómo es tu casa?\n\nPara decir dónde vives usa **I live in a house** (una casa) o **I live in an apartment** (un apartamento). Si es tu ciudad, usa **in**: **I live in Medellín**.\n\nLos cuartos principales son: **living room** (sala), **bedroom** (habitación), **kitchen** (cocina), **bathroom** (baño), **dining room** (comedor), **garage** (garaje) y **garden** (jardín).",
+      "note": "En inglés americano también se dice **restroom** para el baño público y **bathroom** para el de la casa. En Orlando vas a escuchar ambas."
+    },
+    {
+      "h": "Muebles y objetos",
+      "table": {
+        "head": ["Inglés", "Español", "Dónde suele estar"],
+        "rows": [
+          ["sofa", "sofá", "living room"],
+          ["bed", "cama", "bedroom"],
+          ["fridge", "nevera / refrigerador", "kitchen"],
+          ["table", "mesa", "dining room"],
+          ["lamp", "lámpara", "bedroom / living room"],
+          ["window", "ventana", "en casi todos los cuartos"],
+          ["door", "puerta", "en todos los cuartos"],
+          ["shower", "ducha", "bathroom"]
+        ]
+      },
+      "note": "Fíjate: en inglés los objetos casi siempre llevan **a** o **an** delante: a bed, a lamp, an armchair."
+    },
+    {
+      "h": "There is / There are: lo que hay",
+      "body": "En español usamos **hay** para una cosa o para muchas. En inglés tienes dos opciones:\n\n**There is** para una sola cosa (singular).\n**There are** para dos o más cosas (plural).\n\nLa forma corta de there is es **there's**. There are no tiene forma corta común.",
+      "table": {
+        "head": ["Forma", "Ejemplo", "Significa"],
+        "rows": [
+          ["There is + a/an + singular", "There is a sofa in the living room.", "Hay un sofá en la sala."],
+          ["There are + plural", "There are two beds in the bedroom.", "Hay dos camas en la habitación."],
+          ["There are + some + plural", "There are some books on the table.", "Hay unos libros en la mesa."]
+        ]
+      }
+    },
+    {
+      "h": "Negativo y preguntas",
+      "table": {
+        "head": ["Tipo", "Singular", "Plural"],
+        "rows": [
+          ["Afirmativo", "There is a lamp.", "There are two lamps."],
+          ["Negativo", "There isn't a lamp.", "There aren't any lamps."],
+          ["Pregunta", "Is there a lamp?", "Are there any lamps?"],
+          ["Respuesta corta", "Yes, there is. / No, there isn't.", "Yes, there are. / No, there aren't."]
+        ]
+      },
+      "note": "En negativo y preguntas con plural usamos **any** en lugar de some: There aren't **any** chairs. Are there **any** chairs?"
+    },
+    {
+      "h": "Errores típicos de hispanohablantes",
+      "list": [
+        "No digas *Has a sofa*. Para 'hay' se usa **There is a sofa**, no el verbo have.",
+        "No mezcles singular y plural: *There is two beds* está mal. Correcto: **There are two beds**.",
+        "No olvides el there: *Is a fridge in the kitchen?* está mal. Correcto: **Is there a fridge in the kitchen?**",
+        "Con 'a house' dices **in a house**, no *on a house*."
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "house", "es": "casa", "ex": "I live in a big house." },
+    { "en": "apartment", "es": "apartamento", "ex": "My apartment is small." },
+    { "en": "living room", "es": "sala", "ex": "The TV is in the living room." },
+    { "en": "bedroom", "es": "habitación", "ex": "My bedroom is quiet." },
+    { "en": "kitchen", "es": "cocina", "ex": "There is a fridge in the kitchen." },
+    { "en": "bathroom", "es": "baño", "ex": "The bathroom is next to my room." },
+    { "en": "dining room", "es": "comedor", "ex": "We eat in the dining room." },
+    { "en": "garden", "es": "jardín", "ex": "There is a tree in the garden." },
+    { "en": "sofa", "es": "sofá", "ex": "The sofa is very comfortable." },
+    { "en": "bed", "es": "cama", "ex": "I have a small bed." },
+    { "en": "fridge", "es": "nevera", "ex": "There is milk in the fridge." },
+    { "en": "lamp", "es": "lámpara", "ex": "The lamp is on the desk." },
+    { "en": "window", "es": "ventana", "ex": "Open the window, please." },
+    { "en": "door", "es": "puerta", "ex": "Close the door, please." },
+    { "en": "table", "es": "mesa", "ex": "There are four chairs at the table." },
+    { "en": "chair", "es": "silla", "ex": "This chair is new." },
+    { "en": "desk", "es": "escritorio", "ex": "My computer is on the desk." },
+    { "en": "shower", "es": "ducha", "ex": "There is a shower in the bathroom." }
+  ],
+  "examples": [
+    { "en": "I live in an apartment in Bogotá.", "es": "Vivo en un apartamento en Bogotá." },
+    { "en": "There is a sofa in the living room.", "es": "Hay un sofá en la sala." },
+    { "en": "There are two windows in my bedroom.", "es": "Hay dos ventanas en mi habitación." },
+    { "en": "There's a big fridge in the kitchen.", "es": "Hay una nevera grande en la cocina." },
+    { "en": "There isn't a garden.", "es": "No hay jardín." },
+    { "en": "There aren't any chairs here.", "es": "No hay sillas aquí." },
+    { "en": "Is there a bathroom on this floor?", "es": "¿Hay un baño en este piso?" },
+    { "en": "Are there any lamps in your room?", "es": "¿Hay lámparas en tu cuarto?" },
+    { "en": "Yes, there is.", "es": "Sí, hay." },
+    { "en": "No, there aren't.", "es": "No, no hay." },
+    { "en": "My house has three bedrooms.", "es": "Mi casa tiene tres habitaciones." },
+    { "en": "There is a computer on my desk.", "es": "Hay un computador en mi escritorio." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "There ___ a lamp in my bedroom.", "options": ["is", "are", "have"], "answer": 0, "why": "Una sola lámpara es singular: there is." },
+    { "type": "choice", "q": "There ___ three chairs in the kitchen.", "options": ["is", "are", "has"], "answer": 1, "why": "Tres sillas es plural: there are." },
+    { "type": "choice", "q": "¿Cómo se dice 'sala' en inglés?", "options": ["bedroom", "living room", "bathroom"], "answer": 1, "why": "Living room es la sala; bedroom es habitación y bathroom es baño." },
+    { "type": "choice", "q": "___ there a garden?", "options": ["Is", "Are", "Does"], "answer": 0, "why": "Garden es singular, así que la pregunta empieza con Is there." },
+    { "type": "choice", "q": "There aren't ___ chairs.", "options": ["a", "any", "an"], "answer": 1, "why": "En negativo con plural se usa any." },
+    { "type": "choice", "q": "Which room has a bed?", "options": ["kitchen", "bedroom", "garage"], "answer": 1, "why": "La cama (bed) está en la habitación (bedroom)." },
+    { "type": "fill", "q": "There ___ a fridge in the kitchen.", "answer": ["is"], "why": "Fridge es singular: there is." },
+    { "type": "fill", "q": "There ___ two windows in the living room.", "answer": ["are"], "why": "Two windows es plural: there are." },
+    { "type": "fill", "q": "I live ___ an apartment.", "answer": ["in"], "why": "Para vivir en un lugar usamos in." },
+    { "type": "fill", "q": "There ___ any lamps here. (negativo, forma corta)", "answer": ["aren't", "are not"], "why": "Negativo plural: there aren't (o there are not)." },
+    { "type": "fill", "q": "___ there a bathroom? Yes, there is.", "answer": ["is"], "why": "Pregunta con singular: Is there...?" },
+    { "type": "order", "words": ["in", "There", "sofa", "a", "is", "the", "living", "room"], "answer": "There is a sofa in the living room", "es": "Hay un sofá en la sala." },
+    { "type": "order", "words": ["there", "Are", "any", "chairs", "here"], "answer": "Are there any chairs here", "es": "¿Hay sillas aquí?" },
+    { "type": "order", "words": ["live", "I", "in", "a", "house"], "answer": "I live in a house", "es": "Vivo en una casa." },
+    { "type": "translate", "es": "Hay una cama en mi habitación.", "answer": ["There is a bed in my bedroom.", "There's a bed in my bedroom.", "There is a bed in my room.", "There's a bed in my room."], "why": "Hay + singular = there is." },
+    { "type": "translate", "es": "No hay ventanas en el baño.", "answer": ["There aren't any windows in the bathroom.", "There are not any windows in the bathroom."], "why": "Negativo plural: there aren't any." },
+    { "type": "translate", "es": "¿Hay una nevera en la cocina?", "answer": ["Is there a fridge in the kitchen?"], "why": "Pregunta singular: Is there a...?" }
+  ],
+  "speak": [
+    "I live in an apartment.",
+    "There is a bed in my bedroom.",
+    "There are two chairs at my desk.",
+    "There's a big window in the living room.",
+    "There isn't a garden.",
+    "Is there a bathroom here?"
+  ],
+  "tip": "Los hispanohablantes dicen *Has a sofa* porque piensan en 'hay'. Recuerda: 'hay' siempre es **there is** (una cosa) o **there are** (varias), nunca el verbo have."
+}

@@ -1,0 +1,156 @@
+{
+  "n": 18,
+  "block": "Verbos y tiempos",
+  "title": "Presente simple II: negativo, preguntas y frecuencia",
+  "emoji": "❓",
+  "minutes": 40,
+  "goal": "Al final de esta clase podrás negar, preguntar y decir con qué frecuencia haces las cosas usando do / does.",
+  "sections": [
+    {
+      "h": "La idea: do y does son ayudantes",
+      "body": "En el presente simple, para **negar** y **preguntar** necesitas un verbo ayudante (*auxiliar*): **do** o **does**.\n\n- **do** va con I, you, we, they.\n- **does** va con he, she, it.\n\nLo más importante: cuando aparece **does**, la -s ya está en does. El verbo principal vuelve a su forma base: *She does not work*, no *She does not works*.\n\nLos tres momentos con **work**:\n\n- Pasado: **I didn't work** yesterday. (No trabajé ayer.)\n- Presente: **I don't work** on Sundays. (No trabajo los domingos.)\n- Futuro: **I won't work** tomorrow. (No trabajaré mañana.)"
+    },
+    {
+      "h": "Negativo: don't / doesn't + verbo base",
+      "table": {
+        "head": ["Pronombre", "Negativo", "Ejemplo", "Significa"],
+        "rows": [
+          ["I", "don't work", "I don't work on Sundays.", "No trabajo los domingos."],
+          ["you", "don't work", "You don't study at night.", "Tú no estudias en la noche."],
+          ["he / she / it", "doesn't work", "She doesn't work here.", "Ella no trabaja aquí."],
+          ["we", "don't work", "We don't work today.", "No trabajamos hoy."],
+          ["they", "don't work", "They don't work in Orlando.", "Ellos no trabajan en Orlando."]
+        ]
+      },
+      "note": "**don't** = do not y **doesn't** = does not. En conversación casi siempre se usa la forma corta."
+    },
+    {
+      "h": "Preguntas de sí o no y respuestas cortas",
+      "body": "Para preguntar, pon **Do / Does** al inicio, luego el sujeto y el verbo base.\n\n**Do you like coffee?** (¿Te gusta el café?)\n\n**Does she work here?** (¿Ella trabaja aquí?)\n\nLa respuesta corta repite do / does: no repitas el verbo principal.",
+      "table": {
+        "head": ["Pregunta", "Sí", "No"],
+        "rows": [
+          ["Do I work?", "Yes, I do.", "No, I don't."],
+          ["Do you work?", "Yes, I do.", "No, I don't."],
+          ["Does he / she / it work?", "Yes, he does.", "No, he doesn't."],
+          ["Do we work?", "Yes, we do.", "No, we don't."],
+          ["Do they work?", "Yes, they do.", "No, they don't."]
+        ]
+      }
+    },
+    {
+      "h": "Preguntas con Wh-: where, what, when, why, who",
+      "body": "Pon la palabra **Wh-** primero y después sigue la estructura normal: **Wh- + do / does + sujeto + verbo base**.",
+      "table": {
+        "head": ["Pregunta", "Significa", "Respuesta posible"],
+        "rows": [
+          ["Where do you live?", "¿Dónde vives?", "I live in Medellín."],
+          ["What do you study?", "¿Qué estudias?", "I study engineering."],
+          ["When does class start?", "¿Cuándo empieza la clase?", "It starts at 8."],
+          ["Why does he study English?", "¿Por qué él estudia inglés?", "Because he wants to work at Disney."],
+          ["What time does she get up?", "¿A qué hora se levanta ella?", "She gets up at 6."],
+          ["How does he go to work?", "¿Cómo va él al trabajo?", "He goes by bus."]
+        ]
+      },
+      "note": "Ojo: **Who works here?** (¿Quién trabaja aquí?) no usa does, porque *who* es el sujeto. Aquí el verbo sí lleva -s."
+    },
+    {
+      "h": "Adverbios de frecuencia y su posición",
+      "table": {
+        "head": ["Adverbio", "Significa", "Porcentaje aprox.", "Ejemplo"],
+        "rows": [
+          ["always", "siempre", "100%", "I always drink coffee."],
+          ["usually", "normalmente", "80%", "She usually walks to class."],
+          ["often", "a menudo", "60%", "We often eat out."],
+          ["sometimes", "a veces", "40%", "He sometimes works at night."],
+          ["never", "nunca", "0%", "They never watch TV."]
+        ]
+      },
+      "body": "Posición: el adverbio va **antes del verbo principal** y **después de to be**.\n\n- I **always** study at night. (antes de study)\n- She **is** **never** late. (después de is)\n\nCon la negación: *I don't usually eat breakfast* (el adverbio va después de don't).\n\nNunca uses dos negaciones: *I never don't...* está mal. **never** ya es negativo.",
+      "note": "**Sometimes** también puede ir al inicio o al final de la oración: *Sometimes I work at night.*"
+    },
+    {
+      "h": "How often...? ¿Con qué frecuencia?",
+      "body": "Para preguntar la frecuencia usa **How often + do / does + sujeto + verbo base?**\n\n**How often do you study English?** (¿Con qué frecuencia estudias inglés?)\n\nPuedes responder con un adverbio o con una expresión: **every day**, **once a week** (una vez por semana), **twice a week** (dos veces por semana), **three times a month**.\n\n**How often does she go to the gym?** She goes **twice a week**."
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "Mal: *She doesn't works.* Bien: **She doesn't work.** (does ya lleva la -s).",
+        "Mal: *Do she work here?* Bien: **Does she work here?**",
+        "Mal: *Where you live?* Bien: **Where do you live?** (en inglés la pregunta necesita do / does).",
+        "Mal: *Yes, I work.* como respuesta corta. Bien: **Yes, I do.**",
+        "Mal: *I no like coffee.* Bien: **I don't like coffee.**"
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "don't (do not)", "es": "no (con I, you, we, they)", "ex": "I don't eat meat." },
+    { "en": "doesn't (does not)", "es": "no (con he, she, it)", "ex": "He doesn't drink coffee." },
+    { "en": "always", "es": "siempre", "ex": "I always get up at 6." },
+    { "en": "usually", "es": "normalmente", "ex": "She usually walks to work." },
+    { "en": "often", "es": "a menudo", "ex": "We often eat pizza." },
+    { "en": "sometimes", "es": "a veces", "ex": "He sometimes studies at night." },
+    { "en": "never", "es": "nunca", "ex": "They never arrive late." },
+    { "en": "How often...?", "es": "¿Con qué frecuencia...?", "ex": "How often do you exercise?" },
+    { "en": "once a week", "es": "una vez por semana", "ex": "I call my mother once a week." },
+    { "en": "twice a week", "es": "dos veces por semana", "ex": "She goes to the gym twice a week." },
+    { "en": "three times a month", "es": "tres veces al mes", "ex": "We visit my aunt three times a month." },
+    { "en": "like", "es": "gustar / querer", "ex": "Do you like theme parks?" },
+    { "en": "want", "es": "querer", "ex": "He wants to work at Disney." },
+    { "en": "need", "es": "necesitar", "ex": "I need a visa." },
+    { "en": "know", "es": "saber / conocer", "ex": "Do you know Orlando?" },
+    { "en": "Where do you live?", "es": "¿Dónde vives?", "ex": "Where do you live? I live in Bogotá." },
+    { "en": "What time...?", "es": "¿A qué hora...?", "ex": "What time does the park open?" },
+    { "en": "Why...?", "es": "¿Por qué...?", "ex": "Why do you study English?" },
+    { "en": "because", "es": "porque", "ex": "I study English because I want to travel." }
+  ],
+  "examples": [
+    { "en": "I don't work on Sundays.", "es": "No trabajo los domingos." },
+    { "en": "She doesn't live in Orlando.", "es": "Ella no vive en Orlando." },
+    { "en": "Do you study at night?", "es": "¿Estudias en la noche?" },
+    { "en": "Yes, I do. I study every night.", "es": "Sí. Estudio todas las noches." },
+    { "en": "Does he like theme parks?", "es": "¿A él le gustan los parques temáticos?" },
+    { "en": "No, he doesn't. He prefers museums.", "es": "No. Él prefiere los museos." },
+    { "en": "Where do they work?", "es": "¿Dónde trabajan ellos?" },
+    { "en": "What time does the park open?", "es": "¿A qué hora abre el parque?" },
+    { "en": "I always drink coffee in the morning.", "es": "Siempre tomo café en la mañana." },
+    { "en": "She is never late for class.", "es": "Ella nunca llega tarde a clase." },
+    { "en": "We usually don't eat breakfast at home.", "es": "Normalmente no desayunamos en casa." },
+    { "en": "How often do you practice English? Every day.", "es": "¿Con qué frecuencia practicas inglés? Todos los días." },
+    { "en": "He sometimes works on Saturdays.", "es": "A veces él trabaja los sábados." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "She ___ work on Sundays.", "options": ["don't", "doesn't", "isn't"], "answer": 1, "why": "She es tercera persona, entonces se usa doesn't." },
+    { "type": "choice", "q": "I ___ like cold coffee.", "options": ["don't", "doesn't", "no"], "answer": 0, "why": "Con I se usa don't + verbo base." },
+    { "type": "choice", "q": "___ they live in Orlando?", "options": ["Does", "Do", "Is"], "answer": 1, "why": "They va con Do." },
+    { "type": "choice", "q": "___ your brother play soccer?", "options": ["Do", "Does", "Is"], "answer": 1, "why": "Your brother equivale a he, entonces se usa Does." },
+    { "type": "choice", "q": "He ___ eats breakfast. (nunca)", "options": ["never", "don't", "no"], "answer": 0, "why": "Never es el adverbio de frecuencia que significa nunca y va antes del verbo." },
+    { "type": "choice", "q": "¿Cuál oración es correcta?", "options": ["She doesn't works here.", "She doesn't work here.", "She don't work here."], "answer": 1, "why": "Después de doesn't el verbo vuelve a la forma base: work." },
+    { "type": "choice", "q": "Do you work here? Respuesta corta afirmativa:", "options": ["Yes, I do.", "Yes, I work.", "Yes, I does."], "answer": 0, "why": "La respuesta corta repite do: Yes, I do." },
+    { "type": "choice", "q": "She is ___ late. (siempre)", "options": ["always", "usually do", "does"], "answer": 0, "why": "Always va después del verbo to be (is)." },
+    { "type": "fill", "q": "He ___ drink coffee at night.", "answer": ["doesn't", "does not"], "why": "He pide doesn't + verbo base." },
+    { "type": "fill", "q": "___ you study English every day?", "answer": ["do"], "why": "You va con Do." },
+    { "type": "fill", "q": "___ she live in Medellín?", "answer": ["does"], "why": "She va con Does." },
+    { "type": "fill", "q": "Does he like pizza? No, he ___.", "answer": ["doesn't", "does not"], "why": "La respuesta corta negativa con he es doesn't." },
+    { "type": "fill", "q": "Where ___ you live?", "answer": ["do"], "why": "En preguntas Wh- con you se usa do." },
+    { "type": "fill", "q": "How ___ does she go to the gym? Twice a week.", "answer": ["often"], "why": "How often pregunta por la frecuencia." },
+    { "type": "order", "words": ["don't", "I", "on", "work", "Sundays"], "answer": "I don't work on Sundays", "es": "No trabajo los domingos." },
+    { "type": "order", "words": ["Does", "work", "she", "here"], "answer": "Does she work here", "es": "¿Ella trabaja aquí?" },
+    { "type": "order", "words": ["What", "time", "does", "class", "start"], "answer": "What time does class start", "es": "¿A qué hora empieza la clase?" },
+    { "type": "translate", "es": "Él no vive en Orlando.", "answer": ["He doesn't live in Orlando.", "He does not live in Orlando."], "why": "Con he se usa doesn't + verbo base." },
+    { "type": "translate", "es": "¿Tú estudias inglés todos los días?", "answer": ["Do you study English every day?"], "why": "You pide Do al inicio de la pregunta." },
+    { "type": "translate", "es": "Yo siempre tomo café en la mañana.", "answer": ["I always drink coffee in the morning.", "I always have coffee in the morning."], "why": "Always va antes del verbo principal." }
+  ],
+  "speak": [
+    "I don't work on Sundays.",
+    "Do you like theme parks?",
+    "Yes, I do.",
+    "She doesn't live in Orlando.",
+    "Where do you live?",
+    "What time does the park open?",
+    "I always drink coffee in the morning.",
+    "How often do you study English?"
+  ],
+  "tip": "Error típico: poner la -s dos veces (*She doesn't works*) o preguntar sin do / does (*Where you live?*). Recuerda: con do / does el verbo principal siempre va en forma base."
+}

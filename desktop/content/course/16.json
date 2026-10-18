@@ -1,0 +1,137 @@
+{
+  "n": 16,
+  "block": "Mi mundo",
+  "title": "Trabajos y estudios",
+  "emoji": "💼",
+  "minutes": 32,
+  "goal": "Al final de esta clase podrás decir qué haces (trabajo o estudios), preguntar a otros y usar vocabulario básico de un parque temático.",
+  "sections": [
+    {
+      "h": "Trabajos comunes",
+      "body": "En inglés casi siempre usamos **a / an** antes del trabajo: **I am a student**, **She is an engineer**. En español lo omitimos, pero en inglés es obligatorio.",
+      "table": {
+        "head": ["Inglés", "Español", "Ejemplo"],
+        "rows": [
+          ["engineer", "ingeniero/a", "He is an engineer."],
+          ["student", "estudiante", "I am a student."],
+          ["teacher", "profesor/a", "She is a teacher."],
+          ["waiter", "mesero/a", "He is a waiter."],
+          ["cashier", "cajero/a", "She is a cashier."],
+          ["driver", "conductor/a", "He is a driver."],
+          ["doctor", "médico/a", "My mom is a doctor."],
+          ["nurse", "enfermero/a", "She is a nurse."]
+        ]
+      },
+      "note": "**An** va antes de vocal: an engineer, an actor. **A** va antes de consonante: a teacher, a waiter."
+    },
+    {
+      "h": "What do you do?",
+      "body": "Esta es la pregunta clásica para conocer a alguien.\n\n**What do you do?** significa ¿A qué te dedicas? o ¿En qué trabajas?\n\nRespuestas:\n**I'm a student.**\n**I work at a bank.**\n**I study systems engineering.**\n\nLa pregunta también se puede dirigir a otras personas: **What does she do?** (con she/he, **does**). Respuesta: **She is a nurse.**"
+    },
+    {
+      "h": "Work at, work in, study",
+      "table": {
+        "head": ["Frase", "Cuándo se usa", "Ejemplo"],
+        "rows": [
+          ["I work at...", "una empresa o lugar específico", "I work at a restaurant."],
+          ["I work in...", "un área o ciudad", "I work in marketing. / I work in Orlando."],
+          ["I work as...", "tu cargo", "I work as a cashier."],
+          ["I study...", "tu carrera o materia", "I study engineering."],
+          ["I study at...", "tu universidad", "I study at a university."]
+        ]
+      },
+      "note": "Con he/she/it el verbo termina en **-s**: He **works** at a bank. She **studies** at a university."
+    },
+    {
+      "h": "Vocabulario del parque temático",
+      "body": "Si trabajas en Disney, estas palabras las escucharás todos los días:",
+      "table": {
+        "head": ["Inglés", "Español", "Ejemplo"],
+        "rows": [
+          ["ride", "atracción", "This ride is fun."],
+          ["ticket", "boleto", "Show your ticket, please."],
+          ["guest", "visitante / huésped", "Welcome, guests!"],
+          ["shift", "turno de trabajo", "My shift starts at nine."],
+          ["uniform", "uniforme", "I wear a uniform."],
+          ["manager", "gerente", "My manager is very kind."],
+          ["cast member", "empleado de Disney", "I'm a cast member."]
+        ]
+      },
+      "note": "En Disney a los clientes se les llama **guests**, no customers. Y a los empleados, **cast members**."
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "No digas *I am student*. Con trabajos usa **a / an**: **I am a student**.",
+        "No digas *I am working in a bank* para tu trabajo general. Mejor **I work at a bank**.",
+        "No digas *She work*. Con she/he/it hay una -s: **She works**.",
+        "No digas *I am engineer*. Es **I am an engineer** (an antes de vocal)."
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "job", "es": "trabajo (empleo)", "ex": "I want a new job." },
+    { "en": "engineer", "es": "ingeniero", "ex": "He is an engineer." },
+    { "en": "student", "es": "estudiante", "ex": "I am a university student." },
+    { "en": "teacher", "es": "profesor", "ex": "My teacher is friendly." },
+    { "en": "waiter", "es": "mesero", "ex": "The waiter is busy." },
+    { "en": "cashier", "es": "cajero", "ex": "She is a cashier at a store." },
+    { "en": "driver", "es": "conductor", "ex": "He is a bus driver." },
+    { "en": "doctor", "es": "médico", "ex": "My aunt is a doctor." },
+    { "en": "ride", "es": "atracción", "ex": "That ride is really fast." },
+    { "en": "ticket", "es": "boleto", "ex": "Do you have your ticket?" },
+    { "en": "guest", "es": "visitante", "ex": "Welcome, guests!" },
+    { "en": "shift", "es": "turno", "ex": "My shift is from nine to five." },
+    { "en": "uniform", "es": "uniforme", "ex": "I wear a blue uniform." },
+    { "en": "manager", "es": "gerente", "ex": "Ask the manager, please." },
+    { "en": "cast member", "es": "empleado de Disney", "ex": "I want to be a cast member." },
+    { "en": "to work", "es": "trabajar", "ex": "I work in Orlando." },
+    { "en": "to study", "es": "estudiar", "ex": "I study at night." },
+    { "en": "university", "es": "universidad", "ex": "I study at a university." },
+    { "en": "company", "es": "empresa", "ex": "She works at a big company." },
+    { "en": "What do you do?", "es": "¿A qué te dedicas?", "ex": "Hi, what do you do?" }
+  ],
+  "examples": [
+    { "en": "What do you do?", "es": "¿A qué te dedicas?" },
+    { "en": "I'm a student.", "es": "Soy estudiante." },
+    { "en": "I study systems engineering.", "es": "Estudio ingeniería de sistemas." },
+    { "en": "She is an engineer.", "es": "Ella es ingeniera." },
+    { "en": "He works at a restaurant.", "es": "Él trabaja en un restaurante." },
+    { "en": "What does your brother do?", "es": "¿A qué se dedica tu hermano?" },
+    { "en": "My shift starts at nine.", "es": "Mi turno empieza a las nueve." },
+    { "en": "I wear a uniform at work.", "es": "Uso uniforme en el trabajo." },
+    { "en": "Welcome, guests!", "es": "¡Bienvenidos, visitantes!" },
+    { "en": "This ride is open.", "es": "Esta atracción está abierta." },
+    { "en": "Please show your ticket.", "es": "Por favor muestre su boleto." },
+    { "en": "I want to be a cast member.", "es": "Quiero ser empleado de Disney." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I am ___ student.", "options": ["a", "an", "the"], "answer": 0, "why": "Student empieza con consonante: a student." },
+    { "type": "choice", "q": "She is ___ engineer.", "options": ["a", "an", "–"], "answer": 1, "why": "Engineer empieza con vocal: an engineer." },
+    { "type": "choice", "q": "He ___ at a bank.", "options": ["work", "works", "working"], "answer": 1, "why": "Con he se agrega -s: works." },
+    { "type": "choice", "q": "What ___ she do?", "options": ["do", "does", "is"], "answer": 1, "why": "Con she se usa does en la pregunta." },
+    { "type": "choice", "q": "At a theme park, what are the visitors called?", "options": ["guests", "drivers", "managers"], "answer": 0, "why": "En Disney a los visitantes se les llama guests." },
+    { "type": "choice", "q": "Which word means 'turno de trabajo'?", "options": ["shift", "ticket", "ride"], "answer": 0, "why": "Shift es el turno." },
+    { "type": "choice", "q": "I study ___ a university.", "options": ["in", "at", "by"], "answer": 1, "why": "Con instituciones se usa at: at a university." },
+    { "type": "fill", "q": "What do you ___?", "answer": ["do"], "why": "La pregunta correcta es What do you do?" },
+    { "type": "fill", "q": "I am ___ engineer.", "answer": ["an"], "why": "Engineer empieza con vocal: an." },
+    { "type": "fill", "q": "She ___ at a restaurant. (work)", "answer": ["works"], "why": "Con she se agrega -s: works." },
+    { "type": "fill", "q": "My ___ starts at eight. (turno)", "answer": ["shift"], "why": "Turno de trabajo es shift." },
+    { "type": "fill", "q": "Please show your ___. (boleto)", "answer": ["ticket"], "why": "Boleto se dice ticket." },
+    { "type": "order", "words": ["do", "What", "you", "do"], "answer": "What do you do", "es": "¿A qué te dedicas?" },
+    { "type": "order", "words": ["a", "am", "I", "student"], "answer": "I am a student", "es": "Soy estudiante." },
+    { "type": "order", "words": ["works", "He", "at", "a", "restaurant"], "answer": "He works at a restaurant", "es": "Él trabaja en un restaurante." },
+    { "type": "translate", "es": "Soy ingeniero.", "answer": ["I am an engineer.", "I'm an engineer."], "why": "Con trabajos usamos a/an: an engineer." },
+    { "type": "translate", "es": "Ella trabaja en un banco.", "answer": ["She works at a bank.", "She works in a bank."], "why": "Con she el verbo lleva -s: works." },
+    { "type": "translate", "es": "Estudio ingeniería de sistemas.", "answer": ["I study systems engineering."], "why": "Estudiar una carrera: I study + carrera." }
+  ],
+  "speak": [
+    "What do you do?",
+    "I'm a student.",
+    "I study systems engineering.",
+    "I want to be a cast member.",
+    "My shift starts at nine.",
+    "Welcome, guests!"
+  ],
+  "tip": "En español decimos *soy estudiante* sin artículo. En inglés es obligatorio: **I am a student**, **I am an engineer**. Y no olvides la -s con he/she: **She works**."
+}

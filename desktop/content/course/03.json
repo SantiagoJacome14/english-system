@@ -1,0 +1,138 @@
+{
+  "n": 3,
+  "block": "Primeros pasos",
+  "title": "To be: negativo, preguntas y respuestas cortas",
+  "emoji": "❓",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás decir que algo no es así, hacer preguntas con to be y responder con respuestas cortas.",
+  "sections": [
+    {
+      "h": "El negativo: agrega not",
+      "body": "En la clase pasada aprendiste **am / is / are**. Para decir que algo *no* es así, solo agregas **not** después del verbo.\n\n**I am not** tired. (*No estoy cansado.*)\n**She is not** a teacher. (*Ella no es profesora.*)\n**They are not** from Spain. (*Ellos no son de España.*)\n\nPara hablar rápido usamos contracciones, que verás en la tabla."
+    },
+    {
+      "h": "Negativo: forma larga y corta",
+      "table": {
+        "head": ["Sujeto", "Forma larga", "Formas cortas", "Significa"],
+        "rows": [
+          ["I", "I am not", "I'm not", "yo no soy / no estoy"],
+          ["you", "you are not", "you aren't / you're not", "tú no eres / no estás"],
+          ["he", "he is not", "he isn't / he's not", "él no es / no está"],
+          ["she", "she is not", "she isn't / she's not", "ella no es / no está"],
+          ["it", "it is not", "it isn't / it's not", "no es / no está"],
+          ["we", "we are not", "we aren't / we're not", "no somos / no estamos"],
+          ["they", "they are not", "they aren't / they're not", "no son / no están"]
+        ]
+      },
+      "note": "Ojo: con **I** solo existe **I'm not**. Nunca se dice *I amn't*."
+    },
+    {
+      "h": "Preguntas: cambia el orden",
+      "body": "En español hacemos una pregunta cambiando la entonación. En inglés cambias el **orden**: el verbo **to be** pasa al inicio.\n\nAfirmación: **You are** a student.\nPregunta: **Are you** a student?\n\nAfirmación: **She is** at work.\nPregunta: **Is she** at work?\n\nNo se puede decir *You are a student?* como pregunta formal. El verbo va primero."
+    },
+    {
+      "h": "Respuestas cortas",
+      "table": {
+        "head": ["Pregunta", "Sí", "No"],
+        "rows": [
+          ["Are you a student?", "Yes, I am.", "No, I'm not."],
+          ["Is he your brother?", "Yes, he is.", "No, he isn't."],
+          ["Is she tired?", "Yes, she is.", "No, she isn't."],
+          ["Is it a big park?", "Yes, it is.", "No, it isn't."],
+          ["Are they from Brazil?", "Yes, they are.", "No, they aren't."],
+          ["Are we late?", "Yes, we are.", "No, we aren't."]
+        ]
+      },
+      "note": "En el **Yes** nunca se contrae: **Yes, I am** (no *Yes, I'm*). En el **No** sí: **No, he isn't**."
+    },
+    {
+      "h": "Palabras para preguntar con to be",
+      "table": {
+        "head": ["Palabra", "Significa", "Ejemplo"],
+        "rows": [
+          ["What", "¿qué? / ¿cuál?", "What's your name?"],
+          ["Where", "¿dónde?", "Where are you from?"],
+          ["Who", "¿quién?", "Who is he?"],
+          ["How", "¿cómo?", "How are you?"],
+          ["How old", "¿cuántos años?", "How old are you?"],
+          ["When", "¿cuándo?", "When is the class?"]
+        ]
+      },
+      "note": "La palabra de pregunta va primero, luego **am / is / are** y después el sujeto: **Where is** the hotel? **What are** your names?"
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "Decir *Are you from Colombia?* y responder solo *Yes, I'm.* Lo correcto es **Yes, I am.**",
+        "Olvidar el verbo: *Where you from?* Debe ser **Where are you from?**",
+        "Decir *How old do you have?* Lo correcto es **How old are you?**",
+        "Mezclar: *He no is tired.* Lo correcto es **He isn't tired.**"
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "not", "es": "no (negación)", "ex": "I'm not tired." },
+    { "en": "isn't", "es": "no es / no está", "ex": "She isn't here." },
+    { "en": "aren't", "es": "no son / no estás", "ex": "We aren't late." },
+    { "en": "yes", "es": "sí", "ex": "Yes, I am." },
+    { "en": "no", "es": "no", "ex": "No, he isn't." },
+    { "en": "what", "es": "qué / cuál", "ex": "What's your name?" },
+    { "en": "where", "es": "dónde", "ex": "Where are you?" },
+    { "en": "who", "es": "quién", "ex": "Who is she?" },
+    { "en": "how", "es": "cómo", "ex": "How are you?" },
+    { "en": "how old", "es": "cuántos años", "ex": "How old are you?" },
+    { "en": "when", "es": "cuándo", "ex": "When is the party?" },
+    { "en": "here", "es": "aquí", "ex": "I'm here at the hotel." },
+    { "en": "there", "es": "allá", "ex": "The park is there." },
+    { "en": "late", "es": "tarde (retrasado)", "ex": "We aren't late." },
+    { "en": "married", "es": "casado/a", "ex": "He isn't married." },
+    { "en": "single", "es": "soltero/a", "ex": "I'm single." },
+    { "en": "from", "es": "de (origen)", "ex": "Where are you from?" },
+    { "en": "at home", "es": "en casa", "ex": "I'm at home today." }
+  ],
+  "examples": [
+    { "en": "I'm not tired.", "es": "No estoy cansado." },
+    { "en": "She isn't my teacher.", "es": "Ella no es mi profesora." },
+    { "en": "They aren't at home.", "es": "Ellos no están en casa." },
+    { "en": "Are you a student?", "es": "¿Eres estudiante?" },
+    { "en": "Yes, I am.", "es": "Sí, lo soy." },
+    { "en": "Is he your brother?", "es": "¿Es tu hermano?" },
+    { "en": "No, he isn't.", "es": "No, no lo es." },
+    { "en": "What's your name?", "es": "¿Cuál es tu nombre?" },
+    { "en": "Where are you from?", "es": "¿De dónde eres?" },
+    { "en": "How old are you?", "es": "¿Cuántos años tienes?" },
+    { "en": "Where is the hotel?", "es": "¿Dónde está el hotel?" },
+    { "en": "Who is she?", "es": "¿Quién es ella?" }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "He ___ tired.", "options": ["aren't", "isn't", "am not"], "answer": 1, "why": "He va con is, y el negativo es isn't." },
+    { "type": "choice", "q": "___ you from Colombia?", "options": ["Is", "Am", "Are"], "answer": 2, "why": "You va con are, y en la pregunta va primero." },
+    { "type": "choice", "q": "Are they students? Respuesta correcta:", "options": ["Yes, they're.", "Yes, they are.", "Yes, they is."], "answer": 1, "why": "En el Yes corto no se contrae: Yes, they are." },
+    { "type": "choice", "q": "¿Cómo se pregunta la edad de alguien?", "options": ["How old are you?", "How old do you have?", "What old are you?"], "answer": 0, "why": "La edad se pregunta con How old + to be." },
+    { "type": "choice", "q": "Is she your sister? No, ___.", "options": ["she isn't", "she aren't", "she amn't"], "answer": 0, "why": "She va con is, y en negativo es isn't." },
+    { "type": "fill", "q": "I ___ not tired today. (to be)", "answer": ["am"], "why": "Con I siempre se usa am, incluso en negativo: I am not." },
+    { "type": "fill", "q": "She ___ at home. (negativo, forma corta)", "answer": ["isn't", "is not"], "why": "She is not se contrae como isn't." },
+    { "type": "fill", "q": "___ are you from?", "answer": ["where"], "why": "Para preguntar el origen se usa Where." },
+    { "type": "fill", "q": "Are you late? No, I ___.", "answer": ["am not", "'m not", "i'm not", "im not"], "why": "Con I solo existe I'm not, no existe amn't." },
+    { "type": "fill", "q": "Is he a doctor? Yes, he ___.", "answer": ["is"], "why": "En el Yes corto no se contrae: Yes, he is." },
+    { "type": "order", "words": ["you", "Are", "a", "student"], "answer": "Are you a student", "es": "¿Eres estudiante?" },
+    { "type": "order", "words": ["isn't", "He", "my", "brother"], "answer": "He isn't my brother", "es": "Él no es mi hermano." },
+    { "type": "order", "words": ["are", "Where", "you", "from"], "answer": "Where are you from", "es": "¿De dónde eres?" },
+    { "type": "order", "words": ["name", "your", "What's"], "answer": "What's your name", "es": "¿Cuál es tu nombre?" },
+    { "type": "translate", "es": "No estoy cansado.", "answer": ["I am not tired.", "I'm not tired."], "why": "El negativo con I es I'm not." },
+    { "type": "translate", "es": "¿Ella es tu amiga?", "answer": ["Is she your friend?"], "why": "La pregunta lleva is al inicio." },
+    { "type": "translate", "es": "¿Cuántos años tienes?", "answer": ["How old are you?"], "why": "La edad se pregunta con How old are you?" },
+    { "type": "translate", "es": "Ellos no están en casa.", "answer": ["They aren't at home.", "They are not at home.", "They're not at home."], "why": "They va con are, y el negativo es aren't." }
+  ],
+  "speak": [
+    "I'm not tired.",
+    "She isn't my teacher.",
+    "Are you a student?",
+    "Yes, I am.",
+    "No, he isn't.",
+    "What's your name?",
+    "Where are you from?",
+    "How old are you?"
+  ],
+  "tip": "Error común: responder *Yes, I'm.* o *No, I amn't.* En las respuestas cortas con **Yes** no se contrae (**Yes, I am**), y con **I** el negativo es **I'm not** (no existe *amn't*). Y recuerda: la pregunta lleva el verbo primero, no es solo cambiar la entonación."
+}

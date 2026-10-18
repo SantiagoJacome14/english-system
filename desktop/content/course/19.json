@@ -1,0 +1,794 @@
+{
+  "n": 19,
+  "block": "Verbos y tiempos",
+  "title": "Los verbos y sus cuatro formas",
+  "emoji": "🧩",
+  "minutes": 40,
+  "goal": "Al final de esta clase podrás leer una tabla de verbos y formar el pasado, el participio y el -ing de los verbos regulares.",
+  "sections": [
+    {
+      "h": "Cada verbo tiene cuatro formas",
+      "body": "En español un verbo tiene muchas terminaciones: trabajo, trabajé, trabajaré, trabajando. En inglés es más sencillo: cada verbo tiene solo **cuatro formas** y con ellas formas casi todos los tiempos.\n\n1. **Base form** (forma base): *work*. Se usa en presente con I / you / we / they y después de *will*, *don't*, *did*.\n2. **Past** (pasado): *worked*. Se usa para contar lo que pasó.\n3. **Past participle** (participio): *worked*. Se usa con *have* (tiempos perfectos) y en la voz pasiva.\n4. **-ing form** (gerundio): *working*. Se usa para acciones en progreso.\n\nLos tres momentos con **work**:\n\n- Pasado: **I worked** yesterday. (Trabajé ayer.)\n- Presente: **I work** every day. (Trabajo todos los días.)\n- Futuro: **I will work** tomorrow. (Trabajaré mañana.)"
+    },
+    {
+      "h": "Cómo leer una tabla de verbos",
+      "body": "Las tablas de verbos tienen siempre este orden: **base → past → past participle → -ing**.\n\nSi el verbo es **regular**, el pasado y el participio son **iguales** y terminan en **-ed**. Si es **irregular**, cambian de otra forma (lo veremos en la próxima clase).",
+      "table": {
+        "head": [
+          "Base",
+          "Past",
+          "Past participle",
+          "-ing",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "work",
+            "worked",
+            "worked",
+            "working",
+            "trabajar"
+          ],
+          [
+            "play",
+            "played",
+            "played",
+            "playing",
+            "jugar"
+          ],
+          [
+            "go (irregular)",
+            "went",
+            "gone",
+            "going",
+            "ir"
+          ]
+        ]
+      },
+      "note": "La tabla muestra una columna para cada forma. Si el verbo es regular, la 2.ª y la 3.ª columna se ven iguales."
+    },
+    {
+      "h": "Reglas para escribir -ed",
+      "table": {
+        "head": [
+          "Regla",
+          "Base",
+          "Past (-ed)",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "Casi todos: + ed",
+            "walk",
+            "walked",
+            "caminó"
+          ],
+          [
+            "Termina en e: + d",
+            "live",
+            "lived",
+            "vivió"
+          ],
+          [
+            "Consonante + y: y → ied",
+            "study",
+            "studied",
+            "estudió"
+          ],
+          [
+            "Vocal + y: + ed",
+            "play",
+            "played",
+            "jugó"
+          ],
+          [
+            "Una sílaba, consonante-vocal-consonante: dobla la última",
+            "stop",
+            "stopped",
+            "paró"
+          ],
+          [
+            "Una sílaba, consonante-vocal-consonante: dobla la última",
+            "plan",
+            "planned",
+            "planeó"
+          ]
+        ]
+      },
+      "note": "No dobles la consonante si termina en **w, x, y** (*play → played*, *fix → fixed*) ni si el verbo tiene más de una sílaba con acento al inicio (*visit → visited*, *listen → listened*)."
+    },
+    {
+      "h": "Reglas para escribir -ing",
+      "table": {
+        "head": [
+          "Regla",
+          "Base",
+          "-ing",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "Casi todos: + ing",
+            "work",
+            "working",
+            "trabajando"
+          ],
+          [
+            "Termina en e: quita la e",
+            "live",
+            "living",
+            "viviendo"
+          ],
+          [
+            "Termina en e: quita la e",
+            "use",
+            "using",
+            "usando"
+          ],
+          [
+            "Consonante-vocal-consonante (una sílaba): dobla",
+            "stop",
+            "stopping",
+            "parando"
+          ],
+          [
+            "Consonante-vocal-consonante (una sílaba): dobla",
+            "plan",
+            "planning",
+            "planeando"
+          ],
+          [
+            "Termina en y: solo + ing",
+            "study",
+            "studying",
+            "estudiando"
+          ],
+          [
+            "Termina en ie: ie → ying",
+            "lie",
+            "lying",
+            "mintiendo"
+          ]
+        ]
+      }
+    },
+    {
+      "h": "Tres sonidos para -ed",
+      "body": "Aunque se escribe igual (-ed), suena de tres formas. Es fácil de recordar:\n\n- **/t/**: después de sonidos sordos (p, k, f, s, sh, ch). *worked* (workt), *helped*, *watched*, *asked*, *finished*.\n- **/d/**: después de sonidos con vibración y vocales. *played* (pleid), *lived*, *called*, *cleaned*, *opened*, *used*.\n- **/ɪd/**: después de **t** o **d**. Aquí sí se agrega una sílaba. *wanted* (wan-tid), *needed*, *started*, *visited*, *waited*.",
+      "table": {
+        "head": [
+          "Sonido",
+          "Cuándo",
+          "Ejemplos"
+        ],
+        "rows": [
+          [
+            "/t/",
+            "después de p, k, f, s, sh, ch",
+            "worked, walked, helped, watched, asked, finished"
+          ],
+          [
+            "/d/",
+            "después de vocal o sonido con vibración",
+            "played, lived, called, cleaned, opened, used"
+          ],
+          [
+            "/ɪd/",
+            "después de t o d (sílaba extra)",
+            "wanted, needed, started, visited, waited"
+          ]
+        ]
+      },
+      "note": "Truco: si el verbo ya termina en **t** o **d**, el -ed suena como una sílaba nueva. En los demás casos no se agrega sílaba."
+    },
+    {
+      "h": "30 verbos regulares en tabla",
+      "table": {
+        "head": [
+          "Base",
+          "Past",
+          "Past participle",
+          "-ing",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "work",
+            "worked",
+            "worked",
+            "working",
+            "trabajar"
+          ],
+          [
+            "play",
+            "played",
+            "played",
+            "playing",
+            "jugar"
+          ],
+          [
+            "study",
+            "studied",
+            "studied",
+            "studying",
+            "estudiar"
+          ],
+          [
+            "stop",
+            "stopped",
+            "stopped",
+            "stopping",
+            "parar"
+          ],
+          [
+            "live",
+            "lived",
+            "lived",
+            "living",
+            "vivir"
+          ],
+          [
+            "walk",
+            "walked",
+            "walked",
+            "walking",
+            "caminar"
+          ],
+          [
+            "watch",
+            "watched",
+            "watched",
+            "watching",
+            "mirar"
+          ],
+          [
+            "listen",
+            "listened",
+            "listened",
+            "listening",
+            "escuchar"
+          ],
+          [
+            "cook",
+            "cooked",
+            "cooked",
+            "cooking",
+            "cocinar"
+          ],
+          [
+            "clean",
+            "cleaned",
+            "cleaned",
+            "cleaning",
+            "limpiar"
+          ],
+          [
+            "start",
+            "started",
+            "started",
+            "starting",
+            "empezar"
+          ],
+          [
+            "finish",
+            "finished",
+            "finished",
+            "finishing",
+            "terminar"
+          ],
+          [
+            "open",
+            "opened",
+            "opened",
+            "opening",
+            "abrir"
+          ],
+          [
+            "close",
+            "closed",
+            "closed",
+            "closing",
+            "cerrar"
+          ],
+          [
+            "call",
+            "called",
+            "called",
+            "calling",
+            "llamar"
+          ]
+        ]
+      }
+    },
+    {
+      "h": "30 verbos regulares: segunda parte",
+      "table": {
+        "head": [
+          "Base",
+          "Past",
+          "Past participle",
+          "-ing",
+          "Significa"
+        ],
+        "rows": [
+          [
+            "help",
+            "helped",
+            "helped",
+            "helping",
+            "ayudar"
+          ],
+          [
+            "want",
+            "wanted",
+            "wanted",
+            "wanting",
+            "querer"
+          ],
+          [
+            "need",
+            "needed",
+            "needed",
+            "needing",
+            "necesitar"
+          ],
+          [
+            "like",
+            "liked",
+            "liked",
+            "liking",
+            "gustar"
+          ],
+          [
+            "love",
+            "loved",
+            "loved",
+            "loving",
+            "amar"
+          ],
+          [
+            "use",
+            "used",
+            "used",
+            "using",
+            "usar"
+          ],
+          [
+            "visit",
+            "visited",
+            "visited",
+            "visiting",
+            "visitar"
+          ],
+          [
+            "arrive",
+            "arrived",
+            "arrived",
+            "arriving",
+            "llegar"
+          ],
+          [
+            "plan",
+            "planned",
+            "planned",
+            "planning",
+            "planear"
+          ],
+          [
+            "try",
+            "tried",
+            "tried",
+            "trying",
+            "intentar"
+          ],
+          [
+            "ask",
+            "asked",
+            "asked",
+            "asking",
+            "preguntar"
+          ],
+          [
+            "learn",
+            "learned",
+            "learned",
+            "learning",
+            "aprender"
+          ],
+          [
+            "wait",
+            "waited",
+            "waited",
+            "waiting",
+            "esperar"
+          ],
+          [
+            "stay",
+            "stayed",
+            "stayed",
+            "staying",
+            "quedarse"
+          ],
+          [
+            "practice",
+            "practiced",
+            "practiced",
+            "practicing",
+            "practicar"
+          ]
+        ]
+      },
+      "note": "Error típico: confundir las formas. *I am work* está mal; **I am working**. *I work yesterday* está mal; **I worked yesterday**."
+    }
+  ],
+  "vocab": [
+    {
+      "en": "base form",
+      "es": "forma base",
+      "ex": "The base form of worked is work."
+    },
+    {
+      "en": "past",
+      "es": "pasado",
+      "ex": "The past of play is played."
+    },
+    {
+      "en": "past participle",
+      "es": "participio pasado",
+      "ex": "The past participle of walk is walked."
+    },
+    {
+      "en": "-ing form",
+      "es": "forma en -ing (gerundio)",
+      "ex": "The -ing form of study is studying."
+    },
+    {
+      "en": "regular verb",
+      "es": "verbo regular",
+      "ex": "Walk is a regular verb."
+    },
+    {
+      "en": "irregular verb",
+      "es": "verbo irregular",
+      "ex": "Go is an irregular verb."
+    },
+    {
+      "en": "work",
+      "es": "trabajar",
+      "ex": "I worked yesterday."
+    },
+    {
+      "en": "play",
+      "es": "jugar / tocar",
+      "ex": "They played soccer."
+    },
+    {
+      "en": "study",
+      "es": "estudiar",
+      "ex": "She studied last night."
+    },
+    {
+      "en": "stop",
+      "es": "parar / detenerse",
+      "ex": "The bus stopped here."
+    },
+    {
+      "en": "live",
+      "es": "vivir",
+      "ex": "I lived in Cali."
+    },
+    {
+      "en": "walk",
+      "es": "caminar",
+      "ex": "We walked to the park."
+    },
+    {
+      "en": "watch",
+      "es": "mirar / ver",
+      "ex": "He watched a movie."
+    },
+    {
+      "en": "listen",
+      "es": "escuchar",
+      "ex": "I listened to music."
+    },
+    {
+      "en": "cook",
+      "es": "cocinar",
+      "ex": "She cooked dinner."
+    },
+    {
+      "en": "clean",
+      "es": "limpiar",
+      "ex": "We cleaned the room."
+    },
+    {
+      "en": "start",
+      "es": "empezar",
+      "ex": "Class started at 8."
+    },
+    {
+      "en": "finish",
+      "es": "terminar",
+      "ex": "I finished my homework."
+    },
+    {
+      "en": "visit",
+      "es": "visitar",
+      "ex": "They visited Orlando."
+    },
+    {
+      "en": "arrive",
+      "es": "llegar",
+      "ex": "The plane arrived at noon."
+    },
+    {
+      "en": "plan",
+      "es": "planear",
+      "ex": "We planned the trip."
+    },
+    {
+      "en": "try",
+      "es": "intentar",
+      "ex": "He tried again."
+    }
+  ],
+  "examples": [
+    {
+      "en": "I work in the morning.",
+      "es": "Trabajo en la mañana."
+    },
+    {
+      "en": "I worked yesterday.",
+      "es": "Trabajé ayer."
+    },
+    {
+      "en": "I am working now.",
+      "es": "Estoy trabajando ahora."
+    },
+    {
+      "en": "She lived in Bogotá for two years.",
+      "es": "Ella vivió en Bogotá por dos años."
+    },
+    {
+      "en": "He studied for the exam last night.",
+      "es": "Él estudió para el examen anoche."
+    },
+    {
+      "en": "The bus stopped at the corner.",
+      "es": "El bus paró en la esquina."
+    },
+    {
+      "en": "We are planning a trip to Orlando.",
+      "es": "Estamos planeando un viaje a Orlando."
+    },
+    {
+      "en": "They walked to the university.",
+      "es": "Ellos caminaron a la universidad."
+    },
+    {
+      "en": "I am studying English now.",
+      "es": "Estoy estudiando inglés ahora."
+    },
+    {
+      "en": "The park opened at 9.",
+      "es": "El parque abrió a las 9."
+    },
+    {
+      "en": "She is using her laptop.",
+      "es": "Ella está usando su computador."
+    },
+    {
+      "en": "I arrived late, but I tried to be quiet.",
+      "es": "Llegué tarde, pero intenté hacer silencio."
+    },
+    {
+      "en": "He wanted a job, so he visited the office.",
+      "es": "Él quería un trabajo, así que visitó la oficina."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "choice",
+      "q": "¿Cuál es el pasado de play?",
+      "options": [
+        "plaied",
+        "played",
+        "plad"
+      ],
+      "answer": 1,
+      "why": "Vocal + y solo agrega -ed: played."
+    },
+    {
+      "type": "choice",
+      "q": "¿Cuál es el pasado de study?",
+      "options": [
+        "studyed",
+        "studied",
+        "studdied"
+      ],
+      "answer": 1,
+      "why": "Consonante + y: la y cambia a -ied."
+    },
+    {
+      "type": "choice",
+      "q": "¿Cuál es el pasado de stop?",
+      "options": [
+        "stoped",
+        "stopped",
+        "stoppeed"
+      ],
+      "answer": 1,
+      "why": "Verbo corto de consonante-vocal-consonante: se dobla la p."
+    },
+    {
+      "type": "choice",
+      "q": "¿Cuál es el -ing de live?",
+      "options": [
+        "liveing",
+        "living",
+        "livving"
+      ],
+      "answer": 1,
+      "why": "Si el verbo termina en e, se quita la e: living."
+    },
+    {
+      "type": "choice",
+      "q": "¿Cuál es el -ing de plan?",
+      "options": [
+        "planing",
+        "planning",
+        "planeing"
+      ],
+      "answer": 1,
+      "why": "Consonante-vocal-consonante: se dobla la n."
+    },
+    {
+      "type": "choice",
+      "q": "En worked, el -ed suena como?",
+      "options": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
+      "answer": 0,
+      "why": "Después de k (sonido sordo) el -ed suena /t/."
+    },
+    {
+      "type": "choice",
+      "q": "En wanted, el -ed suena como?",
+      "options": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
+      "answer": 2,
+      "why": "Después de t o d el -ed suena /ɪd/ y agrega una sílaba."
+    },
+    {
+      "type": "choice",
+      "q": "En played, el -ed suena como?",
+      "options": [
+        "/t/",
+        "/d/",
+        "/ɪd/"
+      ],
+      "answer": 1,
+      "why": "Después de una vocal el -ed suena /d/."
+    },
+    {
+      "type": "fill",
+      "q": "past de walk: ___",
+      "answer": [
+        "walked"
+      ],
+      "why": "Walk es regular: walk + ed."
+    },
+    {
+      "type": "fill",
+      "q": "past de try: ___",
+      "answer": [
+        "tried"
+      ],
+      "why": "Consonante + y cambia a -ied."
+    },
+    {
+      "type": "fill",
+      "q": "past de arrive: ___",
+      "answer": [
+        "arrived"
+      ],
+      "why": "Termina en e, solo agrega -d."
+    },
+    {
+      "type": "fill",
+      "q": "-ing de use: ___",
+      "answer": [
+        "using"
+      ],
+      "why": "Termina en e, quita la e y agrega -ing."
+    },
+    {
+      "type": "fill",
+      "q": "-ing de study: ___",
+      "answer": [
+        "studying"
+      ],
+      "why": "Con -ing la y se mantiene: studying."
+    },
+    {
+      "type": "fill",
+      "q": "past participle de cook: ___",
+      "answer": [
+        "cooked"
+      ],
+      "why": "En verbos regulares el participio es igual al pasado."
+    },
+    {
+      "type": "fill",
+      "q": "I ___ in Cali for two years. (live, past)",
+      "answer": [
+        "lived"
+      ],
+      "why": "Es un hecho pasado: live + d."
+    },
+    {
+      "type": "order",
+      "words": [
+        "worked",
+        "I",
+        "yesterday"
+      ],
+      "answer": "I worked yesterday",
+      "es": "Trabajé ayer."
+    },
+    {
+      "type": "order",
+      "words": [
+        "am",
+        "I",
+        "now",
+        "studying"
+      ],
+      "answer": "I am studying now",
+      "es": "Estoy estudiando ahora."
+    },
+    {
+      "type": "translate",
+      "es": "Ella caminó a la universidad.",
+      "answer": [
+        "She walked to the university.",
+        "She walked to university."
+      ],
+      "why": "Walk es regular y el pasado es walked."
+    },
+    {
+      "type": "translate",
+      "es": "Estoy trabajando ahora.",
+      "answer": [
+        "I am working now.",
+        "I'm working now."
+      ],
+      "why": "Para acciones en progreso se usa am + verbo -ing."
+    },
+    {
+      "type": "translate",
+      "es": "Ellos visitaron Orlando.",
+      "answer": [
+        "They visited Orlando."
+      ],
+      "why": "Visit es regular y agrega -ed: visited."
+    }
+  ],
+  "speak": [
+    "I work every day.",
+    "I worked yesterday.",
+    "I am working now.",
+    "She lived in Bogotá.",
+    "He studied for the exam.",
+    "We walked to the park.",
+    "They visited Orlando.",
+    "I am planning a trip."
+  ],
+  "tip": "Error típico: dar al pasado la forma del presente (*I walk yesterday*) o usar el infinitivo para una acción en progreso (*I am walk*). Revisa siempre la columna que necesitas: pasado, participio o -ing."
+}

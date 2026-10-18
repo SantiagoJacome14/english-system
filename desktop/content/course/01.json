@@ -1,0 +1,123 @@
+{
+  "n": 1,
+  "block": "Primeros pasos",
+  "title": "Hello! Saludos y presentarte",
+  "emoji": "👋",
+  "minutes": 25,
+  "goal": "Al final de esta clase podrás saludar, decir tu nombre, preguntar cómo está alguien, deletrear tu nombre y despedirte en inglés.",
+  "sections": [
+    {
+      "h": "Tu primera conversación",
+      "body": "Imagina que llegas a Orlando y un compañero de trabajo se acerca. Lo primero que pasa es un saludo. En inglés es muy sencillo.\n\n**Hello** y **Hi** significan *hola*. **Hi** es más informal y lo usas con amigos. **Hello** funciona en cualquier situación, incluso en una entrevista de trabajo.\n\nDespués del saludo, casi siempre viene el nombre y la pregunta **How are you?** (*¿cómo estás?*)."
+    },
+    {
+      "h": "Saludos según la hora del día",
+      "table": {
+        "head": ["Inglés", "Cuándo se usa", "Significa"],
+        "rows": [
+          ["Good morning", "Desde que te levantas hasta el mediodía", "Buenos días"],
+          ["Good afternoon", "Desde el mediodía hasta las 5 o 6 p. m.", "Buenas tardes"],
+          ["Good evening", "Al caer la noche, para saludar", "Buenas noches (al llegar)"],
+          ["Good night", "Solo para despedirte o irte a dormir", "Buenas noches (al irte)"]
+        ]
+      },
+      "note": "Cuidado: **Good night** NO es un saludo. Lo dices cuando te vas a dormir o te despides de noche."
+    },
+    {
+      "h": "Presentarte y conocer a alguien",
+      "body": "Para decir tu nombre usa **My name is...** (*mi nombre es...*). También puedes decir **I'm...** (*soy...*), que es más corto y muy natural.\n\nCuando alguien te dice su nombre, respondes **Nice to meet you.** (*mucho gusto*). La otra persona contesta **Nice to meet you, too.** (*igualmente*).\n\nEjemplo de mini diálogo:\n\n**A:** Hi, my name is Ana.\n**B:** Hello, Ana. I'm Santiago. Nice to meet you.\n**A:** Nice to meet you, too."
+    },
+    {
+      "h": "How are you? y sus respuestas",
+      "table": {
+        "head": ["Respuesta", "Significa", "Cómo se siente"],
+        "rows": [
+          ["I'm great!", "¡Estoy genial!", "Muy bien"],
+          ["I'm fine, thanks.", "Estoy bien, gracias.", "Bien (la más común)"],
+          ["I'm OK.", "Estoy regular / más o menos.", "Normal"],
+          ["Not so good.", "No muy bien.", "Mal"]
+        ]
+      },
+      "note": "Después de responder, devuelve la pregunta: **And you?** (*¿y tú?*). Es de buena educación en inglés."
+    },
+    {
+      "h": "El alfabeto y cómo deletrear tu nombre",
+      "body": "En inglés mucha gente te pedirá deletrear tu nombre: **How do you spell your name?** Por eso es importante conocer las letras. Las vocales suenan así: **A** (ei), **E** (i), **I** (ai), **O** (ou), **U** (iu).\n\nOtras letras que confunden a los hispanohablantes: **G** (yi), **J** (yei), **H** (eich), **W** (dábol-iu), **Y** (uai), **Z** (zi).\n\nPara tu nombre, di las letras una por una: **S-A-N-T-I-A-G-O**. Y si tu apellido tiene una doble letra, di **double** antes de la letra: **double L**."
+    },
+    {
+      "h": "Despedidas y error típico",
+      "list": [
+        "**Goodbye.** (*Adiós.*) Es la más general.",
+        "**Bye.** (*Chao.*) Informal, entre amigos.",
+        "**See you later.** (*Nos vemos luego.*)",
+        "**See you tomorrow.** (*Nos vemos mañana.*)",
+        "**Have a nice day!** (*¡Que tengas un buen día!*) Muy común en Estados Unidos, hasta con los cajeros.",
+        "Error típico: decir *I am call Santiago*. Lo correcto es **My name is Santiago** o **I'm Santiago**."
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "hello", "es": "hola", "ex": "Hello, I'm Santiago." },
+    { "en": "hi", "es": "hola (informal)", "ex": "Hi, Ana!" },
+    { "en": "good morning", "es": "buenos días", "ex": "Good morning, teacher." },
+    { "en": "good afternoon", "es": "buenas tardes", "ex": "Good afternoon, everyone." },
+    { "en": "good evening", "es": "buenas noches (al llegar)", "ex": "Good evening, welcome to Orlando." },
+    { "en": "good night", "es": "buenas noches (al irte)", "ex": "Good night, see you tomorrow." },
+    { "en": "name", "es": "nombre", "ex": "My name is Santiago." },
+    { "en": "nice to meet you", "es": "mucho gusto", "ex": "Nice to meet you, Sam." },
+    { "en": "how are you?", "es": "¿cómo estás?", "ex": "Hi, Ana. How are you?" },
+    { "en": "fine", "es": "bien", "ex": "I'm fine, thanks." },
+    { "en": "great", "es": "genial", "ex": "I'm great today!" },
+    { "en": "thanks", "es": "gracias", "ex": "Thanks, and you?" },
+    { "en": "and you?", "es": "¿y tú?", "ex": "I'm fine. And you?" },
+    { "en": "spell", "es": "deletrear", "ex": "How do you spell your name?" },
+    { "en": "goodbye", "es": "adiós", "ex": "Goodbye, Mr. Smith." },
+    { "en": "bye", "es": "chao", "ex": "Bye, Ana!" },
+    { "en": "see you later", "es": "nos vemos luego", "ex": "See you later, Tom." },
+    { "en": "see you tomorrow", "es": "nos vemos mañana", "ex": "Good night, see you tomorrow." }
+  ],
+  "examples": [
+    { "en": "Hello, my name is Santiago.", "es": "Hola, mi nombre es Santiago." },
+    { "en": "Hi, I'm Ana.", "es": "Hola, soy Ana." },
+    { "en": "Good morning, Mr. Johnson.", "es": "Buenos días, señor Johnson." },
+    { "en": "Nice to meet you, Sam.", "es": "Mucho gusto, Sam." },
+    { "en": "Nice to meet you, too.", "es": "Igualmente." },
+    { "en": "How are you today?", "es": "¿Cómo estás hoy?" },
+    { "en": "I'm fine, thanks. And you?", "es": "Estoy bien, gracias. ¿Y tú?" },
+    { "en": "I'm great, thank you!", "es": "¡Estoy genial, gracias!" },
+    { "en": "How do you spell your name?", "es": "¿Cómo se deletrea tu nombre?" },
+    { "en": "It's S-A-N-T-I-A-G-O.", "es": "Es S-A-N-T-I-A-G-O." },
+    { "en": "Good night, see you tomorrow.", "es": "Buenas noches, nos vemos mañana." },
+    { "en": "Bye! Have a nice day!", "es": "¡Chao! ¡Que tengas un buen día!" }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "Son las 8:00 a. m. Saludas a tu profesora: Good ___, teacher.", "options": ["morning", "evening", "night"], "answer": 0, "why": "Por la mañana se dice Good morning." },
+    { "type": "choice", "q": "Alguien te dice: Nice to meet you. ¿Qué respondes?", "options": ["Nice to meet you, too.", "Goodbye.", "I'm fine."], "answer": 0, "why": "Se responde con Nice to meet you, too (igualmente)." },
+    { "type": "choice", "q": "¿Cuál es la mejor respuesta a How are you?", "options": ["My name is Ana.", "I'm fine, thanks.", "Nice to meet you."], "answer": 1, "why": "How are you? pregunta cómo estás, y se responde con I'm fine, thanks." },
+    { "type": "choice", "q": "¿Cuál de estas frases es una despedida?", "options": ["Hello", "See you later", "Nice to meet you"], "answer": 1, "why": "See you later significa nos vemos luego." },
+    { "type": "choice", "q": "Te vas a dormir. Dices: ___.", "options": ["Good morning", "Good afternoon", "Good night"], "answer": 2, "why": "Good night se usa para despedirte de noche o antes de dormir." },
+    { "type": "fill", "q": "My ___ is Santiago.", "answer": ["name"], "why": "My name is... significa mi nombre es..." },
+    { "type": "fill", "q": "Nice to ___ you.", "answer": ["meet"], "why": "La frase fija es Nice to meet you." },
+    { "type": "fill", "q": "How ___ you?", "answer": ["are"], "why": "La pregunta correcta es How are you?" },
+    { "type": "fill", "q": "I'm fine, ___. And you?", "answer": ["thanks", "thank you"], "why": "Thanks o thank you significa gracias." },
+    { "type": "fill", "q": "How do you ___ your name?", "answer": ["spell"], "why": "Spell significa deletrear." },
+    { "type": "order", "words": ["name", "My", "Santiago", "is"], "answer": "My name is Santiago", "es": "Mi nombre es Santiago." },
+    { "type": "order", "words": ["meet", "to", "Nice", "you"], "answer": "Nice to meet you", "es": "Mucho gusto." },
+    { "type": "order", "words": ["you", "How", "today", "are"], "answer": "How are you today", "es": "¿Cómo estás hoy?" },
+    { "type": "order", "words": ["tomorrow", "you", "See"], "answer": "See you tomorrow", "es": "Nos vemos mañana." },
+    { "type": "translate", "es": "Hola, me llamo Ana.", "answer": ["Hello, my name is Ana.", "Hi, my name is Ana.", "Hello, I'm Ana.", "Hi, I'm Ana.", "Hello, I am Ana.", "Hi, I am Ana."], "why": "Se usa My name is... o I'm... para presentarte." },
+    { "type": "translate", "es": "Mucho gusto.", "answer": ["Nice to meet you.", "Nice to meet you", "Pleased to meet you."], "why": "Nice to meet you es la frase estándar al conocer a alguien." },
+    { "type": "translate", "es": "Estoy bien, gracias.", "answer": ["I'm fine, thanks.", "I am fine, thanks.", "I'm fine, thank you.", "I am fine, thank you.", "I'm good, thanks.", "I'm good, thank you."], "why": "I'm fine se dice para responder cómo estás." }
+  ],
+  "speak": [
+    "Hello, my name is Santiago.",
+    "Nice to meet you.",
+    "How are you today?",
+    "I'm fine, thanks. And you?",
+    "How do you spell your name?",
+    "S-A-N-T-I-A-G-O.",
+    "Good morning, everyone.",
+    "Goodbye, see you tomorrow."
+  ],
+  "tip": "Error común: decir *I am call Santiago* o *I call me Santiago* porque en español decimos *me llamo*. En inglés no se traduce literal: usa **My name is Santiago** o **I'm Santiago**. Además, no uses *Good night* para saludar: es solo para despedirte."
+}

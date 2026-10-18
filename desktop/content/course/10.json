@@ -1,0 +1,120 @@
+{
+  "n": 10,
+  "block": "Mi mundo",
+  "title": "Preposiciones de lugar y this / that",
+  "emoji": "📍",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás decir dónde están las cosas y señalar objetos cercanos y lejanos con this, that, these y those.",
+  "sections": [
+    {
+      "h": "¿Dónde está? Where is / Where are",
+      "body": "Para preguntar por un lugar usa **Where is...?** con una cosa y **Where are...?** con varias.\n\n**Where is the key?** ¿Dónde está la llave?\n**Where are my shoes?** ¿Dónde están mis zapatos?\n\nPara responder usas una preposición de lugar: **It's on the table.** / **They're under the bed.**"
+    },
+    {
+      "h": "Las preposiciones de lugar",
+      "table": {
+        "head": ["Preposición", "Significa", "Ejemplo"],
+        "rows": [
+          ["in", "dentro de / en", "The phone is in the bag."],
+          ["on", "sobre / encima (tocando)", "The book is on the desk."],
+          ["under", "debajo de", "The cat is under the chair."],
+          ["next to", "al lado de", "The lamp is next to the bed."],
+          ["between", "entre (dos cosas)", "The bank is between the bakery and the cafe."],
+          ["in front of", "enfrente de / delante de", "The car is in front of the house."],
+          ["behind", "detrás de", "The garden is behind the house."],
+          ["near", "cerca de", "My school is near my house."],
+          ["at", "en (un punto o lugar)", "I am at work. / She is at home."]
+        ]
+      },
+      "note": "Ojo: en español 'en' sirve para todo. En inglés eliges: **in** (dentro), **on** (encima), **at** (un punto o lugar de actividad)."
+    },
+    {
+      "h": "This, that, these, those",
+      "body": "Sirven para señalar. Dependen de dos cosas: si es una o varias, y si está cerca o lejos de ti.",
+      "table": {
+        "head": ["", "Cerca de ti", "Lejos de ti"],
+        "rows": [
+          ["Singular (una cosa)", "this = este / esta", "that = ese / aquel"],
+          ["Plural (varias)", "these = estos / estas", "those = esos / aquellos"]
+        ]
+      },
+      "note": "Ejemplos: **This** is my phone (lo tengo en la mano). **That** is the castle (está lejos). **These** are my keys. **Those** are your friends."
+    },
+    {
+      "h": "Describir un cuarto",
+      "body": "Ahora combinamos todo. Mira este pequeño texto:\n\n**This is my room. There is a bed next to the window. There is a desk in front of the bed. My laptop is on the desk and my bag is under the desk. Those are my books on the shelf.**\n\nPrimero dices qué es el lugar, luego usas **there is / there are** y las preposiciones para ubicar cada cosa."
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "No digas *in the table* para algo encima de la mesa. Es **on the table**.",
+        "No uses *this* para varias cosas: *this are my keys* está mal. Correcto: **these are my keys**.",
+        "*Next of* no existe. Siempre es **next to**.",
+        "Con *where* y un plural usa are: **Where are my keys?**, no *Where is my keys?*"
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "in", "es": "en / dentro de", "ex": "The milk is in the fridge." },
+    { "en": "on", "es": "sobre / encima de", "ex": "My laptop is on the desk." },
+    { "en": "under", "es": "debajo de", "ex": "The shoes are under the bed." },
+    { "en": "next to", "es": "al lado de", "ex": "The bank is next to the hotel." },
+    { "en": "between", "es": "entre", "ex": "I sit between Ana and Luis." },
+    { "en": "in front of", "es": "enfrente de", "ex": "The bus stop is in front of the park." },
+    { "en": "behind", "es": "detrás de", "ex": "The ball is behind the door." },
+    { "en": "near", "es": "cerca de", "ex": "I live near the university." },
+    { "en": "at", "es": "en (lugar)", "ex": "I am at the airport." },
+    { "en": "far from", "es": "lejos de", "ex": "Orlando is far from Bogotá." },
+    { "en": "where", "es": "dónde", "ex": "Where is the bathroom?" },
+    { "en": "this", "es": "este / esta", "ex": "This is my bag." },
+    { "en": "that", "es": "ese / aquel", "ex": "That is my teacher." },
+    { "en": "these", "es": "estos / estas", "ex": "These are my keys." },
+    { "en": "those", "es": "esos / aquellos", "ex": "Those are big windows." },
+    { "en": "shelf", "es": "estante", "ex": "The books are on the shelf." },
+    { "en": "keys", "es": "llaves", "ex": "Where are my keys?" },
+    { "en": "bag", "es": "bolso / mochila", "ex": "My phone is in my bag." }
+  ],
+  "examples": [
+    { "en": "Where is my phone?", "es": "¿Dónde está mi teléfono?" },
+    { "en": "It's on the table.", "es": "Está sobre la mesa." },
+    { "en": "Where are my keys?", "es": "¿Dónde están mis llaves?" },
+    { "en": "They're under the sofa.", "es": "Están debajo del sofá." },
+    { "en": "The lamp is next to the bed.", "es": "La lámpara está al lado de la cama." },
+    { "en": "The bank is between the cafe and the school.", "es": "El banco está entre la cafetería y la escuela." },
+    { "en": "My car is in front of the house.", "es": "Mi carro está enfrente de la casa." },
+    { "en": "The garden is behind the house.", "es": "El jardín está detrás de la casa." },
+    { "en": "I'm at work.", "es": "Estoy en el trabajo." },
+    { "en": "This is my laptop.", "es": "Este es mi portátil." },
+    { "en": "That is Cinderella Castle.", "es": "Ese es el Castillo de Cenicienta." },
+    { "en": "Those are my friends over there.", "es": "Esos son mis amigos allá." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "The book is ___ the table. (encima)", "options": ["in", "on", "under"], "answer": 1, "why": "Encima de una superficie se dice on." },
+    { "type": "choice", "q": "The cat is ___ the chair. (debajo)", "options": ["under", "behind", "between"], "answer": 0, "why": "Debajo de se dice under." },
+    { "type": "choice", "q": "___ are my shoes? They're under the bed.", "options": ["Where", "What", "Who"], "answer": 0, "why": "Para preguntar el lugar usamos Where." },
+    { "type": "choice", "q": "___ is my book. (lo tengo en la mano)", "options": ["That", "This", "Those"], "answer": 1, "why": "Singular y cerca de ti: this." },
+    { "type": "choice", "q": "___ are my friends over there. (lejos, varios)", "options": ["These", "This", "Those"], "answer": 2, "why": "Plural y lejos: those." },
+    { "type": "choice", "q": "The bank is ___ the cafe and the hotel. (entre los dos)", "options": ["between", "behind", "at"], "answer": 0, "why": "Entre dos cosas se dice between." },
+    { "type": "choice", "q": "I live ___ the university. (cerca)", "options": ["far", "near", "under"], "answer": 1, "why": "Cerca de se dice near." },
+    { "type": "fill", "q": "The phone is ___ my bag. (dentro)", "answer": ["in"], "why": "Dentro de un bolso: in." },
+    { "type": "fill", "q": "Where ___ my keys?", "answer": ["are"], "why": "Keys es plural: where are." },
+    { "type": "fill", "q": "The lamp is ___ to the bed. (al lado)", "answer": ["next"], "why": "Al lado de se dice next to." },
+    { "type": "fill", "q": "___ are my keys. (cerca, varios)", "answer": ["these"], "why": "Plural y cerca: these." },
+    { "type": "fill", "q": "I am ___ home now.", "answer": ["at"], "why": "Con home se usa at: at home." },
+    { "type": "order", "words": ["is", "Where", "the", "bathroom"], "answer": "Where is the bathroom", "es": "¿Dónde está el baño?" },
+    { "type": "order", "words": ["under", "bag", "is", "My", "the", "desk"], "answer": "My bag is under the desk", "es": "Mi mochila está debajo del escritorio." },
+    { "type": "order", "words": ["my", "is", "This", "room"], "answer": "This is my room", "es": "Esta es mi habitación." },
+    { "type": "translate", "es": "Mi teléfono está sobre la mesa.", "answer": ["My phone is on the table.", "My phone's on the table."], "why": "Encima de la mesa: on the table." },
+    { "type": "translate", "es": "¿Dónde están mis llaves?", "answer": ["Where are my keys?"], "why": "Llaves es plural: where are." },
+    { "type": "translate", "es": "Esos son mis amigos.", "answer": ["Those are my friends.", "Those are my friends"], "why": "Plural y lejos: those are." }
+  ],
+  "speak": [
+    "Where is my phone?",
+    "My bag is under the desk.",
+    "The lamp is next to the bed.",
+    "This is my room.",
+    "Those are my friends.",
+    "I live near the university."
+  ],
+  "tip": "En español decimos 'en' para todo. En inglés: **in** si algo está dentro, **on** si está encima y **at** si es un lugar o punto. Un error muy común es decir *The book is in the table*; lo correcto es **on the table**."
+}

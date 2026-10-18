@@ -1,0 +1,173 @@
+{
+  "n": 24,
+  "block": "Verbos y tiempos",
+  "title": "Presente continuo y resumen de tiempos",
+  "emoji": "🎬",
+  "minutes": 40,
+  "goal": "Al final de esta clase podrás decir qué estás haciendo ahora, distinguir presente simple de continuo y repasar pasado, presente y futuro.",
+  "sections": [
+    {
+      "h": "El presente continuo: lo que pasa ahora",
+      "body": "El **presente continuo** (*present continuous*) habla de lo que **está pasando ahora**, **hoy** o **en esta etapa de tu vida**.\n\nSe forma con **am / is / are + verbo con -ing**.\n\n**I am studying** English now. (Estoy estudiando inglés ahora.)\n\nPalabras típicas: **now** (ahora), **right now** (ahora mismo), **today** (hoy), **these days** (estos días), **at the moment** (en este momento).\n\nLos tres momentos con **work**:\n\n- Pasado: **I worked** yesterday. (Trabajé ayer.)\n- Presente: **I work** every day / **I am working** now. (Trabajo todos los días / Estoy trabajando ahora.)\n- Futuro: **I will work** tomorrow. (Trabajaré mañana.)"
+    },
+    {
+      "h": "Conjugación completa: work",
+      "table": {
+        "head": ["Pronombre", "Presente continuo", "Forma corta", "Significa"],
+        "rows": [
+          ["I", "am working", "I'm working", "Estoy trabajando"],
+          ["you", "are working", "you're working", "Estás trabajando"],
+          ["he / she / it", "is working", "she's working", "Está trabajando"],
+          ["we", "are working", "we're working", "Estamos trabajando"],
+          ["they", "are working", "they're working", "Están trabajando"]
+        ]
+      },
+      "note": "Negativo: *I'm not working*, *she isn't working*, *they aren't working*."
+    },
+    {
+      "h": "Cómo escribir -ing",
+      "table": {
+        "head": ["Regla", "Base", "-ing", "Significa"],
+        "rows": [
+          ["Casi todos: + ing", "work", "working", "trabajando"],
+          ["Casi todos: + ing", "eat", "eating", "comiendo"],
+          ["Termina en e: quita la e", "write", "writing", "escribiendo"],
+          ["Termina en e: quita la e", "make", "making", "haciendo"],
+          ["Consonante-vocal-consonante (una sílaba): dobla", "run", "running", "corriendo"],
+          ["Consonante-vocal-consonante (una sílaba): dobla", "sit", "sitting", "sentándose"],
+          ["Termina en y: solo + ing", "study", "studying", "estudiando"],
+          ["Termina en ie: ie → ying", "lie", "lying", "mintiendo / acostado"]
+        ]
+      },
+      "note": "El verbo **go** hace **going**, y **have** hace **having**."
+    },
+    {
+      "h": "Negativo y preguntas",
+      "body": "Con el presente continuo no usas do / does: el propio verbo **to be** hace todo el trabajo. Para preguntar, invierte **am / is / are** y el sujeto.",
+      "table": {
+        "head": ["Tipo", "Ejemplo", "Significa"],
+        "rows": [
+          ["Afirmativo", "She is studying.", "Ella está estudiando."],
+          ["Negativo", "She isn't studying.", "Ella no está estudiando."],
+          ["Pregunta", "Is she studying?", "¿Ella está estudiando?"],
+          ["Respuesta corta sí", "Yes, she is.", "Sí."],
+          ["Respuesta corta no", "No, she isn't.", "No."],
+          ["Wh-", "What are you doing?", "¿Qué estás haciendo?"],
+          ["Wh-", "Where is he working?", "¿Dónde está trabajando él?"]
+        ]
+      },
+      "note": "Respuesta corta con I: *Yes, I am.* / *No, I'm not.* Nunca digas *No, I amn't*."
+    },
+    {
+      "h": "Presente simple vs presente continuo",
+      "table": {
+        "head": ["", "Presente simple", "Presente continuo"],
+        "rows": [
+          ["Idea", "rutinas, hábitos, hechos", "acciones ahora o temporales"],
+          ["Forma", "I work / she works", "I am working / she is working"],
+          ["Palabras clave", "every day, always, usually, on Mondays", "now, right now, today, these days, at the moment"],
+          ["Ejemplo 1", "I study English every day.", "I am studying English now."],
+          ["Ejemplo 2", "She works in a hotel.", "She is working at the hotel today."],
+          ["Pregunta", "Do you work here?", "Are you working now?"]
+        ]
+      },
+      "note": "Verbos de estado como **know**, **like**, **want**, **need**, **love** casi no se usan en continuo: se dice **I want** a coffee, no *I am wanting*."
+    },
+    {
+      "h": "Resumen: pasado, presente y futuro con work, go y eat",
+      "table": {
+        "head": ["Verbo", "Pasado simple", "Presente simple", "Presente continuo", "Futuro con will", "Futuro con going to"],
+        "rows": [
+          ["work", "I worked (trabajé)", "I work (trabajo)", "I am working (estoy trabajando)", "I will work (trabajaré)", "I am going to work (voy a trabajar)"],
+          ["go", "I went (fui)", "I go (voy)", "I am going (estoy yendo)", "I will go (iré)", "I am going to go (voy a ir)"],
+          ["eat", "I ate (comí)", "I eat (como)", "I am eating (estoy comiendo)", "I will eat (comeré)", "I am going to eat (voy a comer)"]
+        ]
+      },
+      "note": "Con he / she / it: she works, she is working, she will work, she is going to work, y en pasado she worked / went / ate."
+    },
+    {
+      "h": "Negativo y pregunta en cada tiempo",
+      "table": {
+        "head": ["Tiempo", "Negativo", "Pregunta", "Significa"],
+        "rows": [
+          ["Pasado simple", "I didn't eat.", "Did you eat?", "No comí. / ¿Comiste?"],
+          ["Presente simple", "I don't eat. / She doesn't eat.", "Do you eat? / Does she eat?", "No como. / ¿Comes?"],
+          ["Presente continuo", "I'm not eating.", "Are you eating?", "No estoy comiendo. / ¿Estás comiendo?"],
+          ["Futuro will", "I won't eat.", "Will you eat?", "No comeré. / ¿Comerás?"],
+          ["Futuro going to", "I'm not going to eat.", "Are you going to eat?", "No voy a comer. / ¿Vas a comer?"]
+        ]
+      },
+      "note": "Error típico: mezclar tiempos (*Yesterday I am eating*, *Tomorrow I ate*). Mira la palabra de tiempo y elige el tiempo que combina."
+    }
+  ],
+  "vocab": [
+    { "en": "now", "es": "ahora", "ex": "I am studying now." },
+    { "en": "right now", "es": "ahora mismo", "ex": "She is working right now." },
+    { "en": "today", "es": "hoy", "ex": "I am working today." },
+    { "en": "these days", "es": "estos días", "ex": "He is learning English these days." },
+    { "en": "at the moment", "es": "en este momento", "ex": "They are eating at the moment." },
+    { "en": "am / is / are", "es": "forma de to be para el continuo", "ex": "We are waiting for the bus." },
+    { "en": "-ing", "es": "terminación del continuo", "ex": "I am reading." },
+    { "en": "work", "es": "trabajar", "ex": "I am working at the hotel." },
+    { "en": "go", "es": "ir", "ex": "They are going to the park." },
+    { "en": "eat", "es": "comer", "ex": "We are eating lunch." },
+    { "en": "study", "es": "estudiar", "ex": "He is studying for an exam." },
+    { "en": "wait", "es": "esperar", "ex": "I am waiting for my friend." },
+    { "en": "learn", "es": "aprender", "ex": "She is learning to drive." },
+    { "en": "listen", "es": "escuchar", "ex": "He is listening to music." },
+    { "en": "watch", "es": "mirar", "ex": "They are watching TV." },
+    { "en": "cook", "es": "cocinar", "ex": "My mom is cooking dinner." },
+    { "en": "rain", "es": "llover", "ex": "It is raining outside." },
+    { "en": "talk", "es": "hablar", "ex": "She is talking on the phone." },
+    { "en": "What are you doing?", "es": "¿Qué estás haciendo?", "ex": "What are you doing right now?" },
+    { "en": "I'm not", "es": "yo no estoy", "ex": "I'm not working today." }
+  ],
+  "examples": [
+    { "en": "I am studying English now.", "es": "Estoy estudiando inglés ahora." },
+    { "en": "She is working at the hotel today.", "es": "Ella está trabajando en el hotel hoy." },
+    { "en": "They are eating lunch.", "es": "Ellos están almorzando." },
+    { "en": "We aren't going to class today.", "es": "Hoy no vamos a ir a clase." },
+    { "en": "Are you listening to music?", "es": "¿Estás escuchando música?" },
+    { "en": "Yes, I am.", "es": "Sí." },
+    { "en": "What is he doing?", "es": "¿Qué está haciendo él?" },
+    { "en": "He is cooking dinner.", "es": "Él está cocinando la cena." },
+    { "en": "It's raining outside.", "es": "Está lloviendo afuera." },
+    { "en": "I usually walk to class, but today I am taking a bus.", "es": "Normalmente camino a clase, pero hoy estoy tomando un bus." },
+    { "en": "She works in Orlando, but she isn't working today.", "es": "Ella trabaja en Orlando, pero hoy no está trabajando." },
+    { "en": "Yesterday I went to the mall. Now I am eating. Tomorrow I will go home.", "es": "Ayer fui al centro comercial. Ahora estoy comiendo. Mañana iré a casa." },
+    { "en": "I'm learning English these days because I'm going to work at Disney.", "es": "Estos días estoy aprendiendo inglés porque voy a trabajar en Disney." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I ___ studying now.", "options": ["am", "is", "do"], "answer": 0, "why": "Con I el continuo usa am." },
+    { "type": "choice", "q": "She ___ working today.", "options": ["are", "is", "does"], "answer": 1, "why": "She usa is." },
+    { "type": "choice", "q": "They ___ eating lunch right now.", "options": ["is", "are", "am"], "answer": 1, "why": "They usa are." },
+    { "type": "choice", "q": "I ___ coffee every morning.", "options": ["drink", "am drinking", "drinking"], "answer": 0, "why": "Every morning indica una rutina: presente simple." },
+    { "type": "choice", "q": "Look! It ___ right now.", "options": ["rains", "is raining", "rain"], "answer": 1, "why": "Right now indica una acción en progreso: presente continuo." },
+    { "type": "choice", "q": "¿Cuál es el -ing de run?", "options": ["runing", "running", "runming"], "answer": 1, "why": "Run es consonante-vocal-consonante corta: se dobla la n." },
+    { "type": "choice", "q": "¿Cuál es el -ing de write?", "options": ["writeing", "writting", "writing"], "answer": 2, "why": "Termina en e: se quita la e y se agrega -ing." },
+    { "type": "choice", "q": "Yesterday I ___ to the mall.", "options": ["go", "went", "will go"], "answer": 1, "why": "Yesterday pide pasado simple: went." },
+    { "type": "fill", "q": "He ___ cooking dinner now.", "answer": ["is", "'s"], "why": "He usa is en el continuo." },
+    { "type": "fill", "q": "We ___ going to the park. (estamos yendo, am / is / are)", "answer": ["are", "'re"], "why": "We usa are." },
+    { "type": "fill", "q": "She ___ working today. (negativo con is)", "answer": ["isn't", "is not"], "why": "Negativo del continuo: isn't." },
+    { "type": "fill", "q": "Tomorrow I ___ go to class. (futuro con will)", "answer": ["will", "'ll"], "why": "Tomorrow indica futuro; will + verbo base." },
+    { "type": "fill", "q": "Last night she ___ pizza. (eat, past)", "answer": ["ate"], "why": "Eat - ate - eaten." },
+    { "type": "fill", "q": "Are you studying? No, I'm ___.", "answer": ["not"], "why": "La respuesta corta negativa con I es I'm not." },
+    { "type": "fill", "q": "What are you ___? (do, -ing)", "answer": ["doing"], "why": "El -ing de do es doing." },
+    { "type": "order", "words": ["am", "I", "English", "studying", "now"], "answer": "I am studying English now", "es": "Estoy estudiando inglés ahora." },
+    { "type": "order", "words": ["Is", "working", "she", "today"], "answer": "Is she working today", "es": "¿Ella está trabajando hoy?" },
+    { "type": "order", "words": ["are", "What", "doing", "you"], "answer": "What are you doing", "es": "¿Qué estás haciendo?" },
+    { "type": "translate", "es": "Ellos están comiendo ahora.", "answer": ["They are eating now.", "They're eating now."], "why": "They + are + eating." },
+    { "type": "translate", "es": "Ella no está trabajando hoy.", "answer": ["She isn't working today.", "She is not working today.", "She's not working today."], "why": "Negativo del continuo: is not + verbo -ing." }
+  ],
+  "speak": [
+    "I am studying English now.",
+    "She is working at the hotel today.",
+    "What are you doing right now?",
+    "They are eating lunch.",
+    "I usually walk to class, but today I am taking a bus.",
+    "Yesterday I went to the mall.",
+    "Tomorrow I will go home.",
+    "I'm learning English because I'm going to work at Disney."
+  ],
+  "tip": "Error típico: usar el presente simple para lo que pasa ahora (*I study now*) o el continuo para rutinas (*I am studying every day*). Mira la palabra de tiempo: every day, always → simple; now, today, right now → continuo."
+}

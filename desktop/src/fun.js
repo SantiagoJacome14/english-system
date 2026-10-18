@@ -66,6 +66,10 @@ const ACH = [
   { id: "writer", e: "✍️", t: "Escritor", d: "Completa 5 misiones de escritura", ok: () => Object.keys(S.lessons).filter((k) => /-w$/.test(k)).length >= 5 },
   { id: "piloto", e: "👨‍✈️", t: "Piloto", d: "Llega al rango Piloto (800 XP)", ok: () => S.xp >= 800 },
   { id: "hours10", e: "⏱️", t: "10 horas de vuelo", d: "Practica 10 horas en total", ok: () => Object.values(S.minutes).reduce((a, b) => a + b, 0) >= 600 },
+  { id: "cls1", e: "🎓", t: "Primera clase", d: "Termina la clase 1 del curso", ok: () => courseDone() >= 1 },
+  { id: "cls10", e: "📚", t: "Diez clases", d: "Termina 10 clases del curso", ok: () => courseDone() >= 10 },
+  { id: "cls30", e: "🏅", t: "Graduado del curso básico", d: "Termina las 30 clases", ok: () => typeof COURSE !== "undefined" && courseDone() >= COURSE.length },
+  { id: "clsperf", e: "💯", t: "Clase perfecta", d: "100% en una clase", ok: () => Object.values((S.course || {}).done || {}).some((x) => x.best === 100) },
   { id: "owl", e: "🦉", t: "Búho", d: "Practica después de las 10 p. m.", ok: () => !!S.owl },
 ];
 let achQueue = [], achShowing = false;

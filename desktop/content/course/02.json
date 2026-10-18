@@ -1,0 +1,135 @@
+{
+  "n": 2,
+  "block": "Primeros pasos",
+  "title": "El verbo to be (ser y estar)",
+  "emoji": "🧍",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás decir quién eres, cuántos años tienes, de dónde eres y cómo te sientes usando am, is y are.",
+  "sections": [
+    {
+      "h": "Una palabra para dos verbos",
+      "body": "En español tenemos dos verbos: *ser* y *estar*. En inglés solo hay uno: **to be**.\n\nPor eso **I am a student** significa *soy estudiante* y **I am tired** significa *estoy cansado*. El contexto te dice cuál de los dos es.\n\nEste verbo es el más importante del inglés. Lo vas a usar en cada conversación."
+    },
+    {
+      "h": "Los pronombres sujeto",
+      "table": {
+        "head": ["Pronombre", "Significa", "Ejemplo"],
+        "rows": [
+          ["I", "yo", "I am Santiago."],
+          ["you", "tú / usted / ustedes", "You are my friend."],
+          ["he", "él", "He is my brother."],
+          ["she", "ella", "She is my teacher."],
+          ["it", "ello (cosas, animales, ideas)", "It is a big park."],
+          ["we", "nosotros", "We are students."],
+          ["they", "ellos / ellas", "They are from Mexico."]
+        ]
+      },
+      "note": "En inglés SIEMPRE se dice el pronombre. No puedes decir solo *am a student*: tiene que ser **I am a student**. Y **it** se usa para cosas, nunca para personas."
+    },
+    {
+      "h": "Cómo se conjuga: forma larga y forma corta",
+      "table": {
+        "head": ["Pronombre", "Forma larga", "Forma corta", "Significa"],
+        "rows": [
+          ["I", "I am", "I'm", "yo soy / estoy"],
+          ["you", "you are", "you're", "tú eres / estás"],
+          ["he", "he is", "he's", "él es / está"],
+          ["she", "she is", "she's", "ella es / está"],
+          ["it", "it is", "it's", "es / está"],
+          ["we", "we are", "we're", "nosotros somos / estamos"],
+          ["they", "they are", "they're", "ellos son / están"]
+        ]
+      },
+      "note": "Al hablar, casi todo el mundo usa la forma corta: **I'm**, **she's**, **they're**. La forma larga se usa para dar énfasis o al escribir algo muy formal."
+    },
+    {
+      "h": "Edad: I'm 20",
+      "body": "En español *tenemos* años. En inglés los *somos*. Por eso se usa **to be**, no *have*.\n\nCorrecto: **I am 20** o **I am 20 years old**.\nIncorrecto: *I have 20 years*.\n\nAsí que Santiago diría: **I'm 20 years old.** Y su hermana: **She's 15.**"
+    },
+    {
+      "h": "Estados y sentimientos",
+      "table": {
+        "head": ["Inglés", "Significa", "Ejemplo"],
+        "rows": [
+          ["happy", "feliz", "I'm happy today."],
+          ["sad", "triste", "He's sad."],
+          ["tired", "cansado/a", "We're tired."],
+          ["hungry", "con hambre", "I'm hungry!"],
+          ["thirsty", "con sed", "She's thirsty."],
+          ["cold / hot", "con frío / con calor", "I'm cold in Bogotá."],
+          ["busy", "ocupado/a", "They're busy at work."]
+        ]
+      },
+      "note": "Error típico: *I have hungry* o *I have cold*. En inglés usamos to be: **I'm hungry**, **I'm cold**."
+    },
+    {
+      "h": "Ser vs. estar: cómo saber cuál es",
+      "body": "No tienes que decidir tú: en inglés siempre es **am / is / are**. Solo piensa en el pronombre.\n\n**I** va con **am**. **He, she, it** van con **is**. **You, we, they** van con **are**.\n\nEjemplos: **She is a doctor** (ser, profesión), **She is at work** (estar, lugar), **She is happy** (estar, sentimiento). Todo con la misma palabra: **is**."
+    }
+  ],
+  "vocab": [
+    { "en": "I", "es": "yo", "ex": "I am a student." },
+    { "en": "you", "es": "tú / ustedes", "ex": "You are very kind." },
+    { "en": "he", "es": "él", "ex": "He is my friend." },
+    { "en": "she", "es": "ella", "ex": "She is from Miami." },
+    { "en": "it", "es": "ello (cosas)", "ex": "It is a nice day." },
+    { "en": "we", "es": "nosotros", "ex": "We are in Orlando." },
+    { "en": "they", "es": "ellos", "ex": "They are at the park." },
+    { "en": "student", "es": "estudiante", "ex": "I'm a university student." },
+    { "en": "teacher", "es": "profesor/a", "ex": "She's my English teacher." },
+    { "en": "friend", "es": "amigo/a", "ex": "He's my best friend." },
+    { "en": "years old", "es": "años de edad", "ex": "I'm 20 years old." },
+    { "en": "happy", "es": "feliz", "ex": "We're happy today." },
+    { "en": "sad", "es": "triste", "ex": "He's sad." },
+    { "en": "tired", "es": "cansado/a", "ex": "I'm tired after work." },
+    { "en": "hungry", "es": "con hambre", "ex": "They're hungry." },
+    { "en": "thirsty", "es": "con sed", "ex": "I'm thirsty." },
+    { "en": "busy", "es": "ocupado/a", "ex": "She's busy today." },
+    { "en": "ready", "es": "listo/a", "ex": "I'm ready for the trip." }
+  ],
+  "examples": [
+    { "en": "I'm Santiago.", "es": "Soy Santiago." },
+    { "en": "I'm 20 years old.", "es": "Tengo 20 años." },
+    { "en": "I'm a university student.", "es": "Soy estudiante universitario." },
+    { "en": "You're my friend.", "es": "Tú eres mi amigo." },
+    { "en": "He's my brother.", "es": "Él es mi hermano." },
+    { "en": "She's a teacher.", "es": "Ella es profesora." },
+    { "en": "It's a big park.", "es": "Es un parque grande." },
+    { "en": "We're in Orlando.", "es": "Estamos en Orlando." },
+    { "en": "They're from Mexico.", "es": "Ellos son de México." },
+    { "en": "I'm hungry.", "es": "Tengo hambre." },
+    { "en": "She's tired today.", "es": "Ella está cansada hoy." },
+    { "en": "We're happy.", "es": "Estamos felices." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "She ___ a student.", "options": ["am", "is", "are"], "answer": 1, "why": "She es tercera persona singular: is." },
+    { "type": "choice", "q": "I ___ 20 years old.", "options": ["am", "is", "have"], "answer": 0, "why": "Con I se usa am, y la edad se dice con to be, no con have." },
+    { "type": "choice", "q": "We ___ in Orlando.", "options": ["is", "are", "am"], "answer": 1, "why": "We va con are." },
+    { "type": "choice", "q": "¿Cómo se dice Tengo hambre?", "options": ["I have hungry.", "I am hungry.", "I has hungry."], "answer": 1, "why": "Los estados se dicen con to be: I am hungry." },
+    { "type": "choice", "q": "It ___ a beautiful day.", "options": ["is", "are", "am"], "answer": 0, "why": "It va con is." },
+    { "type": "fill", "q": "They ___ happy. (to be)", "answer": ["are"], "why": "They va con are." },
+    { "type": "fill", "q": "I ___ a student. (to be)", "answer": ["am"], "why": "I va con am." },
+    { "type": "fill", "q": "He ___ my brother. (to be)", "answer": ["is"], "why": "He va con is." },
+    { "type": "fill", "q": "___ 20 years old. (Yo / forma corta)", "answer": ["i'm", "im"], "why": "I am se contrae como I'm." },
+    { "type": "fill", "q": "You ___ my friend. (to be)", "answer": ["are"], "why": "You siempre va con are." },
+    { "type": "order", "words": ["I", "am", "from", "Colombia"], "answer": "I am from Colombia", "es": "Soy de Colombia." },
+    { "type": "order", "words": ["She's", "a", "teacher"], "answer": "She's a teacher", "es": "Ella es profesora." },
+    { "type": "order", "words": ["tired", "are", "We", "today"], "answer": "We are tired today", "es": "Estamos cansados hoy." },
+    { "type": "order", "words": ["old", "I'm", "years", "20"], "answer": "I'm 20 years old", "es": "Tengo 20 años." },
+    { "type": "translate", "es": "Ella es mi hermana.", "answer": ["She is my sister.", "She's my sister."], "why": "Ella se traduce como She, y ser como is." },
+    { "type": "translate", "es": "Tengo 20 años.", "answer": ["I am 20 years old.", "I'm 20 years old.", "I am 20.", "I'm 20."], "why": "La edad se dice con to be: I am 20." },
+    { "type": "translate", "es": "Nosotros estamos cansados.", "answer": ["We are tired.", "We're tired."], "why": "We va con are, y tired significa cansado." },
+    { "type": "translate", "es": "Ellos son de México.", "answer": ["They are from Mexico.", "They're from Mexico."], "why": "They va con are." }
+  ],
+  "speak": [
+    "I'm Santiago.",
+    "I'm 20 years old.",
+    "I'm a university student.",
+    "She's my sister.",
+    "We're in Orlando.",
+    "They're happy today.",
+    "I'm hungry and tired.",
+    "He's my best friend."
+  ],
+  "tip": "Error común: traducir *tener* literal. En español *tengo 20 años, tengo hambre, tengo frío*. En inglés todo eso es **to be**: **I'm 20, I'm hungry, I'm cold**. Y no olvides el pronombre: nunca digas *Am a student*, siempre **I am a student**."
+}

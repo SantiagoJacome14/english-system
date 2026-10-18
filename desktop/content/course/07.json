@@ -1,0 +1,134 @@
+{
+  "n": 7,
+  "block": "Primeros pasos",
+  "title": "La hora",
+  "emoji": "⏰",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás preguntar y decir la hora, usar a.m. y p.m., y hablar de horarios diarios.",
+  "sections": [
+    {
+      "h": "Preguntar la hora",
+      "body": "Para preguntar la hora hay dos frases muy comunes:\n\n**What time is it?** (*¿Qué hora es?*)\n**Do you have the time?** (*¿Tiene la hora?*, más educado)\n\nPara responder empiezas con **It's** y luego la hora: **It's three o'clock.** Fíjate que se usa **it**, no *they*. En español decimos *son las tres* (plural), en inglés siempre es **It's** (singular)."
+    },
+    {
+      "h": "Las horas exactas y la media hora",
+      "table": {
+        "head": ["Reloj", "Se dice", "Significado"],
+        "rows": [
+          ["3:00", "It's three o'clock.", "Son las tres en punto."],
+          ["7:00", "It's seven o'clock.", "Son las siete en punto."],
+          ["3:30", "It's half past three.", "Son las tres y media."],
+          ["3:30", "It's three thirty.", "Son las tres y media (informal)."],
+          ["9:30", "It's half past nine.", "Son las nueve y media."]
+        ]
+      },
+      "note": "Hay dos formas de decir la hora: la formal (**half past three**) y la rápida, solo con números (**three thirty**). Las dos son correctas."
+    },
+    {
+      "h": "Cuarto y minutos: past y to",
+      "table": {
+        "head": ["Reloj", "Se dice", "Cómo funciona"],
+        "rows": [
+          ["3:05", "It's five past three.", "Pasan 5 minutos de las 3"],
+          ["3:10", "It's ten past three.", "Pasan 10 minutos de las 3"],
+          ["3:15", "It's a quarter past three.", "Quarter = un cuarto de hora"],
+          ["3:20", "It's twenty past three.", "Pasan 20 minutos"],
+          ["3:40", "It's twenty to four.", "Faltan 20 para las 4"],
+          ["4:45", "It's a quarter to five.", "Falta un cuarto para las 5"],
+          ["4:50", "It's ten to five.", "Faltan 10 para las 5"],
+          ["4:55", "It's five to five.", "Faltan 5 para las 5"]
+        ]
+      },
+      "note": "Regla fácil: del minuto 1 al 30 usas **past** (después de la hora). Del 31 al 59 usas **to** (faltan para la siguiente hora) y nombras la hora *siguiente*."
+    },
+    {
+      "h": "a.m., p.m., noon y midnight",
+      "body": "En Estados Unidos casi no se usa el reloj de 24 horas. Se usa el de 12 horas con **a.m.** o **p.m.**\n\n**a.m.** es de medianoche hasta el mediodía (la mañana). **p.m.** es del mediodía hasta la medianoche (tarde y noche).\n\n**7:00 a.m.** es *las 7 de la mañana*. **7:00 p.m.** es *las 7 de la noche* (19:00).\n\n**Noon** es las 12 del día. **Midnight** es las 12 de la noche. Ejemplo: **The park opens at 9:00 a.m. and closes at midnight.**"
+    },
+    {
+      "h": "What time does it start?",
+      "body": "Para preguntar a qué hora empieza algo usamos **What time does ... start?**\n\n**What time does the class start?** (*¿A qué hora empieza la clase?*)\n**What time does the show start?** (*¿A qué hora empieza el show?*)\n\nSe responde con **at** más la hora: **It starts at 8:00 p.m.** (*Empieza a las 8 p. m.*).\n\nPara el final: **What time does it finish?** o **What time does it end?**\n\nOjo: aquí hay un verbo nuevo, **does**. Lo verás con calma más adelante. Por ahora, aprende la frase completa."
+    },
+    {
+      "h": "Mi horario diario",
+      "table": {
+        "head": ["Hora", "Frase", "Significa"],
+        "rows": [
+          ["6:30 a.m.", "I get up at half past six.", "Me levanto a las 6:30."],
+          ["8:00 a.m.", "I have class at eight.", "Tengo clase a las 8."],
+          ["12:00 p.m.", "I have lunch at noon.", "Almuerzo al mediodía."],
+          ["6:15 p.m.", "I finish work at a quarter past six.", "Termino a las 6:15."],
+          ["11:00 p.m.", "I go to bed at eleven.", "Me acuesto a las 11."]
+        ]
+      },
+      "note": "Error típico: *The class is at the 8*. En inglés no usamos *the* antes de la hora: **at 8**."
+    }
+  ],
+  "vocab": [
+    { "en": "time", "es": "hora / tiempo", "ex": "What time is it?" },
+    { "en": "o'clock", "es": "en punto", "ex": "It's two o'clock." },
+    { "en": "half past", "es": "y media", "ex": "It's half past five." },
+    { "en": "quarter past", "es": "y cuarto", "ex": "It's a quarter past nine." },
+    { "en": "quarter to", "es": "menos cuarto", "ex": "It's a quarter to ten." },
+    { "en": "past", "es": "después de (hora)", "ex": "It's ten past one." },
+    { "en": "to", "es": "para (falta para)", "ex": "It's twenty to six." },
+    { "en": "a.m.", "es": "de la mañana", "ex": "I wake up at 7 a.m." },
+    { "en": "p.m.", "es": "de la tarde/noche", "ex": "The show is at 8 p.m." },
+    { "en": "noon", "es": "mediodía", "ex": "Lunch is at noon." },
+    { "en": "midnight", "es": "medianoche", "ex": "The park closes at midnight." },
+    { "en": "start", "es": "empezar", "ex": "What time does the class start?" },
+    { "en": "finish", "es": "terminar", "ex": "I finish work at six." },
+    { "en": "open", "es": "abrir", "ex": "The park opens at nine." },
+    { "en": "close", "es": "cerrar", "ex": "The store closes at ten." },
+    { "en": "get up", "es": "levantarse", "ex": "I get up at 6:30." },
+    { "en": "have lunch", "es": "almorzar", "ex": "I have lunch at noon." },
+    { "en": "go to bed", "es": "acostarse", "ex": "I go to bed at eleven." },
+    { "en": "late", "es": "tarde (retrasado)", "ex": "I'm late for class." },
+    { "en": "early", "es": "temprano", "ex": "I'm early today." }
+  ],
+  "examples": [
+    { "en": "What time is it?", "es": "¿Qué hora es?" },
+    { "en": "It's three o'clock.", "es": "Son las tres en punto." },
+    { "en": "It's half past three.", "es": "Son las tres y media." },
+    { "en": "It's three fifteen.", "es": "Son las tres y quince." },
+    { "en": "It's a quarter to five.", "es": "Son las cinco menos cuarto." },
+    { "en": "It's twenty to four.", "es": "Son las cuatro menos veinte." },
+    { "en": "What time does the show start?", "es": "¿A qué hora empieza el show?" },
+    { "en": "It starts at eight p.m.", "es": "Empieza a las ocho de la noche." },
+    { "en": "The park opens at nine a.m.", "es": "El parque abre a las nueve de la mañana." },
+    { "en": "I have lunch at noon.", "es": "Almuerzo al mediodía." },
+    { "en": "The class finishes at six.", "es": "La clase termina a las seis." },
+    { "en": "I go to bed at eleven.", "es": "Me acuesto a las once." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "¿Cómo se dice 3:15?", "options": ["It's a quarter past three.", "It's a quarter to three.", "It's half past three."], "answer": 0, "why": "Past significa después de la hora, y quarter es un cuarto." },
+    { "type": "choice", "q": "¿Cómo se dice 4:45?", "options": ["It's a quarter past four.", "It's a quarter to five.", "It's half past four."], "answer": 1, "why": "Faltan 15 minutos para las 5: a quarter to five." },
+    { "type": "choice", "q": "¿Cómo se dice 3:30?", "options": ["It's half past three.", "It's half to three.", "It's three o'clock."], "answer": 0, "why": "Y media se dice half past." },
+    { "type": "choice", "q": "¿Cómo se pregunta a qué hora empieza la clase?", "options": ["What time does the class start?", "What hour is the class?", "How time is the class?"], "answer": 0, "why": "La frase estándar es What time does ... start?" },
+    { "type": "choice", "q": "¿Cómo se escribe 7:00 de la noche?", "options": ["7:00 a.m.", "7:00 p.m.", "7:00 noon"], "answer": 1, "why": "Después del mediodía se usa p.m." },
+    { "type": "choice", "q": "The park closes at ___. (12 de la noche)", "options": ["noon", "midnight", "morning"], "answer": 1, "why": "Midnight es la medianoche." },
+    { "type": "fill", "q": "It's five ___ two. (2:05)", "answer": ["past"], "why": "Hasta el minuto 30 se usa past." },
+    { "type": "fill", "q": "It's twenty ___ four. (3:40)", "answer": ["to"], "why": "Del minuto 31 al 59 se usa to." },
+    { "type": "fill", "q": "It's seven ___. (7:00 en punto)", "answer": ["o'clock", "oclock"], "why": "En punto se dice o'clock." },
+    { "type": "fill", "q": "What ___ is it?", "answer": ["time"], "why": "La pregunta es What time is it?" },
+    { "type": "fill", "q": "The show starts ___ eight p.m.", "answer": ["at"], "why": "Antes de una hora exacta se usa at." },
+    { "type": "order", "words": ["time", "What", "it", "is"], "answer": "What time is it", "es": "¿Qué hora es?" },
+    { "type": "order", "words": ["half", "past", "It's", "three"], "answer": "It's half past three", "es": "Son las tres y media." },
+    { "type": "order", "words": ["does", "What", "show", "the", "start", "time"], "answer": "What time does the show start", "es": "¿A qué hora empieza el show?" },
+    { "type": "order", "words": ["lunch", "at", "I", "noon", "have"], "answer": "I have lunch at noon", "es": "Almuerzo al mediodía." },
+    { "type": "translate", "es": "Son las cuatro en punto.", "answer": ["It's four o'clock.", "It is four o'clock."], "why": "La hora exacta se dice con o'clock." },
+    { "type": "translate", "es": "Son las seis y cuarto.", "answer": ["It's a quarter past six.", "It is a quarter past six.", "It's quarter past six.", "It's six fifteen.", "It is six fifteen."], "why": "Y cuarto es a quarter past." },
+    { "type": "translate", "es": "Son las ocho menos cuarto.", "answer": ["It's a quarter to eight.", "It is a quarter to eight.", "It's quarter to eight.", "It's seven forty-five.", "It is seven forty-five."], "why": "Menos cuarto es a quarter to, y se nombra la hora siguiente." }
+  ],
+  "speak": [
+    "What time is it?",
+    "It's three o'clock.",
+    "It's half past three.",
+    "It's a quarter to five.",
+    "What time does the show start?",
+    "It starts at eight p.m.",
+    "I get up at half past six.",
+    "The park closes at midnight."
+  ],
+  "tip": "Error común: decir *Are the three o'clock* o *They are three o'clock* porque en español la hora es plural (*son las tres*). En inglés siempre es singular: **It's three o'clock**. Tampoco uses *the* antes de la hora: **at 8**, no *at the 8*."
+}

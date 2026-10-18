@@ -1,0 +1,118 @@
+{
+  "n": 11,
+  "block": "Mi mundo",
+  "title": "La familia y las personas",
+  "emoji": "👨‍👩‍👧",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás hablar de tu familia, decir cuántos años tienen y describir a las personas con my, your, his, her y 's.",
+  "sections": [
+    {
+      "h": "Los miembros de la familia",
+      "body": "La familia es uno de los temas más comunes en una conversación. Mira las palabras clave:",
+      "table": {
+        "head": ["Hombre", "Mujer", "Significa"],
+        "rows": [
+          ["father (dad)", "mother (mom)", "padre / madre"],
+          ["brother", "sister", "hermano / hermana"],
+          ["son", "daughter", "hijo / hija"],
+          ["grandfather (grandpa)", "grandmother (grandma)", "abuelo / abuela"],
+          ["uncle", "aunt", "tío / tía"],
+          ["cousin", "cousin", "primo / prima"],
+          ["husband", "wife", "esposo / esposa"]
+        ]
+      },
+      "note": "**Parents** son los padres (papá y mamá), no los 'parientes'. Parientes en general se dice **relatives**."
+    },
+    {
+      "h": "Adjetivos posesivos",
+      "body": "Dicen de quién es algo. Siempre van **antes del sustantivo** y no cambian con singular o plural.",
+      "table": {
+        "head": ["Pronombre", "Posesivo", "Ejemplo"],
+        "rows": [
+          ["I", "my", "my mother"],
+          ["you", "your", "your brother"],
+          ["he", "his", "his sister"],
+          ["she", "her", "her father"],
+          ["we", "our", "our house"],
+          ["they", "their", "their parents"]
+        ]
+      },
+      "note": "En inglés el posesivo depende de **quién posee**, no de lo que se posee. **His mother** = la madre de él. **Her brothers** = los hermanos de ella."
+    },
+    {
+      "h": "El posesivo 's",
+      "body": "Para decir 'el hermano de Ana' no existe 'de'. Se pone un **'s** al final del nombre del dueño:\n\n**Ana's brother** = el hermano de Ana.\n**My father's car** = el carro de mi padre.\n\nOjo: **Ana's** puede ser posesivo o la forma corta de **Ana is**. El contexto te dice cuál es."
+    },
+    {
+      "h": "Have / has: tener familia",
+      "body": "Para decir cuántos hermanos, hijos o primos tienes, usa **have** (I, you, we, they) y **has** (he, she, it).\n\n**I have two brothers.** Tengo dos hermanos.\n**She has one sister.** Ella tiene una hermana.\n**I don't have any sisters.** No tengo hermanas.\n**Does he have a brother?** ¿Tiene él un hermano?"
+    },
+    {
+      "h": "Edad y descripción",
+      "body": "La edad se dice con **to be**: **I am 20 years old.** (no *I have 20 years*).\n\nPregunta: **How old are you?** Respuesta corta: **I'm 20.**\n\nPara describir a una persona usa **to be** + adjetivo: **My mom is kind.** **My brother is tall.** O **has** + parte del cuerpo: **She has long hair.**"
+    }
+  ],
+  "vocab": [
+    { "en": "family", "es": "familia", "ex": "I love my family." },
+    { "en": "parents", "es": "padres", "ex": "My parents live in Cali." },
+    { "en": "mother", "es": "madre", "ex": "My mother is a nurse." },
+    { "en": "father", "es": "padre", "ex": "My father works in a bank." },
+    { "en": "brother", "es": "hermano", "ex": "I have one brother." },
+    { "en": "sister", "es": "hermana", "ex": "Her sister is 15." },
+    { "en": "son", "es": "hijo", "ex": "They have a son." },
+    { "en": "daughter", "es": "hija", "ex": "Their daughter is five." },
+    { "en": "grandmother", "es": "abuela", "ex": "My grandmother makes great food." },
+    { "en": "grandfather", "es": "abuelo", "ex": "My grandfather is 70 years old." },
+    { "en": "uncle", "es": "tío", "ex": "My uncle lives in Orlando." },
+    { "en": "aunt", "es": "tía", "ex": "My aunt is very funny." },
+    { "en": "cousin", "es": "primo / prima", "ex": "My cousin is my best friend." },
+    { "en": "husband", "es": "esposo", "ex": "Her husband is a teacher." },
+    { "en": "wife", "es": "esposa", "ex": "His wife is from Peru." },
+    { "en": "years old", "es": "años de edad", "ex": "I'm 20 years old." },
+    { "en": "kind", "es": "amable", "ex": "My mom is very kind." },
+    { "en": "funny", "es": "divertido", "ex": "My uncle is funny." }
+  ],
+  "examples": [
+    { "en": "This is my family.", "es": "Esta es mi familia." },
+    { "en": "I have two brothers and one sister.", "es": "Tengo dos hermanos y una hermana." },
+    { "en": "She has a big family.", "es": "Ella tiene una familia grande." },
+    { "en": "His mother is a doctor.", "es": "Su madre (de él) es doctora." },
+    { "en": "Her father is a driver.", "es": "Su padre (de ella) es conductor." },
+    { "en": "Our house is small.", "es": "Nuestra casa es pequeña." },
+    { "en": "Their parents are from Mexico.", "es": "Sus padres son de México." },
+    { "en": "Ana's brother is 18.", "es": "El hermano de Ana tiene 18 años." },
+    { "en": "How old is your sister?", "es": "¿Cuántos años tiene tu hermana?" },
+    { "en": "She is 12 years old.", "es": "Ella tiene 12 años." },
+    { "en": "I don't have any cousins here.", "es": "No tengo primos aquí." },
+    { "en": "My grandfather is tall and kind.", "es": "Mi abuelo es alto y amable." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I ___ two brothers.", "options": ["has", "have", "am"], "answer": 1, "why": "Con I se usa have." },
+    { "type": "choice", "q": "She ___ one sister.", "options": ["have", "has", "is"], "answer": 1, "why": "Con she se usa has." },
+    { "type": "choice", "q": "This is Ana. ___ brother is Pablo.", "options": ["Her", "His", "Their"], "answer": 0, "why": "Ana es mujer: her brother." },
+    { "type": "choice", "q": "Pablo has a car. ___ car is red.", "options": ["Her", "His", "Our"], "answer": 1, "why": "Pablo es hombre: his car." },
+    { "type": "choice", "q": "How old ___ you?", "options": ["is", "have", "are"], "answer": 2, "why": "La edad se pregunta con to be: How old are you?" },
+    { "type": "choice", "q": "¿Cómo se dice 'tía'?", "options": ["uncle", "aunt", "cousin"], "answer": 1, "why": "Aunt es tía; uncle es tío." },
+    { "type": "choice", "q": "They love ___ children.", "options": ["her", "their", "our"], "answer": 1, "why": "Para they el posesivo es their." },
+    { "type": "fill", "q": "I ___ 20 years old. (to be)", "answer": ["am", "'m", "i'm"], "why": "La edad usa to be: I am 20." },
+    { "type": "fill", "q": "He ___ two sisters. (have)", "answer": ["has"], "why": "Con he se usa has." },
+    { "type": "fill", "q": "This is Ana___ brother.", "answer": ["'s", "’s"], "why": "El posesivo se forma con 's: Ana's brother." },
+    { "type": "fill", "q": "We love ___ grandmother. (nosotros)", "answer": ["our"], "why": "El posesivo de we es our." },
+    { "type": "fill", "q": "I ___ have any sisters.", "answer": ["don't", "do not"], "why": "Negativo con I: don't have." },
+    { "type": "order", "words": ["have", "I", "brothers", "two"], "answer": "I have two brothers", "es": "Tengo dos hermanos." },
+    { "type": "order", "words": ["is", "mother", "My", "a", "nurse"], "answer": "My mother is a nurse", "es": "Mi madre es enfermera." },
+    { "type": "order", "words": ["old", "How", "is", "your", "father"], "answer": "How old is your father", "es": "¿Cuántos años tiene tu padre?" },
+    { "type": "translate", "es": "Tengo 20 años.", "answer": ["I am 20 years old.", "I'm 20 years old.", "I am 20.", "I'm 20."], "why": "La edad se dice con to be, no con have." },
+    { "type": "translate", "es": "El hermano de Ana tiene 18 años.", "answer": ["Ana's brother is 18.", "Ana's brother is 18 years old."], "why": "El dueño con 's y la edad con is." },
+    { "type": "translate", "es": "Ella tiene una hermana.", "answer": ["She has one sister.", "She has a sister."], "why": "Con she se usa has." }
+  ],
+  "speak": [
+    "This is my family.",
+    "I have two brothers and one sister.",
+    "My mother is a nurse.",
+    "My father's name is Carlos.",
+    "My sister is 15 years old.",
+    "I'm 20 years old."
+  ],
+  "tip": "Un error clásico: *I have 20 years*. En inglés la edad se dice con to be: **I am 20**. Otro: *the brother of Ana*. Lo natural es **Ana's brother**."
+}

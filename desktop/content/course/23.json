@@ -1,0 +1,158 @@
+{
+  "n": 23,
+  "block": "Verbos y tiempos",
+  "title": "Futuro: will y be going to",
+  "emoji": "🔮",
+  "minutes": 35,
+  "goal": "Al final de esta clase podrás hablar de tus planes y predicciones usando will y be going to, por ejemplo tu viaje a Orlando.",
+  "sections": [
+    {
+      "h": "El futuro tiene dos formas principales",
+      "body": "En inglés no existe una terminación de futuro como en español (*trabajaré*). Se forma con palabras auxiliares. Hay dos muy usadas:\n\n1. **will + verbo base**: decisiones del momento, promesas, predicciones.\n2. **be going to + verbo base**: planes que ya tienes, cosas que van a pasar.\n\nLos tres momentos con **work**:\n\n- Pasado: **I worked** last week. (Trabajé la semana pasada.)\n- Presente: **I work** every day. (Trabajo todos los días.)\n- Futuro: **I will work** tomorrow. / **I am going to work** tomorrow. (Trabajaré mañana.)"
+    },
+    {
+      "h": "Will: conjugación y forma",
+      "body": "**Will** es igual para todas las personas. Después de will, el verbo va en forma base, sin -s.",
+      "table": {
+        "head": ["Pronombre", "Futuro: will work", "Forma corta", "Significa"],
+        "rows": [
+          ["I", "will work", "I'll work", "Trabajaré"],
+          ["you", "will work", "you'll work", "Trabajarás"],
+          ["he / she / it", "will work", "she'll work", "Trabajará"],
+          ["we", "will work", "we'll work", "Trabajaremos"],
+          ["they", "will work", "they'll work", "Trabajarán"]
+        ]
+      },
+      "note": "Negativo: **will not** o **won't** (*I won't work*). Pregunta: **Will you work?** Respuesta corta: *Yes, I will.* / *No, I won't.*"
+    },
+    {
+      "h": "Be going to: conjugación y forma",
+      "body": "Se forma con **am / is / are + going to + verbo base**. Aquí el verbo to be cambia según la persona.",
+      "table": {
+        "head": ["Pronombre", "Futuro: be going to work", "Forma corta", "Significa"],
+        "rows": [
+          ["I", "am going to work", "I'm going to work", "Voy a trabajar"],
+          ["you", "are going to work", "you're going to work", "Vas a trabajar"],
+          ["he / she / it", "is going to work", "she's going to work", "Va a trabajar"],
+          ["we", "are going to work", "we're going to work", "Vamos a trabajar"],
+          ["they", "are going to work", "they're going to work", "Van a trabajar"]
+        ]
+      },
+      "note": "Negativo: *I'm not going to work*, *she isn't going to work*, *they aren't going to work*. Pregunta: **Are you going to work?** Respuesta corta: *Yes, I am.* / *No, I'm not.*"
+    },
+    {
+      "h": "¿Cuándo uso will y cuándo be going to?",
+      "table": {
+        "head": ["Situación", "Usa", "Ejemplo", "Significa"],
+        "rows": [
+          ["Decisión en el momento", "will", "It's cold. I'll close the window.", "Hace frío. Cerraré la ventana."],
+          ["Promesa u oferta", "will", "I'll help you with your homework.", "Te ayudaré con la tarea."],
+          ["Predicción (opinión)", "will", "I think it will rain tomorrow.", "Creo que lloverá mañana."],
+          ["Plan ya decidido", "be going to", "I'm going to study in Orlando next year.", "Voy a estudiar en Orlando el próximo año."],
+          ["Prueba ahora de que algo pasará", "be going to", "Look at the clouds! It's going to rain.", "¡Mira las nubes! Va a llover."]
+        ]
+      },
+      "note": "Regla fácil: si ya lo decidiste antes de hablar, usa **be going to**. Si lo decides mientras hablas, usa **will**."
+    },
+    {
+      "h": "Expresiones de tiempo del futuro",
+      "table": {
+        "head": ["Expresión", "Significa", "Ejemplo", "Traducción"],
+        "rows": [
+          ["tomorrow", "mañana", "I'll call you tomorrow.", "Te llamaré mañana."],
+          ["tonight", "esta noche", "We're going to eat out tonight.", "Vamos a comer fuera esta noche."],
+          ["next week", "la próxima semana", "She'll arrive next week.", "Ella llegará la próxima semana."],
+          ["next year", "el próximo año", "I'm going to work in Orlando next year.", "Voy a trabajar en Orlando el próximo año."],
+          ["soon", "pronto", "I'll finish soon.", "Terminaré pronto."],
+          ["in two months", "dentro de dos meses", "They'll travel in two months.", "Ellos viajarán dentro de dos meses."],
+          ["in 2028", "en 2028", "He'll graduate in 2028.", "Él se graduará en 2028."]
+        ]
+      },
+      "note": "**In** + tiempo = dentro de ese tiempo (futuro). **Ago** = hace ese tiempo (pasado)."
+    },
+    {
+      "h": "Planes para Orlando",
+      "body": "Santiago quiere trabajar en Disney. Así podrías contar tus planes:\n\n*Next year I'm going to apply for a job at Disney. First, I'm going to study English every day. I'll practice speaking with my friends. In six months I'll take an English test. I think it will be difficult, but I'll try my best.*\n\nSi alguien te pregunta: **Are you going to travel to Orlando?** puedes responder: *Yes, I am. I'm going to leave in March.*"
+    },
+    {
+      "h": "Errores típicos",
+      "list": [
+        "Mal: *I will to work.* Bien: **I will work.** (después de will no va to).",
+        "Mal: *She will works.* Bien: **She will work.** (sin -s).",
+        "Mal: *I going to study.* Bien: **I am going to study.** (falta el verbo to be).",
+        "Mal: *Tomorrow I work in Orlando* para un plan. Bien: **Tomorrow I'm going to work in Orlando.**",
+        "Mal: *Will you to go?* Bien: **Will you go?**"
+      ]
+    }
+  ],
+  "vocab": [
+    { "en": "will", "es": "futuro (decisión, promesa, predicción)", "ex": "I will call you tomorrow." },
+    { "en": "won't", "es": "no (futuro)", "ex": "I won't be late." },
+    { "en": "be going to", "es": "ir a (plan)", "ex": "I am going to travel next year." },
+    { "en": "tomorrow", "es": "mañana", "ex": "I'll study tomorrow." },
+    { "en": "tonight", "es": "esta noche", "ex": "We're going to eat out tonight." },
+    { "en": "next week", "es": "la próxima semana", "ex": "She will visit us next week." },
+    { "en": "next year", "es": "el próximo año", "ex": "I'm going to live in Orlando next year." },
+    { "en": "soon", "es": "pronto", "ex": "I'll see you soon." },
+    { "en": "in two months", "es": "dentro de dos meses", "ex": "He will arrive in two months." },
+    { "en": "apply for", "es": "postularse a", "ex": "I'm going to apply for a job." },
+    { "en": "travel", "es": "viajar", "ex": "They will travel by plane." },
+    { "en": "graduate", "es": "graduarse", "ex": "I'll graduate in 2028." },
+    { "en": "visit", "es": "visitar", "ex": "We're going to visit Disney World." },
+    { "en": "practice", "es": "practicar", "ex": "I'll practice English every day." },
+    { "en": "help", "es": "ayudar", "ex": "I'll help you." },
+    { "en": "rain", "es": "llover", "ex": "It's going to rain." },
+    { "en": "I think", "es": "creo que", "ex": "I think it will be fun." },
+    { "en": "maybe", "es": "quizás", "ex": "Maybe I'll go to Orlando." },
+    { "en": "interview", "es": "entrevista", "ex": "I have an interview next week." },
+    { "en": "visa", "es": "visa", "ex": "I'm going to ask for a visa." }
+  ],
+  "examples": [
+    { "en": "I will work tomorrow.", "es": "Trabajaré mañana." },
+    { "en": "I'm going to study in Orlando next year.", "es": "Voy a estudiar en Orlando el próximo año." },
+    { "en": "She'll call you tonight.", "es": "Ella te llamará esta noche." },
+    { "en": "They aren't going to travel in March.", "es": "Ellos no van a viajar en marzo." },
+    { "en": "I won't be late.", "es": "No llegaré tarde." },
+    { "en": "Will you help me with this email?", "es": "¿Me ayudarás con este correo?" },
+    { "en": "Yes, I will.", "es": "Sí, te ayudaré." },
+    { "en": "Are you going to apply for a job at Disney?", "es": "¿Vas a postularte a un trabajo en Disney?" },
+    { "en": "Yes, I am. I'm going to send my application soon.", "es": "Sí. Voy a enviar mi solicitud pronto." },
+    { "en": "I think it will be a great experience.", "es": "Creo que será una gran experiencia." },
+    { "en": "It's cold. I'll close the window.", "es": "Hace frío. Cerraré la ventana." },
+    { "en": "In two months I will take an English test.", "es": "Dentro de dos meses haré un examen de inglés." },
+    { "en": "When are you going to leave?", "es": "¿Cuándo vas a salir?" },
+    { "en": "Yesterday I studied. Today I study. Tomorrow I will study.", "es": "Ayer estudié. Hoy estudio. Mañana estudiaré." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "She ___ call you tomorrow.", "options": ["will", "wills", "will to"], "answer": 0, "why": "Will no cambia y después va el verbo base." },
+    { "type": "choice", "q": "I ___ going to study next year.", "options": ["am", "is", "will"], "answer": 0, "why": "Con I se usa am: I am going to." },
+    { "type": "choice", "q": "They ___ going to travel in March.", "options": ["is", "are", "am"], "answer": 1, "why": "They usa are." },
+    { "type": "choice", "q": "He ___ going to work in Orlando.", "options": ["are", "am", "is"], "answer": 2, "why": "He usa is." },
+    { "type": "choice", "q": "It's cold. I ___ close the window. (decisión del momento)", "options": ["will", "am going to", "going"], "answer": 0, "why": "Una decisión en el momento usa will." },
+    { "type": "choice", "q": "Look at those clouds! It ___ rain.", "options": ["will", "is going to", "going to"], "answer": 1, "why": "Hay evidencia ahora, así que se usa be going to." },
+    { "type": "choice", "q": "¿Cuál oración es correcta?", "options": ["She will works.", "She will work.", "She will to work."], "answer": 1, "why": "Después de will va el verbo base, sin -s ni to." },
+    { "type": "fill", "q": "I ___ be late. (negativo con will)", "answer": ["won't", "will not"], "why": "Won't es la forma corta de will not." },
+    { "type": "fill", "q": "We ___ going to eat out tonight.", "answer": ["are", "'re"], "why": "We usa are: We are going to." },
+    { "type": "fill", "q": "___ you help me? Yes, I will.", "answer": ["will"], "why": "Pregunta con will: Will you help me?" },
+    { "type": "fill", "q": "Are you going to travel? No, I'm ___.", "answer": ["not"], "why": "La respuesta corta negativa es No, I'm not." },
+    { "type": "fill", "q": "She is going ___ study English. (palabra que falta)", "answer": ["to"], "why": "La estructura es be going to + verbo." },
+    { "type": "fill", "q": "They will arrive ___ two months. (dentro de)", "answer": ["in"], "why": "In + tiempo indica dentro de ese tiempo." },
+    { "type": "order", "words": ["will", "I", "tomorrow", "call", "you"], "answer": "I will call you tomorrow", "es": "Te llamaré mañana." },
+    { "type": "order", "words": ["going", "I", "to", "am", "travel"], "answer": "I am going to travel", "es": "Voy a viajar." },
+    { "type": "order", "words": ["Are", "going", "you", "to", "Orlando"], "answer": "Are you going to Orlando", "es": "¿Vas a ir a Orlando?" },
+    { "type": "translate", "es": "Voy a trabajar en Orlando el próximo año.", "answer": ["I am going to work in Orlando next year.", "I'm going to work in Orlando next year.", "Next year I'm going to work in Orlando.", "Next year I am going to work in Orlando."], "why": "Es un plan: be going to + verbo base." },
+    { "type": "translate", "es": "Ella no llegará tarde.", "answer": ["She won't be late.", "She will not be late.", "She won't arrive late.", "She will not arrive late."], "why": "El futuro negativo con will es won't." },
+    { "type": "translate", "es": "¿Me ayudarás?", "answer": ["Will you help me?"], "why": "Para pedir ayuda se usa Will you + verbo base." }
+  ],
+  "speak": [
+    "I will call you tomorrow.",
+    "I'm going to study English every day.",
+    "I'm going to work in Orlando next year.",
+    "She'll arrive soon.",
+    "I won't be late.",
+    "Are you going to travel in March?",
+    "Yes, I am.",
+    "I think it will be a great experience."
+  ],
+  "tip": "Error típico: traducir 'voy a' como *I go to* (*I go to study*). En inglés es **I am going to study**. Y recuerda que después de will no se usa to ni -s: *I will go*, no *I will to go*."
+}

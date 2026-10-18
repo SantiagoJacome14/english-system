@@ -1,0 +1,142 @@
+{
+  "n": 4,
+  "block": "Primeros pasos",
+  "title": "Pronombres, artículos y plurales",
+  "emoji": "🔤",
+  "minutes": 30,
+  "goal": "Al final de esta clase podrás usar pronombres de sujeto y objeto, los artículos a/an/the, formar plurales y señalar cosas con this y that.",
+  "sections": [
+    {
+      "h": "Pronombres de sujeto y de objeto",
+      "body": "Ya conoces los pronombres de sujeto (**I, you, he...**), que hacen la acción. Ahora aprendemos los de **objeto**, que reciben la acción y van *después* del verbo.\n\n**I like him.** (*Me gusta él / lo aprecio.*)\n**She helps me.** (*Ella me ayuda.*)\n\nEn español usamos *me, te, lo, la*. En inglés se ponen detrás del verbo."
+    },
+    {
+      "h": "Tabla de pronombres",
+      "table": {
+        "head": ["Sujeto", "Objeto", "Ejemplo"],
+        "rows": [
+          ["I", "me", "She calls me."],
+          ["you", "you", "I see you."],
+          ["he", "him", "We know him."],
+          ["she", "her", "I help her."],
+          ["it", "it", "I like it."],
+          ["we", "us", "He helps us."],
+          ["they", "them", "I call them."]
+        ]
+      },
+      "note": "**You** e **it** no cambian. También se usan los pronombres de objeto después de preposiciones: **with me**, **for you**, **to them**."
+    },
+    {
+      "h": "Los artículos a, an y the",
+      "body": "**A** y **an** significan *un / una*. Se usan con cosas singulares, cuando hablas de algo por primera vez.\n\nUsa **a** antes de un sonido de consonante: **a** book, **a** teacher, **a** university.\nUsa **an** antes de un sonido de vocal: **an** apple, **an** hour, **an** engineer.\n\nOjo: importa el *sonido*, no la letra. *University* empieza con sonido *iu* (consonante), por eso es **a university**. *Hour* empieza con sonido vocal porque la *h* no se pronuncia, por eso es **an hour**.\n\n**The** significa *el / la / los / las*. Se usa cuando es algo específico que ya se conoce: **the hotel**, **the park**."
+    },
+    {
+      "h": "Plurales regulares",
+      "table": {
+        "head": ["Regla", "Singular", "Plural"],
+        "rows": [
+          ["Casi todos: agrega -s", "book", "books"],
+          ["Terminan en s, x, ch, sh: agrega -es", "bus", "buses"],
+          ["Terminan en s, x, ch, sh: agrega -es", "box", "boxes"],
+          ["Consonante + y: cambia a -ies", "city", "cities"],
+          ["Consonante + y: cambia a -ies", "party", "parties"],
+          ["Vocal + y: solo -s", "day", "days"]
+        ]
+      },
+      "note": "Los artículos **a / an** no se usan en plural: **a book** pero **books**. Y los verbos cambian: **The books are here.**"
+    },
+    {
+      "h": "Plurales irregulares",
+      "table": {
+        "head": ["Singular", "Plural", "Significa"],
+        "rows": [
+          ["man", "men", "hombre / hombres"],
+          ["woman", "women", "mujer / mujeres"],
+          ["child", "children", "niño / niños"],
+          ["person", "people", "persona / personas"],
+          ["foot", "feet", "pie / pies"],
+          ["tooth", "teeth", "diente / dientes"]
+        ]
+      },
+      "note": "**People** ya es plural: **The people are friendly**, no *the people is*. Estos plurales hay que memorizarlos."
+    },
+    {
+      "h": "This, that, these, those",
+      "table": {
+        "head": ["Palabra", "Cuándo", "Ejemplo"],
+        "rows": [
+          ["this", "una cosa, cerca de ti", "This is my phone."],
+          ["that", "una cosa, lejos de ti", "That is the castle."],
+          ["these", "varias cosas, cerca", "These are my friends."],
+          ["those", "varias cosas, lejos", "Those are big hotels."]
+        ]
+      },
+      "note": "Error típico: confundir **this** (cerca) con **that** (lejos). Piensa: *this* = *esto de aquí*, *that* = *eso de allá*."
+    }
+  ],
+  "vocab": [
+    { "en": "me", "es": "me / a mí", "ex": "Call me later." },
+    { "en": "him", "es": "lo / a él", "ex": "I know him." },
+    { "en": "her", "es": "la / a ella", "ex": "I help her." },
+    { "en": "us", "es": "nos / a nosotros", "ex": "He helps us." },
+    { "en": "them", "es": "los / a ellos", "ex": "I call them." },
+    { "en": "a", "es": "un / una", "ex": "I have a phone." },
+    { "en": "an", "es": "un / una (ante vocal)", "ex": "She has an apple." },
+    { "en": "the", "es": "el / la / los / las", "ex": "The park is big." },
+    { "en": "book", "es": "libro", "ex": "This is a book." },
+    { "en": "box", "es": "caja", "ex": "Those are boxes." },
+    { "en": "city", "es": "ciudad", "ex": "Orlando is a big city." },
+    { "en": "man / men", "es": "hombre / hombres", "ex": "Those men are engineers." },
+    { "en": "woman / women", "es": "mujer / mujeres", "ex": "The women are teachers." },
+    { "en": "child / children", "es": "niño / niños", "ex": "The children are happy." },
+    { "en": "person / people", "es": "persona / personas", "ex": "Many people are here." },
+    { "en": "this", "es": "esto / este", "ex": "This is my phone." },
+    { "en": "that", "es": "eso / aquel", "ex": "That is my friend." },
+    { "en": "engineer", "es": "ingeniero/a", "ex": "I'm an engineer student." }
+  ],
+  "examples": [
+    { "en": "I like her.", "es": "Ella me cae bien." },
+    { "en": "She calls me every day.", "es": "Ella me llama todos los días." },
+    { "en": "We know them.", "es": "Los conocemos." },
+    { "en": "This is a book.", "es": "Esto es un libro." },
+    { "en": "That is an apple.", "es": "Eso es una manzana." },
+    { "en": "I'm a student at a university.", "es": "Soy estudiante en una universidad." },
+    { "en": "The park is big.", "es": "El parque es grande." },
+    { "en": "Those are my friends.", "es": "Esos son mis amigos." },
+    { "en": "There are two buses.", "es": "Hay dos buses." },
+    { "en": "Two cities, three boxes.", "es": "Dos ciudades, tres cajas." },
+    { "en": "The children are happy.", "es": "Los niños están felices." },
+    { "en": "These men are engineers.", "es": "Estos hombres son ingenieros." }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "I help ___. (a mi hermana)", "options": ["she", "her", "hers"], "answer": 1, "why": "Después del verbo va el pronombre de objeto: her." },
+    { "type": "choice", "q": "She is ___ engineer.", "options": ["a", "an", "the"], "answer": 1, "why": "Engineer empieza con sonido de vocal, por eso an." },
+    { "type": "choice", "q": "He is ___ university student.", "options": ["a", "an", "the"], "answer": 0, "why": "University empieza con sonido iu, que es consonante: a." },
+    { "type": "choice", "q": "¿Cuál es el plural de child?", "options": ["childs", "children", "childes"], "answer": 1, "why": "Child es irregular: children." },
+    { "type": "choice", "q": "___ is my phone. (está en tu mano)", "options": ["This", "That", "Those"], "answer": 0, "why": "This se usa para una cosa que está cerca." },
+    { "type": "fill", "q": "Please help ___. (a mí)", "answer": ["me"], "why": "El objeto de I es me." },
+    { "type": "fill", "q": "We know ___. (a ellos)", "answer": ["them"], "why": "El objeto de they es them." },
+    { "type": "fill", "q": "one box, two ___", "answer": ["boxes"], "why": "Las palabras que terminan en x llevan -es." },
+    { "type": "fill", "q": "one city, two ___", "answer": ["cities"], "why": "Consonante + y cambia a -ies." },
+    { "type": "fill", "q": "one man, two ___", "answer": ["men"], "why": "Man es irregular: men." },
+    { "type": "fill", "q": "I have ___ apple. (a o an)", "answer": ["an"], "why": "Apple empieza con vocal: an." },
+    { "type": "order", "words": ["help", "I", "her"], "answer": "I help her", "es": "Yo la ayudo." },
+    { "type": "order", "words": ["is", "This", "my", "phone"], "answer": "This is my phone", "es": "Este es mi teléfono." },
+    { "type": "order", "words": ["children", "The", "are", "happy"], "answer": "The children are happy", "es": "Los niños están felices." },
+    { "type": "order", "words": ["an", "She", "is", "engineer"], "answer": "She is an engineer", "es": "Ella es ingeniera." },
+    { "type": "translate", "es": "Ella me ayuda.", "answer": ["She helps me."], "why": "Me es el pronombre de objeto de I y va después del verbo." },
+    { "type": "translate", "es": "Eso es un hotel.", "answer": ["That is a hotel.", "That's a hotel."], "why": "That se usa para lo que está lejos, y hotel pide a." },
+    { "type": "translate", "es": "Las mujeres son profesoras.", "answer": ["The women are teachers."], "why": "Woman hace women en plural, y se usa are." }
+  ],
+  "speak": [
+    "She helps me.",
+    "I know him.",
+    "This is my phone.",
+    "That is a big castle.",
+    "I'm a student at a university.",
+    "She is an engineer.",
+    "The children are happy.",
+    "Those are my friends."
+  ],
+  "tip": "Error común: decir *a university* como *an university* porque empieza con la vocal u, o *the people is*. Recuerda: importa el **sonido** (**a university**, **an hour**) y **people** es plural (**the people are**). También: *I like he* es incorrecto; después del verbo va el objeto: **I like him**."
+}

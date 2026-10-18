@@ -1,0 +1,23 @@
+{
+  "n": 2,
+  "block": "Primeros pasos",
+  "title": "El verbo to be (ser y estar)",
+  "emoji": "🧍",
+  "minutes": 25,
+  "goal": "Al final de esta clase podrás presentarte y decir cómo estás usando am, is y are.",
+  "sections": [
+    { "h": "¿Para qué sirve?", "body": "En inglés **to be** hace el trabajo de *ser* y *estar*.\n\nSe usa para decir quién eres, de dónde eres y cómo estás." },
+    { "h": "Cómo se conjuga", "table": { "head": ["Pronombre", "to be", "Ejemplo", "Significa"], "rows": [["I", "am", "I am Santiago.", "Yo soy Santiago."], ["you", "are", "You are my friend.", "Tú eres mi amigo."]] }, "note": "Casi siempre se usa la forma corta: I'm, you're, he's, she's, it's, we're, they're." },
+    { "h": "Error típico de hispanohablantes", "body": "En español decimos *tengo 20 años*. En inglés se dice **I am 20 years old**, nunca *I have 20 years*." }
+  ],
+  "vocab": [ { "en": "hello", "es": "hola", "ex": "Hello, my name is Ana." } ],
+  "examples": [ { "en": "I am from Colombia.", "es": "Soy de Colombia." } ],
+  "exercises": [
+    { "type": "choice", "q": "She ___ a student.", "options": ["am", "is", "are"], "answer": 1, "why": "She es tercera persona singular: is." },
+    { "type": "fill", "q": "They ___ happy. (to be)", "answer": ["are"], "why": "They → are." },
+    { "type": "order", "words": ["I", "am", "from", "Colombia"], "answer": "I am from Colombia", "es": "Soy de Colombia." },
+    { "type": "translate", "es": "Ella es mi hermana.", "answer": ["She is my sister.", "She's my sister."], "why": "Ella → She is." }
+  ],
+  "speak": ["I am Santiago.", "I'm from Colombia."],
+  "tip": "Si dudas entre am, is y are, mira el pronombre: I→am, he/she/it→is, you/we/they→are."
+}

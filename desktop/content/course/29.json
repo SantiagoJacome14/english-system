@@ -1,0 +1,185 @@
+{
+  "n": 29,
+  "block": "Para comunicarte",
+  "title": "Phrasal verbs y frases del día a día",
+  "emoji": "💬",
+  "minutes": 35,
+  "goal": "Al final de esta clase podrás usar 30 phrasal verbs y 30 expresiones muy comunes para sobrevivir como viajero y como trabajador en Estados Unidos.",
+  "sections": [
+    {
+      "h": "¿Qué es un phrasal verb?",
+      "body": "Un **phrasal verb** es un verbo + una palabra pequeña (up, down, on, off, out, back...). Juntos significan algo nuevo, a veces muy distinto del verbo solo.\n\nPor ejemplo: **look** = mirar, pero **look for** = buscar, y **give up** = rendirse.\n\nLos nativos los usan todo el día, así que son vitales para entender y hablar natural.",
+      "note": "No los traduzcas palabra por palabra. Memoriza el phrasal verb completo con una frase de ejemplo."
+    },
+    {
+      "h": "Phrasal verbs de la rutina (1 a 10)",
+      "table": {
+        "head": ["Phrasal verb", "Significa", "Ejemplo", "Traducción"],
+        "rows": [
+          ["wake up", "despertarse", "I wake up at 6.", "Me despierto a las 6."],
+          ["get up", "levantarse", "I get up at 6:30.", "Me levanto a las 6:30."],
+          ["go to sleep", "dormirse", "I go to sleep at 11.", "Me duermo a las 11."],
+          ["turn on", "encender", "Turn on the light, please.", "Enciende la luz, por favor."],
+          ["turn off", "apagar", "Turn off your phone.", "Apaga tu teléfono."],
+          ["put on", "ponerse (ropa)", "I put on my jacket.", "Me pongo la chaqueta."],
+          ["take off", "quitarse / despegar", "Take off your shoes. The plane takes off.", "Quítate los zapatos. El avión despega."],
+          ["sit down", "sentarse", "Please sit down.", "Por favor siéntate."],
+          ["stand up", "ponerse de pie", "Stand up, please.", "Ponte de pie, por favor."],
+          ["clean up", "limpiar, ordenar", "I clean up my room.", "Ordeno mi cuarto."]
+        ]
+      }
+    },
+    {
+      "h": "Phrasal verbs de acción y movimiento (11 a 20)",
+      "table": {
+        "head": ["Phrasal verb", "Significa", "Ejemplo", "Traducción"],
+        "rows": [
+          ["look for", "buscar", "I look for my keys.", "Busco mis llaves."],
+          ["look at", "mirar", "Look at the castle!", "¡Mira el castillo!"],
+          ["pick up", "recoger, levantar", "I pick up my bag.", "Recojo mi mochila."],
+          ["come back", "regresar", "I come back at 5.", "Regreso a las 5."],
+          ["go back", "volver (a un lugar)", "We go back to the hotel.", "Volvemos al hotel."],
+          ["come in", "entrar", "Come in, please.", "Pasa, por favor."],
+          ["go out", "salir", "We go out on Friday.", "Salimos el viernes."],
+          ["get in / get out", "subir / bajar (de un carro)", "Get in the car.", "Sube al carro."],
+          ["get on / get off", "subir / bajar (bus, tren)", "Get off at the next stop.", "Bájate en la próxima parada."],
+          ["hurry up", "apurarse", "Hurry up, we are late!", "¡Apúrate, vamos tarde!"]
+        ]
+      }
+    },
+    {
+      "h": "Phrasal verbs de comunicación y trabajo (21 a 30)",
+      "table": {
+        "head": ["Phrasal verb", "Significa", "Ejemplo", "Traducción"],
+        "rows": [
+          ["give up", "rendirse", "Don't give up!", "¡No te rindas!"],
+          ["find out", "averiguar, enterarse", "I want to find out the price.", "Quiero averiguar el precio."],
+          ["fill out", "llenar (formulario)", "Fill out this form, please.", "Llena este formulario, por favor."],
+          ["check in / check out", "registrarse / salir del hotel", "We check in at 3 pm.", "Nos registramos a las 3 pm."],
+          ["try on", "probarse", "Can I try on this shirt?", "¿Puedo probarme esta camisa?"],
+          ["call back", "devolver la llamada", "Please call me back.", "Por favor devuélveme la llamada."],
+          ["write down", "anotar", "Write down your name.", "Anota tu nombre."],
+          ["slow down", "ir más despacio", "Please slow down.", "Por favor habla más despacio."],
+          ["set up", "configurar, organizar", "I set up my phone.", "Configuro mi teléfono."],
+          ["work out", "hacer ejercicio / resultar bien", "I work out on Monday.", "Hago ejercicio los lunes."]
+        ]
+      },
+      "note": "Con algunos phrasal verbs puedes separar el objeto: Turn it off (no Turn off it). Con pronombres (it, them, me), el pronombre va en medio."
+    },
+    {
+      "h": "30 expresiones del día a día",
+      "list": [
+        "Hello! / Hi! (Hola)",
+        "Good morning / afternoon / evening (Buenos días / tardes / noches)",
+        "How are you? / I'm fine, thanks. (¿Cómo estás? / Bien, gracias)",
+        "What's up? (¿Qué tal? informal)",
+        "Nice to meet you. (Mucho gusto)",
+        "Please. / Thank you. / You're welcome. (Por favor / Gracias / De nada)",
+        "No problem. (No hay problema)",
+        "Of course. / Sure. (Claro)",
+        "Excuse me. (Disculpa, con permiso)",
+        "I'm sorry. (Lo siento)",
+        "Just a moment. / One moment, please. (Un momento)",
+        "Can you repeat that? (¿Puedes repetir?)",
+        "Slow down, please. (Más despacio, por favor)",
+        "I don't understand. (No entiendo)",
+        "I don't know. (No sé)",
+        "What does ... mean? (¿Qué significa...?)",
+        "How do you say ... in English? (¿Cómo se dice... en inglés?)",
+        "Take care. (Cuídate)",
+        "See you later. / See you tomorrow. (Nos vemos luego / mañana)",
+        "Have a nice day! (¡Que tengas un buen día!)",
+        "Good luck! (¡Buena suerte!)",
+        "Congratulations! (¡Felicidades!)",
+        "Bless you! (¡Salud! al estornudar)",
+        "Never mind. (Olvídalo, no importa)",
+        "It's OK. / That's fine. (Está bien)",
+        "I'm lost. (Estoy perdido)",
+        "Where is ...? (¿Dónde está...?)",
+        "How much is it? (¿Cuánto cuesta?)",
+        "I'm hungry / thirsty / tired. (Tengo hambre / sed / sueño)",
+        "Help! / I need help. (¡Ayuda!)"
+      ]
+    },
+    {
+      "h": "Para sobrevivir en EE. UU.",
+      "body": "**Como viajero:** *Where is the bus stop?*, *Can I check in, please?*, *One ticket to Orlando, please*, *Is there Wi-Fi here?*, *I have a reservation.*\n\n**Como trabajador:** *Can I help you?*, *Just a moment, please.*, *I'm sorry, I don't understand. Can you repeat that?*, *I'll find out for you.*, *What time is my shift?*, *Thanks, have a nice day!*\n\nCon esas frases puedes resolver casi cualquier situación. Cuando no entiendas, di **Can you speak more slowly, please?** Es normal y nadie se molesta.",
+      "note": "En EE. UU. se espera cortesía: usa please, thank you y excuse me todo el tiempo y sonríe."
+    }
+  ],
+  "vocab": [
+    { "en": "wake up", "es": "despertarse", "ex": "I wake up at 6." },
+    { "en": "get up", "es": "levantarse", "ex": "I get up early." },
+    { "en": "turn on", "es": "encender", "ex": "Turn on the TV." },
+    { "en": "turn off", "es": "apagar", "ex": "Turn off the light." },
+    { "en": "put on", "es": "ponerse", "ex": "Put on your jacket." },
+    { "en": "look for", "es": "buscar", "ex": "I look for my phone." },
+    { "en": "pick up", "es": "recoger", "ex": "Pick up your bag." },
+    { "en": "come back", "es": "regresar", "ex": "Come back soon." },
+    { "en": "give up", "es": "rendirse", "ex": "Never give up." },
+    { "en": "find out", "es": "averiguar", "ex": "Let's find out." },
+    { "en": "check in", "es": "registrarse", "ex": "We check in at 3." },
+    { "en": "fill out", "es": "llenar", "ex": "Fill out the form." },
+    { "en": "No problem", "es": "no hay problema", "ex": "No problem, I can help." },
+    { "en": "Of course", "es": "claro", "ex": "Of course, come in." },
+    { "en": "I'm sorry", "es": "lo siento", "ex": "I'm sorry I'm late." },
+    { "en": "Excuse me", "es": "disculpa, con permiso", "ex": "Excuse me, where is the exit?" },
+    { "en": "Take care", "es": "cuídate", "ex": "Bye, take care!" },
+    { "en": "What's up?", "es": "¿qué tal?", "ex": "Hey, what's up?" },
+    { "en": "Just a moment", "es": "un momento", "ex": "Just a moment, please." },
+    { "en": "See you later", "es": "nos vemos luego", "ex": "Bye! See you later." },
+    { "en": "Good luck", "es": "buena suerte", "ex": "Good luck tomorrow!" },
+    { "en": "Never mind", "es": "olvídalo", "ex": "Never mind, it's OK." },
+    { "en": "I'm lost", "es": "estoy perdido", "ex": "Excuse me, I'm lost." },
+    { "en": "Have a nice day", "es": "que tengas un buen día", "ex": "Thanks, have a nice day!" }
+  ],
+  "examples": [
+    { "en": "I wake up at six and get up at six thirty.", "es": "Me despierto a las seis y me levanto a las seis y media." },
+    { "en": "Please turn off your phone.", "es": "Por favor apaga tu teléfono." },
+    { "en": "It is cold, so put on your jacket.", "es": "Hace frío, así que ponte la chaqueta." },
+    { "en": "I'm looking for the bathroom.", "es": "Estoy buscando el baño." },
+    { "en": "Can you pick up my bag?", "es": "¿Puedes recoger mi bolso?" },
+    { "en": "We come back to the hotel at nine.", "es": "Regresamos al hotel a las nueve." },
+    { "en": "Don't give up, your English is improving.", "es": "No te rindas, tu inglés está mejorando." },
+    { "en": "I need to find out the price of the ticket.", "es": "Necesito averiguar el precio del boleto." },
+    { "en": "Please fill out this form.", "es": "Por favor llena este formulario." },
+    { "en": "Excuse me, can you help me? I'm lost.", "es": "Disculpe, ¿me puede ayudar? Estoy perdido." },
+    { "en": "Just a moment, please. I'll check.", "es": "Un momento, por favor. Voy a revisar." },
+    { "en": "No problem. Of course I can help.", "es": "No hay problema. Claro que puedo ayudar." },
+    { "en": "I'm sorry, I don't understand. Can you repeat that?", "es": "Lo siento, no entiendo. ¿Puede repetir eso?" },
+    { "en": "Bye, take care! See you tomorrow.", "es": "¡Chao, cuídate! Nos vemos mañana." },
+    { "en": "Get off at the next stop.", "es": "Bájate en la próxima parada." },
+    { "en": "Thanks, have a nice day!", "es": "Gracias, ¡que tengas un buen día!" }
+  ],
+  "exercises": [
+    { "type": "choice", "q": "It's dark. Please ___ the light.", "options": ["turn on", "turn up", "get in"], "answer": 0, "why": "Turn on significa encender." },
+    { "type": "choice", "q": "I can't find my keys. I'm ___ them.", "options": ["looking at", "looking for", "looking up"], "answer": 1, "why": "Look for significa buscar." },
+    { "type": "choice", "q": "The test is hard, but don't ___!", "options": ["give up", "give on", "give in"], "answer": 0, "why": "Give up significa rendirse." },
+    { "type": "choice", "q": "I ___ at 6 every morning. (despertarse)", "options": ["wake up", "wake on", "wake in"], "answer": 0, "why": "Wake up significa despertarse." },
+    { "type": "choice", "q": "Someone says: Thank you! You answer: ___", "options": ["You're welcome.", "I'm sorry.", "Bless you."], "answer": 0, "why": "You're welcome es la respuesta a thank you." },
+    { "type": "choice", "q": "You step on someone's foot. You say: ___", "options": ["Good luck!", "I'm sorry.", "See you later."], "answer": 1, "why": "I'm sorry se usa para disculparse." },
+    { "type": "choice", "q": "You don't understand a word. Which is correct?", "options": ["Can you repeat that, please?", "Where is the bus stop?", "Have a nice day!"], "answer": 0, "why": "Can you repeat that? sirve para pedir que repitan." },
+    { "type": "fill", "q": "Please ___ off your shoes. (quitarse)", "answer": ["take"], "why": "Take off significa quitarse." },
+    { "type": "fill", "q": "We ___ in at the hotel at 3 pm.", "answer": ["check"], "why": "Check in es registrarse en el hotel." },
+    { "type": "fill", "q": "Hurry ___, we are late!", "answer": ["up"], "why": "Hurry up significa apurarse." },
+    { "type": "fill", "q": "Please sit ___ and wait.", "answer": ["down"], "why": "Sit down significa sentarse." },
+    { "type": "fill", "q": "A: Thank you! B: No ___.", "answer": ["problem"], "why": "No problem es una respuesta común a thank you." },
+    { "type": "order", "words": ["moment", "a", "Just", "please"], "answer": "Just a moment please", "es": "Un momento, por favor." },
+    { "type": "order", "words": ["I", "for", "my", "looking", "am", "keys"], "answer": "I am looking for my keys", "es": "Estoy buscando mis llaves." },
+    { "type": "order", "words": ["on", "the", "Turn", "light"], "answer": "Turn on the light", "es": "Enciende la luz." },
+    { "type": "translate", "es": "Apaga tu teléfono, por favor.", "answer": ["Turn off your phone, please.", "Turn off your phone please.", "Please turn off your phone.", "Please, turn off your phone.", "Turn your phone off, please.", "Please turn your phone off."], "why": "Turn off significa apagar." },
+    { "type": "translate", "es": "Disculpe, estoy perdido.", "answer": ["Excuse me, I'm lost.", "Excuse me, I am lost.", "Excuse me I'm lost.", "Excuse me I am lost.", "Sorry, I'm lost.", "Sorry, I am lost."], "why": "Excuse me para llamar la atención e I'm lost para decir que estás perdido." },
+    { "type": "translate", "es": "Regreso a las cinco.", "answer": ["I come back at five.", "I come back at 5.", "I'll come back at five.", "I'll come back at 5.", "I will come back at five.", "I will come back at 5.", "I'm coming back at five.", "I'm coming back at 5.", "I am coming back at five.", "I am coming back at 5.", "I go back at five.", "I go back at 5."], "why": "Come back significa regresar." }
+  ],
+  "speak": [
+    "I wake up at six and get up at six thirty.",
+    "Excuse me, I'm lost. Where is the bus stop?",
+    "Just a moment, please.",
+    "I'm sorry, I don't understand. Can you repeat that?",
+    "Can I check in, please? I have a reservation.",
+    "No problem. Of course I can help you.",
+    "Thanks, have a nice day! Take care!",
+    "Never give up. I want to work at Disney."
+  ],
+  "tip": "Muchos hispanohablantes dicen *turn off it* o traducen palabra por palabra *look up for*. Aprende el phrasal verb completo: look for, y con pronombre separa: turn it off, pick it up. Y recuerda: *Excuse me* es para llamar la atención y *I'm sorry* para disculparte."
+}
