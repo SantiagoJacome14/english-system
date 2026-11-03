@@ -63,12 +63,12 @@ This is a VOICE PHONE CALL. The student's words come from speech recognition, so
 function startCall(scen) {
   talkMode = scen;
   const m = SCEN.find((x) => x.id === scen) || SCEN[0];
-  CALL = { scen, m, hist: [], active: true, muted: false, ptt: !!S.ptt, subs: S.subs !== false, t0: Date.now(), speakSec: 0, miss: 0, state: "ring", micLevel: 0 };
+  CALL = { scen, m, hist: [], active: true, muted: false, ptt: !!S.ptt, subs: S.subs !== false, t0: Date.now(), speakSec: 0, miss: 0, state: "ring", micLevel: 0, fast: fastVoice() };
   $("#main").innerHTML = `<div class="callv">
     <div class="call-top"><span class="label">📞 ${esc(m.t)}</span><span class="call-timer" id="c-time">00:00</span></div>
     <div class="call-mid">
       <button class="call-avatar" id="c-av" title="Toca para saltar lo que está diciendo"><span class="ring" id="c-ring"></span><span class="ring r2" id="c-ring2"></span><span class="face">🧑‍✈️</span></button>
-      <b class="call-name">Max</b><div class="call-state" id="c-state">Llamando…</div><div class="call-lat" id="c-lat"></div>
+      <b class="call-name">Max</b><div class="call-state" id="c-state">Llamando…</div><div class="call-heard" id="c-heard"></div><div class="call-lat" id="c-lat"></div>
       <div class="subs" id="c-subs" ${CALL.subs ? "" : "hidden"}></div>
       <div class="cfix" id="c-fix"></div>
     </div>
@@ -78,6 +78,7 @@ function startCall(scen) {
       <button class="cbtn" id="c-mute" title="Silenciar micrófono"><span>🎙️</span><small>Micrófono</small></button>
       <button class="cbtn" id="c-mode" title="Cambiar modo"><span>${CALL.ptt ? "✋" : "🙌"}</span><small>${CALL.ptt ? "Presionar" : "Manos libres"}</small></button>
       <button class="cbtn" id="c-cc" aria-pressed="${CALL.subs}" title="Subtítulos"><span>CC</span><small>Subtítulos</small></button>
+      <button class="cbtn" id="c-voice" title="Voz natural (más bonita) o voz rápida de Windows (responde al instante)"><span>${CALL.fast ? "⚡" : "🎧"}</span><small>${CALL.fast ? "Voz rápida" : "Voz natural"}</small></button>
       <button class="cbtn hang" id="c-hang" title="Colgar"><span>📞</span><small>Colgar</small></button>
     </div>
   </div>`;
@@ -85,6 +86,7 @@ function startCall(scen) {
   $("#c-av").onclick = () => Voice.stop();
   $("#c-mute").onclick = () => { CALL.muted = !CALL.muted; $("#c-mute").classList.toggle("off", CALL.muted); $("#c-mute span").textContent = CALL.muted ? "🔇" : "🎙️"; if (CALL.muted && Voice.recording) Voice.recording.cancel(); };
   $("#c-mode").onclick = () => { CALL.ptt = !CALL.ptt; S.ptt = CALL.ptt; save(); $("#c-mode").innerHTML = `<span>${CALL.ptt ? "✋" : "🙌"}</span><small>${CALL.ptt ? "Presionar" : "Manos libres"}</small>`; $("#c-ptt").hidden = !CALL.ptt; if (Voice.recording) Voice.recording.cancel(); };
+  $("#c-voice").onclick = () => { CALL.fast = !CALL.fast; S.callVoice = CALL.fast ? "fast" : "natural"; save(); $("#c-voice").innerHTML = `<span>${CALL.fast ? "⚡" : "🎧"}</span><small>${CALL.fast ? "Voz rápida" : "Voz natural"}</small>`; toast(CALL.fast ? "Max usará la voz de Windows: responde al instante" : "Max usará la voz natural"); };
   $("#c-cc").onclick = () => { CALL.subs = !CALL.subs; S.subs = CALL.subs; save(); $("#c-subs").hidden = !CALL.subs; $("#c-cc").setAttribute("aria-pressed", CALL.subs); };
   const pb = $("#c-pttb");
   pb.onpointerdown = () => pttDown(); pb.onpointerup = pb.onpointerleave = () => pttUp();
@@ -94,18 +96,32 @@ function startCall(scen) {
   newAngle(); CALL.greet = greeting(scen); delete GREET[scen];
   S.coach = S.coach || { sessions: [] }; S.coach.lastGreet = CALL.greet; save();
   window.api.warm(callPrompt(), [{ role: "user", content: CALL_START }, { role: "assistant", content: CALL.greet }]);
-  Voice.loadES();
-  onLeave = () => { if (CALL && CALL.active) { CALL.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); } CALL = null; };
+  Voice.setQuiet(true); // no background audio while you talk: the computer is all for the call
+  onLeave = () => { Voice.setQuiet(false); if (CALL && CALL.active) { CALL.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); } CALL = null; };
   const tick = setInterval(() => { if (!CALL || !CALL.active) return clearInterval(tick); $("#c-time").textContent = fmtTime((Date.now() - CALL.t0) / 1000); }, 500);
   animateCall();
   callLoop();
 }
 
+// What Max heard, shown under his name: live while you talk, then the final text (or that he didn't get it).
+function heard(t, kind) { const el = $("#c-heard"); if (!el) return; el.dataset.k = kind || ""; el.innerHTML = !t ? "" : kind === "ok" ? `<span class="label">Entendí</span> “${esc(t)}”` : esc(t); }
+const rmsOf = (a) => { let s = 0, n = 0; for (let i = 0; i < a.length; i += 4) { s += a[i] * a[i]; n++; } return Math.sqrt(s / (n || 1)); };
+// Said by Max at once when your answer is done and his reply isn't ready yet, so the silence doesn't feel like a dropped call.
+const FILLERS = ["Mm-hm.", "Okay.", "I see.", "Right.", "Uh-huh."];
+const SORRY = ["Sorry, I didn't catch that. Could you say it again?", "Sorry, can you repeat that?", "I didn't hear you well. One more time?"];
+// The Windows voice in calls when the natural voice would make Max pause: no graphics card and the
+// computer takes longer to make the audio than to play it. The student can switch it in the call.
+function fastVoice() {
+  if (S.callVoice === "fast") return true;
+  if (S.callVoice === "natural" || !Voice.cfg().neural) return false;
+  return Voice.state.ttsDevice !== "webgpu" && (Voice.state.ttsRtf || 0) > 1.1;
+}
 function setCallState(s, text) { if (!CALL) return; CALL.state = s; const el = $("#c-state"); if (el) { el.textContent = text; el.dataset.s = s; } }
 function renderSubs() {
   const el = $("#c-subs"); if (!el || !CALL) return;
-  const last = CALL.hist.slice(-2);
-  el.innerHTML = last.map((h) => h.role === "assistant" ? `<p class="sb" data-lk>${esc(h.content)}</p>` : `<p class="su"><span class="label">Te entendí</span> ${esc(h.content)}</p>`).join("");
+  // Only Max's line: what you said is shown above, under "Entendí".
+  const m = [...CALL.hist].reverse().find((h) => h.role === "assistant");
+  el.innerHTML = m ? `<p class="sb" data-lk>${esc(m.content)}</p>` : "";
 }
 function animateCall() {
   const r1 = $("#c-ring"), r2 = $("#c-ring2");
@@ -130,7 +146,21 @@ async function listenOnce() {
     return new Promise((res) => { pttResolve = (p) => { pttResolve = null; p.then(res); }; CALL.cancelWait = () => { pttResolve = null; res(null); }; });
   }
   setCallState("listen", "Te escucho…");
-  return Voice.record({ vad: true, silenceMs: 900, maxMs: 40000, onLevel: (l) => (CALL.micLevel = l), onStart: () => setCallState("listen", "Te escucho… 🟢") });
+  // While you talk, each part you finish (a short pause) is transcribed right away, so when you stop
+  // only the last bit is left and Max can answer sooner. What it heard so far is shown live.
+  const me = CALL, segs = (me.segs = []);
+  me.spec = null;
+  const live = () => Promise.all(segs).then((t) => {
+    if (CALL !== me || me.segs !== segs) return;
+    const txt = t.filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+    heard(txt + " …", "live");
+    // Still quiet after this part? You're probably done: start Max's answer now, and use it if you don't go on.
+    const r = Voice.recording;
+    if (txt && r && r.quietMs >= 250 && !/\bhow (?:do|can|would|should) (?:you|i) say\b|\bhow to say\b/i.test(txt)) me.spec = speculate(me, txt);
+  });
+  return Voice.record({ vad: true, silenceMs: 800, maxMs: 40000, onLevel: (l) => (CALL.micLevel = l),
+    onStart: () => { setCallState("listen", "Te escucho… 🟢"); heard("🎙️ …", "live"); },
+    onSegment: (a) => { segs.push(Voice.transcribe(a).catch(() => "")); live(); } });
 }
 
 async function callLoop() {
@@ -139,20 +169,27 @@ async function callLoop() {
   if (!me.active) return;
   if (!(await Voice.openMic())) { setCallState("error", "No pude usar el micrófono. Revisa que esté conectado y permitido en Windows."); return; }
   // Max always speaks with the natural voice: wait for it instead of falling back to the Windows one.
-  if (Voice.cfg().neural && Voice.state.tts !== "ready") { setCallState("think", "Preparando la voz natural…"); await Promise.race([Voice.loadTTS(), sleep(40000)]); if (!me.active) return; }
+  if (!me.fast && Voice.cfg().neural && Voice.state.tts !== "ready") { setCallState("think", "Preparando la voz natural…"); await Promise.race([Voice.loadTTS(), sleep(40000)]); if (!me.active) return; }
   me.hist.push({ role: "assistant", content: me.greet }); renderSubs();
   setCallState("speak", "Hablando…");
-  await Voice.say(me.greet, { rate: 1, wait: true });
+  await Voice.say(me.greet, { rate: 1, wait: true, system: me.fast });
+  if (!me.fast) Voice.prefetch([...FILLERS, ...SORRY], true); // ready (and saved) for the first time they're needed
   while (me.active) {
     if (me.busyChip) { await sleep(150); continue; }
     if (me.muted) { setCallState("muted", "Micrófono silenciado"); await sleep(300); continue; }
     const audio = await listenOnce();
     if (!me.active) return;
-    if (!audio || audio.length < 16000 * 0.4 || me.busyChip) continue;
-    setCallState("think", "Entendiendo…");
+    const segs = me.segs || []; me.segs = null;
+    if (!audio || audio.length < 16000 * 0.4 || me.busyChip) { heard(""); continue; }
+    me.endAt = performance.now() - (me.ptt ? 0 : 800); // when you stopped talking (hands-free waits 0.8 s of silence)
+    sfx("heard"); setCallState("think", "✓ Te escuché");
     let text = "";
     const t0 = performance.now();
-    try { text = await Voice.transcribe(audio); } catch { setCallState("error", "El reconocimiento de voz falló. Intenta otra vez."); await sleep(1500); continue; }
+    try {
+      const tail = audio.subarray(audio.sent || 0);
+      const parts = await Promise.all([...segs, tail.length > 16000 * 0.3 && (!segs.length || rmsOf(tail) > 0.01) ? Voice.transcribe(tail) : ""]);
+      text = parts.filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+    } catch { heard(""); setCallState("error", "El reconocimiento de voz falló. Intenta otra vez."); await sleep(1500); continue; }
     me.heardMs = performance.now() - t0;
     // "How do you say <Spanish word>?": listen to the same audio again in Spanish to get the word right.
     if (/\bhow (?:do|can|would|should) (?:you|i) say\b|\bhow to say\b/i.test(text)) {
@@ -161,17 +198,19 @@ async function callLoop() {
     if (!me.active) return;
     me.speakSec += audio.length / 16000;
     if (!text) {
-      me.miss++;
-      if (me.miss >= 2) { me.miss = 0; setCallState("speak", "Hablando…"); await Voice.say("Sorry, I didn't catch that. Could you say it again?", { wait: true }); }
+      heard("No te entendí. Habla un poco más fuerte o más cerca del micrófono.", "miss");
+      // Say so right away when you clearly spoke; stay quiet for a cough or a noise.
+      if (rmsOf(audio) > 0.02) { setCallState("speak", "Hablando…"); await Voice.say(SORRY[me.miss++ % SORRY.length], { wait: !me.fast, system: me.fast }); }
       continue;
     }
     me.miss = 0;
+    heard(text, "ok");
     await userSaid(text, 0, me);
   }
 }
 async function userSaid(text, fromChip, me = CALL) {
   if (!me || !me.active) return;
-  if (fromChip) { if (me.state !== "listen" || me.busyChip) return; me.busyChip = true; if (Voice.recording) Voice.recording.cancel(); if (me.cancelWait) me.cancelWait(); }
+  if (fromChip) { if (me.state !== "listen" || me.busyChip) return; me.busyChip = true; if (Voice.recording) Voice.recording.cancel(); if (me.cancelWait) me.cancelWait(); heard(text, "ok"); }
   me.hist.push({ role: "user", content: text });
   renderSubs();
   if (fromChip) { await botTurn(me); me.busyChip = false; }
@@ -195,13 +234,25 @@ async function askSpanish() {
   if (w && me.active) { addVocab(w); me.hist.push({ role: "user", content: `How do you say "${w}" in English?` }); renderSubs(); await botTurn(me); }
   me.busyChip = false;
 }
+// Asks for Max's reply to `text` before your turn has officially ended; botTurn uses it if your final words match.
+function speculate(me, text) {
+  const s = { text, buf: "", onDelta: null };
+  s.res = window.api.chat(callPrompt(), [{ role: "user", content: CALL_START }, ...me.hist, { role: "user", content: text }], (t) => { s.buf = t; if (s.onDelta) s.onDelta(t); }, { fast: true });
+  return s;
+}
 async function botTurn(me) {
   if (me.thinking) return; me.thinking = true;
   setCallState("think", "Pensando…");
-  const t0 = performance.now();
+  const t0 = me.endAt || performance.now(); me.endAt = 0;
+  const last = me.hist[me.hist.length - 1], spec = me.spec; me.spec = null;
   // Max starts talking as soon as the first sentence of the reply is written.
-  const sp = Voice.stream({ onStart: () => { setCallState("speak", "Hablando…"); const l = $("#c-lat"); if (l) l.textContent = `${me.heardMs ? `Te entendí en ${(me.heardMs / 1000).toFixed(1)} s · ` : ""}Max respondió en ${((performance.now() - t0) / 1000).toFixed(1)} s`; } });
-  const r = await window.api.chat(callPrompt(), [{ role: "user", content: CALL_START }, ...me.hist], (t) => { if (me.active) sp.push(t); });
+  const sp = Voice.stream({ system: me.fast, lead: FILLERS[Math.floor(Math.random() * FILLERS.length)], onStart: () => { setCallState("speak", "Hablando…"); const l = $("#c-lat"); if (l) l.textContent = `Max respondió ${((performance.now() - t0) / 1000).toFixed(1)} s después de que terminaste`; } });
+  let r;
+  if (spec && last && last.role === "user" && spec.text === last.content) {
+    if (spec.buf && me.active) sp.push(spec.buf);
+    spec.onDelta = (t) => { if (me.active) sp.push(t); };
+    r = await spec.res;
+  } else r = await window.api.chat(callPrompt(), [{ role: "user", content: CALL_START }, ...me.hist], (t) => { if (me.active) sp.push(t); }, { fast: true });
   me.thinking = false;
   if (!me.active) { sp.cancel(); return; }
   if (!r.ok) { sp.cancel(); setCallState("error", ERR[r.code] || ERR.error); await sleep(2500); return; }
@@ -221,7 +272,7 @@ async function fixLast(me) {
 async function hangUp() {
   if (!CALL) return;
   const c = CALL; c.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); if (c.cancelWait) c.cancelWait();
-  sfx("hang"); CALL = null; onLeave = null;
+  sfx("hang"); CALL = null; onLeave = null; Voice.setQuiet(false);
   const sess = c.hist.length ? coachSession("call", c.scen, c.hist) : null;
   const said = c.hist.filter((m) => m.role === "user").map((m) => m.content);
   const secs = Math.round((Date.now() - c.t0) / 1000);

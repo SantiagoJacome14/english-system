@@ -21,6 +21,7 @@ function sfx(name, n = 1) {
     else if (name === "combo") { const b = 520 * Math.pow(1.12, Math.min(n, 12)); tone(b, 0, 0.09, "triangle"); tone(b * 1.5, 0.06, 0.16, "triangle"); }
     else if (name === "win") [523, 659, 784, 1046].forEach((f, i) => tone(f, i * 0.11, 0.3, "triangle", 0.16));
     else if (name === "ring") [0, 0.5].forEach((at) => { tone(880, at, 0.18, "sine", 0.1); tone(660, at + 0.2, 0.18, "sine", 0.1); });
+    else if (name === "heard") { tone(740, 0, 0.07, "sine", 0.07); tone(1110, 0.06, 0.09, "sine", 0.06); }
     else if (name === "hang") { tone(480, 0, 0.12, "sine", 0.12); tone(360, 0.13, 0.2, "sine", 0.12); }
   } catch {}
 }

@@ -233,3 +233,10 @@ button.st{cursor:pointer}button.st:hover{background:var(--panel-2)}
 .exfb{border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}.exfb p{margin:0}
 .exfb.good{background:rgba(62,214,155,.12);border:1px solid var(--green)}.exfb.bad{background:rgba(255,107,122,.1);border:1px solid var(--red,#ff6b7a)}
 .okw{color:var(--green)}.badw{color:var(--red,#ff6b7a);text-decoration:underline}
+/* What Max heard: live while you talk, then the final text */
+.call-heard{min-height:26px;max-width:640px;text-align:center;font-size:17px;color:var(--muted);margin-top:6px;line-height:1.35}
+.call-heard[data-k="ok"]{color:var(--ink);font-weight:600}
+.call-heard[data-k="ok"] .label{display:block;margin-bottom:2px;color:var(--green)}
+.call-heard[data-k="miss"]{color:var(--gold)}
+/* During a call the bottom dock would cover the call buttons */
+body:has(.callv .call-ctrls) .tabs-main{display:none}

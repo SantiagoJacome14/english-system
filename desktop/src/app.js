@@ -402,6 +402,8 @@ VIEWS.settings=async()=>{
       <label class="label" for="v-speed">Velocidad · <span id="v-sv">${vc.speed.toFixed(2)}×</span></label><input id="v-speed" type="range" min="0.7" max="1.2" step="0.05" value="${vc.speed}">
       <label class="label" for="v-stt">Reconocimiento de voz</label><select id="v-stt">${Object.entries(STT_MODELS).map(([id,t])=>`<option value="${id}" ${vc.stt===id?"selected":""}>${t}</option>`).join("")}</select>
       <label class="toggle"><input type="checkbox" id="v-sys" ${vc.neural?"":"checked"}> Usar las voces de Windows en lugar de la voz natural</label>
+      <label class="toggle"><input type="checkbox" id="v-gpu" ${vc.gpu==="cpu"?"":"checked"}> Usar la tarjeta gráfica para la voz natural (mucho más rápida; descarga unos 330 MB una vez)</label>
+      <p class="muted" style="margin:0;font-size:13px">${Voice.state.ttsDevice==="webgpu"?"⚡ Ahora la voz natural usa la tarjeta gráfica.":Voice.state.tts==="ready"?"La voz natural usa el procesador"+(Voice.state.ttsRtf?` (tarda ${Voice.state.ttsRtf.toFixed(1)} s por cada segundo de voz)`:"")+".":""}</p>
       ${cache.bytes?`<div><button class="btn" id="v-clear">Borrar voces descargadas (${Math.round(cache.bytes/1e6)} MB)</button></div>`:""}</div>
     <div class="card"><h3>Recordatorio diario</h3>
       <label class="toggle"><input type="checkbox" id="r-on" ${s.reminder.on?"checked":""}> Avisarme todos los días con la frase del día</label>
@@ -435,6 +437,7 @@ VIEWS.settings=async()=>{
   $("#v-speed").onchange=()=>Voice.say("This is my new speed.");
   $("#v-stt").onchange=e=>{setV({stt:e.target.value});toast("Se descargará la próxima vez que hables")};
   $("#v-sys").onchange=e=>setV({neural:!e.target.checked});
+  $("#v-gpu").onchange=e=>{setV({gpu:e.target.checked?"auto":"cpu"});toast("Se aplica la próxima vez que abras la app")};
   const vcl=$("#v-clear");if(vcl)vcl.onclick=async()=>{if(!confirm("¿Borrar las voces? Tendrás que descargarlas otra vez."))return;await window.api.voiceClear();S.voiceReady=false;save();VIEWS.settings()};
   $("#r-on").onchange=e=>set({reminderOn:e.target.checked});
   $("#r-time").onchange=e=>set({reminderTime:e.target.value});

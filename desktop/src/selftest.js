@@ -2,7 +2,7 @@
 (async () => {
   const BASE = new URL("../", location.href).href;
   const call = (w, msg, transfer) => new Promise((res) => {
-    const h = ({ data }) => { if (data.type === "progress") return; w.removeEventListener("message", h); res(data); };
+    const h = ({ data }) => { if (data.type === "progress" || data.type === "device" || data.id === undefined) return; w.removeEventListener("message", h); res(data); };
     w.addEventListener("message", h); w.postMessage({ id: 1, ...msg }, transfer || []);
   });
   const result = { ok: false, steps: {} };
@@ -19,6 +19,7 @@
     t0 = performance.now();
     const sp = await call(tts, { type: "say", text, voice: "af_heart", speed: 1 });
     t("tts", t0);
+    result.ttsDevice = sp.device;
     if (!sp.ok) throw new Error("tts: " + sp.error);
     result.audioSeconds = +(sp.audio.length / sp.rate).toFixed(2);
     const ratio = sp.rate / 16000, n = Math.floor(sp.audio.length / ratio), pcm = new Float32Array(n);
