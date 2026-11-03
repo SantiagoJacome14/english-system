@@ -89,13 +89,15 @@ function tabExamples() {
 }
 
 /* ---------- Exercises ---------- */
-const CONTR = [["i'm", "i am"], ["you're", "you are"], ["he's", "he is"], ["she's", "she is"], ["it's", "it is"], ["we're", "we are"], ["they're", "they are"], ["that's", "that is"], ["there's", "there is"], ["what's", "what is"], ["where's", "where is"], ["who's", "who is"], ["how's", "how is"], ["isn't", "is not"], ["aren't", "are not"], ["wasn't", "was not"], ["weren't", "were not"], ["don't", "do not"], ["doesn't", "does not"], ["didn't", "did not"], ["can't", "cannot"], ["won't", "will not"], ["haven't", "have not"], ["hasn't", "has not"], ["i'll", "i will"], ["you'll", "you will"], ["he'll", "he will"], ["she'll", "she will"], ["we'll", "we will"], ["they'll", "they will"], ["i've", "i have"], ["you've", "you have"], ["we've", "we have"], ["they've", "they have"], ["i'd", "i would"], ["let's", "let us"], ["can not", "cannot"]];
+const CONTR = [["i'm", "i am"], ["you're", "you are"], ["he's", "he is"], ["she's", "she is"], ["it's", "it is"], ["we're", "we are"], ["they're", "they are"], ["that's", "that is"], ["there's", "there is"], ["what's", "what is"], ["where's", "where is"], ["who's", "who is"], ["how's", "how is"], ["isn't", "is not"], ["aren't", "are not"], ["wasn't", "was not"], ["weren't", "were not"], ["don't", "do not"], ["doesn't", "does not"], ["didn't", "did not"], ["can't", "cannot"], ["won't", "will not"], ["haven't", "have not"], ["hasn't", "has not"], ["i'll", "i will"], ["you'll", "you will"], ["he'll", "he will"], ["she'll", "she will"], ["we'll", "we will"], ["they'll", "they will"], ["i've", "i have"], ["you've", "you have"], ["we've", "we have"], ["they've", "they have"], ["i'd", "i would"], ["you'd", "you would"], ["he'd", "he would"], ["she'd", "she would"], ["we'd", "we would"], ["they'd", "they would"], ["it'll", "it will"], ["there'll", "there will"], ["couldn't", "could not"], ["wouldn't", "would not"], ["shouldn't", "should not"], ["mustn't", "must not"], ["hadn't", "had not"], ["here's", "here is"], ["when's", "when is"], ["let's", "let us"], ["can not", "cannot"]];
 function normEn(s) {
   s = String(s).toLowerCase().replace(/[’‘]/g, "'").replace(/[.,!?;:"“”]/g, " ").replace(/\s+/g, " ").trim();
   for (const [a, b] of CONTR) s = s.replace(new RegExp("(^| )" + a.replace("'", "'") + "(?= |$)", "g"), "$1" + b);
   return s.replace(/\s+/g, " ").trim();
 }
 const sameEn = (user, acc) => acc.some((a) => normEn(a) === normEn(user));
+// A fill-in sentence with its blank filled, without the hints in parentheses: "They ___ happy. (to be)" → "They are happy."
+const fillIn = (q, word) => q.q.replace(/\s*\([^)]*\)/g, "").trim().replace("___", word);
 
 function tabPractice() {
   const c = CL.c;
@@ -123,7 +125,7 @@ function renderEx() {
     if (good) { sfx("ok"); if (!E.wrong.includes(idx)) E.ok.push(idx); } else {
       sfx("bad"); if (!E.wrong.includes(idx)) E.wrong.push(idx);
       if ((q.type === "fill" || q.type === "translate") && userAns) {
-        const bien = q.type === "fill" ? q.q.replace("___", q.answer[0]) : q.answer[0], mal = q.type === "fill" ? q.q.replace("___", userAns) : userAns;
+        const bien = q.type === "fill" ? fillIn(q, q.answer[0]) : q.answer[0], mal = q.type === "fill" ? fillIn(q, userAns) : userAns;
         S.errors = mergeErr([{ mal, bien, porque: q.why || "" }], S.errors); save();
       }
     }
@@ -131,7 +133,7 @@ function renderEx() {
     fb.innerHTML = `<div class="exfb ${good ? "good" : "bad"}"><b>${good ? "¡Correcto! ✓" : "Casi. La respuesta es: " + esc(correctText)}</b>${q.why ? `<p>${md(q.why)}</p>` : ""}<button class="btn primary" id="ex-next">${E.i + 1 >= E.list.length ? "Ver resultado" : "Continuar"} →</button></div>`;
     $("#ex-next").onclick = () => { E.i++; renderEx(); $("#main").scrollTop = 0; };
     setTimeout(() => { const nb = $("#ex-next"); if (nb) nb.focus(); }, 120); // not during the Enter keypress, or it would skip the feedback
-    if (q.type !== "choice" || good) { const t = q.type === "choice" ? q.options[q.answer] : q.type === "order" ? q.answer : q.type === "fill" ? q.q.replace("___", q.answer[0]) : q.answer[0]; if (good && q.type !== "choice") speak(t); }
+    if (q.type !== "choice" || good) { const t = q.type === "choice" ? q.options[q.answer] : q.type === "order" ? q.answer : q.type === "fill" ? fillIn(q, q.answer[0]) : q.answer[0]; if (good && q.type !== "choice") speak(t); }
   };
   if (q.type === "choice") document.querySelectorAll("[data-opt]").forEach((b) => (b.onclick = () => {
     if (E.answered) return; const i = +b.dataset.opt, good = i === q.answer;
@@ -160,7 +162,10 @@ function exSummary() {
     st.done[c.n] = { date: prev ? prev.date : TODAY, best: Math.max(pct, prev ? prev.best : 0) }; addMin(c.minutes); addXP(xp, "Clase " + c.n); save();
     if (firstTime) celebrate("¡Clase " + c.n + " terminada!"); else sfx("win");
     checkAch();
-  } else if (!passed) sfx("bad");
+  } else if (passed) { // a retry after the class already counted: no XP again, but keep the best score
+    if (st.done[c.n] && pct > st.done[c.n].best) { st.done[c.n].best = pct; save(); }
+    sfx("win");
+  } else sfx("bad");
   const nx = nextClass();
   $("#cl-body").innerHTML = `<div class="card done-screen" style="padding:36px 20px"><div class="big" style="font-size:54px">${pct === 100 ? "🏆" : passed ? "🎉" : "💪"}</div><h2>${pct}% · ${good} de ${first} bien</h2>
     <p class="muted">${passed ? (xp ? `¡Clase terminada! +${xp} XP.` : "¡Muy bien!") : "Todavía no llegas al 60%. Repite las que fallaste y vuelve a intentarlo."}${E.wrong.length ? " Tus respuestas escritas incorrectas ya están en Mis errores." : ""}</p>

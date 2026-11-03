@@ -6,15 +6,15 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1");
 const key=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-const today=new Date(); today.setHours(0,0,0,0);
-const TODAY=key(today);
+// The app can stay open for days in the tray, so the date values are recomputed by setDay() when the day changes (see boot.js).
 const W1=new Date(2026,9,19), START=new Date(2026,9,17), END=new Date(2027,0,3);
 const dow=d=>(d.getDay()+6)%7;
-const WK=today<W1?0:Math.min(11,Math.floor((today-W1)/(7*864e5))+1);
-const CUR=Math.max(1,WK);
 const week=n=>WEEKS.find(w=>w.n===n);
 const opensOn=n=>{const d=new Date(W1.getTime()+(n-1)*7*864e5);return d.getDate()+" "+MON[d.getMonth()]};
-const topicToday=WK===0?(dow(today)===5?"Test de nivel y primera conversación":"Prepara tus herramientas y lee la Semana 1"):week(CUR).dias[dow(today)];
+let today,TODAY,WK,CUR,topicToday;
+function setDay(){today=new Date();today.setHours(0,0,0,0);TODAY=key(today);WK=today<W1?0:Math.min(11,Math.floor((today-W1)/(7*864e5))+1);CUR=Math.max(1,WK);
+  topicToday=WK===0?(dow(today)===5?"Test de nivel y primera conversación":"Prepara tus herramientas y lee la Semana 1"):week(CUR).dias[dow(today)]}
+setDay();
 
 /* ---------- State ---------- */
 const DEFAULT={name:"Santiago",xp:0,xpLog:{},minutes:{},lessons:{},cards:{},errors:[],chats:0,dictations:0,theme:"dark"};
@@ -184,7 +184,7 @@ function canCheck(){const it=L.items[L.i];return it.type==="mc"?L.sel!=null:it.t
 function check(){const it=L.items[L.i];let ok;
   if(it.type==="mc")ok=L.sel===it.answer;
   else if(it.type==="build")ok=norm(L.tray.map(t=>t.w).join(" "))===norm(it.answer);
-  else ok=norm(L.typed||"")===norm(it.answer);
+  else ok=normEn(norm(L.typed||""))===normEn(norm(it.answer)); // normEn (course.js): "I am" counts the same as "I'm"
   L.answered=true;L.lastOk=ok;sfx(ok?"ok":"bad");if(ok){L.right++;L.xp+=10}else if(it.type!=="mc"){S.errors=mergeErr([{mal:it.type==="build"?L.tray.map(t=>t.w).join(" "):L.typed,bien:it.answer,porque:it.type==="dict"?"Dictado: escucha otra vez":"Orden de la frase"}],S.errors);save()}
   speak(it.type==="mc"?it.q.replace("___",it.options[it.answer]):it.answer);renderLesson()}
 function next(){L.i++;L.sel=null;L.answered=false;L.bank=null;L.tray=[];L.typed="";L.played=false;
@@ -336,8 +336,8 @@ Judge ONLY the student's lines. ${COACH_JSON}`);
 
 /* ---------- Progress ---------- */
 VIEWS.progress=()=>{
-  const lessonsDone=Object.keys(S.lessons).length;
-  const sk=[["Speaking",Math.min(100,(S.chats||0)*4+20)],["Listening",Math.min(100,(S.dictations||0)*1.5+35)],["Gramática",Math.min(100,lessonsDone*3+25)],["Vocabulario",Math.min(100,learned()*1.2+20)],["Writing",Math.min(100,Object.keys(S.lessons).filter(k=>/-w$/.test(k)).length*8+20)]];
+  const lessonsDone=Object.keys(S.lessons).length,classesDone=Object.keys(cState().done).length,talks=(S.chats||0)+(S.calls||0);
+  const sk=[["Speaking",Math.min(100,talks*4+(S.pronCount||0)*0.5+20)],["Listening",Math.min(100,(S.dictations||0)*1.5+35)],["Gramática",Math.min(100,(lessonsDone+classesDone)*3+25)],["Vocabulario",Math.min(100,learned()*1.2+20)],["Writing",Math.min(100,Object.keys(S.lessons).filter(k=>/-w$/.test(k)).length*8+20)]];
   let heat=["L","M","X","J","V","S","D"].map(h=>`<span class="h">${h}</span>`).join("");
   for(let d=new Date(2026,9,12);d<=END;d.setDate(d.getDate()+1)){if(d<START){heat+='<span class="d blank"></span>';continue}const x=S.xpLog[key(d)]||0;heat+=`<span class="d ${x>=100?"l3":x>=50?"l2":x>0?"l1":""} ${key(d)===TODAY?"today":""}" title="${d.getDate()} ${MON[d.getMonth()]}: ${x} XP">${d.getDate()}</span>`}
   const mins=Object.values(S.minutes).reduce((a,b)=>a+b,0);
@@ -346,8 +346,8 @@ VIEWS.progress=()=>{
     <div class="grid g4">
       <div class="card stat"><svg class="ic"><use href="#i-flame"/></svg><div><b>${streak()}</b><span>racha actual</span></div></div>
       <div class="card stat"><span class="ic" style="background:var(--blue-soft)">⏱️</span><div><b>${Math.round(mins/60*10)/10}</b><span>horas practicadas</span></div></div>
-      <div class="card stat"><span class="ic" style="background:var(--green-soft)">📘</span><div><b>${lessonsDone}</b><span>lecciones de 55</span></div></div>
-      <div class="card stat"><span class="ic" style="background:var(--panel-3)">💬</span><div><b>${S.chats||0}</b><span>conversaciones</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--green-soft)">📘</span><div><b>${classesDone}</b><span>clases de ${COURSE.length}</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--panel-3)">💬</span><div><b>${talks}</b><span>conversaciones</span></div></div>
     </div>
     <div class="grid g2">
       <div class="card"><h3>Habilidades</h3>${sk.map(s=>`<div class="skill"><span>${s[0]}</span><div class="bar"><i style="width:${Math.round(s[1])}%"></i></div><b>${Math.round(s[1])}%</b></div>`).join("")}<p class="muted" style="margin:0;font-size:13px">Suben con lo que practicas en cada sección.</p></div>
