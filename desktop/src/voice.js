@@ -240,12 +240,13 @@ const Voice = (() => {
   // For replies that arrive word by word: each sentence starts generating as soon as it's complete,
   // so the first one plays while the rest of the reply is still being written.
   // system: true speaks with the Windows voice (instant, for computers where the natural voice is slow).
-  function stream({ voice, onStart, system = false } = {}) {
+  // lead: a short "Mm-hm." said if the reply hasn't started after leadMs, so you know you were heard.
+  function stream({ voice, onStart, system = false, lead, leadMs = 700 } = {}) {
     stop();
     const my = token, c = cfg(), v = voice || c.voice, neural = !system && c.neural && state.tts === "ready";
-    let used = 0, chain = Promise.resolve(), started = false;
+    let used = 0, chain = Promise.resolve(), started = false, any = false;
     const enqueue = (raw) => {
-      const sTxt = clean(raw); if (!sTxt) return;
+      const sTxt = clean(raw); if (!sTxt) return; any = true;
       const job = neural ? gen(sTxt, v, c.speed, true) : null;
       chain = chain.then(async () => {
         if (my !== token) return;
@@ -255,6 +256,7 @@ const Voice = (() => {
         if (r) await playBuffer(r.audio, r.rate); else await saySystem(sTxt, 1, my);
       });
     };
+    if (lead) setTimeout(() => { if (!any && my === token) enqueue(lead); }, leadMs);
     return {
       push(full) {
         for (;;) {
@@ -293,7 +295,10 @@ const Voice = (() => {
   }
   // Records one utterance at 16 kHz. With vad, it starts on speech and stops after a pause;
   // without it, it records until finish() is called (push to talk).
-  function record({ vad = true, silenceMs = 1100, maxMs = 30000, onLevel, onStart } = {}) {
+  // onSegment(samples): called at each short pause while you keep talking, with the audio since the
+  // last pause, so it can be transcribed while you speak. The final audio says how much was already
+  // sent (audio.sent), so only the rest needs transcribing when you finish.
+  function record({ vad = true, silenceMs = 1100, maxMs = 30000, onLevel, onStart, onSegment } = {}) {
     fg();
     return new Promise(async (resolve) => {
       if (!(await openMic())) return resolve(null);
@@ -302,7 +307,7 @@ const Voice = (() => {
       const proc = micCtx.createScriptProcessor(1024, 1, 1);
       const mute = micCtx.createGain(); mute.gain.value = 0;
       const chunks = [], pre = [];
-      let speaking = !vad, above = 0, quietMs = 0, spokeMs = 0, totalMs = 0, noise = 0.008, ended = false;
+      let speaking = !vad, above = 0, quietMs = 0, spokeMs = 0, totalMs = 0, noise = 0.008, ended = false, segFrom = 0, sentLen = 0;
       const frameMs = 1024 / 16;
       const finish = (cancel) => {
         if (ended) return; ended = true;
@@ -310,9 +315,10 @@ const Voice = (() => {
         if (cancel || !chunks.length) return resolve(cancel ? null : new Float32Array(0));
         const n = chunks.reduce((a, c) => a + c.length, 0), out = new Float32Array(n);
         let o = 0; for (const c of chunks) { out.set(c, o); o += c.length; }
+        out.sent = sentLen;
         resolve(out);
       };
-      rec = { finish: () => finish(false), cancel: () => finish(true), get speaking() { return speaking; } };
+      rec = { finish: () => finish(false), cancel: () => finish(true), get speaking() { return speaking; }, get quietMs() { return quietMs; } };
       proc.onaudioprocess = (e) => {
         if (ended) return;
         const d = new Float32Array(e.inputBuffer.getChannelData(0));
@@ -330,7 +336,12 @@ const Voice = (() => {
         chunks.push(d); spokeMs += frameMs;
         if (vad) {
           quietMs = rms < Math.max(0.01, noise * 2) ? quietMs + frameMs : 0;
-          if (quietMs >= silenceMs && spokeMs > 400) finish(false);
+          if (quietMs >= silenceMs && spokeMs > 400) return finish(false);
+          if (onSegment && quietMs >= 300 && quietMs < 300 + frameMs && (chunks.length - segFrom) * frameMs >= 1200) {
+            const part = chunks.slice(segFrom), n = part.reduce((a, c) => a + c.length, 0), seg = new Float32Array(n);
+            let o = 0; for (const c of part) { seg.set(c, o); o += c.length; }
+            segFrom = chunks.length; sentLen += n; onSegment(seg);
+          }
         }
         if (spokeMs >= maxMs) finish(false);
       };
