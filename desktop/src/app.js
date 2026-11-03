@@ -6,15 +6,15 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1");
 const key=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-const today=new Date(); today.setHours(0,0,0,0);
-const TODAY=key(today);
+// The app can stay open for days in the tray, so the date values are recomputed by setDay() when the day changes (see boot.js).
 const W1=new Date(2026,9,19), START=new Date(2026,9,17), END=new Date(2027,0,3);
 const dow=d=>(d.getDay()+6)%7;
-const WK=today<W1?0:Math.min(11,Math.floor((today-W1)/(7*864e5))+1);
-const CUR=Math.max(1,WK);
 const week=n=>WEEKS.find(w=>w.n===n);
 const opensOn=n=>{const d=new Date(W1.getTime()+(n-1)*7*864e5);return d.getDate()+" "+MON[d.getMonth()]};
-const topicToday=WK===0?(dow(today)===5?"Test de nivel y primera conversación":"Prepara tus herramientas y lee la Semana 1"):week(CUR).dias[dow(today)];
+let today,TODAY,WK,CUR,topicToday;
+function setDay(){today=new Date();today.setHours(0,0,0,0);TODAY=key(today);WK=today<W1?0:Math.min(11,Math.floor((today-W1)/(7*864e5))+1);CUR=Math.max(1,WK);
+  topicToday=WK===0?(dow(today)===5?"Test de nivel y primera conversación":"Prepara tus herramientas y lee la Semana 1"):week(CUR).dias[dow(today)]}
+setDay();
 
 /* ---------- State ---------- */
 const DEFAULT={name:"Santiago",xp:0,xpLog:{},minutes:{},lessons:{},cards:{},errors:[],chats:0,dictations:0,theme:"dark"};
@@ -22,7 +22,10 @@ let S=Object.assign({},DEFAULT);
 try{Object.assign(S,JSON.parse(localStorage.getItem("ebp2")||"{}"))}catch(e){}
 function save(){try{localStorage.setItem("ebp2",JSON.stringify(S))}catch(e){}}
 function addXP(n,why){const before=rank().name;S.xp+=n;S.xpLog[TODAY]=(S.xpLog[TODAY]||0)+n;save();toast("+"+n+" XP · "+why);renderRank();if(rank().name!==before)celebrate("¡Subiste a "+rank().name+"!");checkAch()}
-function addMin(n){S.minutes[TODAY]=(S.minutes[TODAY]||0)+n;save()}
+// Pronunciation XP: each phrase pays once per day (only the improvement over your best try), so repeating one phrase doesn't farm points.
+function pronXP(text,n,why){const k=String(text).toLowerCase().trim();if(!S.pronXp||S.pronXp.d!==TODAY)S.pronXp={d:TODAY,p:{}};const had=S.pronXp.p[k]||0;if(n<=had)return;S.pronXp.p[k]=n;addXP(n-had,why)}
+function addMin(n){S.minutes[TODAY]=(S.minutes[TODAY]||0)+n;save();reportGoal()}
+function reportGoal(){if((S.minutes[TODAY]||0)>=DAILY_GOAL&&window.api.goalMet)window.api.goalMet(TODAY).catch(()=>{})}
 let toastT;function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,1800)}
 document.documentElement.dataset.theme=S.theme;
 
@@ -63,6 +66,9 @@ VIEWS.home=()=>{
   const days=[...Array(7)].map((_,i)=>{const d=new Date(today);d.setDate(d.getDate()-6+i);return d});
   const vals=days.map(d=>S.xpLog[key(d)]||0);const max=Math.max(100,...vals);
   const plan=dailyPlan(),ps=planStats();
+  // "Puerta de hoy" is your next class (the main course); once today's class is done it shows the week's practice topic.
+  const ncl=typeof nextClass==="function"?nextClass():null,clsDone=typeof cState==="function"&&Object.values(cState().done).some(d=>d.date===TODAY);
+  const gate=ncl&&!clsDone?{label:"Puerta de hoy · clase "+ncl.n,t:ncl.title}:{label:"Tema de la semana",t:topicToday};
   $("#main").innerHTML=`<div class="screen">
     <div class="hall">
       <div class="hall-l">
@@ -72,7 +78,7 @@ VIEWS.home=()=>{
         <div class="tk-route"><div class="code">BGA<small>BUCARAMANGA</small></div><div class="track"><span class="done" style="width:${pct}%"></span>${wps}<span class="plane" style="left:${pct}%"><svg viewBox="0 0 256 256"><use href="#i-plane"/></svg></span></div><div class="code">MCO<small>ORLANDO</small></div></div>
       </div>
       <div class="hall-r">
-        <div><span class="label">Puerta de hoy</span><p style="margin:6px 0 0;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase">${esc(topicToday)}</p></div>
+        <div><span class="label">${gate.label}</span><p style="margin:6px 0 0;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase">${esc(gate.t)}</p></div>
         <div class="goal"><div class="goal-t"><span class="label">Meta de hoy</span><b>${ps.mins} / ${DAILY_GOAL} min</b></div><div class="bar"><i style="width:${ps.pct}%"></i></div><small class="muted">${ps.mins>=DAILY_GOAL?"¡Meta cumplida! Todo lo extra suma.":"Te faltan "+ps.left+" min."} Esta semana: ${ps.hit} de 7 días con meta.</small></div><button class="btn primary big" data-nav="${(plan.find(x=>!x.done)||plan[2]).go}" data-arg="${esc((plan.find(x=>!x.done)||{}).arg||"")}"><svg class="ic"><use href="#i-arrow"/></svg>${plan.every(x=>x.done)?"Hablar con Max":"Seguir con el plan"}</button>
       </div>
     </div>
@@ -122,7 +128,7 @@ Voice.on(st=>{if((st.tts==="error"||st.stt==="error")&&!st.warned){st.warned=tru
 VIEWS.path=()=>{
   const nl=nextLesson();
   $("#main").innerHTML=`<div class="screen">
-    <div class="head"><div><h1>Tu ruta</h1><p>11 semanas, 5 lecciones por semana. Completa una para desbloquear la siguiente.</p></div><span class="pill">${Object.keys(S.lessons).length} / 55 lecciones</span></div>
+    <div class="head"><div><h1>Práctica semanal</h1><p>Complementa tus clases: cada semana trae un tema con gramática, frases, dictado, conversación y una misión de escritura. Cada semana se abre en su fecha.</p></div><span class="pill">${Object.keys(S.lessons).length} / 55 lecciones</span></div>
     ${WEEKS.map(w=>{const ls=lessonsOf(w.n);const locked=w.n>CUR;return`<div class="unit ${locked?"locked":""} ${w.n===CUR?"now":""}">
       <div><span class="label">Semana · ${esc(w.fechas)}</span><div class="wk">${w.n}</div><b>${esc(w.tema)}</b></div>
       <div class="nodes">${ls.map(l=>{const done=S.lessons[l.id];const isNext=nl&&nl.id===l.id;return`<button class="node ${done?"done":""} ${isNext?"next":""}" ${locked?"disabled title='Se desbloquea el "+opensOn(w.n)+"'":`data-nav="lesson" data-arg="${l.id}"`}><span class="c">${locked?"🔒":done?"✓":l.icon}</span><span>${l.t}</span></button>`}).join("")}</div>
@@ -137,7 +143,7 @@ function buildItems(n){const w=week(n);const ex=EXTRA.build[n]||w.ej.filter(e=>!
 function dictItems(n){const w=week(n);return shuffle([...w.ej.filter(e=>!e.includes("___")),...w.vocab.filter(v=>!/[…\/(]/.test(v))]).slice(0,6).map(t=>({type:"dict",answer:t}))}
 let L=null;
 VIEWS.lesson=id=>{
-  const n=+String(id).split("-")[0],kind=lessonsOf(n).find(l=>l.id===id);
+  const n=+String(id).split("-")[0],kind=week(n)&&lessonsOf(n).find(l=>l.id===id);
   if(!kind){go("path");return}
   if(kind.kind==="talk"){talkMode="daily";go("talk");return}
   if(kind.kind==="write"){writeView(n,id);return}
@@ -184,7 +190,7 @@ function canCheck(){const it=L.items[L.i];return it.type==="mc"?L.sel!=null:it.t
 function check(){const it=L.items[L.i];let ok;
   if(it.type==="mc")ok=L.sel===it.answer;
   else if(it.type==="build")ok=norm(L.tray.map(t=>t.w).join(" "))===norm(it.answer);
-  else ok=norm(L.typed||"")===norm(it.answer);
+  else ok=normEn(norm(L.typed||""))===normEn(norm(it.answer)); // normEn (course.js): "I am" counts the same as "I'm"
   L.answered=true;L.lastOk=ok;sfx(ok?"ok":"bad");if(ok){L.right++;L.xp+=10}else if(it.type!=="mc"){S.errors=mergeErr([{mal:it.type==="build"?L.tray.map(t=>t.w).join(" "):L.typed,bien:it.answer,porque:it.type==="dict"?"Dictado: escucha otra vez":"Orden de la frase"}],S.errors);save()}
   speak(it.type==="mc"?it.q.replace("___",it.options[it.answer]):it.answer);renderLesson()}
 function next(){L.i++;L.sel=null;L.answered=false;L.bank=null;L.tray=[];L.typed="";L.played=false;
@@ -336,8 +342,8 @@ Judge ONLY the student's lines. ${COACH_JSON}`);
 
 /* ---------- Progress ---------- */
 VIEWS.progress=()=>{
-  const lessonsDone=Object.keys(S.lessons).length;
-  const sk=[["Speaking",Math.min(100,(S.chats||0)*4+20)],["Listening",Math.min(100,(S.dictations||0)*1.5+35)],["Gramática",Math.min(100,lessonsDone*3+25)],["Vocabulario",Math.min(100,learned()*1.2+20)],["Writing",Math.min(100,Object.keys(S.lessons).filter(k=>/-w$/.test(k)).length*8+20)]];
+  const lessonsDone=Object.keys(S.lessons).length,classesDone=Object.keys(cState().done).length,talks=(S.chats||0)+(S.calls||0);
+  const sk=[["Speaking",Math.min(100,talks*4+(S.pronCount||0)*0.5+20)],["Listening",Math.min(100,(S.dictations||0)*1.5+35)],["Gramática",Math.min(100,(lessonsDone+classesDone)*3+25)],["Vocabulario",Math.min(100,learned()*1.2+20)],["Writing",Math.min(100,Object.keys(S.lessons).filter(k=>/-w$/.test(k)).length*8+20)]];
   let heat=["L","M","X","J","V","S","D"].map(h=>`<span class="h">${h}</span>`).join("");
   for(let d=new Date(2026,9,12);d<=END;d.setDate(d.getDate()+1)){if(d<START){heat+='<span class="d blank"></span>';continue}const x=S.xpLog[key(d)]||0;heat+=`<span class="d ${x>=100?"l3":x>=50?"l2":x>0?"l1":""} ${key(d)===TODAY?"today":""}" title="${d.getDate()} ${MON[d.getMonth()]}: ${x} XP">${d.getDate()}</span>`}
   const mins=Object.values(S.minutes).reduce((a,b)=>a+b,0);
@@ -346,8 +352,8 @@ VIEWS.progress=()=>{
     <div class="grid g4">
       <div class="card stat"><svg class="ic"><use href="#i-flame"/></svg><div><b>${streak()}</b><span>racha actual</span></div></div>
       <div class="card stat"><span class="ic" style="background:var(--blue-soft)">⏱️</span><div><b>${Math.round(mins/60*10)/10}</b><span>horas practicadas</span></div></div>
-      <div class="card stat"><span class="ic" style="background:var(--green-soft)">📘</span><div><b>${lessonsDone}</b><span>lecciones de 55</span></div></div>
-      <div class="card stat"><span class="ic" style="background:var(--panel-3)">💬</span><div><b>${S.chats||0}</b><span>conversaciones</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--green-soft)">📘</span><div><b>${classesDone}</b><span>clases de ${COURSE.length}</span></div></div>
+      <div class="card stat"><span class="ic" style="background:var(--panel-3)">💬</span><div><b>${talks}</b><span>conversaciones</span></div></div>
     </div>
     <div class="grid g2">
       <div class="card"><h3>Habilidades</h3>${sk.map(s=>`<div class="skill"><span>${s[0]}</span><div class="bar"><i style="width:${Math.round(s[1])}%"></i></div><b>${Math.round(s[1])}%</b></div>`).join("")}<p class="muted" style="margin:0;font-size:13px">Suben con lo que practicas en cada sección.</p></div>

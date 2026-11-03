@@ -27,7 +27,7 @@ function dailyPlan() {
     { k: "class", t: nc ? "Clase " + nc.n + ": " + nc.title : "Curso terminado", s: nc ? nc.minutes + " min · " + nc.goal.replace(/^Al final de esta clase podrás /, "Aprenderás a ") : "Repasa cuando quieras", min: nc ? nc.minutes : 0, go: "course", arg: nc ? String(nc.n) : "", done: classToday || !nc },
     { k: "call", t: "Llamada con Max", s: "15 min · habla y recibe corrección al instante", min: 15, go: "call", done: !!(S.chatLog || {})[TODAY] },
     { k: "dict", t: "Dictado", s: "10 min · entrena tu oído", min: 10, go: "listen", done: !!(S.dictLog || {})[TODAY] },
-    { k: "write", t: "Misión de escritura", s: "10 min · escribe y corrige", min: 10, go: "path", done: wToday },
+    { k: "write", t: "Misión de escritura", s: "10 min · escribe y corrige", min: 10, go: "lesson", arg: CUR + "-w", done: wToday },
   ];
 }
 function planStats() {

@@ -18,6 +18,7 @@ contextBridge.exposeInMainWorld("api", {
   aiStatus: () => ipcRenderer.invoke("ai:status"),
   ollamaTest: () => ipcRenderer.invoke("ollama:test"),
   reminderTest: () => ipcRenderer.invoke("reminder:test"),
+  goalMet: (day) => ipcRenderer.invoke("goal:met", day),
   voiceCache: () => ipcRenderer.invoke("voice:cache"),
   voiceClear: () => ipcRenderer.invoke("voice:clear"),
   onNavigate: (fn) => { onNav = fn; },

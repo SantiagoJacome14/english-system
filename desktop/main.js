@@ -489,6 +489,7 @@ function checkReminder() {
   const r = reminderCfg();
   if (!r.on) return;
   const now = new Date();
+  if (readSettings().goalMet === keyOf(now)) return; // already practiced enough today
   const hm = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
   if (hm >= r.time && readSettings().lastReminder !== keyOf(now) && hm < "23:59") {
     // Only fire within 30 min of the chosen time, so opening the app late at night doesn't nag.
@@ -497,6 +498,12 @@ function checkReminder() {
   }
 }
 ipcMain.handle("reminder:test", () => fireReminder(true));
+// The app tells us when today's practice goal is reached, so the reminder doesn't nag after that.
+ipcMain.handle("goal:met", (_e, day) => {
+  if (!/^\d{4}-\d\d-\d\d$/.test(day || "")) return false;
+  const s = readSettings(); if (s.goalMet !== day) { s.goalMet = day; writeSettings(s); }
+  return true;
+});
 
 /* ---------- Voice self-test (used by CI on Windows) ---------- */
 function runSelftest() {
