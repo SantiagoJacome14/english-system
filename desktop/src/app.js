@@ -22,7 +22,10 @@ let S=Object.assign({},DEFAULT);
 try{Object.assign(S,JSON.parse(localStorage.getItem("ebp2")||"{}"))}catch(e){}
 function save(){try{localStorage.setItem("ebp2",JSON.stringify(S))}catch(e){}}
 function addXP(n,why){const before=rank().name;S.xp+=n;S.xpLog[TODAY]=(S.xpLog[TODAY]||0)+n;save();toast("+"+n+" XP · "+why);renderRank();if(rank().name!==before)celebrate("¡Subiste a "+rank().name+"!");checkAch()}
-function addMin(n){S.minutes[TODAY]=(S.minutes[TODAY]||0)+n;save()}
+// Pronunciation XP: each phrase pays once per day (only the improvement over your best try), so repeating one phrase doesn't farm points.
+function pronXP(text,n,why){const k=String(text).toLowerCase().trim();if(!S.pronXp||S.pronXp.d!==TODAY)S.pronXp={d:TODAY,p:{}};const had=S.pronXp.p[k]||0;if(n<=had)return;S.pronXp.p[k]=n;addXP(n-had,why)}
+function addMin(n){S.minutes[TODAY]=(S.minutes[TODAY]||0)+n;save();reportGoal()}
+function reportGoal(){if((S.minutes[TODAY]||0)>=DAILY_GOAL&&window.api.goalMet)window.api.goalMet(TODAY).catch(()=>{})}
 let toastT;function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,1800)}
 document.documentElement.dataset.theme=S.theme;
 
@@ -63,6 +66,9 @@ VIEWS.home=()=>{
   const days=[...Array(7)].map((_,i)=>{const d=new Date(today);d.setDate(d.getDate()-6+i);return d});
   const vals=days.map(d=>S.xpLog[key(d)]||0);const max=Math.max(100,...vals);
   const plan=dailyPlan(),ps=planStats();
+  // "Puerta de hoy" is your next class (the main course); once today's class is done it shows the week's practice topic.
+  const ncl=typeof nextClass==="function"?nextClass():null,clsDone=typeof cState==="function"&&Object.values(cState().done).some(d=>d.date===TODAY);
+  const gate=ncl&&!clsDone?{label:"Puerta de hoy · clase "+ncl.n,t:ncl.title}:{label:"Tema de la semana",t:topicToday};
   $("#main").innerHTML=`<div class="screen">
     <div class="hall">
       <div class="hall-l">
@@ -72,7 +78,7 @@ VIEWS.home=()=>{
         <div class="tk-route"><div class="code">BGA<small>BUCARAMANGA</small></div><div class="track"><span class="done" style="width:${pct}%"></span>${wps}<span class="plane" style="left:${pct}%"><svg viewBox="0 0 256 256"><use href="#i-plane"/></svg></span></div><div class="code">MCO<small>ORLANDO</small></div></div>
       </div>
       <div class="hall-r">
-        <div><span class="label">Puerta de hoy</span><p style="margin:6px 0 0;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase">${esc(topicToday)}</p></div>
+        <div><span class="label">${gate.label}</span><p style="margin:6px 0 0;font-family:var(--display);font-stretch:80%;font-weight:800;font-size:26px;line-height:1.1;text-transform:uppercase">${esc(gate.t)}</p></div>
         <div class="goal"><div class="goal-t"><span class="label">Meta de hoy</span><b>${ps.mins} / ${DAILY_GOAL} min</b></div><div class="bar"><i style="width:${ps.pct}%"></i></div><small class="muted">${ps.mins>=DAILY_GOAL?"¡Meta cumplida! Todo lo extra suma.":"Te faltan "+ps.left+" min."} Esta semana: ${ps.hit} de 7 días con meta.</small></div><button class="btn primary big" data-nav="${(plan.find(x=>!x.done)||plan[2]).go}" data-arg="${esc((plan.find(x=>!x.done)||{}).arg||"")}"><svg class="ic"><use href="#i-arrow"/></svg>${plan.every(x=>x.done)?"Hablar con Max":"Seguir con el plan"}</button>
       </div>
     </div>
@@ -122,7 +128,7 @@ Voice.on(st=>{if((st.tts==="error"||st.stt==="error")&&!st.warned){st.warned=tru
 VIEWS.path=()=>{
   const nl=nextLesson();
   $("#main").innerHTML=`<div class="screen">
-    <div class="head"><div><h1>Tu ruta</h1><p>11 semanas, 5 lecciones por semana. Completa una para desbloquear la siguiente.</p></div><span class="pill">${Object.keys(S.lessons).length} / 55 lecciones</span></div>
+    <div class="head"><div><h1>Práctica semanal</h1><p>Complementa tus clases: cada semana trae un tema con gramática, frases, dictado, conversación y una misión de escritura. Cada semana se abre en su fecha.</p></div><span class="pill">${Object.keys(S.lessons).length} / 55 lecciones</span></div>
     ${WEEKS.map(w=>{const ls=lessonsOf(w.n);const locked=w.n>CUR;return`<div class="unit ${locked?"locked":""} ${w.n===CUR?"now":""}">
       <div><span class="label">Semana · ${esc(w.fechas)}</span><div class="wk">${w.n}</div><b>${esc(w.tema)}</b></div>
       <div class="nodes">${ls.map(l=>{const done=S.lessons[l.id];const isNext=nl&&nl.id===l.id;return`<button class="node ${done?"done":""} ${isNext?"next":""}" ${locked?"disabled title='Se desbloquea el "+opensOn(w.n)+"'":`data-nav="lesson" data-arg="${l.id}"`}><span class="c">${locked?"🔒":done?"✓":l.icon}</span><span>${l.t}</span></button>`}).join("")}</div>
@@ -137,7 +143,7 @@ function buildItems(n){const w=week(n);const ex=EXTRA.build[n]||w.ej.filter(e=>!
 function dictItems(n){const w=week(n);return shuffle([...w.ej.filter(e=>!e.includes("___")),...w.vocab.filter(v=>!/[…\/(]/.test(v))]).slice(0,6).map(t=>({type:"dict",answer:t}))}
 let L=null;
 VIEWS.lesson=id=>{
-  const n=+String(id).split("-")[0],kind=lessonsOf(n).find(l=>l.id===id);
+  const n=+String(id).split("-")[0],kind=week(n)&&lessonsOf(n).find(l=>l.id===id);
   if(!kind){go("path");return}
   if(kind.kind==="talk"){talkMode="daily";go("talk");return}
   if(kind.kind==="write"){writeView(n,id);return}

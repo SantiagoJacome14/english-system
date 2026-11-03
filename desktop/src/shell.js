@@ -81,7 +81,7 @@
   const pal = $("#pal"), q = $("#pal-q"), list = $("#pal-list");
   let items = [], sel = 0;
   function build() {
-    const base = [["Inicio", "home"], ["Clases", "course"], ["Ruta", "path"], ["Viaje a Orlando", "story"], ["Tarjetas", "cards"], ["Mis palabras", "vocab"], ["Dictado", "listen"], ["Llamada en inglés", "call"], ["Chat", "talk"], ["Pronunciación", "pron"], ["Entrevista Disney", "interview"], ["Juegos", "games"], ["Reto relámpago", "blitz"], ["Progreso y logros", "progress"], ["Ajustes", "settings"]];
+    const base = [["Inicio", "home"], ["Clases", "course"], ["Práctica semanal (ruta)", "path"], ["Viaje a Orlando", "story"], ["Tarjetas", "cards"], ["Mis palabras", "vocab"], ["Dictado", "listen"], ["Llamada en inglés", "call"], ["Chat", "talk"], ["Pronunciación", "pron"], ["Entrevista Disney", "interview"], ["Juegos", "games"], ["Reto relámpago", "blitz"], ["Progreso y logros", "progress"], ["Ajustes", "settings"]];
     items = base.map(([t, v]) => ({ t, ico: ICO[v], run: () => go(v), k: t.toLowerCase() }));
     if (typeof COURSE !== "undefined") COURSE.forEach(c => items.push({ t: `Clase ${c.n}: ${c.title}`, ico: "course", run: () => go("course", c.n), k: `clase ${c.n} ${c.title}`.toLowerCase() }));
     items.push({ t: S.theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro", ico: S.theme === "dark" ? "sun" : "moon", run: () => { S.theme = S.theme === "dark" ? "light" : "dark"; root.dataset.theme = S.theme; save(); }, k: "tema oscuro claro" });

@@ -8,3 +8,4 @@ function checkNewDay(){const d=new Date();if(key(d)===TODAY)return;setDay();rend
 setInterval(checkNewDay,60e3);
 window.addEventListener("focus",checkNewDay);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)checkNewDay()});
+reportGoal();

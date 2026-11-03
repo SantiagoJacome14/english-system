@@ -20,7 +20,7 @@ function renderCourseList() {
   const st = cState(), done = courseDone(), nx = nextClass(), blocks = [...new Set(COURSE.map((c) => c.block))];
   $("#main").innerHTML = `<div class="screen">
     <div class="head"><div><h1>Clases de inglés</h1><p>Un curso paso a paso, desde lo más básico hasta poder conversar. Cada clase dura unos 25 minutos: explicación, vocabulario, ejercicios y práctica de voz. Sugerimos una por día.</p></div><span class="pill gold">${done} / ${COURSE.length}</span></div>
-    <div class="card"><div class="bar"><i style="width:${Math.round(done / COURSE.length * 100)}%"></i></div></div>
+    ${done ? `<div class="card"><div class="bar"><i style="width:${Math.round(done / COURSE.length * 100)}%"></i></div></div>` : ""}
     ${nx ? `<div class="card clshome big"><span class="e">${nx.emoji}</span><div><span class="label">${done ? "Sigue con" : "Empieza por aquí"} · sugerida para el ${clsDateTxt(nx.n)}</span><b>Clase ${nx.n}: ${esc(nx.title)}</b><small>${esc(nx.goal)}</small></div><button class="btn gold big" data-nav="course" data-arg="${nx.n}">▶ ${done ? "Continuar" : "Empezar"}</button></div>` : ""}
     ${blocks.map((b) => `<div class="card"><span class="label">${esc(b)}</span><div class="clgrid">${COURSE.filter((c) => c.block === b).map((c) => { const d = st.done[c.n]; return `<button class="clc ${d ? "done" : ""} ${nx && nx.n === c.n ? "next" : ""}" data-nav="course" data-arg="${c.n}"><span class="no">${c.n}</span><span class="e">${c.emoji}</span><div><b>${esc(c.title)}</b><small>${c.minutes} min · ${clsDateTxt(c.n)}</small></div><span class="stt">${d ? "✓ " + d.best + "%" : nx && nx.n === c.n ? "Siguiente" : ""}</span></button>`; }).join("")}</div></div>`).join("")}
   </div>`;
@@ -195,6 +195,6 @@ function tabSpeak() {
     const r = alignWords(target, heard);
     row.querySelector(".sptxt").innerHTML = r.words.map((w) => `<span class="${w.ok ? "okw" : "badw"}">${esc(w.w)}</span>`).join(" ");
     row.querySelector(".spres").textContent = heard ? `${r.score}% · Te oí: “${heard}”` : "No te entendí. Habla más cerca del micrófono.";
-    if (r.score >= 80) { sfx("ok"); S.pronCount = (S.pronCount || 0) + 1; S.pronBest = Math.max(S.pronBest || 0, r.score); addXP(3, "Pronunciación"); checkAch(); } else sfx("bad");
+    if (r.score >= 80) { sfx("ok"); S.pronCount = (S.pronCount || 0) + 1; S.pronBest = Math.max(S.pronBest || 0, r.score); pronXP(target, 3, "Pronunciación"); checkAch(); } else sfx("bad");
   }));
 }

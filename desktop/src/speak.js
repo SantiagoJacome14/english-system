@@ -65,7 +65,7 @@ VIEWS.pron = (target) => {
     save();
     $("#p-stats").textContent = `${S.pronCount} frases · mejor ${S.pronBest}%`;
     sfx(a.score >= 80 ? "ok" : "bad");
-    if (a.score >= 80) addXP(a.score === 100 ? 15 : 10, "Pronunciación"); else addXP(3, "Práctica de pronunciación");
+    if (a.score >= 80) pronXP(t, a.score === 100 ? 15 : 10, "Pronunciación"); else pronXP(t, 3, "Práctica de pronunciación");
     if (a.score === 100) confetti();
     $("#p-hint").textContent = "";
     $("#p-target").innerHTML = a.words.map((x) => `<span class="${x.ok ? "wok" : "wbad"}">${esc(x.w)}</span>`).join(" ");
