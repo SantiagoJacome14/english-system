@@ -156,8 +156,10 @@ function client() {
   return new Anthropic({ apiKey });
 }
 // Opus 5.5 gets server-side refusal fallbacks; Haiku 5.5 has none.
-function requestParams(system, messages, maxTokens) {
-  const m = model();
+// Voice calls use the quick model: Max's replies are 1–2 short sentences and every second of waiting is heard.
+const FAST_MODEL = "claude-haiku-5-5";
+function requestParams(system, messages, maxTokens, modelId) {
+  const m = modelId || model();
   const params = { model: m, max_tokens: maxTokens, system, messages, output_config: { effort: "low" } };
   if (m === "claude-opus-5-5") {
     params.betas = ["server-side-fallback-2026-07-01"];
@@ -176,8 +178,8 @@ function errorCode(err) {
 function textOf(msg) {
   return msg.content.filter((b) => b.type === "text").map((b) => b.text).join("");
 }
-async function claudeChat(system, messages, onText, maxTokens) {
-  const stream = client().beta.messages.stream(requestParams(system, messages, maxTokens));
+async function claudeChat(system, messages, onText, maxTokens, modelId) {
+  const stream = client().beta.messages.stream(requestParams(system, messages, maxTokens, modelId));
   let text = "";
   if (onText) stream.on("text", (delta) => { text += delta; onText(text); });
   const final = await stream.finalMessage();
@@ -262,10 +264,10 @@ ipcMain.handle("ai:status", async () => {
   } catch (err) { return { ok: false, provider: p, code: errorCode(err), message: String(err.message || err) }; }
 });
 
-function chatWith(system, messages, onText, json) {
+function chatWith(system, messages, onText, json, fast) {
   const p = provider();
   if (p === "ollama") return ollamaChat(system, messages, onText, json);
-  if (p === "claude") return claudeChat(system, messages, onText, json ? 8000 : 4000);
+  if (p === "claude") return claudeChat(system, messages, onText, json ? 8000 : 4000, fast ? FAST_MODEL : null);
   const e = new Error("Sin IA"); e.code = "no_ai"; throw e;
 }
 
@@ -331,9 +333,9 @@ ipcMain.handle("ollama:test", async () => {
   }
 });
 
-ipcMain.handle("chat", async (event, { id, system, messages }) => {
+ipcMain.handle("chat", async (event, { id, system, messages, fast }) => {
   try {
-    const text = await chatWith(system, messages, (t) => event.sender.send("chat:delta", { id, text: t }), false);
+    const text = await chatWith(system, messages, (t) => event.sender.send("chat:delta", { id, text: t }), false, !!fast);
     return { ok: true, text };
   } catch (err) {
     return { ok: false, code: errorCode(err), message: String(err.message || err) };

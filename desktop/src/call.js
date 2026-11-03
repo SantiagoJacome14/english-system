@@ -63,7 +63,7 @@ This is a VOICE PHONE CALL. The student's words come from speech recognition, so
 function startCall(scen) {
   talkMode = scen;
   const m = SCEN.find((x) => x.id === scen) || SCEN[0];
-  CALL = { scen, m, hist: [], active: true, muted: false, ptt: !!S.ptt, subs: S.subs !== false, t0: Date.now(), speakSec: 0, miss: 0, state: "ring", micLevel: 0 };
+  CALL = { scen, m, hist: [], active: true, muted: false, ptt: !!S.ptt, subs: S.subs !== false, t0: Date.now(), speakSec: 0, miss: 0, state: "ring", micLevel: 0, fast: fastVoice() };
   $("#main").innerHTML = `<div class="callv">
     <div class="call-top"><span class="label">📞 ${esc(m.t)}</span><span class="call-timer" id="c-time">00:00</span></div>
     <div class="call-mid">
@@ -78,6 +78,7 @@ function startCall(scen) {
       <button class="cbtn" id="c-mute" title="Silenciar micrófono"><span>🎙️</span><small>Micrófono</small></button>
       <button class="cbtn" id="c-mode" title="Cambiar modo"><span>${CALL.ptt ? "✋" : "🙌"}</span><small>${CALL.ptt ? "Presionar" : "Manos libres"}</small></button>
       <button class="cbtn" id="c-cc" aria-pressed="${CALL.subs}" title="Subtítulos"><span>CC</span><small>Subtítulos</small></button>
+      <button class="cbtn" id="c-voice" title="Voz natural (más bonita) o voz rápida de Windows (responde al instante)"><span>${CALL.fast ? "⚡" : "🎧"}</span><small>${CALL.fast ? "Voz rápida" : "Voz natural"}</small></button>
       <button class="cbtn hang" id="c-hang" title="Colgar"><span>📞</span><small>Colgar</small></button>
     </div>
   </div>`;
@@ -85,6 +86,7 @@ function startCall(scen) {
   $("#c-av").onclick = () => Voice.stop();
   $("#c-mute").onclick = () => { CALL.muted = !CALL.muted; $("#c-mute").classList.toggle("off", CALL.muted); $("#c-mute span").textContent = CALL.muted ? "🔇" : "🎙️"; if (CALL.muted && Voice.recording) Voice.recording.cancel(); };
   $("#c-mode").onclick = () => { CALL.ptt = !CALL.ptt; S.ptt = CALL.ptt; save(); $("#c-mode").innerHTML = `<span>${CALL.ptt ? "✋" : "🙌"}</span><small>${CALL.ptt ? "Presionar" : "Manos libres"}</small>`; $("#c-ptt").hidden = !CALL.ptt; if (Voice.recording) Voice.recording.cancel(); };
+  $("#c-voice").onclick = () => { CALL.fast = !CALL.fast; S.callVoice = CALL.fast ? "fast" : "natural"; save(); $("#c-voice").innerHTML = `<span>${CALL.fast ? "⚡" : "🎧"}</span><small>${CALL.fast ? "Voz rápida" : "Voz natural"}</small>`; toast(CALL.fast ? "Max usará la voz de Windows: responde al instante" : "Max usará la voz natural"); };
   $("#c-cc").onclick = () => { CALL.subs = !CALL.subs; S.subs = CALL.subs; save(); $("#c-subs").hidden = !CALL.subs; $("#c-cc").setAttribute("aria-pressed", CALL.subs); };
   const pb = $("#c-pttb");
   pb.onpointerdown = () => pttDown(); pb.onpointerup = pb.onpointerleave = () => pttUp();
@@ -94,13 +96,20 @@ function startCall(scen) {
   newAngle(); CALL.greet = greeting(scen); delete GREET[scen];
   S.coach = S.coach || { sessions: [] }; S.coach.lastGreet = CALL.greet; save();
   window.api.warm(callPrompt(), [{ role: "user", content: CALL_START }, { role: "assistant", content: CALL.greet }]);
-  Voice.loadES();
-  onLeave = () => { if (CALL && CALL.active) { CALL.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); } CALL = null; };
+  Voice.setQuiet(true); // no background audio while you talk: the computer is all for the call
+  onLeave = () => { Voice.setQuiet(false); if (CALL && CALL.active) { CALL.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); } CALL = null; };
   const tick = setInterval(() => { if (!CALL || !CALL.active) return clearInterval(tick); $("#c-time").textContent = fmtTime((Date.now() - CALL.t0) / 1000); }, 500);
   animateCall();
   callLoop();
 }
 
+// The Windows voice in calls when the natural voice would make Max pause: no graphics card and the
+// computer takes longer to make the audio than to play it. The student can switch it in the call.
+function fastVoice() {
+  if (S.callVoice === "fast") return true;
+  if (S.callVoice === "natural" || !Voice.cfg().neural) return false;
+  return Voice.state.ttsDevice !== "webgpu" && (Voice.state.ttsRtf || 0) > 1.1;
+}
 function setCallState(s, text) { if (!CALL) return; CALL.state = s; const el = $("#c-state"); if (el) { el.textContent = text; el.dataset.s = s; } }
 function renderSubs() {
   const el = $("#c-subs"); if (!el || !CALL) return;
@@ -130,7 +139,8 @@ async function listenOnce() {
     return new Promise((res) => { pttResolve = (p) => { pttResolve = null; p.then(res); }; CALL.cancelWait = () => { pttResolve = null; res(null); }; });
   }
   setCallState("listen", "Te escucho…");
-  return Voice.record({ vad: true, silenceMs: 900, maxMs: 40000, onLevel: (l) => (CALL.micLevel = l), onStart: () => setCallState("listen", "Te escucho… 🟢") });
+  // 1.3 s of silence ends your turn: enough to pause and think of a word without being cut off.
+  return Voice.record({ vad: true, silenceMs: 1300, maxMs: 40000, onLevel: (l) => (CALL.micLevel = l), onStart: () => setCallState("listen", "Te escucho… 🟢") });
 }
 
 async function callLoop() {
@@ -139,10 +149,10 @@ async function callLoop() {
   if (!me.active) return;
   if (!(await Voice.openMic())) { setCallState("error", "No pude usar el micrófono. Revisa que esté conectado y permitido en Windows."); return; }
   // Max always speaks with the natural voice: wait for it instead of falling back to the Windows one.
-  if (Voice.cfg().neural && Voice.state.tts !== "ready") { setCallState("think", "Preparando la voz natural…"); await Promise.race([Voice.loadTTS(), sleep(40000)]); if (!me.active) return; }
+  if (!me.fast && Voice.cfg().neural && Voice.state.tts !== "ready") { setCallState("think", "Preparando la voz natural…"); await Promise.race([Voice.loadTTS(), sleep(40000)]); if (!me.active) return; }
   me.hist.push({ role: "assistant", content: me.greet }); renderSubs();
   setCallState("speak", "Hablando…");
-  await Voice.say(me.greet, { rate: 1, wait: true });
+  await Voice.say(me.greet, { rate: 1, wait: true, system: me.fast });
   while (me.active) {
     if (me.busyChip) { await sleep(150); continue; }
     if (me.muted) { setCallState("muted", "Micrófono silenciado"); await sleep(300); continue; }
@@ -200,8 +210,8 @@ async function botTurn(me) {
   setCallState("think", "Pensando…");
   const t0 = performance.now();
   // Max starts talking as soon as the first sentence of the reply is written.
-  const sp = Voice.stream({ onStart: () => { setCallState("speak", "Hablando…"); const l = $("#c-lat"); if (l) l.textContent = `${me.heardMs ? `Te entendí en ${(me.heardMs / 1000).toFixed(1)} s · ` : ""}Max respondió en ${((performance.now() - t0) / 1000).toFixed(1)} s`; } });
-  const r = await window.api.chat(callPrompt(), [{ role: "user", content: CALL_START }, ...me.hist], (t) => { if (me.active) sp.push(t); });
+  const sp = Voice.stream({ system: me.fast, onStart: () => { setCallState("speak", "Hablando…"); const l = $("#c-lat"); if (l) l.textContent = `${me.heardMs ? `Te entendí en ${(me.heardMs / 1000).toFixed(1)} s · ` : ""}Max respondió en ${((performance.now() - t0) / 1000).toFixed(1)} s`; } });
+  const r = await window.api.chat(callPrompt(), [{ role: "user", content: CALL_START }, ...me.hist], (t) => { if (me.active) sp.push(t); }, { fast: true });
   me.thinking = false;
   if (!me.active) { sp.cancel(); return; }
   if (!r.ok) { sp.cancel(); setCallState("error", ERR[r.code] || ERR.error); await sleep(2500); return; }
@@ -221,7 +231,7 @@ async function fixLast(me) {
 async function hangUp() {
   if (!CALL) return;
   const c = CALL; c.active = false; Voice.stop(); if (Voice.recording) Voice.recording.cancel(); if (c.cancelWait) c.cancelWait();
-  sfx("hang"); CALL = null; onLeave = null;
+  sfx("hang"); CALL = null; onLeave = null; Voice.setQuiet(false);
   const sess = c.hist.length ? coachSession("call", c.scen, c.hist) : null;
   const said = c.hist.filter((m) => m.role === "user").map((m) => m.content);
   const secs = Math.round((Date.now() - c.t0) / 1000);

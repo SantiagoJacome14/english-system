@@ -7,10 +7,11 @@ contextBridge.exposeInMainWorld("api", {
   getSettings: () => ipcRenderer.invoke("settings:get"),
   setSettings: (s) => ipcRenderer.invoke("settings:set", s),
   openExternal: (url) => ipcRenderer.invoke("open-external", url),
-  chat: async (system, messages, onText) => {
+  // fast: true answers with the quick model (used in voice calls, where waiting feels like lag).
+  chat: async (system, messages, onText, { fast = false } = {}) => {
     const id = Math.random().toString(36).slice(2);
     listeners.set(id, onText);
-    try { return await ipcRenderer.invoke("chat", { id, system, messages }); }
+    try { return await ipcRenderer.invoke("chat", { id, system, messages, fast }); }
     finally { listeners.delete(id); }
   },
   warm: (system, messages) => ipcRenderer.invoke("ai:warm", system, messages),

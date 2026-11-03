@@ -14,7 +14,7 @@ const STT_ES = "Xenova/whisper-base";
 const HALLUCINATION = /^(\s*(thank you|thanks for watching|you|bye|okay)[.!]?\s*|\s*[\[(].*[\])]\s*|\s*)$/i;
 
 const Voice = (() => {
-  const cfg = () => Object.assign({ neural: true, voice: "af_heart", speed: 1, stt: "Xenova/whisper-base.en" }, S.voice || {});
+  const cfg = () => Object.assign({ neural: true, voice: "af_heart", speed: 1, stt: "Xenova/whisper-base.en", gpu: "auto" }, S.voice || {});
   const state = { tts: "idle", stt: "idle", es: "idle", progress: {} }; // idle | loading | ready | error
   const listeners = new Set();
   const emit = () => listeners.forEach((f) => f(state));
@@ -24,6 +24,7 @@ const Voice = (() => {
   function worker(name) {
     const w = new Worker("workers/" + name + ".worker.js", { type: "module" });
     w.onmessage = ({ data }) => {
+      if (data.type === "device") { state.ttsDevice = data.device; emit(); return; }
       if (data.type === "progress") {
         const p = data.p;
         if (p.status === "progress" && p.total > 1e6) { state.progress[name + ":" + p.file] = { loaded: p.loaded, total: p.total }; emit(); }
@@ -42,7 +43,7 @@ const Voice = (() => {
     if (!tts) tts = worker("tts");
     if (state.tts === "ready" || state.tts === "loading") return ttsReady;
     state.tts = "loading"; state.warned = false; emit();
-    ttsReady = call(tts, { type: "load" }).then((r) => { state.tts = r.ok ? "ready" : "error"; state.ttsError = r.error; emit(); if (r.ok) gen("Hi.", cfg().voice, cfg().speed, false); return r.ok; });
+    ttsReady = call(tts, { type: "load", gpu: cfg().gpu }).then((r) => { state.tts = r.ok ? "ready" : "error"; state.ttsError = r.error; if (r.device) state.ttsDevice = r.device; emit(); if (r.ok) gen("Hi.", cfg().voice, cfg().speed, false); return r.ok; });
     return ttsReady;
   }
   function loadSTT() {
@@ -111,7 +112,7 @@ const Voice = (() => {
   // Background audio (this week's content) waits until nothing else is happening, one sentence
   // at a time with a pause between them, so the computer stays responsive.
   const bg = [], bgKeys = new Set();
-  let busy = false, lastFg = 0, sttBusy = false, bgTimer = null;
+  let busy = false, lastFg = 0, sttBusy = false, bgTimer = null, quiet = false; // quiet: no background audio (during a call)
   const fg = () => { lastFg = Date.now(); };
   const keyOf = (t, v, sp) => v + "|" + sp.toFixed(2) + "|" + t;
   const speedFor = (rate) => { const c = cfg(); return rate < 0.8 ? Math.max(0.6, c.speed * 0.72) : c.speed; };
@@ -136,24 +137,30 @@ const Voice = (() => {
     for (let i = 0; i < pcm.length; i++) pcm[i] = Math.max(-1, Math.min(1, r.audio[i])) * 32767;
     try { d.transaction("tts", "readwrite").objectStore("tts").put({ pcm, rate: r.rate }, k); } catch {}
   }
+  // How many seconds it takes to make one second of speech (below 1 = faster than it plays).
+  function speedSample(r) {
+    if (!r || !r.ok || !r.ms || !r.audio || r.audio.length < r.rate * 0.8) return;
+    const f = r.ms / 1000 / (r.audio.length / r.rate);
+    state.ttsRtf = state.ttsRtf ? state.ttsRtf * 0.7 + f * 0.3 : f;
+  }
   function pump() {
     if (busy) return;
     if (queue.length) {
       busy = true;
       const j = queue.shift(); queued.delete(j.k);
-      call(tts, { type: "say", text: j.text, voice: j.voice, speed: j.speed }).then((r) => {
-        busy = false;
+      call(tts, { type: "say", text: j.text, voice: j.voice, speed: j.speed, gpu: cfg().gpu }).then((r) => {
+        busy = false; speedSample(r);
         j.res(r.ok ? { audio: r.audio, rate: r.rate } : null);
         pump();
       });
       return;
     }
     if (!bg.length || bgTimer) return;
-    if (rec || sttBusy || playing || Date.now() - lastFg < 4000) { bgTimer = setTimeout(() => { bgTimer = null; pump(); }, 1500); return; }
+    if (rec || sttBusy || playing || quiet || Date.now() - lastFg < 4000) { bgTimer = setTimeout(() => { bgTimer = null; pump(); }, 1500); return; }
     busy = true;
     const j = bg.shift(); bgKeys.delete(j.k);
-    call(tts, { type: "say", text: j.text, voice: j.voice, speed: j.speed }).then((r) => {
-      busy = false;
+    call(tts, { type: "say", text: j.text, voice: j.voice, speed: j.speed, gpu: cfg().gpu }).then((r) => {
+      busy = false; speedSample(r);
       if (r.ok && !mem.has(j.k)) diskPut(j.k, r);
       bgTimer = setTimeout(() => { bgTimer = null; pump(); }, 700);
       pump();
@@ -204,11 +211,11 @@ const Voice = (() => {
   // Speaks text; resolves when it finishes (or is interrupted by stop()/another say()).
   // Short texts never wait: if the natural voice isn't ready in 0.7 s, the Windows voice says it
   // and the natural audio is kept for next time. Pass wait:true to always use the natural voice.
-  async function say(text, { rate = 0.95, voice, wait = false } = {}) {
+  async function say(text, { rate = 0.95, voice, wait = false, system = false } = {}) {
     stop();
     const my = token;
     const c = cfg();
-    if (!c.neural || state.tts !== "ready") return saySystem(text, rate, my);
+    if (system || !c.neural || state.tts !== "ready") return saySystem(text, rate, my);
     const speed = speedFor(rate), v = voice || c.voice;
     const jobs = sentences(text).map((p) => gen(p, v, speed, true));
     if (!jobs.length) return;
@@ -232,9 +239,10 @@ const Voice = (() => {
   }
   // For replies that arrive word by word: each sentence starts generating as soon as it's complete,
   // so the first one plays while the rest of the reply is still being written.
-  function stream({ voice, onStart } = {}) {
+  // system: true speaks with the Windows voice (instant, for computers where the natural voice is slow).
+  function stream({ voice, onStart, system = false } = {}) {
     stop();
-    const my = token, c = cfg(), v = voice || c.voice, neural = c.neural && state.tts === "ready";
+    const my = token, c = cfg(), v = voice || c.voice, neural = !system && c.neural && state.tts === "ready";
     let used = 0, chain = Promise.resolve(), started = false;
     const enqueue = (raw) => {
       const sTxt = clean(raw); if (!sTxt) return;
@@ -244,13 +252,15 @@ const Voice = (() => {
         const r = job ? await job : null;
         if (my !== token) return;
         if (!started) { started = true; if (onStart) onStart(); }
-        if (r) await playBuffer(r.audio, r.rate); else await saySystem(sTxt, 0.95, my);
+        if (r) await playBuffer(r.audio, r.rate); else await saySystem(sTxt, 1, my);
       });
     };
     return {
       push(full) {
         for (;;) {
-          const m = full.slice(used).match(/^[\s\S]*?[.!?]+["')\]]*\s+/);
+          const rest = full.slice(used);
+          // A whole sentence; or, for the very first piece of a long sentence, up to a comma, so the voice starts sooner.
+          const m = rest.match(/^[\s\S]*?[.!?]+["')\]]*\s+/) || (used === 0 && rest.length > 45 ? rest.match(/^[\s\S]{18,}?[,;:]\s+/) : null);
           if (!m) break;
           used += m[0].length; enqueue(m[0]);
         }
@@ -327,6 +337,7 @@ const Voice = (() => {
       src.connect(proc); proc.connect(mute); mute.connect(micCtx.destination);
     });
   }
+  function loud(a) { let s = 0, n = 0; for (let i = 0; i < a.length; i += 4) { s += a[i] * a[i]; n++; } return Math.sqrt(s / (n || 1)) > 0.02; }
   async function transcribe(audio, { lang } = {}) {
     if (!audio || audio.length < 16000 * 0.3) return "";
     if (state.stt !== "ready" && !(await loadSTT())) throw new Error(state.sttError || "stt");
@@ -336,7 +347,9 @@ const Voice = (() => {
     try {
       const r = await call(stt, lang === "es" ? { type: "transcribe", audio: copy, model: STT_ES, language: "spanish" } : { type: "transcribe", audio: copy, model: cfg().stt }, [copy.buffer]);
       if (!r.ok) throw new Error(r.error);
-      return HALLUCINATION.test(r.text) ? "" : r.text;
+      // Whisper invents "Thank you." or "you" on silence; but if you clearly spoke, "Okay." or "Thank you." is real.
+      if (!HALLUCINATION.test(r.text)) return r.text;
+      return /[a-z]/i.test(r.text) && !/[\[(]/.test(r.text) && loud(audio) ? r.text : "";
     } finally { sttBusy = false; fg(); }
   }
   let esReady = null;
@@ -360,7 +373,7 @@ const Voice = (() => {
   return {
     state, cfg, on: (f) => { listeners.add(f); return () => listeners.delete(f); },
     loadTTS, loadSTT, loadES, say, sayNatural, stream, prefetch, synth, stop, level, playBuffer, record, transcribe, openMic, closeMic, resample, downloadPct,
-    get recording() { return rec; }, get speaking() { return !!playing || ("speechSynthesis" in window && speechSynthesis.speaking); },
+    get recording() { return rec; }, setQuiet(q) { quiet = !!q; if (!q) pump(); }, get speaking() { return !!playing || ("speechSynthesis" in window && speechSynthesis.speaking); },
   };
 })();
 
